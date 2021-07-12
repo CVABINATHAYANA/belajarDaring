@@ -1,0 +1,85 @@
+<ion-view title="Profil Pengguna" id="profilPengguna" style="background-color:#EEEEEE">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+        <form class="list" ng-submit="simpan()">
+            <label class="item item-input">
+                <span class="input-label">
+                    <p>Nama Lengkap</p>
+                </span>
+                <input type="text" placeholder="Nama Lengkap" ng-model="formData.namaPengguna">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">
+                    <p>No Handphone</p>
+                </span>
+                <input type="tel" placeholder="No Handphone" ng-model="formData.noHandphone">
+            </label>
+            <label class="item item-input">
+                <textarea placeholder="Alamat" ng-model="formData.alamat" rows="5"></textarea>
+            </label>
+            <label class="item item-select">
+                <span class="input-label">
+                    <p>Jenis Kelamin</p>
+                </span>
+                <select ng-model="formData.jenisKelamin">
+                    <option>Laki-laki</option>
+                    <option>Perempuan</option>
+                </select>
+            </label>
+            <label class="item item-input">
+                    <span class="input-label">
+                        <p>Sekolah</p>
+                    </span>
+                    <input type="text" placeholder="Nama Sekolah" ng-model="formData.namaSekolah" disabled>
+                </label>
+            <label class="item item-input">
+                <span class="input-label">
+                    <p>Kelas</p>
+                </span>
+                <input type="text" placeholder="Nama Kelas" ng-model="formData.namaKelas" disabled>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">
+                    <p>Nomor Absen</p>
+                </span>
+                <input type="text" placeholder="Nomor Absen" ng-model="formData.siswaAbsen" disabled>
+            </label>
+            
+            <label class="item item-input">
+                <span class="input-label">
+                    <p>Provinsi</p>
+                </span>
+                <input type="text" placeholder="Provinsi" ng-model="formData.namaProvinsi" disabled>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">
+                    <p>Kota/Kabupaten</p>
+                </span>
+                <input type="text" placeholder="Kota/Kabupaten" ng-model="formData.namaKotaKabupaten" disabled>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">
+                    <p>Kecamatan</p>
+                </span>
+                <input type="text" placeholder="Kecamatan" ng-model="formData.namaKecamatan" disabled>
+            </label>
+            <div class="spacer" style="height: 10px;"></div>
+            <label class="item item-input">
+                <span class="input-label">
+                    <p>Email</p>
+                </span>
+                <input type="email" placeholder="Email" ng-model="formData.email" disabled>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">
+                    <p>Password</p>
+                </span>
+                <input type="text" placeholder="Password" ng-model="formData.password" disabled>
+            </label>
+            <button class="button button-positive button-block">Simpan Data</button>
+        </form>
+    </div>
+        </div>
+    </ion-content>
+</ion-view>

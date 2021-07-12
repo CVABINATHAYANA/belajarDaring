@@ -1,0 +1,23 @@
+<ion-view title="{{data.namaKecamatan}} - {{data.jenjang}}" id="dataPokokGuruAdmin" class="latar">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <ion-item class="item-avatar item-icon-right" ng-repeat="(x, y) in dataGuruMuaraEnim"
+                ng-click="getDataSekolah(x, y)">
+                <img src="https://image.flaticon.com/icons/svg/235/235286.svg">
+                <h2>{{x}}</h2>
+                <p>
+                    <b style="color:green">{{y.length}}</b> Guru</p>
+                <i class="icon ion-ios-arrow-right icon-accessory"></i>
+            </ion-item>
+            </div>
+        </div>
+        
+
+    </ion-content>
+    <ion-footer-bar align-title="left" class="bar-dark">
+        <button class="button button-clear pull-left">Data Guru</button>
+        <button class="button button-clear pull-right">Total :
+            <strong>{{totalGuru}}</strong> Guru</button>
+    </ion-footer-bar>
+</ion-view>

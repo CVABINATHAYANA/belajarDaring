@@ -1,0 +1,136 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+      <ion-nav-bar class="bar-assertive">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-buttons side="left">
+          <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+      </ion-nav-bar>
+      <ion-nav-view name="menuSekolah"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" id="menuSekolah">
+      <ion-header-bar class="bar-assertive">
+        <div class="title">Menu</div>
+      </ion-header-bar>
+      <ion-content padding="false" class="side-menu-left has-header ">
+        <ion-list id="menu-list1" ng-if="aksesAplikasi===true">
+          <ion-item id="menu-list-item1" ui-sref="menuSekolah.berandaSekolah()" menu-close="">
+            <p>Beranda</p>
+          </ion-item>
+          <ion-item class="item-divider" id="menu-list-item-divider3">
+            <p>Data Pokok Sekolah</p>
+          </ion-item>
+          <ion-item id="menu-list-item2" menu-close="" ui-sref="menuSekolah.dataSekolahEditSekolah()">
+            <p>Data Sekolah</p>
+          </ion-item>
+          <ion-item id="menu-list-item2" menu-close="" ui-sref="menuSekolah.dataPrasaranaSekolah()">
+            <p>Data Prasarana</p>
+          </ion-item>
+          <ion-item id="menu-list-item2" menu-close="" ui-sref="menuSekolah.dataSaranaSekolah()">
+            <p>Data Sarana</p>
+          </ion-item>
+          <ion-item id="menu-list-item21" menu-close="" ui-sref="menuSekolah.dataKelasSekolah()">
+            <p>Data Rombel</p>
+          </ion-item>
+          <ion-item id="menu-list-item21" menu-close="" ui-sref="menuSekolah.dataGuruSekolah()">
+            <p>Data Guru</p>
+          </ion-item>
+          <ion-item id="menu-list-item22" menu-close="" ui-sref="menuSekolah.dataSiswaSekolah()">
+            <p>Data Siswa</p>
+          </ion-item>
+          <ion-item class="item-divider" id="menu-list-item-divider3">
+            <p>Data Kurikulum</p>
+          </ion-item>
+          <ion-item id="menu-list-item31" ui-sref="menuSekolah.jadwalPelajaranSekolah()" menu-close="">
+            <p>Jadwal Pelajaran</p>
+          </ion-item>
+          <!-- <ion-item id="menu-list-item32" ui-sref="menuSekolah.kkmSekolah()" menu-close="">
+            <p>KKM</p>
+          </ion-item>
+          <ion-item id="menu-list-item33" ui-sref="menuSekolah.silabusSekolah()" menu-close="">
+            <p>Silabus</p>
+          </ion-item>
+          <ion-item id="menu-list-item34" ui-sref="menuSekolah.rppSekolah()" menu-close="">
+            <p>RPP</p>
+          </ion-item> -->
+          <ion-item class="item-divider" id="menu-list-item-divider3">
+            <p>Data Absensi</p>
+          </ion-item>
+          <ion-item id="menu-list-item4" ui-sref="menuSekolah.absensiSiswaSekolah()" menu-close="">
+            <p>Absensi Siswa</p>
+          </ion-item>
+          <!-- <ion-item id="menu-list-item4" ui-sref="menuSekolah.absensiSekolahSekolah()" menu-close="">
+            <p>Absensi Sekolah</p>
+          </ion-item> -->
+          <ion-item class="item-divider" id="menu-list-item-divider3">
+            <p>Data Tugas</p>
+          </ion-item>
+          <ion-item id="menu-list-item5" ui-sref="menuSekolah.tugasSiswaSekolah()" menu-close="">
+            <p>Tugas Siswa</p>
+          </ion-item>
+          <ion-item class="item-divider" id="menu-list-item-divider3">
+            <p>e-Learning</p>
+          </ion-item>
+          <ion-item id="menu-list-item6" ui-sref="menuSekolah.bankSoalSekolah()" menu-close="">
+            <p>Bank Soal</p>
+          </ion-item>
+          <ion-item id="menu-list-item6" ui-sref="menuSekolah.materiPelajaranSekolah()" menu-close="">
+            <p>Materi Pelajaran</p>
+          </ion-item>
+          <ion-item class="item-divider" id="menu-list-item-divider3">
+            <p>Ujian, Tryout & SOC Online</p>
+          </ion-item>
+          <ion-item id="menu-list-item7" ui-sref="menuSekolah.ujianOnlineSekolah()" menu-close="">
+            <p>Ujian Online</p>
+          </ion-item>
+          <ion-item id="menu-list-item7" ui-sref="menuSekolah.UTSUASSekolah()" menu-close="">
+            <p>UTS / UAS Online</p>
+          </ion-item>
+          <ion-item id="menu-list-item8" ui-sref="menuSekolah.tryoutOnlineSekolah()" menu-close="">
+            <p>Tryout Online</p>
+          </ion-item>
+          <!-- <ion-item id="menu-list-item9" ui-sref="menuSekolah.socSekolah()" menu-close="">
+            <p>Students Online Competition</p>
+          </ion-item> -->
+  
+          <!-- <ion-item class="item-divider" id="menu-list-item-divider3">
+            <p>Pengaturan</p>
+          </ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSekolah.tahunAjaranSekolah()" menu-close="">
+            <p>Pengaturan Tahun Ajaran</p>
+          </ion-item>
+          <ion-item id="menu-list-item11" ui-sref="menuSekolah.semesterSekolah()" menu-close="">
+            <p>Pengaturan Semester</p>
+          </ion-item>
+          <ion-item id="menu-list-item12" ui-sref="menuSekolah.pelajaranSekolah()" menu-close="">
+            <p>Pengaturan Pelajaran</p>
+          </ion-item>
+          <ion-item id="menu-list-item12" ui-sref="menuSekolah.jenisPrasaranaSekolah()" menu-close="">
+            <p>Jenis Prasarana</p>
+          </ion-item>
+          <ion-item id="menu-list-item12" ui-sref="menuSekolah.jenisSaranaSekolah()" menu-close="">
+            <p>Jenis Sarana</p>
+          </ion-item>
+          <ion-item id="menu-list-item12" ui-sref="menuSekolah.dataSekolah()" menu-close="">
+            <p>Data Sekolah</p>
+          </ion-item> -->
+  
+          <ion-item class="item-divider" id="menu-list-item-divider3">
+            <p>Data Akun</p>
+          </ion-item>
+          <ion-item id="menu-list-item13" ui-sref="menuSekolah.profilPenggunaSekolah()" menu-close="">
+            <p>Profil Pengguna</p>
+          </ion-item>
+          <ion-item id="menu-list-item14" ui-sref="menuSekolah.gantiPasswordSekolah()" menu-close="">
+            <p>Ganti Password</p>
+          </ion-item>
+          <!-- <ion-item id="menu-list-item15" ui-sref="menuSekolah.uploadFotoSekolah()" menu-close="">
+            <p>Upload Foto</p>
+          </ion-item> -->
+          <ion-item id="menu-list-item16" ng-click="logoutSekolah()">
+            <p>Keluar</p>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-side-menu>
+  </ion-side-menus>

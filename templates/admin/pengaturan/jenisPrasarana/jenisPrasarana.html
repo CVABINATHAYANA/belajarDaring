@@ -1,0 +1,49 @@
+<ion-view title="Jenis Prasarana" id="jenisPrasarana">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-android-add" ng-click="tambahJenisPrasarana()"> Tambah</button>
+    </ion-nav-buttons>
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <label class="item item-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="search" placeholder="Cari Data" ng-model="searchData">
+                </label>
+                <ion-list id="jenisPrasarana-list19">
+                    <ion-item id="jenisPrasarana-list-item43" ng-repeat="data in jenisPrasarana | filter:searchData">
+                        <p>{{$index+1}}. <b>{{data.jenisPrasarana}}</b>
+                        </p>
+                        <ion-option-button class="button-assertive" ng-click="hapusData(data)">Hapus</ion-option-button>
+                        <ion-option-button class="button-positive" ng-click="editData(data)">Edit</ion-option-button>
+                    </ion-item>
+                </ion-list>
+        
+                <script id="templates/modal.html" type="text/ng-template" cache-view="false">
+                    <ion-modal-view>
+                        <ion-header-bar class="bar bar-header bar-positive">
+                            <h1 class="title">Tambah Jenis Prasarana</h1>
+                            <button class="button button-clear button-primary" ng-click="modal.hide()">Close</button>
+                        </ion-header-bar>
+                        
+                        <ion-content style="padding:10px">
+                            <form class="list" ng-submit="simpan()">
+                                <label class="item item-input item-floating-label">
+                                    <span class="input-label">
+                                        <p>Jenis Prasarana</p>
+                                    </span>
+                                    <input type="text" placeholder="Jenis Prasarana" ng-model="formData.jenisPrasarana">
+                                </label>
+                                <label class="item item-input">
+                                    <textarea placeholder="Keterangan" ng-model="formData.keterangan" rows="5"></textarea>
+                                </label>
+                                <button class="button button-positive button-block">Simpan Data</button>
+                            </form>
+                        </ion-content>
+                    </ion-modal-view>
+                </script>
+            </div>
+        </div>
+       
+
+    </ion-content>
+</ion-view>

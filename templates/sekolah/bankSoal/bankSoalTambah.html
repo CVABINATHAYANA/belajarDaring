@@ -1,0 +1,182 @@
+<ion-view title="Bank Soal Tambah" id="bankSoalTambahAdmin" cache-view="false" style="background-color:#EEEEEE">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <ion-list id="bankSoalTambahAdmin-list19">
+                    <form id="tambahSoal-form7" class="list" ng-submit="simpan()">
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider11"> Info Soal</ion-item>
+                        <label class="item item-select" id="tambahSoal-select12">
+                            <span class="input-label">
+                                <p>Jenjang</p>
+                            </span>
+                            <select ng-model="formData.jenjang" ng-change="getJenjang()">
+                                <option>SD</option>
+                                <option>SMP</option>
+                                <option>SMA</option>
+                                <option>SMK</option>
+                            </select>
+                        </label>
+                        <label class="item item-select" id="tambahSoal-select13">
+                            <span class="input-label">
+                                <p>Kelas</p>
+                            </span>
+                            <select ng-model="formData.kelas">
+                                <option ng-repeat="data in kelas">{{data}}</option>
+                                <!-- <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option> -->
+                            </select>
+                        </label>
+                        <label class="item item-select">
+                            <span class="input-label">
+                                <p>Pelajaran</p>
+                            </span>
+                            <select ng-model="formData.idPelajaran" ng-change="getPelajaran()">
+                                <option value="{{data.$id}}" ng-repeat="data in mataPelajaran">{{data.pelajaran}}</option>
+                            </select>
+                        </label>
+                        <div class="spacer" style="height: 10px;"></div>
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider12">Kompetensi Inti</ion-item>
+                        <label class="item item-input" id="tambahSoal-textarea11">
+                            <!-- <span class="input-label">
+                                <p>Kompetensi Inti</p>
+                            </span> -->
+                            <textarea placeholder="" ng-model="formData.kompetensiInti" rows="10"
+                                ui-tinymce="tinymceOptions"></textarea></label>
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider12">Kompetensi Dasar</ion-item>
+                        <label class="item item-input" id="tambahSoal-textarea12">
+                            <!-- <span class="input-label">
+                                <p>Kompetensi Dasar</p>
+                            </span> -->
+                            <textarea placeholder="" ng-model="formData.kompetensiDasar" rows="10"
+                                ui-tinymce="tinymceOptions"></textarea></label>
+                        <label class="item item-select" id="tambahSoal-select14">
+                            <span class="input-label">
+                                <p>Jenis Soal</p>
+                            </span>
+                            <select ng-model="formData.jenisSoal" ng-change="getJenisSoal()">
+                                <option>Pilihan Ganda</option>
+                                <option>Essay</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-floating-label input" id="tambahSoal-input17">
+                            <span class="input-label">
+                                <p>Materi Soal</p>
+                            </span>
+                            <input type="text" placeholder="Materi Soal" ng-model="formData.materiSoal">
+                        </label>
+                        <label class="item item-select" id="tambahSoal-select15">
+                            <span class="input-label">
+                                <p>Bobot Soal</p>
+                            </span>
+                            <select ng-model="formData.bobotSoal">
+                                <option>Mudah</option>
+                                <option>Sedang</option>
+                                <option>Sulit</option>
+                            </select>
+                        </label>
+                        <div class="spacer" style="height: 10px;"></div>
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider12"> Isi Soal</ion-item>
+                        <label class="item item-input" id="tambahSoal-textarea13">
+                            <!-- <span class="input-label">
+                                <p>Soal</p>
+                            </span> -->
+                            <textarea placeholder="" ng-model="formData.soal" rows="10"
+                                ui-tinymce="tinymceOptions"></textarea></label>
+        
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider13" ng-show="PG"> Pilihan Jawaban A
+                        </ion-item>
+                        <label class="item item-input" id="tambahSoal-textarea14" ng-show="PG">
+                            <!-- <span class="input-label">
+                                <p>A</p>
+                            </span> -->
+                            <textarea placeholder="" ng-model="formData.jawabanA" rows="10"
+                                ui-tinymce="tinymceOptions"></textarea></label>
+        
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider13" ng-show="PG"> Pilihan Jawaban B
+                        </ion-item>
+                        <label class="item item-input" id="tambahSoal-textarea15" ng-show="PG">
+                            <!-- <span class="input-label">
+                                <p>B</p>
+                            </span> -->
+                            <textarea placeholder="" ng-model="formData.jawabanB" rows="10"
+                                ui-tinymce="tinymceOptions"></textarea></label>
+        
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider13" ng-show="PG"> Pilihan Jawaban C
+                        </ion-item>
+                        <label class="item item-input" id="tambahSoal-textarea16" ng-show="PG">
+                            <!-- <span class="input-label">
+                                <p>C</p>
+                            </span> -->
+                            <textarea placeholder="" ng-model="formData.jawabanC" rows="10"
+                                ui-tinymce="tinymceOptions"></textarea></label>
+        
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider13" ng-show="PG"> Pilihan Jawaban D
+                        </ion-item>
+                        <label class="item item-input" id="tambahSoal-textarea17" ng-show="PG">
+                            <!-- <span class="input-label">
+                                <p>D</p>
+                            </span> -->
+                            <textarea placeholder="" ng-model="formData.jawabanD" rows="10"
+                                ui-tinymce="tinymceOptions"></textarea></label>
+        
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider13" ng-show="PG"> Pilihan Jawaban E
+                        </ion-item>
+                        <label class="item item-input" id="tambahSoal-textarea18" ng-show="PG">
+                            <!-- <span class="input-label">
+                                <p>E</p>
+                            </span> -->
+                            <textarea placeholder="" ng-model="formData.jawabanE" rows="10"
+                                ui-tinymce="tinymceOptions"></textarea>
+                        </label>
+                        <div class="spacer" style="height: 10px;"></div>
+                        <ion-item class="item-divider" id="tambahSoal-list-item-divider14" ng-show="PG"> Kunci dan Pembahasan
+                        </ion-item>
+                        <label class="item item-select" id="tambahSoal-select16" ng-show="PG">
+                            <span class="input-label">
+                                <p>Kunci Jawaban</p>
+                            </span>
+                            <select ng-model="formData.kunciJawaban">
+                                <option>A</option>
+                                <option>B</option>
+                                <option>C</option>
+                                <option>D</option>
+                                <option>E</option>
+                            </select>
+                        </label>
+        
+                        <ion-item class="item-divider" id="editSoal-list-item-divider17"> Pembahasan Soal</ion-item>
+                        <label class="item item-input" id="tambahSoal-textarea19">
+                            <!-- <span class="input-label">
+                                <p>Pembahasan</p>
+                            </span> -->
+                            <textarea placeholder="" ng-model="formData.pembahasanSoal" rows="10"
+                                ui-tinymce="tinymceOptions"></textarea></label>
+        
+                        <ion-item class="item-divider" id="editSoal-list-item-divider17"> Video Pembahasan Soal</ion-item>
+                        <label class="item item-input item-floating-label input">
+                            <span class="input-label">
+                                <p>Link Video Youtube</p>
+                            </span>
+                            <input type="text" placeholder="Id Video Youtube" ng-model="formData.videoPembahasan">
+                        </label>
+                        <ion-toggle toggle-class="toggle-positive" id="tambahSoal-toggle9" ng-model="formData.publish">
+                            <p>Publish</p>
+                        </ion-toggle>
+                        <button id="tambahSoal-button4" class="button button-balanced button-block">Simpan Soal</button>
+                    </form>
+                </ion-list>
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-view>

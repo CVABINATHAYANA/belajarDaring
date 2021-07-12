@@ -1,0 +1,87 @@
+<ion-view title="Lihat Tugas" id="tugasSiswaLihatAdmin" class="latar">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+
+                <div class="item item-body">
+                    <div class="show-list-numbers-and-dots">
+                        <div class="row">
+                            <div class="col-33" style="padding-left:10px">
+                                <small>
+                                    <!-- Tahun Ajaran <br>
+                                    Semester<br> -->
+                                    Pelajaran<br>
+                                    <!-- Guru<br> -->
+                                    Kelas<br>
+                                    Sekolah<br>
+                                </small>
+                            </div>
+                            <div class="col-67">
+                                <small>
+                                    <!-- : {{data.tahunAjaran}}<br>
+                                    : {{data.semester}}<br> -->
+                                    : {{data.pelajaran}}<br>
+                                    <!-- : {{data.namaGuru}}<br> -->
+                                    : {{data.namaKelas}}<br>
+                                    : <span>{{data.namaSekolah}}</span><br>
+                                </small>
+                            </div>
+                        </div>
+                        <hr>
+                        <small>Judul Tugas : <br><span>{{data.judulTugas}}</span></small>
+                        <hr>
+                        <small>Isi Tugas : <br><span ng-bind-html="data.isiTugas"></span></small>
+                        <hr>
+                        <small>Tanggal Pengumpulan Tugas. <br>{{data.tanggalPengumpulanTugas}}</small>
+                    </div>
+                </div>
+                <div class="spacer" style="height: 10px;"></div>
+                <ion-item class="item-divider input" id="registrasi-list-item-divider4" ng-if="banyakFile > 0"> File
+                    Anda</ion-item>
+                <ion-list>
+                    <ion-item class="item-icon-right" ng-repeat="fileGuru in fileTugasGuru">
+                        <p><a href="{{fileGuru.fotoURL}}" target="new">{{$index+1}}. {{fileGuru.namaFile}}</a></p>
+                        <i style="color: red;" class="icon ion-trash-b icon-accessory"
+                            ng-click="hapusFile(fileGuru)"></i>
+                    </ion-item>
+                </ion-list>
+
+                <div class="spacer" style="height: 10px;"></div>
+                <div class="kartu">
+                    <div id="messages" style="overflow: auto; height:400px; ">
+                        <div class="message" ng-repeat="dataChat in ChatSiswa">
+                            <div ng-if="dataChat.idPengirim!=data.uidGuru" class="incoming_msg">
+                                <!-- <div class="incoming_msg_img"> <img
+                                        src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div> -->
+                                    <div class="received_nama">
+                                        <p>{{dataChat.namaPengirim}}</p>
+                                    </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>{{dataChat.isiChat}}</p>
+                                        <span class="time_date"> {{dataChat.jamChat}} |
+                                            {{dataChat.tanggalDisplay}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="dataChat.idPengirim==data.uidGuru" class="outgoing_msg">
+                                <div class="sent_msg">
+                                    <p>{{dataChat.isiChat}}</p>
+                                    <span class="time_date"> {{dataChat.jamChat}} | {{dataChat.tanggalDisplay}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="type_msg">
+                        <div class="input_msg_write">
+                            <input type="text" class="write_msg" placeholder="Type a message" ng-model="data.isiChat">
+                            <button class="msg_send_btn" type="button" ng-click="chat()"><i class="fa fa-paper-plane-o"
+                                    aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,289 @@
+<ion-view title="Beranda" id="berandaSekolah" class="latar">
+    <ion-content padding="false" class="has-header">
+        <ion-slides disable-side-menu-drag=""
+            options="{'loop': true,'initialSlide':0,'direction':horizontal,'speed':500,'autoplay':2000,'grabCursor':true}"
+            slider="slider1" delegate-handle="slider1" style="width:100%;height:200px;">
+            <ion-slide-page style="background-color:#ef473a ;">
+                <div class="spacer" style="width: 320px; height: 10px;"></div>
+                <div class="row responsive-md" style="margin: auto;">
+                    <div class="col col-50 col-offset-25">
+                        <div class="row" style="margin: auto">
+                            <div class="col col-33">
+                                <img src="https://image.flaticon.com/icons/svg/145/145867.svg"
+                                    style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
+                                <!-- <img src="https://image.flaticon.com/icons/svg/145/145864.svg"
+                                    ng-if="jenisKelaminGuru==='Perempuan'"> -->
+                            </div>
+                            <div class="col col-67" style="padding-left: 10px">
+                                <h3 style="color:white">{{namaPenggunaSekolah}}</h3>
+                                <div class="show-list-numbers-and-dots">
+                                    <p style="font-size:12px;color:white"><strong>{{namaSekolah}}</strong><br>
+                                        Admin Sekolah
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-slide-page>
+
+            <ion-slide-page style="background-color:#ef473a ;">
+                <div class="spacer" style="width: 320px; height: 10px;"></div>
+                <div class="row responsive-md" style="margin: auto;">
+                    <div class="col col-50 col-offset-25">
+                        <div class="row" style="margin: auto">
+                            <div class="col col-33">
+                                <img src="img/smartphone.png"
+                                    style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
+                            </div>
+                            <div class="col col-67" style="padding-left: 10px">
+                                <h3 style="color:white">HANDPHONE</h3>
+                                <div class="show-list-numbers-and-dots">
+                                    <p style="font-size: 12px;color:white"><strong>Absensi, Ujian, Tugas dll Menggunakan
+                                            Handphone</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-slide-page>
+
+            <ion-slide-page style="background-color:#ef473a ;">
+                <div class="spacer" style="width: 320px; height: 10px;"></div>
+                <div class="row responsive-md" style="margin: auto;">
+                    <div class="col col-50 col-offset-25">
+                        <div class="row" style="margin: auto">
+                            <div class="col col-33">
+                                <img src="https://image.flaticon.com/icons/svg/437/437553.svg"
+                                    style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
+                            </div>
+                            <div class="col col-67" style="padding-left: 10px">
+                                <h3 style="color:white">INTEGRASI</h3>
+                                <div class="show-list-numbers-and-dots">
+                                    <p style="font-size: 12px;color:white"><strong>Terintegrasi dengan sekolah,
+                                            guru, siswa dan ortu</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-slide-page>
+
+        </ion-slides>
+        <div ng-if="aksesAplikasi===true">
+            <div class="row responsive-md" style="margin: auto;">
+                <div class="col col-50 col-offset-25">
+                    <ion-list>
+                        <ion-item class="item-divider"> Data Pokok Sekolah</ion-item>
+                        <ion-item class="item-avatar item-icon-right" ng-click="dataPokokSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/2777/2777287.svg">
+                            <h2>Data Pokok Sekolah</h2>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Didalamnya terdapat data sekolah, prasarana, sarana, rombel, guru dan
+                                        siswa.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+
+                        <div class="spacer" style="height: 10px;"></div>
+                        <ion-item class="item-divider"> Jadwal, Absensi dan Tugas</ion-item>
+                        <ion-item class="item-avatar item-icon-right" ui-sref="menuSekolah.jadwalPelajaranSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/3164/3164217.svg">
+                            <h2>Jadwal Pelajaran</h2>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Pengaturan jadwal pelajaran yang dilakukan oleh guru, terintegrasi langsung ke
+                                        siswa dan
+                                        orang tua.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item-avatar item-icon-right" ui-sref="menuSekolah.absensiSiswaSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/3036/3036019.svg">
+                            <h2>Absensi Siswa</h2>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Pembuatan absensi siswa dilakukan oleh guru, terintegrasi langsung ke siswa dan
+                                        orang tua.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item-avatar item-icon-right" ui-sref="menuSekolah.tugasSiswaSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/3036/3036665.svg">
+                            <h2>Tugas Siswa</h2>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Pembuatan tugas siswa dilakukan oleh guru, terintegrasi langsung ke siswa dan
+                                        orang tua.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+
+                        <div class="spacer" style="height: 10px;"></div>
+                        <ion-item class="item-divider"> eLearning & Ujian Online</ion-item>
+                        <ion-item class="item-avatar item-icon-right" ng-click="eLearning()">
+                            <img src="https://image.flaticon.com/icons/svg/3036/3036633.svg">
+                            <h2>e-Learning</h2>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Didalamnya terdapat bank soal dan materi pelajaran yang bisa dibuat dan disusun
+                                        oleh
+                                        guru.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+                        
+                        <ion-item class="item-avatar item-icon-right" ng-click="ujianOnline()">
+                            <img src="https://image.flaticon.com/icons/svg/3036/3036702.svg">
+                            <h2>Ujian Online</h2>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Guru bisa membuat ujian online sendiri, seperti : ulangan harian, latihan soal,
+                                        kuis
+                                        online, tryout online, UTS dan UAS </em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+
+                        <div class="spacer" style="height: 10px;"></div>
+                        <ion-item class="item-divider"> Video Tutorial</ion-item>
+                        <ion-item class="item-avatar item-icon-right" ui-sref="menuSekolah.videoTutorialSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/3036/3036707.svg">
+                            <h2>Video Tutorial</h2>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Ini adalah video tutorial penggunaan aplikasi untuk admin sekolah.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+
+                        <!-- <div class="spacer" style="height: 10px;"></div>
+                        <ion-item class="item-divider"> Layanan Lainnya</ion-item>
+                        <ion-item class="item-avatar item-icon-right" ui-sref="menuSekolah.visiMisiSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/3164/3164212.svg">
+                            <h3>Visi Misi Sekolah</h3>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Ini adalah visi dan misi sekolah.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item-avatar item-icon-right" ng-click="tentangKami()">
+                            <img src="https://image.flaticon.com/icons/svg/3164/3164264.svg">
+                            <h3>Tentang Sekolah</h3>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Ini adalah infromasi tentang sekolah Anda.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item-avatar item-icon-right" ui-sref="menuSekolah.beritaSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/3164/3164157.svg">
+                            <h3>Berita Sekolah</h3>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Ini adalah kumpulan berita sekolah.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item-avatar item-icon-right" ui-sref="menuSekolah.informasiSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/3164/3164190.svg">
+                            <h3>Informasi Sekolah</h3>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Ini adalah kumpulan informasi sekolah.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item-avatar item-icon-right" ng-click="layananKami()">
+                            <img src="https://image.flaticon.com/icons/svg/3164/3164147.svg">
+                            <h3>Layanan Dinas Untuk Sekolah</h3>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Ini adalah layanan Dinas Pendidikan Untuk Sekolah.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item-avatar item-icon-right" ui-sref="menuSekolah.fotoSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/3164/3164228.svg">
+                            <h3>Album Foto</h3>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Ini adalah kumpulan album foto sekolah.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item>
+                        <ion-item class="item-avatar item-icon-right" ui-sref="menuSekolah.videoSekolah()">
+                            <img src="https://image.flaticon.com/icons/svg/3164/3164252.svg">
+                            <h3>Album Video</h3>
+                            <p style="white-space:normal;">
+                                <small>
+                                    <em>Ini adalah kumpulan album video Sekolah.</em>
+                                </small>
+                            </p>
+                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                        </ion-item> -->
+                    </ion-list>
+                </div>
+            </div>
+        </div>
+
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <div class="list card" ng-if="aksesAplikasi===false || aksesAplikasi===undefined">
+                    <ion-item class="item-divider putih"> Perhatian</ion-item>
+                    <div class="item item-body">
+                        <div class="show-list-numbers-and-dots">
+                            <p style="margin-top:0px;color:#000000;">Akun Anda Belum Kami Verifikasi, Silahkan
+                                Hubungi Admin
+                                Aplikasi Online</p>
+                        </div>
+                    </div>
+                    <!-- <ion-item class="item-icon-left" href="mailto:sudasacorporation@gmail.com">
+                        <i class="icon ion-email"></i>sudasacorporation@gmail.com
+                    </ion-item> -->
+                    <ion-item class="item-icon-left" href="tel:081337210971">
+                        <i class="icon ion-ios-telephone"></i>0813-3721-0971
+                    </ion-item>
+                    <!-- <ion-item class="item-icon-left" href="tel:081238171897">
+                        <i class="icon ion-ios-telephone"></i>0812-3817-1897
+                    </ion-item> -->
+                    <!-- <ion-item class="item-icon-left" href="tel:081339308765">
+                        <i class="icon ion-ios-telephone"></i>0813-3930-8765
+                    </ion-item> -->
+                    <ion-item class="item-icon-left"
+                        href-inappbrowser="https://api.whatsapp.com/send?phone=6281337210971&amp;text= Registrasi-Sistem-Informasi-Sekolah-Untuk-Admin-Sekolah"
+                        ng-click="getlinkWhatsapp()">
+                        <i class="icon ion-social-whatsapp-outline"></i>0813-3721-0971
+                    </ion-item>
+                    <!-- <ion-item class="item-icon-left"
+                        href-inappbrowser="https://api.whatsapp.com/send?phone=6281238171897&amp;text= Registrasi-LENTERA-DENPASAR-Untuk-Admin-Sekolah"
+                        ng-click="getlinkWhatsapp()">
+                        <i class="icon ion-social-whatsapp-outline"></i>0812-3817-1897
+                    </ion-item> -->
+                    <!-- <ion-item class="item-icon-left"
+                        href-inappbrowser="https://api.whatsapp.com/send?phone=6281339308765&amp;text= Registrasi-Denpasar-Cerdas-Untuk-Admin-Sekolah"
+                        ng-click="getlinkWhatsapp()">
+                        <i class="icon ion-social-whatsapp-outline"></i>0813-3930-8765
+                    </ion-item> -->
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

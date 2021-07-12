@@ -1,0 +1,51 @@
+<ion-view title="{{data.namaSiswa}}" cache-view="false" id="dataSiswaLihatAdmin" style="background-color:#EEEEEE">
+    <ion-nav-buttons side="right" class="has-header">
+    </ion-nav-buttons>
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <div class="list card" id="nilaiSiswa-card22">
+                    <ion-item class="item-divider putih" id="pelajaran-list-item-divider1"> Data Siswa</ion-item>
+                    <div class="item item-body">
+                        <div class="show-list-numbers-and-dots">
+                            <span style="color:green">{{data.namaSiswa}}</span><br>
+                            <small>{{formData.jenisKelamin}}<br>
+                                <hr>
+                                {{formData.alamat}}<br>{{formData.namaKecamatan}}<br>
+                                {{formData.namaKotaKabupaten}}, {{formData.namaProvinsi}}</small>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="list card" id="nilaiSiswa-card22">
+                    <ion-item class="item-divider putih" id="email-list-item-divider1"> Email & No Handphone</ion-item>
+        
+                    <ion-item id="pelajaran-list-item5">
+                        <p>{{formData.email}}</p>
+                    </ion-item>
+                    <ion-item id="pelajaran-list-item5">
+                        <p>{{formData.password}}</p>
+                    </ion-item>
+                    <ion-item id="pelajaran-list-item5" href="tel:{{formData.noHandphone}}}">
+                        <p> {{formData.noHandphone}}</p>
+                    </ion-item>
+        
+                </div>
+        
+                <div class="list card" id="nilaiSiswa-card22">
+                    <ion-item class="item-divider putih" id="sekolah-list-item-divider1"> Sekolah</ion-item>
+        
+                    <ion-item id="pelajaran-list-item5">
+                        <p>{{formData.namaSekolah}}</p>
+                    </ion-item>
+                    <ion-item id="pelajaran-list-item5" href="tel:{{formData.noHandphone}}}">
+                        <p> Kelas. {{formData.namaKelas}}</p>
+                    </ion-item>
+        
+                </div>
+            </div>
+        </div>
+        
+
+    </ion-content>
+</ion-view>

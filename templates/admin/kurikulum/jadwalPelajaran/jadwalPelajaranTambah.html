@@ -1,0 +1,152 @@
+<ion-view title="Tambah Jadwal" id="jadwalPelajaranTambahAdmin" class="latar">
+    <ion-nav-buttons side="right" class="has-header">
+    </ion-nav-buttons>
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <form id="registrasi-form1" class="list" ng-submit="simpan()" name="myForm">
+                    <ion-item class="item-divider input" id="registrasi-list-item-divider1"> Data Sekolah & Guru</ion-item>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Provinsi</p>
+                            <p>
+                                <select ng-model="formData.idProvinsi" ng-change="getIdProvinsi()">
+                                    <option ng-repeat="data in dataProvinsi | orderBy:'nama_provinsi'"
+                                        value="{{data.id_provinsi}}">{{data.nama_provinsi}}</option>
+                                </select>
+                            </p>
+                        </span>
+                    </label>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Kota / Kab</p>
+                        </span>
+                        <select ng-model="formData.idKotaKabupaten" ng-change="getIdKotaKabupaten()">
+                            <option ng-repeat="data in dataKotaKabupaten | orderBy:'nama_kota_kabupaten'"
+                                value="{{data.id_kota_kabupaten}}">{{data.nama_kota_kabupaten}}</option>
+                        </select>
+                    </label>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Kecamatan</p>
+                        </span>
+                        <select ng-model="formData.idKecamatan" ng-change="getIdKecamatan()">
+                            <option ng-repeat="data in dataKecamatan | orderBy:'nama_kecamatan'" value="{{data.id_kecamatan}}">
+                                {{data.nama_kecamatan}}</option>
+                        </select>
+                    </label>
+                    <label class="item item-select" id="registrasi-select2">
+                        <span class="input-label">
+                            <p>Jenjang</p>
+                            <p>
+                                <select ng-model="formData.jenjang" ng-change="getJenjang()">
+                                    <option ng-if="jenjangSekolah==='SD'">SD</option>
+                                    <option ng-if="jenjangSekolah==='SMP'">SMP</option>
+                                    <option ng-if="jenjangSekolah==='SMA'">SMA</option>
+                                    <option ng-if="jenjangSekolah==='SMK'">SMK</option>
+                                </select>
+                            </p>
+                        </span>
+                    </label>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Sekolah</p>
+                        </span>
+                        <select ng-model="formData.idSekolah" ng-change="getIdSekolah()">
+                            <option ng-repeat="data in dataSekolah | orderBy:'nama_sekolah'" value="{{data.$id}}">
+                                {{data.nama_sekolah}}</option>
+                        </select>
+                    </label>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Guru</p>
+                            <p>
+                                <select ng-model="formData.idGuru" ng-change="getGuru()">
+                                    <option ng-repeat="data in dataGuru | orderBy:'namaPengguna'" value="{{data.$id}}">
+                                    {{data.namaPengguna | uppercase}}</option>
+                                </select>
+                            </p>
+                        </span>
+                    </label>
+                    <div class="spacer" style="height: 10px;"></div>
+                    <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Kelas, Hari, Jumlah Jam Pelajaran
+                    </ion-item>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Tahun Ajaran</p>
+                        </span>
+                        <select ng-model="formData.idTahunAjaran" ng-change="getTahunAjaran()">
+                            <option ng-repeat="data in tahunAjaran" value="{{data.$id}}">{{data.tahunAjaran}}</option>
+                        </select>
+                    </label>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Hari</p>
+                        </span>
+                        <select ng-model="formData.hari">
+                            <option>Senin</option>
+                            <option>Selasa</option>
+                            <option>Rabu</option>
+                            <option>Kamis</option>
+                            <option>Jumat</option>
+                            <option>Sabtu</option>
+                            <option>Minggu</option>
+                        </select>
+                    </label>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Jumlah Jam Pelajaran</p>
+                        </span>
+                        <select ng-model="formData.jumlahJamPelajaran" ng-change="getJumlahJam()">
+                            <option ng-repeat="data in jumlahJamPelajaran">{{data}}</option>
+                        </select>
+                    </label>
+        
+                    <div ng-repeat="data in jumlahJam">
+                        <div class="spacer" style="height: 10px;"></div>
+                        <ion-item class="item-divider input" id="registrasi-list-item-divider5">{{$index+1}}. Jadwal Pelajaran</ion-item>
+                        <label class="item item-select">
+                            <span class="input-label">
+                                <p>Nama Kelas</p>
+                            </span>
+                            <select ng-model="formData.idKelas[$index]" ng-change="getKelas($index)">
+                                <option ng-repeat="data in dataKelas" value="{{data.$id}}">{{data.namaKelas}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-select">
+                            <span class="input-label">
+                                <p>Pelajaran</p>
+                            </span>
+                            <select ng-model="formData.idPelajaran[$index]" ng-change="getPelajaran($index)">
+                                <option ng-repeat="data in dataPelajaran" value="{{data.$id}}">{{data.pelajaran}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input putih">
+                            <span class="input-label">
+                                <p>Jam Ke</p>
+                            </span>
+                            <input type="number" placeholder="Jam Ke" ng-model="formData.jamKe[$index]">
+                        </label>
+                        <label class="item item-input putih">
+                            <span class="input-label">
+                                <p>Jam Mulai</p>
+                            </span>
+                            <input type="text" placeholder="Jam Mulai" ng-model="formData.jamMulai[$index]">
+                        </label>
+                        <label class="item item-input putih">
+                            <span class="input-label">
+                                <p>Jam Selesai</p>
+                            </span>
+                            <input type="text" placeholder="Jam Selesai" ng-model="formData.jamSelesai[$index]">
+                        </label>
+        
+                    </div>
+        
+        
+                    <button id="registrasi-button3" class="button button-balanced button-block">Simpan Data</button>
+                </form>
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-view>

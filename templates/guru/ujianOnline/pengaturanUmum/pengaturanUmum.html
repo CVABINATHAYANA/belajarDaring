@@ -1,0 +1,43 @@
+<ion-view title="{{data.pelajaran}}" cache-view="false" id="page9">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+        <form id="pengaturanUmum-form2" class="list" ng-submit="simpan()">
+            <label class="item item-input" id="pengaturanUmum-input2">
+                <span class="input-label">Tanggal Ujian</span>
+                <input type="date" placeholder="" ng-model="formData.tanggalUjian">
+            </label>
+            <label class="item item-input" id="pengaturanUmum-input3">
+                <span class="input-label">Jam Ujian</span>
+                <input type="time" placeholder="" ng-model="formData.jamUjian">
+            </label>
+            <label class="item item-input" id="pengaturanUmum-input4">
+                <span class="input-label">Durasi Ujian (Menit)</span>
+                <input type="number" placeholder="" ng-model="formData.durasiUjian">
+            </label>
+            <label class="item item-input" id="pengaturanUmum-input5">
+                <span class="input-label">Nilai Maksimum</span>
+                <input type="number" placeholder="" ng-model="formData.nilaiMaksimum">
+            </label>
+            <label class="item item-input" id="pengaturanUmum-input6">
+                <span class="input-label">Jumlah Soal</span>
+                <input type="number" placeholder="" ng-model="formData.jumlahSoal">
+            </label>
+            <label class="item item-input" id="pengaturanUmum-input7">
+                <span class="input-label">KKM</span>
+                <input type="number" placeholder="" ng-model="formData.kkm">
+            </label>
+            <ion-toggle toggle-class="toggle-positive" id="pengaturanUmum-toggle3" ng-model="formData.soalAcak">Soal
+                Acak</ion-toggle>
+            <ion-toggle toggle-class="toggle-positive" id="pengaturanUmum-toggle2"
+                ng-model="formData.pembahasanSoalDibuka">Pembahasan Soal Dibuka</ion-toggle>
+            <ion-toggle toggle-class="toggle-positive" id="pengaturanUmum-toggle6"
+                ng-model="formData.bukaUjianSekarang">Buka Ujian Sekarang</ion-toggle>
+            <ion-toggle toggle-class="toggle-positive" id="pengaturanUmum-toggle11"
+                ng-model="formData.tutupUjianSekarang">Tutup Ujian Sekarang</ion-toggle>
+            <button id="pengaturanUmum-button1" class="button button-positive button-block">Simpan Pengaturan</button>
+        </form>
+    </div>
+        </div>
+    </ion-content>
+</ion-view>

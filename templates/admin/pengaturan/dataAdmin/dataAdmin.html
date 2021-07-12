@@ -1,0 +1,94 @@
+<ion-view title="Data Admin" id="dataAdmin" style="background-color:#EEEEEE">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-android-add" ng-click="tambahData()">Tambah</button>
+    </ion-nav-buttons>
+    <ion-content padding="false" class="has-header">
+      <div class="row responsive-md" style="margin: auto;">
+        <div class="col col-50 col-offset-25">
+          <!-- <iframe src="https://tokbox.com/embed/embed/ot-embed.js?embedId=c60273b5-3da7-4df8-8979-2f98b203d498&room=DEFAULT_ROOM&iframe=true" width=800 height=640 scrolling="auto" allow="microphone; camera" ></iframe> -->
+          <ion-list id="dataAdmin-list27">
+            <label class="item item-input" id="dataAdmin-search7">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="Cari Data" ng-model="searchData">
+            </label>
+            <ion-item class="item-avatar" ng-repeat="data in dataAdmin | filter:searchData" ng-click="getData(data)"
+                ng-if="data.hakAkses==='Admin'">
+                <img src="img/student.png">
+                <h3>{{$index+1}}. {{data.namaAdmin}}</h3>
+                <p style="white-space:normal;">
+                    <small>
+                        Hak Akses. {{data.hakAkses}}<br>
+                        Email. {{data.email}}<br>
+                        <b ng-if="data.ijinkanAkses===true" style="color: green">Dijinkan Akses</b>
+                        <b ng-if="data.ijinkanAkses===false" style="color: red">Tidak Diijinkan Akses</b>
+                    </small>
+                </p>
+            </ion-item>
+        </ion-list>
+
+        <script id="templates/modal.html" type="text/ng-template">
+                <ion-modal-view>
+                  <ion-header-bar class="bar bar-header bar-positive">
+                    <h1 class="title">Admin</h1>
+                    <button class="button button-clear button-primary" ng-click="modal.hide()">Close</button>
+                  </ion-header-bar>
+          
+                  <ion-content style="padding:10px">
+          
+                        <form class="list" ng-submit="simpan()">
+                                <label class="item item-input">
+                                  <span class="input-label">
+                                    <p>Nama</p>
+                                  </span>
+                                  <input type="text" placeholder="Nama Lengkap" ng-model="formData.namaAdmin">
+                                </label>
+                                <label class="item item-input">
+                                  <span class="input-label">
+                                    <p>Email</p>
+                                  </span>
+                                  <input type="email" placeholder="Email" ng-model="formData.email">
+                                </label>
+                                <label class="item item-select">
+                                  <span class="input-label">
+                                    <p>Hak Akses</p>
+                                  </span>
+                                  <select ng-model="formData.hakAkses">
+                                    <option ng-if="hakAkses==='Super Admin'">Super Admin</option>
+                                    <option>Admin</option>
+                                  </select>
+                                </label>
+                                <label class="item item-select">
+                                    <span class="input-label">
+                                        <p>Provinsi</p>
+                                        <p>
+                                            <select ng-model="formData.idProvinsi" ng-change="getIdProvinsi()">
+                                                <option ng-repeat="data in dataProvinsi | orderBy:'nama_provinsi'"
+                                                    value="{{data.id_provinsi}}">
+                                                    {{data.nama_provinsi}}</option>
+                                            </select>
+                                        </p>
+                                    </span>
+                                </label>
+                                <label class="item item-select">
+                                    <span class="input-label">
+                                        <p>Kota / Kab</p>
+                                    </span>
+                                    <select ng-model="formData.idKotaKabupaten" ng-change="getIdKotaKabupaten()">
+                                        <option ng-repeat="data in dataKotaKabupaten | orderBy:'nama_kota_kabupaten'"
+                                            value="{{data.id_kota_kabupaten}}">{{data.nama_kota_kabupaten}}</option>
+                                    </select>
+                                </label>
+                                <ion-toggle toggle-class="toggle-positive" ng-model="formData.ijinkanAkses">
+                                  <p>Ijinkan Akses</p>
+                                </ion-toggle>
+                                <button class="button button-positive button-block">Simpan Data</button>
+                              </form>
+          
+                  </ion-content>
+                </ion-modal-view>
+              </script>
+        </div>
+    </div>
+       
+    </ion-content>
+</ion-view>

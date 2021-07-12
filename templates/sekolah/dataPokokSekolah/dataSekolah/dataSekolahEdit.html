@@ -1,0 +1,98 @@
+<ion-view title="{{namaSekolah}}" id="dataSekolahEditAdmin">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <form id="dataSekolah-form3" class="list" ng-submit="simpan()">
+                    <label class="item item-select" id="dataSekolah-select1">
+                        <span class="input-label">
+                            <p>Jenjang</p>
+                        </span>
+                        <select ng-model="formData.jenjang">
+                            <option>SD</option>
+                            <option>SMP</option>
+                            <option>SMA</option>
+                            <option>SMK</option>
+                        </select>
+                    </label>
+                    <label class="item item-select" id="dataSekolah-select2">
+                        <span class="input-label">
+                            <p>Status</p>
+                        </span>
+                        <select ng-model="formData.status">
+                            <option>Negeri</option>
+                            <option>Swasta</option>
+                        </select>
+                    </label>
+
+                    <label class="item item-input item-floating-label input" id="dataSekolah-input9">
+                        <span class="input-label">
+                            <p>Nama Sekolah</p>
+                        </span>
+                        <input type="text" placeholder="Nama Sekolah" ng-model="formData.nama_sekolah">
+                    </label>
+
+                    <label class="item item-input item-floating-label input" id="dataSekolah-input9">
+                        <span class="input-label">
+                            <p>NPSN</p>
+                        </span>
+                        <input type="text" placeholder="NPSN" ng-model="formData.npsn">
+                    </label>
+
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Provinsi</p>
+                            <p>
+                                <select ng-model="formData.id_provinsi" ng-change="getIdProvinsi()">
+                                    <option ng-repeat="data in dataProvinsi | orderBy:'nama_provinsi'"
+                                        value="{{data.id_provinsi}}">
+                                        {{data.nama_provinsi}}</option>
+                                </select>
+                            </p>
+                        </span>
+                    </label>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Kota / Kab</p>
+                        </span>
+                        <select ng-model="formData.id_kota_kabupaten" ng-change="getIdKotaKabupaten()">
+                            <option ng-repeat="data in dataKotaKabupaten | orderBy:'nama_kota_kabupaten'"
+                                value="{{data.id_kota_kabupaten}}">{{data.nama_kota_kabupaten}}</option>
+                        </select>
+                    </label>
+                    <label class="item item-select">
+                        <span class="input-label">
+                            <p>Kecamatan</p>
+                        </span>
+                        <select ng-model="formData.id_kecamatan" ng-change="getIdKecamatan()">
+                            <option ng-repeat="data in dataKecamatan | orderBy:'nama_kecamatan'"
+                                value="{{data.id_kecamatan}}">
+                                {{data.nama_kecamatan}}</option>
+                        </select>
+                    </label>
+
+                    <label class="item item-input item-floating-label input" id="dataSekolah-input10">
+                        <span class="input-label">
+                            <p>Alamat Sekolah</p>
+                        </span>
+                        <input type="text" placeholder="Alamat Lengkap" ng-model="formData.alamat_sekolah">
+                    </label>
+                    <label class="item item-input item-floating-label input" id="dataSekolah-input11">
+                        <span class="input-label">
+                            <p>Nama Kepsek</p>
+                        </span>
+                        <input type="text" placeholder="Nama Kepsek" ng-model="formData.kepala_sekolah">
+                    </label>
+                    <label class="item item-input item-floating-label input" id="dataSekolah-input12">
+                        <span class="input-label">
+                            <p>No HP Kepsek</p>
+                        </span>
+                        <input type="tel" placeholder="No HP Kepsek" ng-model="formData.nohpkepsek">
+                    </label>
+
+                    <button id="dataSekolah-button2" class="button button-balanced button-block">Simpan Data</button>
+                </form>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

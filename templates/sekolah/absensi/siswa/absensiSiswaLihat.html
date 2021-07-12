@@ -1,0 +1,52 @@
+<ion-view title="Lihat Absensi" id="absensiSiswaLihatAdmin" class="latar">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <div class="item item-body">
+                    <div class="show-list-numbers-and-dots">
+                        <div class="row">
+                            <div class="col-33" style="padding-left:10px">
+                                <small>Tahun Ajaran <br>
+                                    Semester<br>
+                                    Pelajaran<br>
+                                    Guru<br>
+                                    Kelas<br>
+                                    Sekolah<br>
+                                </small>
+                            </div>
+                            <div class="col-67">
+                                <small>
+                                    : {{dataAbsensi.tahunAjaran}}<br>
+                                    : {{dataAbsensi.semester}}<br>
+                                    : {{dataAbsensi.pelajaran}}<br>
+                                    : {{dataAbsensi.namaGuru}}<br>
+                                    : {{dataAbsensi.namaKelas}}<br>
+                                    : {{dataAbsensi.namaSekolah}}<br>
+                                </small>
+                            </div>
+                        </div>
+                        <hr>
+        
+                        <div class="row">
+                            <div class="col" ng-repeat="(x, y) in absensiByGroup">
+                                <div align="center"><span style="color:green">{{x}}</span><br>
+                                    <span style="font-size:10px">{{y.length}} Siswa</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="spacer" style="height: 10px;"></div>
+                <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Absensi Siswa
+                </ion-item>
+                <ion-list id="absensiSiswaLihat-list19">
+                    <ion-item ng-repeat="data in dataGetAbs">
+                        <p>{{$index+1}}. {{data.namaSiswa | uppercase}}
+                            <span class="item-note">{{data.keterangan}}</span>
+                        </p>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-view>

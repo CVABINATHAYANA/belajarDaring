@@ -1,0 +1,92 @@
+<ion-view title="Nilai &amp; Peringkat" id="page23">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button button-icon icon ion-android-print" ng-click="excel()"></button>
+    </ion-nav-buttons>
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <form id="nilaiPeringkat-form11" class="list">
+                    <label class="item item-input" id="nilaiPeringkat-search6">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input type="search" placeholder="Cari Siswa" ng-model="searchData">
+                    </label>
+                    <ion-item class="item-avatar" id="nilaiPeringkat-list-item14"
+                        ng-repeat="datanya in peringkat | orderBy: '-jumlahNilai' | filter : searchData"
+                        ng-click="dataNilaiSiswa(datanya)">
+                        <img src="img/7AEFXfCDTwOFdEYDMEY0_award.png">
+                        <h2>{{$index+1}}. {{datanya.namaPengguna}}</h2>
+                        <p style="white-space:normal;">Jumlah Nilai. {{datanya.jumlahNilai | number:2}}
+                            <br>Rata-rata : {{datanya.rataRata | number:2}}
+                            <br>
+                            <small>{{datanya.namaSekolah}}, Kelas {{datanya.kelas}}</small><br>
+                            <span ng-if="$index+1<=data.totalSiswaLolos" style="color:green"><b>Lolos Tingkat
+                                    Selanjutnya</b></span>
+                            <span ng-if="$index+1>data.totalSiswaLolos && data.totalSiswaLolos!==''" style="color:red"><b>Tidak
+                                    Lolos Tingkat Selanjutnya</b></span>
+                        </p>
+                    </ion-item>
+                </form>
+
+                <div class="container-fluid hidden" style="margin-top:20px;margin-bottom:20px">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default kotak-shadow">
+                            <div class="panel-heading" style="background-color: white">
+                                <h4>Peringkat</h4>
+                            </div>
+                            <div class="panel-body" style="overflow: auto">
+                                <table id="danu-table" class="table table-hover table-responsive table-striped dtable"
+                                    style="overflow:auto;font-size: 12px">
+                                    <thead>
+                                        <tr>
+                                            <th align="center">No</th>
+                                            <th>
+                                                <div align="left">Nama Siswa</div>
+                                            </th>
+                                            <th>
+                                                <div align="left">Asal Sekolah</div>
+                                            </th>
+                                            <th>
+                                                <div align="center">Kelas</div>
+                                            </th>
+                                            <th>
+                                                <div align="center">Rata-rata</div>
+                                            </th>
+                                            <th>
+                                                <div align="center">Jumlah Nilai</div>
+                                            </th>
+                                            <th>
+                                                <div align="center">Pelajaran</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="datanya in peringkat | orderBy: '-jumlahNilai' | filter : searchData"
+                                        ng-click="lihatData(y)">
+                                        <td>
+                                            <div align="center">{{$index+1}}</div>
+                                        </td>
+                                        <td align="left">{{datanya.namaPengguna | uppercase}}</td>
+                                        <th>
+                                            <div align="left">{{datanya.namaSekolah}}</div>
+                                        </th>
+                                        <td align="center">{{datanya.namaKelas}}</td>
+                                        <td align="center">{{datanya.rataRata | number:2}}</td>
+                                        <td align="center">{{datanya.jumlahNilai | number:2}}</td>
+                                        <td align="left">
+                                            <span ng-repeat="dataNilai in datanya.pelajaran">
+                                                {{dataNilai.pelajaran}} : {{dataNilai.nilai | number:2}}
+                                                
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="panel-footer"><small></small></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-view>

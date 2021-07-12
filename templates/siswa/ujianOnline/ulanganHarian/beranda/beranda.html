@@ -1,0 +1,54 @@
+<ion-view title="Ulangan Harian" cache-view="false" id="berandaUjianOnlineSiswa" style="background-color:#EEEEEE">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+        <div class="list card" id="beranda-card21" ng-repeat="data in datas" ng-click="getUjian(data)" ng-if="data.jenisUjian==='Ulangan Harian'">
+            <ion-item class="item-avatar" id="beranda-list-item8">
+                <img src="img/learning.png">
+                <h2>
+                    <span style="color:green">{{data.namaUjian}}</span>
+                </h2>
+                <p>
+                    <span style="color:orange">
+                        <b>{{data.namaSekolah}}</b>
+                    </span><br>
+                    <small><em>{{data.namaKotaKabupaten}}, {{data.namaProvinsi}}</em></small>
+                </p>
+            </ion-item>
+            <div class="item item-body">
+                <div class="show-list-numbers-and-dots">
+                    <div class="row">
+                        <div class="col col-33">
+                            <p style="margin-top:0px">
+                                Semester
+                                <br> Tahun
+                                <br> Kelas
+                                <br> Guru
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p style="margin-top:0px">
+                                : {{data.semester}}
+                                <br> : {{data.tahunAjaran}}
+                                <br> : {{data.namaKelas}}
+                                <br> : {{data.namaGuru}}
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <ion-item class="item-icon-right assertive" id="beranda-list-item9">Klik Disini
+                <i class="icon ion-ios-arrow-right icon-accessory"></i>
+            </ion-item>
+        </div>
+        <div class="spacer" style="width: 300px; height: 50px;" ng-show="informasi"></div>
+        <h2 style="color:#000000;font-weight:300;text-align:center;" ng-show="informasi">Selamat Datang</h2>
+        <p style="text-align:center" ng-show="informasi">
+            Saat ini Anda belum ada ujian online yang tersedia dari sekolah Anda. Terimakasih.</p>
+        <button id="beranda-button13" ng-show="informasi" ng-click="refresh()"
+            class="button button-positive button-block">Refresh</button>
+    </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,90 @@
+<ion-view title="Edit Tugas Siswa" id="tugasSiswaEditAdmin" view-cache="false" class="latar">
+    <ion-nav-buttons side="right" class="has-header">
+    </ion-nav-buttons>
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <form id="registrasi-form1" class="list" ng-submit="simpan()" name="myForm">
+
+                    <div class="item item-body">
+                        <div class="show-list-numbers-and-dots">
+                            <div class="row">
+                                <div class="col-33" style="padding-left:10px">
+                                    <small>Tahun Ajaran <br>
+                                        Semester<br>
+                                        Pelajaran<br>
+                                        Guru<br>
+                                        Kelas<br>
+                                        Sekolah<br>
+                                    </small>
+                                </div>
+                                <div class="col-67">
+                                    <small>
+                                        : {{formData.tahunAjaran}}<br>
+                                        : {{formData.semester}}<br>
+                                        : {{formData.pelajaran}}<br>
+                                        : {{formData.namaGuru}}<br>
+                                        : {{formData.namaKelas}}<br>
+                                        : <span style="font-size: 10px">{{formData.namaSekolah}}</span><br>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Judul Tugas
+                    </ion-item>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Judul Tugas" ng-model="formData.judulTugas">
+                    </label>
+                    <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Isi Tugas
+                    </ion-item>
+                    <label class="item item-input">
+
+                        <textarea placeholder="Ketik Isi Tugas Disini" ng-model="formData.isiTugas" rows="30"
+                            ui-tinymce="tinymceOptions"></textarea>
+                    </label>
+                    <label class="item item-input item-stacked-label input">
+                        <span class="input-label">Tanggal Pengumpulan Tugas</span>
+                        <input type="date" placeholder="" ng-model="formData.tanggalPengumpulanTugas">
+                    </label>
+
+                    <div class="spacer" style="height: 10px;"></div>
+                    <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Publish Tugas</ion-item>
+                    <ion-toggle toggle-class="toggle-positive" ng-model="formData.publish">
+                        <p>Publish</p>
+                    </ion-toggle>
+                    <div class="item item-body">
+                        <div class="show-list-numbers-and-dots">
+                            <p style="margin-top:0px;color:#000000;">Jika klik
+                                <strong>Publish</strong> maka tugas Anda langsung terlihat oleh siswa, jika tidak di
+                                Publish maka tugas Anda tidak terlihat oleh siswa, namun tetap tersimpan di perangkat
+                                Anda.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="spacer" style="height: 10px;"></div>
+                    <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Data Tugas Siswa
+                    </ion-item>
+                    <div ng-repeat="data in dataSiswa | orderBy:'namaSiswa'">
+                        <!-- <label class="item item-select" ng-repeat="data in dataSiswa">
+                    <span class="input-label">
+                        <small>{{$index+1}}. {{data.namaSiswa}}</small>
+                    </span>
+                    <select ng-model="data.keterangan" ng-change="getAbsensi(data)">
+                        <option value="Masuk">Masuk</option>
+                        <option value="Sakit">Sakit</option>
+                        <option value="Ijin">Ijin</option>
+                        <option value="Alpha">Alpha</option>
+                    </select>
+                </label> -->
+                        <ion-checkbox ng-model="data.kirimTugas" ng-click="getTugas(data, $index)">
+                            <p>{{data.namaSiswa}}</p>
+                        </ion-checkbox>
+                    </div>
+                    <button id="registrasi-button3" class="button button-positive button-block">Simpan Data</button>
+                </form>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

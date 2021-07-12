@@ -1,0 +1,78 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+      <ion-nav-bar class="bar-assertive">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-buttons side="left">
+          <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+      </ion-nav-bar>
+      <ion-nav-view name="menuSiswa"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" id="menuSiswa">
+      <ion-header-bar class="bar-assertive">
+        <div class="title">Menu</div>
+      </ion-header-bar>
+      <ion-content padding="false" class="side-menu-left has-header ">
+        <ion-list id="menu-list1" ng-if="ijinkanPenggunaanAplikasi===true">
+          <ion-item id="menu-list-item1" ui-sref="menuSiswa.berandaSiswa()" menu-close="">
+            <p>Beranda</p>
+          </ion-item>
+          <ion-item class="item-divider" id="menu-list-item-divider6"> Jadwal, Absensi & Tugas</ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.jadwalPelajaranSiswa()" menu-close="">
+            <p>Jadwal Pelajaran</p>
+          </ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.absensiSiswa()" menu-close="">
+            <p>Absensi Siswa</p>
+          </ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.tugasSiswa()" menu-close="">
+            <p>Tugas Siswa</p>
+          </ion-item>
+          <ion-item class="item-divider" id="menu-list-item-divider6"> Bank Soal</ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.bankSoalSiswa()" menu-close="">
+            <p>Bank Soal</p>
+          </ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.materiPelajaranSiswa()" menu-close="">
+            <p>Materi Pelajaran</p>
+          </ion-item>
+          <ion-item class="item-divider" id="menu-list-item-divider3"> Ujian Online Sekolah</ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.ujianOnlineSiswa()" menu-close="">
+            <p>Ulangan Harian</p>
+          </ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.latihanSoalOnlineSiswa()" menu-close="">
+            <p>Latihan / Kuis Online</p>
+          </ion-item>
+          <ion-item id="menu-list-item11" ui-sref="menuSiswa.berandaUTSUASSiswa()" menu-close="">
+            <p>UTS & UAS Online</p>
+          </ion-item>
+          <ion-item id="menu-list-item11" ui-sref="menuSiswa.berandaTryoutOnlineSiswa()" menu-close="">
+            <p>Tryout Online</p>
+          </ion-item>
+          <ion-item class="item-divider" id="menu-list-item-divider3"> Ujian Online Umum</ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.latihanSoalOnlineSiswaUmum()" menu-close="">
+            <p>Latihan Online</p>
+          </ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.kuisOnlineSiswaUmum()" menu-close="">
+            <p>Kuis Online</p>
+          </ion-item>
+          <ion-item id="menu-list-item10" ui-sref="menuSiswa.tryoutOnlineSiswaUmum()" menu-close="">
+            <p>Tryout Online</p>
+          </ion-item>
+          <ion-item id="menu-list-item12" ui-sref="menuSiswa.socSiswa()" menu-close="">
+            <p>Students Online Competition</p>
+          </ion-item>
+          <ion-item class="item-divider" id="menu-list-item-divider3"> Data Akun</ion-item>
+          <ion-item id="menu-list-item11" ui-sref="menuSiswa.profilPenggunaSiswa()" menu-close="">
+            <p>Profil Pengguna</p>
+          </ion-item>
+          <ion-item id="menu-list-item7" ui-sref="menuSiswa.gantiPasswordSiswa()" menu-close="">
+            <p>Ganti Password</p>
+          </ion-item>
+          <ion-item id="menu-list-item8" ng-click="logoutSiswa()">
+            <p>Keluar</p>
+          </ion-item>
+        </ion-list>
+      </div>
+          </div>
+      </ion-content>
+    </ion-side-menu>
+  </ion-side-menus>

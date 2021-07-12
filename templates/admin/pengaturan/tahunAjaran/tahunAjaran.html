@@ -1,0 +1,55 @@
+<ion-view title="TahunAjaran" id="tahunAjaranAdmin">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button icon ion-android-add" ng-click="tambahTahunAjaran()"> Tambah</button>
+    </ion-nav-buttons>
+    <ion-content padding="false" class="has-header">
+      <div class="row responsive-md" style="margin: auto;">
+        <div class="col col-50 col-offset-25">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" placeholder="Cari Data" ng-model="searchData">
+        </label>
+        <ion-list id="tahunAjaran-list19">
+            <ion-item id="tahunAjaran-list-item43" ng-repeat="data in tahunAjaran | filter:searchData">
+                <p>Tahun Ajaran. <b>{{data.tahunAjaran}}</b><br>Status.
+                    <span ng-if="data.aktif===true" style="color:green"><b>Aktif</b></span>
+                    <span ng-if="data.aktif===false" style="color:red"><b>Tidak Aktif</b></span>
+                </p>
+                <ion-option-button class="button-assertive" ng-click="hapusData(data)">Hapus</ion-option-button>
+                <ion-option-button class="button-positive" ng-click="editData(data)">Edit</ion-option-button>
+            </ion-item>
+        </ion-list>
+
+        <script id="templates/modal.html" type="text/ng-template" cache-view="false">
+                <ion-modal-view>
+                  <ion-header-bar class="bar bar-header bar-positive">
+                    <h1 class="title">Tambah Tahun Ajaran</h1>
+                    <button class="button button-clear button-primary" ng-click="modal.hide()">Close</button>
+                  </ion-header-bar>
+          
+                  <ion-content style="padding:10px">
+          
+                        <form class="list" ng-submit="simpan()">
+                                <label class="item item-input item-floating-label">
+                                  <span class="input-label">
+                                    <p>Tahun Ajaran</p>
+                                  </span>
+                                  <input type="text" placeholder="Tahun Ajaran" ng-model="formData.tahunAjaran">
+                                </label>
+                                <label class="item item-input">
+                                  <textarea placeholder="Keterangan" ng-model="formData.keterangan" rows="5"></textarea></label>
+                                <ion-toggle toggle-class="toggle-positive" ng-model="formData.aktif">
+                                  <p>Aktif</p>
+                                </ion-toggle>
+                                <button class="button button-positive button-block">Simpan Data</button>
+                              </form>
+          
+                  </ion-content>
+                </ion-modal-view>
+              </script>
+        </div>
+    </div>
+        
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,59 @@
+<ion-view title="Lihat Tugas" id="tugasSiswaLihatAdmin" class="latar">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <div class="item item-body">
+                    <div class="show-list-numbers-and-dots">
+                        <div class="row">
+                            <div class="col-33" style="padding-left:10px">
+                                <small>Tahun Ajaran <br>
+                                    Semester<br>
+                                    Pelajaran<br>
+                                    Guru<br>
+                                    Kelas<br>
+                                    Sekolah<br>
+                                </small>
+                            </div>
+                            <div class="col-67">
+                                <small>
+                                    : {{dataTugas.tahunAjaran}}<br>
+                                    : {{dataTugas.semester}}<br>
+                                    : {{dataTugas.pelajaran}}<br>
+                                    : {{dataTugas.namaGuru}}<br>
+                                    : {{dataTugas.namaKelas}}<br>
+                                    : {{dataTugas.namaSekolah}}<br>
+                                </small>
+                            </div>
+                        </div>
+                        <hr>
+                        <small>Isi Tugas : <br><span ng-bind-html="dataTugas.isiTugas"></span></small>
+                        <hr>
+                        <small>Tanggal Pengumpulan Tugas. <br>{{dataTugas.tanggalPengumpulanTugas}}</small>
+                    </div>
+                </div>
+                <div class="spacer" style="height: 10px;"></div>
+                <ion-item class="item-divider input" id="registrasi-list-item-divider4" ng-if="banyakFile > 0"> File
+                    Anda</ion-item>
+                <ion-list>
+                    <ion-item class="item-icon-right" ng-repeat="fileGuru in fileTugasGuru">
+                        <p><a href="{{fileGuru.fotoURL}}" target="new">{{$index+1}}. {{fileGuru.namaFile}}</a></p>
+                        <i style="color: red;" class="icon ion-trash-b icon-accessory"
+                            ng-click="hapusFile(fileGuru)"></i>
+                    </ion-item>
+                </ion-list>
+                <div class="spacer" style="height: 10px;"></div>
+                <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Terkirim
+                </ion-item>
+                <ion-list id="tugasSiswaLihat-list19">
+                    <ion-item ng-repeat="data in dataGetTugas" ng-click="lihatJawabanTugas(data)">
+                        <p>{{$index+1}}. {{data.namaSiswa}}
+                            <span class="item-note" ng-if="data.jawabanTugas===undefined || data.jawabanTugas===''"><small style="color: red;"> Belum Menjawab</small></span>
+                            <span class="item-note" ng-if="data.jawabanTugas!==undefined && data.jawabanTugas!==''"><small style="color: green;"> Lihat Jawaban<br>{{data.tanggalKirimTugas}}</small></span>
+                        </p>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-view>

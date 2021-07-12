@@ -1,0 +1,188 @@
+<ion-view title="{{formData.namaPengguna}}" id="berandaUser" class="latar">
+    <ion-nav-buttons side="right" class="has-header">
+        <!-- <button class="button icon ion-android-textsms" ng-click="goToPesan()"></button>&nbsp; -->
+        <!-- <button class="button icon ion-android-notifications" ng-click="goToTugas()" ng-if="tugasYangBelumDibaca!==0">
+            <b>{{tugasYangBelumDibaca}}</b> Tugas Baru</button> -->
+    </ion-nav-buttons>
+
+    <ion-content padding="true" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <div class="kartuBaru">
+                    <img src="https://image.flaticon.com/icons/svg/145/145867.svg"
+                        ng-if="jenisKelaminSiswa==='Laki-laki'" class="avatar" style="margin:auto">
+                    <img src="https://image.flaticon.com/icons/svg/145/145864.svg"
+                        ng-if="jenisKelaminSiswa==='Perempuan'" class="avatar" style="margin:auto">
+                    <h3 style="text-align: center;color: green;">{{formData.namaPengguna}}</h3>
+                    <h5 style="text-align: center;">
+                        <strong>{{formData.namaSekolah}}</strong><br>
+                        <span ng-if="statusSiswa==='Siswa'">Kelas {{formData.namaKelas}}</span><br>
+                        {{formData.namaKotaKabupaten}}, {{formData.namaProvinsi}}
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row responsive-md" style="margin: auto;" ng-if="akses===false">
+            <div class="col col-50 col-offset-25">
+                <div class="kartu">
+                    <h4>{{update.judul}}</h4>
+                    <p>{{update.pesan}}</p>
+                    <a ng-if="update.linkAndroid!==''" href="{{update.linkAndroid}}" target="new"
+                        class="button button-positive button-block">Klik Tombol Ini Untuk Update Aplikasi
+                    </a>
+                </div>
+            </div>
+        </div> -->
+
+        <div ng-if="ijinkanPenggunaanAplikasi===true">
+            <div class="row responsive-md" style="margin: auto;">
+                <div class="col col-50 col-offset-25">
+                    <div class="kartuTransparant">
+                        <h5 style="text-align: center;">Jadwal, Absensi, Tugas & Kelas :</h5>
+                        <div class="row" style="margin:auto">
+                            <div class="col" align="center" ui-sref="menuSiswa.kelasLintasMinat()"
+                                ng-if="jenjangSiswa==='SMA' || jenjangSiswa==='SMK'">
+                                <img src="https://image.flaticon.com/icons/svg/1089/1089129.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Kelas Lintas Minat</span>
+                            </div>
+                            <!-- <div class="col" align="center" ui-sref="menuSiswa.kelasLintasMinat()"
+                                ng-if="jenjangSiswa!=='SMA' || jenjangSiswa!=='SMK'">
+                                <img src="https://image.flaticon.com/icons/svg/1089/1089129.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Kelas Agama</span>
+                            </div> -->
+                            <div class="col" align="center" ui-sref="menuSiswa.jadwalPelajaranSiswa()">
+                                <img src="https://image.flaticon.com/icons/svg/201/201552.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Jadwal</span>
+                            </div>
+                            <div class="col" align="center" ui-sref="menuSiswa.absensiSiswa()">
+                                <img src="https://image.flaticon.com/icons/svg/235/235251.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Absensi Siswa</span>
+                            </div>
+                            <div class="col" align="center" ui-sref="menuSiswa.tugasSiswaPerMapel()">
+                                <img src="https://image.flaticon.com/icons/svg/178/178150.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Tugas Siswa</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="spacer" style="height: 20px;"></div>
+                    <div class="kartuTransparant">
+                        <h5 style="text-align: center;">e-Learning</h5>
+                        <div class="row" style="margin:auto;">
+                            <div class="col" align="center" ui-sref="menuSiswa.bankSoalSiswa()">
+                                <img src="https://image.flaticon.com/icons/svg/201/201638.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Bank Soal</span>
+                            </div>
+                            <div class="col" align="center" ui-sref="menuSiswa.materiPelajaranSiswa()">
+                                <img src="https://image.flaticon.com/icons/svg/1838/1838007.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Materi Pelajaran</span>
+                            </div>
+                            <div class="col" align="center" ng-click="goMeeting()">
+                                <img src="https://image.flaticon.com/icons/svg/201/201636.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Kelas Virtual</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="spacer" style="height: 20px;"></div>
+                    <div class="kartuTransparant">
+                        <h5 style="text-align: center;">Ujian Online Sekolah :</h5>
+                        <div class="row" style="margin:auto;">
+                            <div class="col" align="center" ui-sref="menuSiswa.ujianOnlineSiswa()">
+                                <img src="https://image.flaticon.com/icons/svg/201/201635.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Ulangan</span>
+                            </div>
+                            <div class="col" align="center" ui-sref="menuSiswa.latihanSoalOnlineSiswa()">
+                                <img src="https://image.flaticon.com/icons/svg/234/234653.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Latihan / Kuis</span>
+                            </div>
+                            <div class="col" align="center" ui-sref="menuSiswa.berandaUTSUASSiswa()">
+                                <img src="https://image.flaticon.com/icons/svg/1837/1837963.svg" width="50%">
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">UTS / UAS</span>
+                            </div>
+                            <div class="col" align="center" ui-sref="menuSiswa.berandaTryoutOnlineSiswa()">
+                                <img src="https://image.flaticon.com/icons/svg/235/235296.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Tryout Online</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="spacer" style="height: 20px;"></div>
+                    <!-- <div class="kartuTransparant">
+                        <h5 style="text-align: center;">Ujian Online Umum :</h5>
+                        <div class="row" style="margin:auto;">
+                            <div class="col" align="center" ui-sref="menuSiswa.latihanSoalOnlineSiswaUmum()">
+                                <img src="https://image.flaticon.com/icons/svg/1837/1837963.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Latihan Online</span>
+                            </div>
+                            <div class="col" align="center" ui-sref="menuSiswa.kuisOnlineSiswaUmum()">
+                                <img src="https://image.flaticon.com/icons/svg/1837/1837989.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Kuis Online</span>
+                            </div>
+                            <div class="col" align="center" ui-sref="menuSiswa.tryoutOnlineSiswaUmum()">
+                                <img src="https://image.flaticon.com/icons/svg/1803/1803764.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">Tryout Online</span>
+                            </div>
+                            <div class="col" align="center" ui-sref="menuSiswa.socSiswa()">
+                                <img src="https://image.flaticon.com/icons/svg/178/178161.svg" width="50%"
+                                    >
+                                <br>
+                                <span style="font-size:10px;color:rgb(65, 64, 64)">SOC</span>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row responsive-md" style="margin: auto;" ng-if="ijinkanPenggunaanAplikasi===false || ijinkanPenggunaanAplikasi===undefined">
+            <div class="col col-50 col-offset-25">
+                <div class="kartu">
+                    <h4>{{pesanKeSiswa.judulPesan}}</h4>
+                    <p>{{pesanKeSiswa.isiPesan}}</p>
+                    <a ng-if="pesanKeSiswa.link!==''" href="{{pesanKeSiswa.link}}" target="new"
+                        class="button button-positive button-block">Klik Tombol Ini
+                    </a>
+                </div>
+                <ion-item class="item-icon-left" ng-repeat="data in adminSekolah" href="tel:{{data.noHandphone}}"
+                    ng-if="jumlahAdminSekolah!==0 && data.noHandphone.length>4">
+                    <i class="icon ion-ios-telephone"></i>
+                    <p>{{data.noHandphone}}<br>{{data.namaPengguna}}</p>
+                </ion-item>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

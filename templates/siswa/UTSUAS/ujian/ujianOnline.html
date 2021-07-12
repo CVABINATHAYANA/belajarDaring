@@ -1,0 +1,86 @@
+<ion-view title="Ujian Online" cache-view="false" style="background-color:#EEEEEE">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button button-primary icon No Icon" ng-click="finish()"> FINISH</button>
+    </ion-nav-buttons>
+    <div class="scrollmenu  bar bar-subheader" style="height:60px">
+        <a ng-click="getSoal(data)" ng-repeat="data in soalSiswa">
+            <div ng-if="data.nomorSoal===nomorSoalNow" class="nomorSoalNow"><b ng-if="data.statusTerjawab===1"
+                    style="color:indigo">No. {{data.nomorSoal}}</b><span ng-if='data.statusTerjawab===0'>No.
+                    {{data.nomorSoal}}</span></div>
+            <div ng-if="data.nomorSoal!==nomorSoalNow"><b ng-if="data.statusTerjawab===1" style="color: indigo">No.
+                    {{data.nomorSoal}}</b><span ng-if='data.statusTerjawab===0'>No. {{data.nomorSoal}}</span></div>
+            <!-- <div ng-if="data.nomorSoal===nomorSoalNow" class="nomorSoalNow">No. {{data.nomorSoal}}</div>
+            <div ng-if="data.nomorSoal!==nomorSoalNow">No. {{data.nomorSoal}}</div> -->
+        </a>
+    </div>
+
+    <ion-content padding="false" class="has-header" style="margin-top:60px">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <div class="list card">
+                    <ion-item class="item-divider"> Soal Nomor : {{nomorSoal}}</ion-item>
+                    <div class="item item-body">
+                        <div class="show-list-numbers-and-dots">
+                            <p style="margin-top:0px;color:#000000;" ng-bind-html="formData.soal">
+                            </p>
+                            <ng-youtube-embed video="formData.soalVideo" width="100%"
+                                ng-if="formData.soalVideo!==undefined">
+                            </ng-youtube-embed>
+                        </div>
+                    </div>
+                </div>
+                <div class="list card">
+                    <ion-item class="item-divider"> Pilihan Jawaban : {{danu.pilihanJawaban}}</ion-item>
+                    <div>
+                        <div class=" item-body">
+                            <label>
+                                <input type="radio" ng-model="danu.pilihanJawaban" value="A" ng-click="klik()">
+                                &nbsp;&nbsp; A.
+                                <span ng-bind-html="formData.jawabanA"></span>
+                            </label>
+                        </div>
+
+                        <div class=" item-body">
+                            <label>
+                                <input type="radio" ng-model="danu.pilihanJawaban" value="B" ng-click="klik()">
+                                &nbsp;&nbsp; B.
+                                <span ng-bind-html="formData.jawabanB"></span>
+                            </label>
+                        </div>
+
+                        <div class=" item-body">
+                            <label>
+                                <input type="radio" ng-model="danu.pilihanJawaban" value="C" ng-click="klik()">
+                                &nbsp;&nbsp; C.
+                                <span ng-bind-html="formData.jawabanC"></span>
+                            </label>
+                        </div>
+
+                        <div class=" item-body">
+                            <label>
+                                <input type="radio" ng-model="danu.pilihanJawaban" value="D" ng-click="klik()">
+                                &nbsp;&nbsp; D.
+                                <span ng-bind-html="formData.jawabanD"></span>
+                            </label>
+                        </div>
+                        <div class=" item-body" ng-if="formData.jawabanE!==''">
+                            <label>
+                                <input type="radio" ng-model="danu.pilihanJawaban" value="E" ng-click="klik()">
+                                &nbsp;&nbsp; E.
+                                <span ng-bind-html="formData.jawabanE"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <ion-footer-bar align-title="left" class="bar-dark">
+        <button class="button button-clear pull-left">{{theTime}}</button>
+        <button class="button button-clear pull-right">Terjawab :
+            <strong>{{statusTerjawab}}</strong> dari
+            <strong>{{jumlahSoal}}</strong> soal</button>
+    </ion-footer-bar>
+</ion-view>

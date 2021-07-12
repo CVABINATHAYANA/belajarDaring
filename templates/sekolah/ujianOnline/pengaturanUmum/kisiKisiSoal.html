@@ -1,0 +1,56 @@
+<ion-view title="Kisi-kisi Soal" id="kisiKisiSoalUjianOnlineAdmin">
+    <ion-nav-buttons side="right" class="has-header">
+        <button class="button button-icon icon ion-android-add" ng-click="tambahData()"></button>
+    </ion-nav-buttons>
+    <ion-content padding="false" class="has-header">
+      <div class="row responsive-md" style="margin: auto;">
+        <div class="col col-50 col-offset-25">
+          <ion-list id="kisiKisiSoal-list6">
+            <ion-item class="item-divider" id="kisiKisiSoal-list-item-divider5"> {{data.pelajaran}}</ion-item>
+        </ion-list>
+        <ion-list id="kisiKisiSoal-list4">
+            <div class="item item-body" ng-repeat="data in kisiKisi" ng-click="getData(data)">
+                <div class="show-list-numbers-and-dots">
+                    <p style="margin-top:0px;color:#000000;">Materi :
+                        <strong>{{data.materiPelajaran}}</strong>
+
+                    </p>
+                    <p>
+                        <strong>Ruang Lingkup :</strong>
+                        <br>
+                        <span ng-bind-html="data.ruangLingkup"></span>
+                    </p>
+                </div>
+            </div>
+        </ion-list>
+        <script id="templates/modal.html" type="text/ng-template">
+            <ion-modal-view>
+              <ion-header-bar class="bar bar-header bar-positive">
+                <h1 class="title">Tambah Data</h1>
+                <button class="button button-clear button-primary" ng-click="modal.hide()">Close</button>
+              </ion-header-bar>
+      
+              <ion-content>
+      
+                <form class="list" ng-submit="simpan()">
+                  <label class="item item-input item-floating-label">
+                    <span class="input-label">
+                      <p>Materi Pelajaran</p>
+                    </span>
+                    <input type="text" placeholder="Materi Pelajaran" ng-model="formData.materiPelajaran">
+                  </label>
+                  <label class="item item-input">
+                    <span class="input-label">
+                      <p>Ruang Lingkup</p>
+                    </span><textarea placeholder="" ng-model="formData.ruangLingkup"></textarea></label>
+                  <button class="button button-balanced button-block short">Simpan Data</button>
+                </form>
+      
+              </ion-content>
+            </ion-modal-view>
+          </script>
+        </div>
+    </div>
+        
+    </ion-content>
+</ion-view>

@@ -1,0 +1,63 @@
+<ion-view title="Tugas Siswa" id="tugasSiswa" class="latar">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+
+                <!-- <progress value="0" max="100" id="uploader" style="-webkit-appearance: none; appearance: none; width: 50%; margin-bottom: 10px;">{{percentage}}%</progress>
+                {{uploader.value | number:2}}%
+                <input type="file" value="upload" id="fileButton"> -->
+
+                <div class="kartu">
+                    <h4>Keterangan</h4>
+                    <hr>
+                    <p>
+                        <small>
+                            <!-- Tahun Ajaran <span class="pull-right">{{formData.tahunAjaran}}</span><br>
+                            Semester <span class="pull-right">{{formData.semester}}</span><br>
+                            Pelajaran <span class="pull-right">{{formData.pelajaran}}</span><br>
+                            Guru <span class="pull-right">{{formData.guru}}</span><br> -->
+                            Kelas <span class="pull-right">{{formData.kelas}}</span><br>
+                            Sekolah <span class="pull-right">{{formData.sekolah}}</span><br>
+                        </small>
+
+                    </p>
+                </div>
+
+                <div class="kartu">
+                    <h4>{{formData.judulTugas}}</h4>
+                    <hr>
+                    <span ng-bind-html="formData.isiTugas"></span>
+                    <hr>
+                    <p>File Tugas</p>
+                    <p ng-repeat="fileGuru in fileTugasGuru"><a href="{{fileGuru.fotoURL}}" target="new">{{$index+1}}.
+                        {{fileGuru.namaFile}}</a></p>
+                </div>
+
+                <form id="home-form1" class="list">
+                    <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Jawab Tugas</ion-item>
+                    <label class="item item-input">
+                        <textarea placeholder="Ketik Isi Tugas Disini" ng-model="formData.jawabanTugas" rows="30"
+                            ui-tinymce="tinymceOptions">
+                        </textarea>
+                        
+                    </label>
+                    <button ng-click="uploadFile()" class="button button-positive button-block">Kirim Tugas</button>
+                </form>
+
+                <div class="row responsive-md" style="margin: auto;">
+                    <div class="col col-50 col-offset-25">
+                        <button class="button icon ion-android-attach button-positive button-block" ng-click="uploadfilesiswa()"> &nbsp;&nbsp; Upload File</button>
+                    </div>
+                </div>
+                <div class="kartu">
+                    <h4>Nilai Tugas Anda</h2>
+                        <hr>
+                        <h1 style="color: green;">{{formData.nilaiTugasSiswa}}
+                    </h4>
+
+                </div>
+
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

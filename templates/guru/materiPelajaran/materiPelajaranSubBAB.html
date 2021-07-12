@@ -1,0 +1,84 @@
+<ion-view title="{{data.BAB}}" id="materiPelajaranSubBABGuru" cache-view="false" class="latar">
+    <ion-nav-buttons side="right" class="has-header">
+      <button class="button button-icon icon ion-android-add" ng-click="tambahSubBAB()"></button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+      <div class="row responsive-md" style="margin: auto;">
+        <div class="col col-50 col-offset-25">
+          <ion-list>
+            <ion-item ng-repeat="item in datas" ng-click="getData(item)" style="font-size: 14px">{{$index+1}}.
+              {{item.namaSubBAB}}</ion-item>
+          </ion-list>
+        </div>
+      </div>
+  
+      <script id="templates/modal.html" type="text/ng-template" cache-view="false">
+                  <ion-modal-view>
+                    <ion-header-bar class="bar bar-header bar-positive">
+                      <h1 class="title">Tambah Sub BAB</h1>
+                      <button class="button button-clear button-primary" ng-click="modal.hide()">Close</button>
+                    </ion-header-bar>
+            
+                    <ion-content style="padding:10px" class="latar">
+      
+                      <form class="list" ng-submit="simpan()">
+                          <ion-item class="item-divider"> Nama Sub BAB</ion-item>
+                          <label class="item item-input item-floating-label input">
+                              <span class="input-label">Nama Sub BAB Materi Pembelajaran</span>
+                              <input type="text" placeholder="Nama Sub BAB Materi Pembelajaran" ng-model="formData.namaSubBAB">
+                          </label>
+                          <ion-item class="item-divider"> Isi Materi Pembelajaran</ion-item>
+                          <label class="item item-input">
+                              <textarea placeholder="Isi Materi Pembelajaran" ng-model="formData.isiMateriPembelajaran" rows="20"
+                              ui-tinymce="tinymceOptions"></textarea>
+                          </label>
+                          <label class="item item-input item-floating-label input">
+                              <span class="input-label">
+                                  <p>Link Video Youtube</p>
+                              </span>
+                              <input type="text" placeholder="Link Video Youtube" ng-model="formData.videoPembelajaran">
+                          </label>
+                          <ion-toggle toggle-class="toggle-positive" ng-model="formData.publish">Publish</ion-toggle>
+                          <button class="button button-positive button-block">Simpan Materi Pembelajaran</button>
+                      </form>
+            
+                    </ion-content>
+                  </ion-modal-view>
+              </script>
+  
+      <script id="templates/modalLihat.html" type="text/ng-template" cache-view="false">
+                  <ion-modal-view>
+                    <ion-header-bar class="bar bar-header bar-positive">
+                      <h1 class="title">{{formData.namaSubBAB}}</h1>
+                      <button class="button button-clear button-primary" ng-click="modal.hide()">Close</button>
+                    </ion-header-bar>
+            
+                    <ion-content style="padding:10px" class="latar">
+      
+                          <ion-item class="item-divider"> Materi Pembalajaran</ion-item>
+                          <div class="item item-body">
+                            <div class="show-list-numbers-and-dots">
+                              <p style="margin-top:0px;color:#000000;">
+                                BAB : <strong>{{data.BAB}}</strong><br>
+                                SUB : <strong>{{formData.namaSubBAB}}</strong>
+                              </p>
+                            </div>
+                          </div>
+      
+                          <div class="spacer" style="height: 10px;"></div>
+                          <ion-item class="item-divider"> Isi Materi Pembelajaran</ion-item>
+                          <div class="item item-body">
+                            <div class="show-list-numbers-and-dots">
+                              <p style="margin-top:0px;color:#000000;" ng-bind-html="formData.isiMateriPembelajaran"></p>
+                            </div>
+                          </div>
+      
+                          <div class="spacer" style="height: 10px;" ng-if="formData.videoPembelajaran!==''"></div>
+                          <ion-item class="item-divider" ng-if="formData.videoPembelajaran!==''"> Video Pembelajaran</ion-item>
+                          <ng-youtube-embed video="formData.videoPembelajaran" width="100%" ng-if="formData.videoPembelajaran!==''"></ng-youtube-embed>
+            
+                    </ion-content>
+                  </ion-modal-view>
+              </script>
+    </ion-content>
+  </ion-view>

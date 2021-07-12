@@ -1,0 +1,179 @@
+<ion-view title="Lengkapi Data Di Bawah Ini" id="registrasiSiswa" style="background-color:#EEEEEE">
+    <ion-nav-buttons side="right" class="has-header">
+    </ion-nav-buttons>
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+
+        <form id="registrasi-form1" class="list" ng-submit="daftar()" name="myForm">
+            
+            <ion-item class="item-divider input" id="registrasi-list-item-divider1"> Data Sekolah</ion-item>
+            <label class="item item-select">
+                <span class="input-label">
+                    <p>Provinsi</p>
+                    <p>
+                        <select ng-model="formData.idProvinsi" ng-change="getIdProvinsi()">
+                            <option ng-repeat="data in dataProvinsi | orderBy:'nama_provinsi'"
+                                value="{{data.id_provinsi}}">{{data.nama_provinsi}}</option>
+                        </select>
+                    </p>
+                </span>
+            </label>
+            <label class="item item-select">
+                <span class="input-label">
+                    <p>Kota / Kab</p>
+                </span>
+                <select ng-model="formData.idKotaKabupaten" ng-change="getIdKotaKabupaten()">
+                    <option ng-repeat="data in dataKotaKabupaten | orderBy:'nama_kota_kabupaten'"
+                        value="{{data.id_kota_kabupaten}}">{{data.nama_kota_kabupaten}}</option>
+                </select>
+            </label>
+            <label class="item item-select">
+                <span class="input-label">
+                    <p>Kecamatan</p>
+                </span>
+                <select ng-model="formData.idKecamatan" ng-change="getIdKecamatan()">
+                    <option ng-repeat="data in dataKecamatan | orderBy:'nama_kecamatan'" value="{{data.id_kecamatan}}">
+                        {{data.nama_kecamatan}}</option>
+                </select>
+            </label>
+            <label class="item item-select" id="registrasi-select2">
+                <span class="input-label">
+                    <p>Jenjang</p>
+                    <p>
+                        <select ng-model="formData.jenjang" ng-change="getJenjang()">
+                            <option>SD</option>
+                            <option>SMP</option>
+                            <option>SMA</option>
+                            <option>SMK</option>
+                        </select>
+                    </p>
+                </span>
+            </label>
+            <label class="item item-select">
+                <span class="input-label">
+                    <p>Sekolah</p>
+                </span>
+                <select ng-model="formData.idSekolah" ng-change="getIdSekolah()">
+                    <option ng-repeat="data in dataSekolah | orderBy:'nama_sekolah'" value="{{data.$id}}">
+                        {{data.nama_sekolah}}</option>
+                </select>
+            </label>
+
+
+            <div ng-if="statusSiswa==='Siswa'">
+                <div class="spacer" style="height: 10px;"></div>
+                <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Data Kelas</ion-item>
+                <label class="item item-select">
+                    <span class="input-label">
+                        <p>Tahun Ajaran</p>
+                    </span>
+                    <select ng-model="formData.idTahunAjaran" ng-change="getTahunAjaran()">
+                        <option ng-repeat="data in tahunAjaran" value="{{data.$id}}">{{data.tahunAjaran}}</option>
+                    </select>
+                </label>
+                <label class="item item-select">
+                    <span class="input-label">
+                        <p>Tingkat Kelas</p>
+                    </span>
+                    <select ng-model="formData.tingkatKelas">
+                        <option ng-repeat="data in tingkatKelas" value="{{data}}">{{data}}</option>
+                    </select>
+                </label>
+                <!-- <ion-item class="item-icon-right assertive" ng-show="tampilBuatKelas" ng-click="buatKelasBaru()">Buat Kelas Baru
+                    <i class="icon ion-ios-arrow-right icon-accessory"></i>
+                </ion-item> -->
+                <label class="item item-select">
+                    <span class="input-label">
+                        <p>Nama Kelas</p>
+                    </span>
+                    <select ng-model="formData.idKelas" ng-change="getKelas()">
+                        <!-- <option value="1">Buat Kelas Baru</option> -->
+                        <option ng-repeat="data in dataKelas | orderBy:'namaKelas'" value="{{data.$id}}">
+                            {{data.namaKelas}}
+                        </option>
+                    </select>
+                </label>
+                <label class="item item-input item-floating-label input" id="registrasi-input7">
+                    <span class="input-label">
+                        <p>Nomor Absen</p>
+                    </span>
+                    <input type="number" placeholder="Nomor Absen" ng-model="formData.nomorAbsen">
+                </label>
+            </div>
+
+
+            <div class="spacer" style="height: 10px;"></div>
+            <label class="item item-input item-floating-label input" id="registrasi-input7">
+                <span class="input-label">
+                    <p>No Handphone</p>
+                </span>
+                <input type="tel" placeholder="Nomor Handphone" ng-model="formData.noHandphone">
+            </label>
+            <label class="item item-select" id="registrasi-select6">
+                <span class="input-label">
+                    <p>Jenis Kelamin</p>
+                </span>
+                <select ng-model="formData.jenisKelamin">
+                    <option>Laki-laki</option>
+                    <option>Perempuan</option>
+                </select>
+            </label>
+            <label class="item item-input" id="registrasi-textarea1">
+                <span class="input-label">
+                    <p>Alamat</p>
+                </span><textarea placeholder="" ng-model="formData.alamat" rows="7"></textarea></label>
+
+            <button id="registrasi-button3" class="button button-positive button-block">Simpan Data</button>
+        </form>
+
+        <script id="templates/modal.html" type="text/ng-template" cache-view="false">
+            <ion-modal-view>
+                <ion-header-bar class="bar bar-header bar-positive">
+                    <h1 class="title">Buat Kelas Baru</h1>
+                    <button class="button button-clear button-primary" ng-click="modal.hide()">Close</button>
+                </ion-header-bar>
+                <ion-content padding="false" class="has-header" style="background-color:#EEEEEE;padding:10px">
+                        <form class="list" ng-submit="simpan()">
+                                <label class="item item-select">
+                                  <span class="input-label">
+                                    <p>Tahun Ajaran</p>
+                                  </span>
+                                  <select ng-model="formData.idTahunAjaran" ng-change="getTahunAjaran()">
+                                      <option ng-repeat="data in tahunAjaran" value="{{data.$id}}">{{data.tahunAjaran}}</option>
+                                  </select>
+                                </label>
+                                <label class="item item-select">
+                                  <span class="input-label">
+                                    <p>Tingkat Kelas</p>
+                                  </span>
+                                  <select ng-model="formData.tingkatKelas">
+                                      <option ng-repeat="data in tingkatKelas">{{data}}</option>
+                                  </select>
+                                </label>
+                                <label class="item item-input">
+                                  <span class="input-label">
+                                    <p>Nama Kelas</p>
+                                  </span>
+                                  <input type="text" placeholder="Nama Kelas Misal 7.1" ng-model="formData.namaKelas">
+                                </label>
+                                <!-- <label class="item item-select">
+                                  <span class="input-label">
+                                    <p>Prasarana</p>
+                                  </span>
+                                  <select ng-model="formData.idPrasarana" ng-change="getPrasarana()">
+                                      <option ng-repeat="data in dataPrasarana" value="{{data.$id}}">{{data.namaPrasarana}}</option>
+                                  </select>
+                                </label> -->
+                                <button class="button button-positive button-block">Simpan Data</button>
+                              </form>    
+                </div>
+        </div>
+    </ion-content>
+            </ion-modal-view>
+          </script>
+
+    </div>
+        </div>
+    </ion-content>
+</ion-view>
