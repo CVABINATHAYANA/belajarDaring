@@ -1,0 +1,73 @@
+<ion-view title="Ujian Detail" id="olimpiadeDetailUTSUASSiswa" style="background-color:#EEEEEE">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+        <div class="list card" id="olimpiadeDetail-card23">
+            <ion-item id="olimpiadeDetail-list-item17">
+                <span style="color:green">{{data.namaUTSUAS}}</span>
+                <br>
+                <small>Tingkat
+                    <span style="color:orange">
+                        <b>{{data.utsUasTingkat}}</b>
+                    </span>
+                </small>
+            </ion-item>
+            <div class="item item-body">
+                <div class="show-list-numbers-and-dots">
+                    <div class="row">
+                        <div class="col col-33">
+                            <p style="margin-top:0px">
+                                Semester
+                                <br> Tahun
+                                <br> Jenjang
+                                <br> Kota
+                                <br> Provinsi
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p style="margin-top:0px">
+                                : {{data.semester}}
+                                <br> : {{data.tahunAjaran}}
+                                <br> : {{data.jenjang}}
+                                <br> : {{data.namaKota}}
+                                <br> : {{data.namaProvinsi}}
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="list card" id="olimpiadeDetail-card24" ng-repeat="pelajaran in dataPelajaran | orderBy:'tanggalUjianDisplay'">
+            <ion-item id="olimpiadeDetail-list-item19">{{pelajaran.pelajaran}}</ion-item>
+            <div class="item item-body">
+                <div class="show-list-numbers-and-dots">
+                    <div class="row">
+                        <div class="col col-33">
+                            <p style="margin-top:0px">
+                                Tanggal
+                                <br> Jam
+                                <br> Durasi
+                                <br> Soal
+                                <br> KKM
+                                <br>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p style="margin-top:0px">
+                                : {{pelajaran.tanggalUjianDisplay}}
+                                <br> : {{pelajaran.jamUjianDisplay}}
+                                <br> : {{pelajaran.durasiUjian}} menit
+                                <br> : {{pelajaran.jumlahSoal}} soal
+                                <br> : {{pelajaran.kkm}}
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </ion-content>
+</ion-view>

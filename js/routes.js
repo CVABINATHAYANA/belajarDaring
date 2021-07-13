@@ -260,6 +260,7 @@ angular.module('app.routes', [])
           }
         }
       })
+
       //Data Pokok Siswa Admin
       .state('menuAdmin.dataPokokSiswaAdmin', {
         url: '/dataPokokSiswaAdmin',
@@ -9155,6 +9156,162 @@ angular.module('app.routes', [])
 
       })
 
+        
+      // USER ORANG TUA 
+      .state('menuOrangTua', {
+        url: '/orangTua',
+        templateUrl: 'templates/orangTua/menuOrangTua.html',
+        controller: 'menuOrangTuaCtrl'
+      })
+
+      .state('menuOrangTua.authOrangTua', {
+        url: '/authOrangTua',
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/beranda/authSiswa.html',
+            controller: 'authOrangTuaCtrl'
+          }
+        }
+      })
+
+      .state('menuOrangTua.berandaOrangTua', {
+        url: '/berandaOrangTua',
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/beranda/beranda.html',
+            controller: 'berandaOrangTuaCtrl'
+          }
+        }
+      })
+
+      .state('menuOrangTua.absensiOrangTua', {
+        url: '/absensiOrangTua',
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/absensi/absensi.html',
+            controller: 'absensiOrangTuaCtrl'
+          }
+        }
+      })
+
+      .state('menuOrangTua.jadwalPelajaranOrangTua', {
+        url: '/jadwalPelajaranOrangTua',
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/jadwalPelajaran/jadwalPelajaran.html',
+            controller: 'jadwalPelajaranOrangTuaCtrl'
+          }
+        }
+      })
+      
+      // Tugas Siswa
+      .state('menuOrangTua.tugasSiswaPerMapelOrangTua', {
+        url: '/tugasSiswaPerMapelOrangTua',
+        params: {
+          idMapel: "",
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/tugas/tugaspermapel.html',
+            controller: 'tugasSiswaPerMapelOrangTuaCtrl'
+          }
+        }
+      })
+      .state('menuOrangTua.tugasSiswaOrangTua', {
+        url: '/tugasSiswaOrangTua',
+        params: {
+          idMapel: "",
+          idKelas: "",
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/tugas/tugas.html',
+            controller: 'tugasSiswaOrangTuaCtrl'
+          }
+        }
+      })
+      .state('menuOrangTua.tugasSiswaLihatOrangTua', {
+        url: '/tugasSiswaLihatOrangTua',
+        params: {
+          idTugas: "",
+          pelajaran: "",
+          groupTugas: '',
+          tahunAjaran: '',
+          semester: '',
+          pelajaran: '',
+          guru: '',
+          kelas: '',
+          sekolah: '',
+          judulTugas: '',
+          isiTugas: '',
+          nilaiTugasSiswa: '',
+          jawabanTugas: '',
+
+          idMapel: "",
+          idKelas: "",
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/tugas/tugasLihat.html',
+            controller: 'tugasSiswaLihatOrangTuaCtrl'
+          }
+        }
+      })
+      .state('menuOrangTua.tugasSiswaDiskusiOrangTua', {
+        url: '/tugasSiswaDiskusiOrangTua',
+        params: {
+          idTugas: "",
+          pelajaran: "",
+          groupTugas: '',
+          tahunAjaran: '',
+          semester: '',
+          pelajaran: '',
+          guru: '',
+          kelas: '',
+          sekolah: '',
+          judulTugas: '',
+          isiTugas: '',
+          nilaiTugasSiswa: '',
+          jawabanTugas: '',
+          isiChat: '',
+
+          idMapel: "",
+          idKelas: "",
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/tugas/tugasSiswaDiskusi.html',
+            controller: 'tugasSiswaDiskusiOrangTuaCtrl'
+          }
+        }
+      })
+      .state('menuOrangTua.uploadFileTugasOrangTua', {
+        url: '/uploadFileTugasOrangTua',
+        params: {
+          idTugas: "",
+          pelajaran: "",
+          groupTugas: '',
+          tahunAjaran: '',
+          semester: '',
+          pelajaran: '',
+          namaGuru: '',
+          namaKelas: '',
+          namaSekolah: '',
+          isiTugas: '',
+          nilaiTugasSiswa: '',
+          jawabanTugas: '',
+
+          idMapel: "",
+          idKelas: "",
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/tugas/uploadFile.html',
+            controller: 'uploadFileTugasOrangTuaCtrl'
+          }
+        }
+      })
+      
     $urlRouterProvider.otherwise('/welcome')
 
 

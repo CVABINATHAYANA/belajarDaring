@@ -611,11 +611,11 @@ angular.module('app.berandaSiswa', [])
             $scope.ijinkanPenggunaanAplikasi = snapshot.val().ijinkanPenggunaanAplikasi;
         });
 
-        var pesan = firebase.database(appSiswa).ref("pesan/1");
-        pesan.on('value', function(snapshot){
-            $scope.pesanKeSiswa = snapshot.val();
-            console.log(snapshot.val().link)
-        })
+        // var pesan = firebase.database(appSiswa).ref("pesan/1");
+        // pesan.on('value', function(snapshot){
+        //     $scope.pesanKeSiswa = snapshot.val();
+        //     console.log(snapshot.val().link)
+        // })
 
         $scope.logoutSiswa = function () {
 

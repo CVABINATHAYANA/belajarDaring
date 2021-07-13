@@ -1,0 +1,70 @@
+<ion-view title="Room Chat Tugas Siswa" id="tugasSiswa" class="latar">
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+
+                <!-- <progress value="0" max="100" id="uploader" style="-webkit-appearance: none; appearance: none; width: 50%; margin-bottom: 10px;">{{percentage}}%</progress>
+                {{uploader.value | number:2}}%
+                <input type="file" value="upload" id="fileButton"> -->
+
+                <!-- <div class="kartu">
+                    <h4>Keterangan</h4>
+                    <hr>
+                    <p>
+                        <small>
+                            Tahun Ajaran <span class="pull-right">{{formData.tahunAjaran}}</span><br>
+                            Semester <span class="pull-right">{{formData.semester}}</span><br>
+                            Pelajaran <span class="pull-right">{{formData.pelajaran}}</span><br>
+                            Guru <span class="pull-right">{{formData.guru}}</span><br>
+                            Kelas <span class="pull-right">{{formData.kelas}}</span><br>
+                            Sekolah <span class="pull-right">{{formData.sekolah}}</span><br>
+                        </small>
+
+                    </p>
+                </div> -->
+
+                <div class="kartu">
+                    <h4>{{formData.judulTugas}}</h4>
+                    <hr>
+                    <span ng-bind-html="formData.isiTugas"></span>
+                    <hr>
+                    <p>File Tugas</p>
+                    <p ng-repeat="fileGuru in fileTugasGuru"><a href="{{fileGuru.fotoURL}}" target="new">{{$index+1}}.
+                        {{fileGuru.namaFile}}</a></p>
+                </div>
+                <div class="kartu">
+                    <div>
+                        <div ng-repeat="data in ChatSiswa">
+                            <div ng-if="data.idPengirim!=formData.uidSiswa"class="incoming_msg">
+                                <!-- <div class="incoming_msg_img"> 
+                                    <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                </div> -->
+                                <div class="received_nama">
+                                    <p>{{data.namaPengirim}}</p>
+                                </div>
+                                <div class="received_msg">
+                                  <div class="received_withd_msg">
+                                    <p>{{data.isiChat}}</p>
+                                    <span class="time_date"> {{data.jamChat}} | {{data.tanggalDisplay}}</span> 
+                                </div>
+                                </div>
+                              </div>
+                              <div ng-if="data.idPengirim==formData.uidSiswa" class="outgoing_msg">
+                                <div class="sent_msg">
+                                  <p>{{data.isiChat}}</p>
+                                  <span class="time_date"> {{data.jamChat}} | {{data.tanggalDisplay}}</span> </div>
+                              </div>
+                        </div>
+                        <div class="type_msg">
+                          <div class="input_msg_write">
+                            <input type="text" class="write_msg" placeholder="Type a message"  ng-model="formData.isiChat">
+                            <button class="msg_send_btn" type="button" ng-click="chat()"><i class="fa fa-paper-plane-o" aria-hidden="true" ></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

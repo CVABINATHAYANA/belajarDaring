@@ -123,6 +123,7 @@ angular.module('app.authentification', [])
         $scope.login = function () {
             if ($scope.formData.email !== '' && $scope.formData.password !== '' && $scope.formData.sebagai !== '') {
 
+                console.log($scope.formData.sebagai);
                 //Login Sebagai Admin Sekolah
                 if ($scope.formData.sebagai === "adminSekolah") {
                     var dataAdminSekolah = firebase.database().ref("adminSekolah").orderByChild("email").equalTo($scope.formData.email);
@@ -194,7 +195,7 @@ angular.module('app.authentification', [])
                 }
 
                 //Login Sebagai Siswa / Orang Tua
-                if ($scope.formData.sebagai === "siswaSekolah" || $scope.formData.sebagai === 'orangTua') {
+                if ($scope.formData.sebagai === "siswaSekolah") {
                     var dataSiswaSekolah = firebase.database(appSiswa).ref("dataSiswa").orderByChild("email").equalTo($scope.formData.email);
                     var listSiswaSekolah = $firebaseArray(dataSiswaSekolah);
 
@@ -240,6 +241,81 @@ angular.module('app.authentification', [])
                                         $state.go('menuSiswa.berandaSiswa');
                                     }).then(function (resp) {
                                         window.location.reload(true);
+                                    })
+
+                                })
+                                .catch(function (error) {
+                                    $ionicLoading.hide();
+                                    //console.log(error.message);
+                                    $scope.message = error.message;
+                                    $ionicPopup.alert({
+                                        title: 'Something Wrong',
+                                        template: $scope.message,
+                                        okType: 'button-positive'
+                                    });
+                                });
+                        }
+
+                        else {
+                            //console.log("jangan dilanjutkan");
+                            $ionicPopup.alert({
+                                title: 'Information',
+                                template: 'Maaf email anda belum terdaftar , silahkan mendaftar terlebih dahulu',
+                                okType: 'button-positive'
+                            });
+                        }
+
+                    });
+                }
+
+                //Login Sebagai Orang Tua
+                if ($scope.formData.sebagai === 'orangTua') {
+                    console.log('ORANG TUA');
+                    var dataSiswaSekolah = firebase.database(appSiswa).ref("dataSiswa").orderByChild("email").equalTo($scope.formData.email);
+                    var listSiswaSekolah = $firebaseArray(dataSiswaSekolah);
+
+                    listSiswaSekolah.$loaded().then(function (response) {
+                        // console.log("jumlahData", response.length);
+                        // console.log(response);
+                        if (response.length === 1) {
+                            // console.log("lanjutkan");
+                            $ionicLoading.show();
+                            var auth = $firebaseAuth();
+                            auth.$signInWithEmailAndPassword($scope.formData.email, $scope.formData.password)
+                                .then(function (response) {
+                                    $ionicLoading.hide();
+
+                                    var user = firebase.auth().currentUser;
+                                    //console.log("uidGuru", user.uid);
+
+                                    //Ambil Data Pengguna
+                                    var dataPengguna = firebase.database(appSiswa).ref("dataSiswa").orderByChild("uid").equalTo(user.uid);
+                                    var listGetID = $firebaseArray(dataPengguna);
+
+                                    listGetID.$loaded().then(function (response) {
+                                        //console.log(response);
+
+                                        localStorage.setItem('uidSiswa', user.uid);
+                                        localStorage.setItem('namaPenggunaSiswa', response[0].namaPengguna);
+                                        localStorage.setItem('emailSiswa', response[0].email);
+                                        localStorage.setItem('idPenggunaSiswa', response[0].$id);
+                                        if (response[0].idSekolah !== undefined) {
+                                            localStorage.setItem('idSekolahSiswa', response[0].idSekolah);
+                                            localStorage.setItem('jenjangSiswa', response[0].jenjang);
+                                            localStorage.setItem('idProvinsiSiswa', response[0].idProvinsi);
+                                            localStorage.setItem('idKotaKabupatenSiswa', response[0].idKotaKabupaten);
+                                            localStorage.setItem('idKecamatanSiswa', response[0].idKecamatan);
+                                            localStorage.setItem('namaSekolahSiswa', response[0].namaSekolah);
+                                            localStorage.setItem('namaKotaKabupatenSiswa', response[0].namaKotaKabupaten);
+                                            localStorage.setItem('namaProvinsiSiswa', response[0].namaProvinsi);
+                                            localStorage.setItem('namaKelasSiswa', response[0].namaKelas);
+                                            localStorage.setItem('jenisKelaminSiswa', response[0].jenisKelamin);
+                                            localStorage.setItem('kodeSekolah', response[0].kodeSekolah)
+                                        }
+                                        localStorage.setItem('statusSiswa', response[0].statusSiswa);
+                                        $state.go('menuOrangTua.berandaOrangTua');
+                                    }).then(function (resp) {
+                                        // window.location.reload(true);
                                     })
 
                                 })

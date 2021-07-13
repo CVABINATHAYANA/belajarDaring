@@ -8,29 +8,20 @@
                 <input type="file" value="upload" id="fileButton"> -->
 
                 <div class="kartu">
-                    <h4>Keterangan</h4>
+                    <h3>{{formData.judulTugas}}</h3>
+                    <small>
+                        Guru : <span> {{formData.guru}}</span><br>
+                        Kelas : <span> {{formData.kelas}}</span><br>
+                        <!-- Sekolah <span class="pull-right">{{formData.sekolah}}</span><br> -->
+                    </small>
                     <hr>
-                    <p>
-                        <small>
-                            <!-- Tahun Ajaran <span class="pull-right">{{formData.tahunAjaran}}</span><br>
-                            Semester <span class="pull-right">{{formData.semester}}</span><br>
-                            Pelajaran <span class="pull-right">{{formData.pelajaran}}</span><br>
-                            Guru <span class="pull-right">{{formData.guru}}</span><br> -->
-                            Kelas <span class="pull-right">{{formData.kelas}}</span><br>
-                            Sekolah <span class="pull-right">{{formData.sekolah}}</span><br>
-                        </small>
-
-                    </p>
-                </div>
-
-                <div class="kartu">
-                    <h4>{{formData.judulTugas}}</h4>
-                    <hr>
+                    <h5>Isi Tugas</h5>
                     <span ng-bind-html="formData.isiTugas"></span>
                     <hr>
-                    <p>File Tugas</p>
+                    <p>File Tugas dari Guru</p>
                     <p ng-repeat="fileGuru in fileTugasGuru"><a href="{{fileGuru.fotoURL}}" target="new">{{$index+1}}.
-                        {{fileGuru.namaFile}}</a></p>
+                            {{fileGuru.namaFile}}</a></p>
+                    <hr>
                 </div>
 
                 <form id="home-form1" class="list">
