@@ -106,8 +106,11 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
                         // })
                     }
                     if (index === 1) {
+                        console.log(data.groupTugas);
                         $state.go("menuSekolah.tugasSiswaLihatSekolah", {
-                            "groupTugas": data.groupTugas
+                            "groupTugas": data.groupTugas,
+                            "idKelas": data.idKelas,
+                            "idPelajaran": data.idPelajaran,
                         })
                     }
                     return true;
@@ -784,10 +787,12 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
         }
 
         $scope.data = {
-            "groupTugas": $stateParams.groupTugas
+            "groupTugas": $stateParams.groupTugas,
+            "idKelas": $stateParams.idKelas,
+            "idPelajaran": $stateParams.idPelajaran,
         }
 
-        var getAbs = firebase.database(app).ref("tugasSiswa").orderByChild("groupTugas").equalTo($scope.data.groupTugas);
+        var getAbs = firebase.database(app).ref("tugasSiswa").child($scope.data.idKelas).child($scope.data.idPelajaran).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
         var listGetAbs = $firebaseArray(getAbs);
         $ionicLoading.show();
         listGetAbs.$loaded().then(function (response) {

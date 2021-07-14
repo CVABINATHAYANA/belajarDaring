@@ -7133,6 +7133,8 @@ angular.module('app.routes', [])
         url: '/tugasSiswaLihatSekolah',
         params: {
           groupTugas: '',
+          idKelas: '',
+          idPelajaran: '',
         },
         views: {
           'menuSekolah': {
