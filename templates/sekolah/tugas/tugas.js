@@ -805,7 +805,9 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
             // console.log(data.jawabanTugas)
             $state.go("menuSekolah.LihatJawabanTugasSiswaSekolah", {
                 "idTugas": data.$id,
-                "namaSiswa": data.namaSiswa
+                "namaSiswa": data.namaSiswa,
+                "idKelas": data.idKelas,
+                "idPelajaran": data.idPelajaran,
             })
         }
 
@@ -856,10 +858,12 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
 
         $scope.data = {
             "idTugas": $stateParams.idTugas,
-            "namaSiswa": $stateParams.namaSiswa
+            "namaSiswa": $stateParams.namaSiswa,
+            "idKelas": $stateParams.idKelas,
+            "idPelajaran": $stateParams.idPelajaran,
         }
 
-        var refTugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idTugas);
+        var refTugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + "/" + $scope.data.idPelajaran + "/" + $scope.data.idTugas);
         var objTugas = $firebaseObject(refTugas);
         $ionicLoading.show();
         objTugas.$loaded().then(function (response) {
@@ -867,7 +871,7 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
             $scope.formData = response;
         });
 
-        var fileTugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idTugas + "/fileSiswa");
+        var fileTugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + "/" + $scope.data.idPelajaran + "/" + $scope.data.idTugas + "/fileSiswa");
         var listFileTugas = $firebaseArray(fileTugas);
         listFileTugas.$loaded().then(function (response) {
             $scope.fileTugasSiswa = response;
