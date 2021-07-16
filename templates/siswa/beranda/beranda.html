@@ -121,7 +121,7 @@
                             <!-- <span style="color:white">
                                 {{formData.namaKotaKabupaten}}, {{formData.namaProvinsi}}
                             </span> -->
-                            <button class="button button-light button-profile" >Profile</button>
+                            <button class="button button-light button-profile" ui-sref="menuSiswa.profilPenggunaSiswa()">Profile</button>
 
                         </h5>
                     </center>
@@ -153,7 +153,7 @@
             
                 <div  class="container row responsive-lg" style="margin-right: auto;margin-right: auto;">
                     <div class="col col-100" style="padding-bottom: 0;padding-top: 0;margin:0;">
-                        <div class="row padding-0">
+                        <div class="row" ng-if="jenjangSiswa==='SMA' || jenjangSiswa==='SMK'">
                             <div class="col" style="height: 20vh;margin:0; width: 100%;">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;"  ui-sref="menuSiswa.kelasLintasMinat()">
                                     <center>
@@ -166,6 +166,14 @@
                                 </div>
                             </div>
                             <div class="col" style="height: 20vh;margin:0">
+
+                            </div>
+                            <div class="col" style="height: 20vh;margin:0">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col" style="height: 20vh;margin:0; width: 100%;">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;" ui-sref="menuSiswa.jadwalPelajaranSiswa()">
                                     <center>
                                         <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201552.svg" width="50%"
@@ -185,11 +193,7 @@
                                     </center>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin:0">
-                        <div class="row">
-                            <div class="col" style="height: 20vh;margin:0;">
+                            <div class="col" style="height: 20vh;margin:0">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;" ui-sref="menuSiswa.tugasSiswaPerMapel()">
                                     <center>
                                         <img class="icon-card" src="https://image.flaticon.com/icons/svg/178/178150.svg" width="50%"
@@ -201,7 +205,11 @@
     
                                 </div>
                             </div>
-                            <div class="col" style="height: 20vh;margin:0">
+                        </div>
+                    </div>
+                    <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin:0">
+                        <div class="row">
+                            <div class="col" style="height: 20vh;margin:0;">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;"  ui-sref="menuSiswa.bankSoalSiswa()">
                                     <center>
                                         <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201638.svg" width="50%"
@@ -221,11 +229,7 @@
                                     </center>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin:0">
-                        <div class="row">
-                            <div class="col" style="height: 20vh;margin:0;">
+                            <div class="col" style="height: 20vh;margin:0">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;" ng-click="goMeeting()">
                                     <center>
                                         <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201636.svg" width="50%"
@@ -237,7 +241,11 @@
     
                                 </div>
                             </div>
-                            <div class="col" style="height: 20vh;margin:0">
+                        </div>
+                    </div>
+                    <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin:0">
+                        <div class="row">
+                            <div class="col" style="height: 20vh;margin:0;">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;"  ui-sref="menuSiswa.ujianOnlineSiswa()">
                                     <center>
                                         <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201635.svg" width="50%"
@@ -257,11 +265,7 @@
                                     </center>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin:0">
-                        <div class="row">
-                            <div class="col" style="height: 20vh;margin:0;">
+                            <div class="col" style="height: 20vh;margin:0">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;" ui-sref="menuSiswa.berandaTryoutOnlineSiswa()">
                                     <center>
                                         <img class="icon-card" src="https://image.flaticon.com/icons/svg/235/235296.svg" width="50%"
@@ -272,12 +276,6 @@
                                     </center>
     
                                 </div>
-                            </div>
-                            <div class="col" style="height: 20vh;margin:0">
-       
-                            </div>
-                            <div class="col" style="height: 20vh;margin:0">
-    
                             </div>
                         </div>
                     </div>
