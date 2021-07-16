@@ -213,7 +213,7 @@ angular.module('app.berandaUjianOnlineSekolah', [])
             "idSekolah": '',
             "idGuru": '',
             "jenisUjian": '',
-            "ruangLingkupUjian": '',
+            "ruangLingkupUjian": 'Sekolah',
             "idTahunAjaran": '',
             "idSemester": '',
             "idKelas": '',

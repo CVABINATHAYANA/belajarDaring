@@ -273,7 +273,7 @@ angular.module('app.berandaUjianOnlineGuru', [])
             // "idSekolah": '',
             // "idGuru": '',
             "jenisUjian": '',
-            "ruangLingkupUjian": '',
+            "ruangLingkupUjian": 'Sekolah',
             "idTahunAjaran": '',
             "idSemester": '',
             "idKelas": '',
@@ -562,10 +562,11 @@ angular.module('app.berandaUjianOnlineGuru', [])
             $scope.tampil = true;
 
             var dataKelasNya = firebase.database().ref("dataKelas/" + $scope.formData.idKelas);
+            console.log($scope.formData.idKelas);
             dataKelasNya.on("value", function (snapshot) {
                 $scope.namaKelas = snapshot.val().namaKelas;
                 $scope.dataTingkatKelas = snapshot.val().tingkatKelas;
-                console.log("tingkatKelas", $scope.tingkatKelas);
+                console.log("tingkatKelas", $scope.dataTingkatKelas );
             })
 
             // console.log($scope.formData.idKelas);
@@ -595,7 +596,7 @@ angular.module('app.berandaUjianOnlineGuru', [])
         }
 
         $scope.simpan = function () {
-            console.log($scope.formData);
+            console.log($scope.idSekolahGuru);
             var tanggalBuat = $filter('date')(new Date(), 'dd-MM-yyyy');
             var jamBuat = $filter('date')(new Date(), 'HH:mm:ss');
             var hariBuat = $filter('date')(new (Date), 'EEEE');
@@ -612,6 +613,7 @@ angular.module('app.berandaUjianOnlineGuru', [])
                         "idKecamatan": $scope.idKecamatanGuru,
                         "namaKecamatan": $scope.namaKecamatan,
                         "jenjang": $scope.jenjangGuru,
+
                         "idSekolah": $scope.idSekolahGuru,
                         "namaSekolah": $scope.namaSekolah,
                         "idGuru": $scope.idGuru,

@@ -31,7 +31,7 @@ const appJadwalPelajaran = firebase.initializeApp({
 
 //PerSekolah-Negeri
 const app_smpn1 = firebase.initializeApp({
-  databaseURL: "https://bee-singaraja-smpn1sgr.firebaseio.com/",
+  databaseURL: "https://beesmpn1.firebaseio.com/",
 }, 'app_smpn1');
 
 const app_smpn2 = firebase.initializeApp({
