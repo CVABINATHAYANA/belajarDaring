@@ -1,28 +1,44 @@
 <ion-view title="Login" cache-view="false" id="page8" style="background-color:#EEEEEE">
-    <ion-content padding="false" class="has-header">
+  <style>
+    input[type=email],input[type=password]{
+      color:white;
+    }
+    input::placeholder,span>p{
+      color:white
+    }
+    .item-floating-label{
+      border-bottom:2px solid white;
+    }
+    input[type=radio]{
+      background-color: transparent !important;
+      border:none;
+      --color-checked: #75D154;
+    }
+  </style>
+    <ion-content padding="false" class="bg-gradient-blue">
       <div class="row responsive-md" style="margin: auto;">
         <div class="col col-50 col-offset-25">
           <form class="list" name="myForm">
             <ion-list>
-              <ion-item class="item-divider putih"> Email & Password</ion-item>
-              <label class="item item-input  input">
+
+              <label class="item-input item-floating-label">
                 <span class="input-label">
                   <p>Email</p>
                 </span>
-                <input type="email" placeholder="Email Address" ng-model="formData.email" name="email">
+                <input type="email" placeholder="Email" ng-model="formData.email" name="email">
                 <small class="help-block" ng-show="myForm.email.$touched &amp;&amp; myForm.email.$invalid"
-                  style="color: red">Enter a valid email address</small>
+                  style="color: red">Masukan Alamat Email Yang Benar</small>
               </label>
   
-              <label class="item item-input  input">
+              <label class="item-input item-floating-label">
                 <span class="input-label">
                   <p>Password</p>
                 </span>
-                <input type="password" placeholder="Type Your Password" ng-model="formData.password">
+                <input type="password" placeholder="Password" ng-model="formData.password">
               </label>
               <div class="spacer" style="height: 10px;"></div>
   
-              <ion-item class="item-divider putih"> Sebagai Apakah Anda ?</ion-item>
+              <ion-item class="item-divider" style="background-color: transparent;color: white;border:none"> Sebagai Apakah Anda ?</ion-item>
               <ion-radio ng-model="formData.sebagai" value="dinasPendidikan">
                 <p>Dinas Pendidikan</p>
               </ion-radio>
@@ -44,8 +60,8 @@
               </ion-radio>
             </ion-list>
   
-            <button ng-click="login()" class="button button-balanced button-block">Log in</button>
-            <a ng-click="forgetPassword()" class="button button-assertive button-block button-clear">Forget Password?
+            <button ng-click="login()" class="button button-light button-block">Log in</button>
+            <a ng-click="forgetPassword()" class="button button-light button-block button-clear">Forget Password?
               Click
               Here
             </a>

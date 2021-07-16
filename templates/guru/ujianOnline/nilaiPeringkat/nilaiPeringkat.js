@@ -190,7 +190,13 @@ angular.module('app.nilaiPeringkatUjianOnlineGuru', [])
                     })
                 }
             }
-        });
+        })
+
+        
+        $scope.excel = function () {
+            var wb = XLSX.utils.table_to_book(document.getElementById('tabelRank'));
+            XLSX.writeFile(wb, "nilaiPeringkat_" + $scope.data.namaUjian + ".xlsx");
+        }
 
         $scope.dataNilaiSiswa = function (data) {
             //console.log(data);

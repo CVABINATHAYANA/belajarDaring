@@ -1,15 +1,15 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="true">
     <ion-side-menu-content>
-      <ion-nav-bar class="bar-assertive">
+      <ion-nav-bar class="bar bar-positive" style="background-color: transparent;padding-bottom: 0;">
         <ion-nav-back-button></ion-nav-back-button>
         <ion-nav-buttons side="left">
-          <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+          <button class="button button-icon button-clear ion-navicon" menu-toggle="left" style="color:white"></button>
         </ion-nav-buttons>
       </ion-nav-bar>
       <ion-nav-view name="menuGuru"></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="left" id="menuGuru">
-      <ion-header-bar class="bar-assertive">
+      <ion-header-bar  class="bar bar-positive" style="padding-bottom: 0;">
         <div class="title">Menu</div>
       </ion-header-bar>
       <ion-content padding="false" class="side-menu-left has-header ">
@@ -18,31 +18,31 @@
             <p>Beranda</p>
           </ion-item>
           <ion-item class="item-divider" id="menu-list-item-divider3">
-            <p>Data Pokok Sekolah</p>
+            <p >Data Pokok Sekolah</p>
           </ion-item>
           <ion-item id="menu-list-item2" menu-close="" ui-sref="menuGuru.dataSekolahEditGuru()">
-            <p>Data Sekolah</p>
+            <p style="margin-left:8%">Data Sekolah</p>
           </ion-item>
           <ion-item id="menu-list-item2" menu-close="" ui-sref="menuGuru.dataPrasaranaGuru()">
-            <p>Data Prasarana</p>
+            <p style="margin-left:8%">Data Prasarana</p>
           </ion-item>
           <ion-item id="menu-list-item2" menu-close="" ui-sref="menuGuru.dataSaranaGuru()">
-            <p>Data Sarana</p>
+            <p style="margin-left:8%">Data Sarana</p>
           </ion-item>
           <ion-item id="menu-list-item21" menu-close="" ui-sref="menuGuru.dataKelasGuru()">
-            <p>Data Rombel</p>
+            <p style="margin-left:8%">Data Rombel</p>
           </ion-item>
           <ion-item id="menu-list-item21" menu-close="" ui-sref="menuGuru.dataGuruGuru()">
-            <p>Data Guru</p>
+            <p style="margin-left:8%">Data Guru</p>
           </ion-item>
           <ion-item id="menu-list-item22" menu-close="" ui-sref="menuGuru.dataSiswaGuru()">
-            <p>Data Siswa</p>
+            <p style="margin-left:8%">Data Siswa</p>
           </ion-item>
-          <ion-item class="item-divider" id="menu-list-item-divider3">
-            <p>Data Kurikulum</p>
+          <ion-item  class="item-divider" id="menu-list-item-divider3">
+            <p >Data Kurikulum</p>
           </ion-item>
           <ion-item id="menu-list-item31" ui-sref="menuGuru.jadwalPelajaranGuru()" menu-close="">
-            <p>Jadwal Pelajaran</p>
+            <p style="margin-left:8%">Jadwal Pelajaran</p>
           </ion-item>
           <!-- <ion-item id="menu-list-item32" ui-sref="menuGuru.kkmGuru()" menu-close="">
             <p>KKM</p>
@@ -53,41 +53,41 @@
           <ion-item id="menu-list-item34" ui-sref="menuGuru.rppGuru()" menu-close="">
             <p>RPP</p>
           </ion-item> -->
-          <ion-item class="item-divider" id="menu-list-item-divider3">
-            <p>Data Absensi</p>
+          <ion-item  class="item-divider" id="menu-list-item-divider3">
+            <p >Data Absensi</p>
           </ion-item>
           <ion-item id="menu-list-item4" ui-sref="menuGuru.absensiSiswaGuru()" menu-close="">
-            <p>Absensi Siswa</p>
+            <p style="margin-left:8%">Absensi Siswa</p>
           </ion-item>
           <!-- <ion-item id="menu-list-item4" ui-sref="menuGuru.absensiGuruGuru()" menu-close="">
             <p>Absensi Guru</p>
           </ion-item> -->
-          <ion-item class="item-divider" id="menu-list-item-divider3">
-            <p>Data Tugas</p>
+          <ion-item  class="item-divider" id="menu-list-item-divider3">
+            <p >Data Tugas</p>
           </ion-item>
           <ion-item id="menu-list-item5" ui-sref="menuGuru.tugasSiswaGuru()" menu-close="">
-            <p>Tugas Siswa</p>
+            <p style="margin-left:8%">Tugas Siswa</p>
           </ion-item>
-          <ion-item class="item-divider" id="menu-list-item-divider3">
-            <p>e-Learning</p>
+          <ion-item  class="item-divider" id="menu-list-item-divider3">
+            <p >e-Learning</p>
           </ion-item>
           <ion-item id="menu-list-item6" ui-sref="menuGuru.bankSoalGuru()" menu-close="">
-            <p>Bank Soal</p>
+            <p style="margin-left:8%">Bank Soal</p>
           </ion-item>
           <ion-item id="menu-list-item6" ui-sref="menuGuru.materiPelajaranGuru()" menu-close="">
-            <p>Materi Pelajaran</p>
+            <p style="margin-left:8%">Materi Pelajaran</p>
           </ion-item>
-          <ion-item class="item-divider" id="menu-list-item-divider3">
-            <p>Ujian, Tryout & SOC Online</p>
+          <ion-item  class="item-divider" id="menu-list-item-divider3">
+            <p >Ujian, Tryout & SOC Online</p>
           </ion-item>
           <ion-item id="menu-list-item7" ui-sref="menuGuru.ujianOnlineGuru()" menu-close="">
-            <p>Ujian Online</p>
+            <p style="margin-left:8%">Ujian Online</p>
           </ion-item>
           <ion-item id="menu-list-item7" ui-sref="menuGuru.UTSUASGuru()" menu-close="">
-            <p>UTS / UAS Online</p>
+            <p style="margin-left:8%">UTS / UAS Online</p>
           </ion-item>
           <ion-item id="menu-list-item8" ui-sref="menuGuru.tryoutOnlineGuru()" menu-close="">
-            <p>Tryout Online</p>
+            <p style="margin-left:8%">Tryout Online</p>
           </ion-item>
           <!-- <ion-item id="menu-list-item9" ui-sref="menuGuru.socGuru()" menu-close="">
             <p>Students Online Competition</p>
@@ -115,14 +115,14 @@
             <p>Data Guru</p>
           </ion-item> -->
   
-          <ion-item class="item-divider" id="menu-list-item-divider3">
-            <p>Data Akun</p>
+          <ion-item  class="item-divider" id="menu-list-item-divider3">
+            <p >Data Akun</p>
           </ion-item>
           <ion-item id="menu-list-item13" ui-sref="menuGuru.profilPenggunaGuru()" menu-close="">
-            <p>Profil Pengguna</p>
+            <p style="margin-left:8%">Profil Pengguna</p>
           </ion-item>
           <ion-item id="menu-list-item14" ui-sref="menuGuru.gantiPasswordGuru()" menu-close="">
-            <p>Ganti Password</p>
+            <p style="margin-left:8%">Ganti Password</p>
           </ion-item>
           <!-- <ion-item id="menu-list-item15" ui-sref="menuGuru.uploadFotoGuru()" menu-close="">
             <p>Upload Foto</p>

@@ -42,6 +42,30 @@
   
 
   <style type="text/css">
+      .bg-gradient-blue{
+        background: rgb(56,126,245);
+background: -moz-linear-gradient(180deg, rgba(56,126,245,1) 0%, rgba(0,176,255,1) 100%);
+background: -webkit-linear-gradient(180deg, rgba(56,126,245,1) 0%, rgba(0,176,255,1) 100%);
+background: linear-gradient(180deg, rgba(56,126,245,1) 0%, rgba(0,176,255,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#387ef5",endColorstr="#00b0ff",GradientType=1);
+      border:none;
+    }
+      .bg-card-gradient-blue{
+        background: rgb(56,126,245);
+background: -moz-linear-gradient(180deg, rgba(56,126,245,1) 0%, rgba(0,176,255,1) 100%);
+background: -webkit-linear-gradient(180deg, rgba(56,126,245,1) 0%, rgba(0,176,255,1) 100%);
+background: linear-gradient(180deg, rgba(56,126,245,1) 0%, rgba(0,176,255,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#387ef5",endColorstr="#00b0ff",GradientType=1);
+        border:none;
+    }
+      .bg-gradient-blue2{
+      background: rgb(56,112,227);
+      background: -moz-linear-gradient(90deg, rgba(56,112,227,1) 0%, rgba(0,181,228,1) 100%);
+      background: -webkit-linear-gradient(90deg, rgba(56,112,227,1) 0%, rgba(0,181,228,1) 100%);
+      background: linear-gradient(90deg, rgba(56,112,227,1) 0%, rgba(0,181,228,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3870e3",endColorstr="#00b5e4",GradientType=1);
+      border:none;
+    }
     .platform-ios .manual-ios-statusbar-padding {
       padding-top: 20px;
     }
@@ -542,7 +566,7 @@ img{ max-width:100%;}
 <body ng-app="app" animation="slide-left-right-ios7">
   <div>
     <div>
-      <ion-nav-bar class="bar-assertive">
+      <ion-nav-bar class="bar bar-positive">
         <ion-nav-back-button></ion-nav-back-button>
       </ion-nav-bar>
       <ion-nav-view></ion-nav-view>
