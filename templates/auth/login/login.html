@@ -1,4 +1,4 @@
-<ion-view title="Login" cache-view="false" id="page8" style="background-color:#EEEEEE">
+<ion-view title="Login" cache-view="false" hide-nav-bar="true"id="page8" style="background-color:#EEEEEE">
   <style>
     input[type=email],input[type=password]{
       color:white;
@@ -14,10 +14,23 @@
       border:none;
       --color-checked: #75D154;
     }
+    h4,h5{
+      color:white
+    }
   </style>
     <ion-content padding="false" class="bg-gradient-blue">
       <div class="row responsive-md" style="margin: auto;">
         <div class="col col-50 col-offset-25">
+          <div>
+            <img src="img/lgoBee.png"
+                style="display: block; width: 40%; height: auto; margin-left: auto; margin-right: auto; margin-top: 5vh;">
+          </div>
+          <div>
+            <center>
+              <h4 style="font-weight: bold;">Selamat Datang</h4>
+              <h5>Silahkan Masukan Email & Password Anda</h5>
+            </center>
+          </div>
           <form class="list" name="myForm">
             <ion-list>
 
@@ -60,7 +73,7 @@
               </ion-radio>
             </ion-list>
   
-            <button ng-click="login()" class="button button-light button-block">Log in</button>
+            <button ng-click="login()" class="button button-light button-block" style="border-radius:100px">Log in</button>
             <a ng-click="forgetPassword()" class="button button-light button-block button-clear">Forget Password?
               Click
               Here
