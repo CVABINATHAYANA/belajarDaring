@@ -50,10 +50,34 @@ angular.module('app.routes', [])
         controller: 'lupaPasswordCtrl'
       })
 
-      .state('login', {
-        url: '/login',
-        templateUrl: 'templates/auth/login/login.html',
-        controller: 'loginCtrl'
+      .state('loginDinas', {
+        url: '/loginDinas',
+        templateUrl: 'templates/auth/login/loginDinas.html',
+        controller: 'loginDinasCtrl'
+      })
+
+      .state('loginSekolah', {
+        url: '/loginSekolah',
+        templateUrl: 'templates/auth/login/loginSekolah.html',
+        controller: 'loginSekolahCtrl'
+      })
+
+      .state('loginGuru', {
+        url: '/loginGuru',
+        templateUrl: 'templates/auth/login/loginGuru.html',
+        controller: 'loginGuruCtrl'
+      })
+
+      .state('loginSiswa', {
+        url: '/loginSiswa',
+        templateUrl: 'templates/auth/login/loginSiswa.html',
+        controller: 'loginSiswaCtrl'
+      })
+
+      .state('loginOrangTua', {
+        url: '/loginOrangTua',
+        templateUrl: 'templates/auth/login/loginOrangTua.html',
+        controller: 'loginOrangTuaCtrl'
       })
 
 

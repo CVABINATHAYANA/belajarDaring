@@ -50,7 +50,6 @@ angular.module('app.registrasi', [])
             "password": '',
             "ketikUlangPassword": '',
             "time": new Date(),
-
             // "idTahunAjaran": '',
             // "namaKelas": ''
         };
@@ -439,9 +438,9 @@ angular.module('app.registrasi', [])
 
                     if ($scope.formData.password === $scope.formData.ketikUlangPassword) {
                         $ionicLoading.show();
-
+                        var email = $scope.formData.email + '@gmail.com'
                         var auth = $firebaseAuth();
-                        auth.$createUserWithEmailAndPassword($scope.formData.email, $scope.formData.password).then(function (response) {
+                        auth.$createUserWithEmailAndPassword(email, $scope.formData.password).then(function (response) {
 
                             var user = firebase.auth().currentUser;
 
@@ -463,7 +462,8 @@ angular.module('app.registrasi', [])
 
                                 "namaPengguna": $scope.formData.namaPengguna,
                                 // "noHandphone": $scope.formData.noHandphone,
-                                "email": $scope.formData.email,
+                                "email": email,
+                                "nisn": $scope.formData.email,
                                 "password": $scope.formData.password,
                                 "retypePassword": $scope.formData.ketikUlangPassword,
                                 "uid": user.uid,
@@ -477,6 +477,7 @@ angular.module('app.registrasi', [])
                                 "diBuatOleh": "",
                                 "idPembuat": "",
 
+                                
                                 // "idTahunAjaran": $scope.formData.idTahunAjaran,
                                 // "tahunAjaran": $scope.dataTahunAjaran,
                                 // "idKelas": $scope.formData.idKelas,

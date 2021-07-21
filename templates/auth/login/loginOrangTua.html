@@ -1,0 +1,107 @@
+<ion-view title="Login Orang Tua" cache-view="false" hide-nav-bar="true" id="page8" style="background-color:#EEEEEE">
+    <style>
+      input[type=text],
+      input[type=password] {
+        color: white;
+      }
+  
+      input::placeholder,
+      span>p {
+        color: white
+      }
+  
+      .item-floating-label {
+        border-bottom: 2px solid white;
+      }
+  
+      input[type=radio] {
+        background-color: transparent !important;
+        border: none;
+        --color-checked: #75D154;
+      }
+  
+      h4,
+      h5 {
+        color: white
+      }
+  
+      img {
+        width: 20%;
+      }
+  
+      @media screen and (max-width:420px) {
+        img {
+          width: 40%;
+        }
+      }
+    </style>
+    <ion-content padding="false" class="bg-gradient-blue">
+      <div class="row responsive-md" style="margin: auto;">
+        <div class="col col-50 col-offset-25">
+          <div>
+            <img src="img/lgoBee.png"
+              style="display: block;height: auto; margin-left: auto; margin-right: auto; margin-top: 5vh;">
+          </div>
+          <div>
+            <center>
+              <h3 style="font-weight: bold; color: white;">Selamat Datang</h3>
+              <h4 style="font-weight: bold;">Orang Tua Siswa</h4>
+              <h5>Silahkan Masukan NISN & Password Anda</h5>
+            </center>
+          </div>
+          <form class="list" name="myForm">
+            <ion-list>
+  
+              <label class="item-input item-floating-label">
+                <span class="input-label">
+                  <p>NISN</p>
+                </span>
+                <input type="text" placeholder="Nisn" ng-model="formData.email" name="email">
+                <small class="help-block" ng-show="myForm.email.$touched &amp;&amp; myForm.email.$invalid"
+                  style="color: red">Masukan NISN Yang Benar</small>
+              </label>
+  
+              <label class="item-input item-floating-label">
+                <span class="input-label">
+                  <p>Password</p>
+                </span>
+                <input type="password" placeholder="Password" ng-model="formData.password">
+              </label>
+              <div class="spacer" style="height: 10px;"></div>
+              <!--   
+                <ion-item class="item-divider" style="background-color: transparent;color: white;border:none"> Sebagai Apakah Anda ?</ion-item>
+                <ion-radio ng-model="formData.sebagai" value="dinasPendidikan">
+                  <p>Dinas Pendidikan</p>
+                </ion-radio>
+    
+                <ion-radio ng-model="formData.sebagai" value="adminSekolah">
+                  <p>Admin Sekolah</p>
+                </ion-radio>
+    
+                <ion-radio ng-model="formData.sebagai" value="guruSekolah">
+                  <p>Guru</p>
+                </ion-radio>
+    
+                <ion-radio ng-model="formData.sebagai" value="siswaSekolah">
+                  <p>Siswa</p>
+                </ion-radio>
+    
+                <ion-radio ng-model="formData.sebagai" value="orangTua">
+                  <p>Orang Tua</p>
+                </ion-radio> -->
+            </ion-list>
+  
+            <button ng-click="login()" class="button button-light button-block" style="border-radius:100px">Log
+              in</button>
+            <button ng-click="kembali()" class="button button-light button-block button-outline" style="border-radius:100px">Kembali</button>
+            <a ng-click="forgetPassword()" class="button button-light button-block button-clear">Forget Password?
+              Click
+              Here
+            </a>
+  
+          </form>
+        </div>
+      </div>
+  
+    </ion-content>
+  </ion-view>
