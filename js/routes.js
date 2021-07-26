@@ -7156,6 +7156,7 @@ angular.module('app.routes', [])
       .state('menuSekolah.tugasSiswaLihatSekolah', {
         url: '/tugasSiswaLihatSekolah',
         params: {
+          idGroupTugasSiswa: '',
           groupTugas: '',
           idKelas: '',
           idPelajaran: '',

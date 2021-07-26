@@ -787,6 +787,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
         listFileTugas.$loaded().then(function (response) {
             $scope.fileTugasGuru = response;
             $scope.banyakFile = response.length;
+            console.log($scope.banyakFile);
         });
 
         $scope.hapusFile = function (fileGuru) {

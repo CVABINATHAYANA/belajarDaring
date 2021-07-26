@@ -108,6 +108,7 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
                     if (index === 1) {
                         console.log(data.groupTugas);
                         $state.go("menuSekolah.tugasSiswaLihatSekolah", {
+                            "idGroupTugasSiswa": data.$id,
                             "groupTugas": data.groupTugas,
                             "idKelas": data.idKelas,
                             "idPelajaran": data.idPelajaran,
@@ -787,10 +788,13 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
         }
 
         $scope.data = {
+            "idGroupTugasSiswa": $stateParams.idGroupTugasSiswa,
             "groupTugas": $stateParams.groupTugas,
             "idKelas": $stateParams.idKelas,
             "idPelajaran": $stateParams.idPelajaran,
         }
+
+        console.log($scope.data.groupTugas)
 
         var getAbs = firebase.database(app).ref("tugasSiswa").child($scope.data.idKelas).child($scope.data.idPelajaran).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
         var listGetAbs = $firebaseArray(getAbs);
@@ -800,6 +804,14 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
             $scope.dataGetTugas = response;
             $scope.dataTugas = response[0];
         })
+
+        var fileTugas = firebase.database(app).ref("groupTugasSiswa/" + $scope.data.idGroupTugasSiswa + "/fileGuru");
+        var listFileTugas = $firebaseArray(fileTugas);
+        listFileTugas.$loaded().then(function (response) {
+            $scope.fileTugasGuru = response;
+            $scope.banyakFile = response.length;
+            console.log($scope.banyakFile);
+        });
 
         $scope.lihatJawabanTugas = function (data) {
             // console.log(data.jawabanTugas)
