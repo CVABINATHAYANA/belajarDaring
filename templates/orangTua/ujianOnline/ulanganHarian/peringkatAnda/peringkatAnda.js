@@ -1,6 +1,6 @@
-angular.module('app.peringkatAndaUjianOnlineSiswa', [])
+angular.module('app.peringkatAndaUjianOnlineSiswaOrangTua', [])
 
-    .controller('peringkatAndaUjianOnlineSiswaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+    .controller('peringkatAndaUjianOnlineSiswaOrangTuaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
         $scope.namaPenggunaSiswa = localStorage.getItem('namaPenggunaSiswa');
@@ -70,7 +70,7 @@ angular.module('app.peringkatAndaUjianOnlineSiswa', [])
 
         $scope.dataNilaiSiswa = function (data) {
             //console.log(data);
-            $state.go("menuSiswa.nilaiSiswaUjianOnlineSiswa", {
+            $state.go("menuOrangTua.nilaiSiswaUjianOnlineSiswaOrangTua", {
                 "idUjian": $stateParams.idUjian,
                 "namaUjian": $stateParams.namaUjian,
                 "jenjang": $stateParams.jenjang,
@@ -88,7 +88,7 @@ angular.module('app.peringkatAndaUjianOnlineSiswa', [])
 
     }])
 
-    .controller('nilaiSiswaUjianOnlineSiswaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+    .controller('nilaiSiswaUjianOnlineSiswaOrangTuaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
         $scope.namaPenggunaSiswa = localStorage.getItem('namaPenggunaSiswa');
@@ -192,7 +192,7 @@ angular.module('app.peringkatAndaUjianOnlineSiswa', [])
             var getData = firebase.database(app).ref("jawabanUjianOnlineSiswaPerPelajaran").orderByChild("filter").equalTo($stateParams.idUjian + "_" + data.idPelajaranUjianOnline + "_" + $scope.data.uid);
             getData.on("child_added", function (snapshot) {
                 // console.log(snapshot.val());
-                $state.go("menuSiswa.nilaiSiswaDetailUjianOnlineSiswa", {
+                $state.go("menuOrangTua.nilaiUjianOnlineSiswaOrangTua", {
                     "idUjian": $stateParams.idUjian,
                     "namaUjian": $stateParams.namaUjian,
                     "jenjang": $stateParams.jenjang,
@@ -216,7 +216,7 @@ angular.module('app.peringkatAndaUjianOnlineSiswa', [])
 
     }])
 
-    .controller('nilaiSiswaDetailUjianOnlineSiswaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+    .controller('nilaiSiswaDetailUjianOnlineSiswaOrangTuaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
         $scope.namaPenggunaSiswa = localStorage.getItem('namaPenggunaSiswa');
@@ -362,7 +362,7 @@ angular.module('app.peringkatAndaUjianOnlineSiswa', [])
 
     }])
 
-    .controller('statusJawabanSiswaUjianOnlineSiswaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+    .controller('statusJawabanSiswaUjianOnlineSiswaOrangTuaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
         $scope.namaPenggunaSiswa = localStorage.getItem('namaPenggunaSiswa');

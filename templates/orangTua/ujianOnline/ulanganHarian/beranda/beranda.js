@@ -1,6 +1,6 @@
-angular.module('app.berandaUjianOnlineSiswa', [])
+angular.module('app.berandaUjianOnlineSiswaOrangTua', [])
 
-    .controller('berandaUjianOnlineSiswaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+    .controller('berandaUjianOnlineSiswaOrangTuaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
         $scope.namaPenggunaSiswa = localStorage.getItem('namaPenggunaSiswa');
@@ -110,12 +110,9 @@ angular.module('app.berandaUjianOnlineSiswa', [])
             $ionicActionSheet.show({
                 titleText: 'Ujian : ' + data.namaUjian,
                 buttons: [
-                    { text: '<i class="icon ion-checkmark-circled"></i> Mulai Ujian' },
                     { text: '<i class="icon ion-ios-list-outline"></i> Detail Ujian' },
-                    { text: '<i class="icon ion-android-bulb"></i> Kisi-kisi Ujian' },
-                    { text: '<i class="icon ion-ios-people"></i> Peserta Ujian' },
-                    { text: '<i class="icon ion-arrow-graph-up-right"></i> Nilai Anda' },
-                    { text: '<i class="icon ion-trophy"></i> Peringkat Anda' },
+                    { text: '<i class="icon ion-arrow-graph-up-right"></i> Nilai Anak Anda' },
+                    { text: '<i class="icon ion-trophy"></i> Peringkat Anak Anda' },
                 ],
                 // destructiveText: '<i class="icon ion-trash-b"></i> Hapus UjianOnline',
                 cancelText: 'Cancel',
@@ -124,34 +121,7 @@ angular.module('app.berandaUjianOnlineSiswa', [])
                 },
                 buttonClicked: function (index) {
                     if (index === 0) {
-                        // console.log('tes')
-                        var getData = firebase.database(app).ref("rekapJawabanUjianOnlineSiswa").orderByChild("filter").equalTo(data.idUjian + "_" + $scope.uidSiswa);
-                        getData.on("child_added", function (snapshot) {
-                            // console.log(snapshot.key)
-                            // console.log(snapshot.val())
-                            $state.go('menuSiswa.mulaiUjianOnlineSiswa', {
-                                "idUjian": data.idUjian,
-                                "namaUjian": data.namaUjian,
-                                "jenjang": data.jenjang,
-                                "UjianOnlineTingkat": data.UjianOnlineTingkat,
-                                "namaKotaKabupaten": data.namaKotaKabupaten,
-                                "namaProvinsi": data.namaProvinsi,
-                                "idSemester": data.idSemester,
-                                "semester": data.semester,
-                                "idTahunAjaran": data.idTahunAjaran,
-                                "tahunAjaran": data.tahunAjaran,
-                                "idRekapJawabanUjianOnlineSiswa": snapshot.key,
-                                "namaSekolah": data.namaSekolah,
-                                "namaKelas": data.namaKelas,
-                                "namaGuru": data.namaGuru,
-                                "jenisUjian": data.jenisUjian,
-                                "tingkatKelas": data.tingkatKelas,
-                            });
-                        });
-
-                    }
-                    if (index === 1) {
-                        $state.go('menuSiswa.UjianOnlineDetaiSiswa', {
+                        $state.go('menuOrangTua.UjianOnlineDetaiSiswaOrangTua', {
                             "idUjian": data.idUjian,
                             "namaUjian": data.namaUjian,
                             "jenjang": data.jenjang,
@@ -167,33 +137,7 @@ angular.module('app.berandaUjianOnlineSiswa', [])
                             "tingkatKelas": data.tingkatKelas,
                         });
                     }
-                    if (index === 2) {
-                        $state.go('menuSiswa.kisiKisiSoalUjianOnlineSiswa', {
-                            "idUjian": data.idUjian,
-                            "namaUjian": data.namaUjian,
-                            "jenjang": data.jenjang,
-                            "UjianOnlineTingkat": data.UjianOnlineTingkat,
-                            "namaKotaKabupaten": data.namaKotaKabupaten,
-                            "namaProvinsi": data.namaProvinsi,
-                            "semester": data.semester,
-                            "tahunAjaran": data.tahunAjaran
-                        });
-                    }
-
-                    if (index === 3) {
-                        $state.go('menuSiswa.pesertaUjianOnlineSiswa', {
-                            "idUjian": data.idUjian,
-                            "namaUjian": data.namaUjian,
-                            "jenjang": data.jenjang,
-                            "UjianOnlineTingkat": data.UjianOnlineTingkat,
-                            "namaKotaKabupaten": data.namaKotaKabupaten,
-                            "namaProvinsi": data.namaProvinsi,
-                            "semester": data.semester,
-                            "tahunAjaran": data.tahunAjaran
-                        });
-                    }
-                    if (index === 4) {
-
+                    if (index === 1) {
                         var getData = firebase.database(app).ref("rekapJawabanUjianOnlineSiswa").orderByChild("filter").equalTo(data.idUjian + "_" + $scope.uidSiswa);
                         getData.on("child_added", function (snapshot) {
 
@@ -224,7 +168,7 @@ angular.module('app.berandaUjianOnlineSiswa', [])
                                         }))).then(function (resp) {
                                             // console.log("jumlahSoalUpdate", $scope.jumlahSoal);
                                             $ionicLoading.hide();
-                                            $state.go('menuSiswa.nilaiAndaUjianOnlineSiswa', {
+                                            $state.go('menuOrangTua.nilaiAndaUjianOnlineSiswaOrangTua', {
                                                 "idUjian": data.idUjian,
                                                 "namaUjian": data.namaUjian,
                                                 "jenjang": data.jenjang,
@@ -243,10 +187,8 @@ angular.module('app.berandaUjianOnlineSiswa', [])
                             });
 
                         });
-
                     }
-
-                    if (index === 5) {
+                    if (index === 2) {
                         var getData = firebase.database(app).ref("rekapJawabanUjianOnlineSiswa").orderByChild("filter").equalTo(data.idUjian + "_" + $scope.uidSiswa);
                         getData.on("child_added", function (snapshot) {
 
@@ -274,7 +216,7 @@ angular.module('app.berandaUjianOnlineSiswa', [])
                                         }))).then(function (resp) {
                                             // console.log("jumlahSoalUpdate", $scope.jumlahSoal);
                                             $ionicLoading.hide();
-                                            $state.go('menuSiswa.peringkatAndaUjianOnlineSiswa', {
+                                            $state.go('menuOrangTua.peringkatAndaUjianOnlineSiswaOrangTua', {
                                                 "idUjian": data.idUjian,
                                                 "namaUjian": data.namaUjian,
                                                 "jenjang": data.jenjang,

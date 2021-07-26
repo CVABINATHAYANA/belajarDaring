@@ -9233,6 +9233,7 @@ angular.module('app.routes', [])
         }
       })
       
+      
       // Tugas Siswa
       .state('menuOrangTua.tugasSiswaPerMapelOrangTua', {
         url: '/tugasSiswaPerMapelOrangTua',
@@ -9340,6 +9341,351 @@ angular.module('app.routes', [])
           }
         }
       })
+ 
+      // MENU UJIAN ORANG TUA
+      .state('menuOrangTua.ujianOnlineSiswaOrangTua', {
+        url: '/ujianOnlineSiswaOrangTua',
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/beranda/beranda.html',
+            controller: 'berandaUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      // USER UJIAN ONLINE DETAIL SISWA
+      .state('menuOrangTua.UjianOnlineDetaiSiswaOrangTua', {
+        url: '/UjianOnlineDetaiSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          olimpiadeTingkat: "",
+          jenjang: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          namaSekolah: "",
+          namaKelas: "",
+          namaGuru: "",
+          jenisUjian: "",
+          tingkatKelas: "",
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/ujianDetail/ujianDetail.html',
+            controller: 'UjianOnlineDetaiSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      // USER UJIAN ONLINE NILAI ANDA SISWA
+      .state('menuOrangTua.nilaiAndaUjianOnlineSiswaOrangTua', {
+        url: '/nilaiAndaUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          jenjang: "",
+          olimpiadeTingkat: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          idRekapJawabanUjianOnlineSiswa: ""
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/nilaiAnda/nilaiAnda.html',
+            controller: 'nilaiAndaUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      .state('menuOrangTua.nilaiUjianOnlineSiswaOrangTua', {
+        url: '/nilaiUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          jenjang: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          idPelajaranUjianOnline: "",
+          idPelajaran: "",
+          pelajaran: "",
+          statusFinish: "",
+          idJawabanUjianOnlineSiswaPerPelajaran: "",
+          idRekapJawabanUjianOnlineSiswa: ""
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/mulaiUjian/nilai.html',
+            controller: 'nilaiUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      .state('menuOrangTua.statusJawabanUjianOnlineSiswaOrangTua', {
+        url: '/statusJawabanUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          idPelajaranUjianOnline: "",
+          pelajaran: "",
+          keterangan: ""
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/mulaiUjian/statusJawaban.html',
+            controller: 'statusJawabanUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      // USER UJIAN ONLINE PERINGKAT ANDA SISWA
+      .state('menuOrangTua.peringkatAndaUjianOnlineSiswaOrangTua', {
+        url: '/peringkatAndaUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          jenjang: "",
+          olimpiadeTingkat: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          totalSiswaLolos: "",
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/peringkatAnda/peringkatAnda.html',
+            controller: 'peringkatAndaUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      .state('menuOrangTua.nilaiSiswaUjianOnlineSiswaOrangTua', {
+        url: '/nilaiSiswaUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          olimpiadeTingkat: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          idRekapJawabanUjianOnlineSiswa: "",
+          namaPengguna: "",
+          uid: "",
+          jenjang: ""
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/peringkatAnda/nilaiSiswa.html',
+            controller: 'nilaiSiswaUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      // Data Akun Siswa
+      .state('menuOrangTua.profilPenggunaSiswaOrangTua', {
+        url: '/profilPenggunaSiswaOrangTua',
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/dataAkun/profilPengguna.html',
+            controller: 'profilPenggunaSiswaOrangTuaCtrl'
+          }
+        }
+      })
+      // // USER UJIAN ONLINE MULAI UJIAN SISWA
+      // .state('menuSiswa.mulaiUjianOnlineSiswa', {
+      //   url: '/mulaiUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     idSemester: "",
+      //     semester: "",
+      //     idTahunAjaran: "",
+      //     tahunAjaran: "",
+      //     idRekapJawabanUjianOnlineSiswa: "",
+      //     namaSekolah: "",
+      //     namaKelas: "",
+      //     namaGuru: "",
+      //     jenisUjian: "",
+      //     tingkatKelas: "",
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/mulaiUjian/mulaiUjian.html',
+      //       controller: 'mulaiUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+ 
+      // // USER UJIAN ONLINE TEST SISWA
+      // .state('ujianOnlineSiswa', {
+      //   url: '/ujianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: "",
+      //     idPelajaranUjianOnline: "",
+      //     idPelajaran: "",
+      //     pelajaran: "",
+      //     statusFinish: "",
+      //     idJawabanUjianOnlineSiswaPerPelajaran: "",
+      //     idRekapJawabanUjianOnlineSiswa: ""
+      //   },
+      //   templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/ujian/ujianOnline.html',
+      //   controller: 'ujianOnlineSiswaCtrl'
+      // })
+
+      // // USER UJIAN ONLINE KISI KISI SOAL OLIMPIADE SISWA
+      // .state('menuSiswa.kisiKisiSoalUjianOnlineSiswa', {
+      //   url: '/kisiKisiSoalUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: ""
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/kisiKisiSoal/kisiKisiSoal.html',
+      //       controller: 'kisiKisiSoalUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+      // // USER UJIAN ONLINE PESERTA OLIMPIADE SISWA
+      // .state('menuSiswa.pesertaUjianOnlineSiswa', {
+      //   url: '/pesertaUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: ""
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/pesertaUjian/pesertaUjian.html',
+      //       controller: 'pesertaUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+
+      // })
+      // .state('menuSiswa.nilaiSiswaDetailUjianOnlineSiswa', {
+      //   url: '/nilaiSiswaDetailUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: "",
+      //     idPelajaranUjianOnline: "",
+      //     idPelajaran: "",
+      //     pelajaran: "",
+      //     statusFinish: "",
+      //     idJawabanUjianOnlineSiswaPerPelajaran: "",
+      //     idRekapJawabanUjianOnlineSiswa: "",
+      //     namaPengguna: "",
+      //     uid: ""
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/peringkatAnda/nilaiSiswaDetail.html',
+      //       controller: 'nilaiSiswaDetailUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+      // .state('menuSiswa.statusJawabanSiswaUjianOnlineSiswa', {
+      //   url: '/statusJawabanSiswaUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: "",
+      //     idPelajaranUjianOnline: "",
+      //     pelajaran: "",
+      //     namaPengguna: "",
+      //     uid: "",
+      //     keterangan: ""
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/peringkatAnda/statusJawabanSiswa.html',
+      //       controller: 'statusJawabanSiswaUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+
+      // // USER LATIHAN SOAL ONLINE SISWA
+      // .state('menuSiswa.latihanSoalOnlineSiswa', {
+      //   url: '/latihanSoalOnlineSiswa',
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/latihanSoal/beranda/beranda.html',
+      //       controller: 'berandaLatihanSoalOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+      // // USER LATIHAN SOAL ONLINE SISWA UMUM
+      // .state('menuSiswa.latihanSoalOnlineSiswaUmum', {
+      //   url: '/latihanSoalOnlineSiswaUmum',
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/latihanSoal/berandaUmum/beranda.html',
+      //       controller: 'berandaLatihanSoalOnlineSiswaUmumCtrl'
+      //     }
+      //   }
+      // })
+      // // USER KUIS ONLINE SISWA UMUM
+      // .state('menuSiswa.kuisOnlineSiswaUmum', {
+      //   url: '/berandaKuisOnlineSiswaUmum',
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/latihanSoal/berandaKuisOnlineUmum/beranda.html',
+      //       controller: 'berandaKuisOnlineSiswaUmumCtrl'
+      //     }
+      //   }
+      // })
+      // // USER TRYOUT ONLINE SISWA UMUM
+      // .state('menuSiswa.tryoutOnlineSiswaUmum', {
+      //   url: '/tryoutOnlineSiswaUmum',
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/latihanSoal/berandaTryoutOnlineUmum/beranda.html',
+      //       controller: 'berandaTryoutOnlineSiswaUmumCtrl'
+      //     }
+      //   }
+      // })
       
     $urlRouterProvider.otherwise('/welcome')
 

@@ -1,6 +1,6 @@
-angular.module('app.nilaiAndaUjianOnlineSiswa', [])
+angular.module('app.nilaiAndaUjianOnlineSiswaOrangTua', [])
 
-    .controller('nilaiAndaUjianOnlineSiswaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+    .controller('nilaiAndaUjianOnlineSiswaOrangTuaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
         $scope.namaPenggunaSiswa = localStorage.getItem('namaPenggunaSiswa');
@@ -76,7 +76,7 @@ angular.module('app.nilaiAndaUjianOnlineSiswa', [])
             var getData = firebase.database(app).ref("jawabanUjianOnlineSiswaPerPelajaran").orderByChild("filter").equalTo($stateParams.idUjian + "_" + data.idPelajaranUjianOnline + "_" + $scope.uidSiswa);
             getData.on("child_added", function (snapshot) {
                 //console.log(snapshot.val());
-                $state.go("menuSiswa.nilaiUjianOnlineSiswa", {
+                $state.go("menuOrangTua.nilaiUjianOnlineSiswaOrangTua", {
                     "idUjian": $stateParams.idUjian,
                     "namaUjian": $stateParams.namaUjian,
                     "jenjang": $stateParams.jenjang,
