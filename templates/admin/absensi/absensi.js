@@ -1,5 +1,63 @@
 angular.module('app.absensiAdmin', [])
 
+    .controller('absensiSiswaPerKecamatanAdminCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+
+        $scope.idAdmin = localStorage.getItem('idAdmin');
+        $scope.namaAdmin = localStorage.getItem('namaAdmin');
+        $scope.emailAdmin = localStorage.getItem('emailAdmin');
+        $scope.hakAkses = localStorage.getItem('hakAkses');
+        $scope.uidAdmin = localStorage.getItem('uidAdmin');
+        $scope.idKotaKabupaten = localStorage.getItem('idKotaKabupaten');
+
+        if (!$scope.idAdmin) {
+            $state.go('welcome');
+        }
+
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+
+
+        var dataKecamatan = firebase.database().ref("groupAbsensiSiswa").orderByChild("idKotaKabupaten").equalTo("id-buleleng");
+        var listDataKecamatan = $firebaseArray(dataKecamatan);
+        listDataKecamatan.$loaded().then(function(response){
+            $scope.groupKecamatan = response;
+            $scope.absensiPerKecamatan = $scope.groupKecamatan.groupBy('namaKecamatan');
+            console.log($scope.absensiPerKecamatan);
+
+        })
+
+        $scope.getData = function (x,y) {
+            // $state.go("menuAdmin.jadwalPelajaranPerKecamatanAdmin", {
+            //     "namaKecamatan": x,
+            //     "idKecamatan": y[0].idKecamatan,
+            //     "jumlahGuru": y.length,
+            // })
+        }
+        // $scope.loadMore = function () {
+        //     var ref = firebase.database().ref("groupAbsensiSiswa").orderByChild("idSekolah").equalTo($scope.data.idSekolah).limitToLast($scope.count += 100);
+        //     var listRef = $firebaseArray(ref);
+        //     $ionicLoading.show();
+        //     listRef.$loaded().then(function (response) {
+        //         $ionicLoading.hide();
+        //         $scope.absensiSiswa = response
+        //         console.log($scope.absensiSiswa);
+        //         console.log("inilahDatanya", $scope.count)
+
+        //         if ($scope.absensiSiswa.length === $scope.banyakData) {
+        //             $scope.noMoreItemsAvailable = true;
+        //             console.log("totalDataTerakhir", $scope.banyakData);
+        //         }
+        //         $scope.$broadcast('scroll.infiniteScrollComplete');
+        //     });
+        // }
+
+    }])
     .controller('absensiSiswaAdminCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idAdmin = localStorage.getItem('idAdmin');
@@ -18,21 +76,6 @@ angular.module('app.absensiAdmin', [])
         }
         console.log($scope.data.idSekolah)
 
-        // $scope.formData = {
-        //     "idProvinsi": '',
-        //     "idKotaKabupaten": '',
-        //     "idKecamatan": '',
-        //     "jenjang": '',
-        //     "idSekolah": '',
-        //     "idGuru": '',
-        //     "tanggal": new Date(),
-        //     "idTahunAjaran": '',
-        //     "idSemester": '',
-        //     "idKelas": '',
-        //     "idPelajaran": '',
-
-        // }
-
         $scope.tambah = function () {
             $state.go("menuAdmin.absensiSiswaTambahAdmin");
         }
@@ -40,15 +83,15 @@ angular.module('app.absensiAdmin', [])
         $scope.totalAbsensi = []
         var dataAbsensiSiswa = firebase.database().ref("groupAbsensiSiswa").orderByChild("idSekolah").equalTo($scope.data.idSekolah);
         var listDataAbsensiSiswa = $firebaseArray(dataAbsensiSiswa);
-        listDataAbsensiSiswa.$loaded().then(function(response){
-            for(i=0; i<response.length; i++){
+        listDataAbsensiSiswa.$loaded().then(function (response) {
+            for (i = 0; i < response.length; i++) {
                 $scope.totalAbsensi.push({
-                    "id":response[i].$id,
+                    "id": response[i].$id,
                 })
             }
             $scope.banyakData = $scope.totalAbsensi.length
         })
-        
+
         $scope.count = 0;
         $scope.loadMore = function () {
             var ref = firebase.database().ref("groupAbsensiSiswa").orderByChild("idSekolah").equalTo($scope.data.idSekolah).limitToLast($scope.count += 100);
@@ -58,7 +101,7 @@ angular.module('app.absensiAdmin', [])
                 $ionicLoading.hide();
                 $scope.absensiSiswa = response
                 console.log($scope.absensiSiswa);
-                console.log("inilahDatanya",$scope.count)
+                console.log("inilahDatanya", $scope.count)
 
                 if ($scope.absensiSiswa.length === $scope.banyakData) {
                     $scope.noMoreItemsAvailable = true;

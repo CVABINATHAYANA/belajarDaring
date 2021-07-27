@@ -631,8 +631,9 @@ angular.module('app.routes', [])
       .state('menuAdmin.jadwalPelajaranAdmin', {
         url: '/jadwalPelajaranAdmin',
         params: {
-          idSekolah: "",
-          namaSekolah: "",
+          idKecamatan: "",
+          namaKecamatan: "",
+          jumlahGuru:"",
         },
         views: {
           'menuAdmin': {
@@ -641,6 +642,38 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuAdmin.jadwalPelajaranPerKecamatanAdmin', {
+        url: '/jadwalPelajaranPerKecamatanAdmin',
+        params: {
+          idKecamatan: "",
+          namaKecamatan: "",
+          jumlahGuru:"",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/kurikulum/jadwalPelajaran/jadwalPelajaranPerKecamatan.html',
+            controller: 'jadwalPelajaranPerKecamatanAdminCtrl'
+          }
+        }
+      })
+
+
+      .state('menuAdmin.jadwalPelajaranPerSekolahAdmin', {
+        url: '/jadwalPelajaranPerSekolahAdmin',
+        params: {
+          idSekolah: "",
+          namaSekolah: "",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/kurikulum/jadwalPelajaran/jadwalPelajaranPerSekolah.html',
+            controller: 'jadwalPelajaranPerSekolahAdminCtrl'
+          }
+        }
+      })
+
+
       .state('menuAdmin.jadwalPelajaranTambahAdmin', {
         url: '/jadwalPelajaranTambahAdmin',
         views: {
@@ -690,6 +723,21 @@ angular.module('app.routes', [])
       })
 
       //Data Absensi Siswa Admin
+
+      .state('menuAdmin.absensiSiswaPerKecamatanAdmin', {
+        url: '/absensiSiswaPerKecamatanAdmin',
+        params: {
+          idSekolah: "",
+          namaSekolah: "",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/absensi/siswa/absensiSiswaPerKecamatan.html',
+            controller: 'absensiSiswaPerKecamatanAdminCtrl'
+          }
+        }
+      })
+
       .state('menuAdmin.absensiSiswaAdmin', {
         url: '/absensiSiswaAdmin',
         params: {
