@@ -3,12 +3,12 @@
 
         <div class="row responsive-sm" style="margin:auto">
             <div class="col col-50 col-offset-25">
-                <ion-item class="item-avatar item-icon-right" ng-repeat="(x, y) in dataSekolahMuaraEnim"
-                    ng-click="getDataJenjang(x, y)">
-                    <img src="https://image.flaticon.com/icons/svg/138/138339.svg">
-                    <h2>Jenjang {{x}}</h2>
+                <ion-item class="item-avatar item-icon-right" ng-repeat="(x,y) in jadwalPerSekolah" ng-click="getData(x,y)">
+                    <img src="img/school.svg">
+                    <h2>{{x}}</h2>
                     <p>
-                        <b style="color:green">{{y.length}}</b> Sekolah</p>
+                        <b style="color:green">{{y.length}} Guru</b> membuat Jadwal
+                    </p>
                     <i class="icon ion-ios-arrow-right icon-accessory"></i>
                 </ion-item>
             </div>
@@ -16,8 +16,8 @@
 
     </ion-content>
     <ion-footer-bar align-title="left" class="bar-dark">
-        <button class="button button-clear pull-left">Data Sekolah</button>
+        <button class="button button-clear pull-left">Guru membuat jadwal</button>
         <button class="button button-clear pull-right">Total :
-            <strong>{{totalSekolah}}</strong> Sekolah</button>
+            <strong>{{data.jumlahGuru}} </strong>Guru</button>
     </ion-footer-bar>
 </ion-view>
