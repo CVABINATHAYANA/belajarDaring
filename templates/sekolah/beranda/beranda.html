@@ -1,4 +1,36 @@
 <ion-view title="Beranda" id="berandaSekolah" class="latar">
+    <style>
+        .icon-btn {
+          height: 30%;
+          width: 35%;
+        }
+    
+        .card {
+          position: relative;
+        }
+    
+        .vertical-center {
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+        }
+    
+        @media screen and (max-width: 770px) {
+          .icon-btn {
+            width: 25%;
+          }
+        }
+    
+        @media screen and (max-width: 540px) {
+          .icon-btn {
+            height: 30%;
+            width: 35%;
+          }
+        }
+    
+      </style>
     <ion-content padding="false" class="has-header">
         <ion-slides disable-side-menu-drag=""
             options="{'loop': true,'initialSlide':0,'direction':horizontal,'effect':'fade','speed':500,'autoplay':2000,'grabCursor':true}"
@@ -77,11 +109,12 @@
                 <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
                     <div class="row" style="margin-left: auto;margin-right: auto;">
                         <div class="col col-50" style="height: 20vh;margin:0">
-                            <div class="card bg-card-gradient-blue" style="height: 100%;margin-bottom:0;" ng-click="dataPokokSekolah()">
+                            <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="dataPokokSekolah()">
                                 <center>
-                                    <img src="../../../img/school2.svg" style="height: 50%;width: 50%;margin-top: 5.5%;"/>
-                                    <h5 class="text-white text-center">Data Pokok Sekolah</h5>
-   
+                                    <div class="vertical-center">
+                                        <img src="../../../img/school2.svg"class="icon-btn"/>
+                                        <h5 class="text-white text-center">Data Pokok Sekolah</h5>
+                                    </div>
                                 </center>
 
                             </div>
@@ -89,8 +122,10 @@
                         <div class="col col-50" style="height: 20vh;margin:0">
                             <div class="card bg-card-gradient-blue" style="height: 100%;"  ui-sref="menuSekolah.jadwalPelajaranSekolah()">
                                 <center>
-                                    <img src="../../../img/calendar.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Jadwal Pelajaran</h5>
+                                    <div class="vertical-center">
+                                        <img src="../../../img/calendar.svg" class="icon-btn"/>
+                                        <h5 class="text-white text-center">Jadwal Pelajaran</h5>
+                                    </div>
                                 </center>
                             </div>
                         </div>
@@ -101,16 +136,20 @@
                         <div class="col col-50"style="height: 20vh;margin:0" >
                             <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuSekolah.absensiSiswaSekolah()">
                                 <center>
-                                    <img src="../../../img/calendar2.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Absensi Siswa</h5>
+                                    <div class="vertical-center">
+                                        <img src="../../../img/calendar2.svg" class="icon-btn"/>
+                                        <h5 class="text-white text-center">Absensi Siswa</h5>
+                                    </div>
                                 </center>
                             </div>
                         </div>
                         <div class="col col-50"style="height: 20vh;margin:0">
                             <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuSekolah.tugasSiswaSekolah()">
                                 <center>
-                                    <img src="../../../img/write.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Tugas Siswa</h5>
+                                    <div class="vertical-center">
+                                        <img src="../../../img/write.svg" class="icon-btn"/>
+                                        <h5 class="text-white text-center">Tugas Siswa</h5>
+                                    </div>
                                 </center>
                             </div>
                         </div>
@@ -121,16 +160,20 @@
                         <div class="col col-50" style="height: 20vh;margin:0">
                             <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="eLearning()">
                                 <center>
-                                    <img src="../../../img/monitor-screen.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">e-Learning</h5>
+                                    <div class="vertical-center">
+                                        <img src="../../../img/monitor-screen.svg" class="icon-btn"/>
+                                        <h5 class="text-white text-center">e-Learning</h5>
+                                    </div>
                                 </center>
                             </div>
                         </div>
                         <div class="col col-50" style="height: 20vh;margin:0">
                             <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="ujianOnline()">
                                 <center>
-                                    <img src="../../../img/test.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Ujian Online</h5>
+                                    <div class="vertical-center">
+                                        <img src="../../../img/test.svg" class="icon-btn"/>
+                                        <h5 class="text-white text-center">Ujian Online</h5>
+                                    </div>
                                 </center>
                             </div>
                         </div>
@@ -141,8 +184,10 @@
                         <div class="col col-50"style="height: 20vh;margin:0" >
                             <div class="card bg-card-gradient-blue" style="height: 100%;"  ui-sref="menuSekolah.videoTutorialSekolah()">
                                 <center>
-                                    <img src="../../../img/video-tutorial.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Video Tutorial</h5>
+                                    <div class="vertical-center">
+                                        <img src="../../../img/video-tutorial.svg" class="icon-btn"/>
+                                        <h5 class="text-white text-center">Video Tutorial</h5>
+                                    </div>
                                 </center>
                             </div>
                         </div>
