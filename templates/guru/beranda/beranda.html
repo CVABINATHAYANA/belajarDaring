@@ -1,86 +1,116 @@
-<ion-view title="Beranda" id="berandaGuru">
-    <ion-content padding="false" class="">
-        <ion-slides disable-side-menu-drag=""
-            options="{'loop': false,'direction':horizontal,'speed':500,'effect':'fade','autoplay':2000,'grabCursor':true}"
-            slider="slider1" delegate-handle="slider1" style="width:100%;height:200px;">
-            <ion-slide-page class="bg-gradient-blue">
-                <div class="spacer" style="width: 320px; height: 0px;"></div>
-                <div class="row responsive-md" style="margin: auto;">
-                    <div class="col col-50 col-offset-25">
-                        <div class="row" style="margin: auto">
-                            <div class="col col-33">
-                                <img src="https://image.flaticon.com/icons/svg/145/145867.svg"
-                                    ng-if="jenisKelaminGuru==='Laki-laki'"
-                                    style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
-                                <img src="https://image.flaticon.com/icons/svg/145/145864.svg"
-                                    ng-if="jenisKelaminGuru==='Perempuan'"
-                                    style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
-                            </div>
-                            <div class="col col-67" style="padding-left: 10px">
-                                <h3 style="color:white;font-weight:300;">{{namaGuru}}</h3>
-                                <div class="show-list-numbers-and-dots">
-                                    <p style="color:white;font-size:12px"><strong>{{namaSekolahGuru}}</strong><br>
-                                        {{namaKotaKabupatenGuru}}, {{namaProvinsiGuru}}
-                                        <br>
-                                        <span>Guru</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ion-slide-page>
+<ion-view title="Beranda" id="berandaGuru" class="latar">
+  <style>
+    .icon-btn {
+      height: 30%;
+      width: 35%;
+    }
 
-            <ion-slide-page class="bg-gradient-blue">
-                <div class="spacer" style="width: 320px; height: 0px;"></div>
-                <div class="row responsive-md" style="margin: auto;">
-                    <div class="col col-50 col-offset-25">
-                        <div class="row" style="margin: auto">
-                            <div class="col col-33">
-                                <img src="img/smartphone.png"
-                                    style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
-                            </div>
-                            <div class="col col-67" style="padding-left: 0px">
-                                <h3 style="color:white;">HANDPHONE</h3>
-                                <div class="show-list-numbers-and-dots">
-                                    <p style="color:white;font-size: 12px"><strong>Absensi, Ujian, Tugas dll
-                                            Menggunakan
-                                            Handphone</strong><br>
-                                        Cepat, Real Time, Transparan
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ion-slide-page>
+    .card {
+      position: relative;
+    }
 
-            <ion-slide-page class="bg-gradient-blue">
-                <div class="spacer" style="width: 320px; height: 0px;"></div>
-                <div class="row responsive-md" style="margin: auto;">
-                    <div class="col col-50 col-offset-25">
-                        <div class="row" style="margin: auto">
-                            <div class="col col-33">
-                                <img src="https://image.flaticon.com/icons/svg/437/437553.svg"
-                                    style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
-                            </div>
-                            <div class="col col-67" style="padding-left: 10px">
-                                <h3 style="color:white;">INTEGRASI</h3>
-                                <div class="show-list-numbers-and-dots">
-                                    <p style="color:white;font-size: 12px"><strong>Langsung terintegrasi dengan
-                                            sekolah,
-                                            guru, siswa dan ortu</strong><br>
-                                        Cepat, Real Time, Transparan
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ion-slide-page>
-        </ion-slides>
+    .vertical-center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
 
-        <!-- <div class="row responsive-md" style="margin: auto;" ng-if="akses===false">
+    @media screen and (max-width: 770px) {
+      .icon-btn {
+        width: 25%;
+      }
+    }
+
+    @media screen and (max-width: 540px) {
+      .icon-btn {
+        height: 30%;
+        width: 35%;
+      }
+    }
+
+  </style>
+  <ion-content padding="false" class="">
+    <ion-slides disable-side-menu-drag=""
+      options="{'loop': false,'direction':horizontal,'speed':500,'effect':'fade','autoplay':2000,'grabCursor':true}"
+      slider="slider1" delegate-handle="slider1" style="width:100%;height:200px;">
+      <ion-slide-page class="bg-gradient-blue">
+        <div class="spacer" style="width: 320px; height: 0px;"></div>
+        <div class="row responsive-md" style="margin: auto;">
+          <div class="col col-50 col-offset-25">
+            <div class="row" style="margin: auto">
+              <div class="col col-33">
+                <img src="https://image.flaticon.com/icons/svg/145/145867.svg" ng-if="jenisKelaminGuru==='Laki-laki'"
+                  style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
+                <img src="https://image.flaticon.com/icons/svg/145/145864.svg" ng-if="jenisKelaminGuru==='Perempuan'"
+                  style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
+              </div>
+              <div class="col col-67" style="padding-left: 10px">
+                <h3 style="color:white;font-weight:300;">{{namaGuru}}</h3>
+                <div class="show-list-numbers-and-dots">
+                  <p style="color:white;font-size:12px"><strong>{{namaSekolahGuru}}</strong><br>
+                    {{namaKotaKabupatenGuru}}, {{namaProvinsiGuru}}
+                    <br>
+                    <span>Guru</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-slide-page>
+
+      <ion-slide-page class="bg-gradient-blue">
+        <div class="spacer" style="width: 320px; height: 0px;"></div>
+        <div class="row responsive-md" style="margin: auto;">
+          <div class="col col-50 col-offset-25">
+            <div class="row" style="margin: auto">
+              <div class="col col-33">
+                <img src="img/smartphone.png"
+                  style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
+              </div>
+              <div class="col col-67" style="padding-left: 0px">
+                <h3 style="color:white;">HANDPHONE</h3>
+                <div class="show-list-numbers-and-dots">
+                  <p style="color:white;font-size: 12px"><strong>Absensi, Ujian, Tugas dll
+                      Menggunakan
+                      Handphone</strong><br>
+                    Cepat, Real Time, Transparan
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-slide-page>
+
+      <ion-slide-page class="bg-gradient-blue">
+        <div class="spacer" style="width: 320px; height: 0px;"></div>
+        <div class="row responsive-md" style="margin: auto;">
+          <div class="col col-50 col-offset-25">
+            <div class="row" style="margin: auto">
+              <div class="col col-33">
+                <img src="https://image.flaticon.com/icons/svg/437/437553.svg"
+                  style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
+              </div>
+              <div class="col col-67" style="padding-left: 10px">
+                <h3 style="color:white;">INTEGRASI</h3>
+                <div class="show-list-numbers-and-dots">
+                  <p style="color:white;font-size: 12px"><strong>Langsung terintegrasi dengan
+                      sekolah,
+                      guru, siswa dan ortu</strong><br>
+                    Cepat, Real Time, Transparan
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-slide-page>
+    </ion-slides>
+
+    <!-- <div class="row responsive-md" style="margin: auto;" ng-if="akses===false">
             <div class="col col-50 col-offset-25">
                 <div class="kartu">
                     <h4>{{update.judul}}</h4>
@@ -91,8 +121,8 @@
             </div>
         </div> -->
 
-        <div ng-if="ijinPenggunaanAplikasi===true">
-            <!-- <div class="row responsive-md" style="margin: auto;">
+    <div ng-if="ijinPenggunaanAplikasi===true">
+      <!-- <div class="row responsive-md" style="margin: auto;">
                 <div class="col col-50 col-offset-25">
                     <ion-list>
                         <ion-item class="item-avatar item-icon-right" ng-click="dataPokokSekolah()">
@@ -183,114 +213,131 @@
                     </ion-list>
                 </div>
             </div> -->
-            <div class="container row responsive-md">
-                <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
-                    <div class="row" style="margin-left: auto;margin-right: auto;">
-                        <div class="col col-50" style="height: 20vh;margin:0">
-                            <div class="card bg-card-gradient-blue" style="height: 100%;margin-bottom:0;" ng-click="dataPokokSekolah()">
-                                <center>
-                                    <!-- <img src="https://image.flaticon.com/icons/svg/2777/2777287.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                                    <img src="../../../img/school2.svg" style="height: 50%;width: 50%;margin-top: 5.5%;"/>
-                                    <h5 class="text-white text-center">Data Sekolah</h5>
-   
-                                </center>
+      <div class="container row responsive-md">
+        <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
+          <div class="row" style="margin-left: auto;margin-right: auto;">
+            <div class="col col-50" style="height: 20vh;margin:0">
+              <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="dataPokokSekolah()">
+                <center>
+                  <div class="vertical-center">
+                    <!-- <img src="https://image.flaticon.com/icons/svg/2777/2777287.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
+                    <img src="../../../img/school2.svg" class="icon-btn"/>
+                    <h5 class="text-white text-center">Data Sekolah</h5>
+                  </div>
+                </center>
 
-                            </div>
-                        </div>
-                        <div class="col col-50" style="height: 20vh;margin:0">
-                            <div class="card bg-card-gradient-blue" style="height: 100%;"  ui-sref="menuGuru.jadwalPelajaranGuru()">
-                                <center>
-                                    <!-- <img src="https://image.flaticon.com/icons/svg/3164/3164217.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                                    <img src="../../../img/calendar.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Jadwal Pelajaran</h5>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
-                    <div class="row" style="margin-left: auto;margin-right: auto;">
-                        <div class="col col-50"style="height: 20vh;margin:0" >
-                            <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuGuru.absensiSiswaGuru()">
-                                <center>
-                                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036019.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                                    <img src="../../../img/calendar2.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Absensi Siswa</h5>
-                                </center>
-                            </div>
-                        </div>
-                        <div class="col col-50"style="height: 20vh;margin:0">
-                            <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="tugasGuru()">
-                                <center>
-                                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036665.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                                    <img src="../../../img/write.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Tugas Siswa</h5>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
-                    <div class="row" style="margin-left: auto;margin-right: auto;">
-                        <div class="col col-50" style="height: 20vh;margin:0">
-                            <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="eLearning()">
-                                <center>
-                                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036633.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                                    <img src="../../../img/monitor-screen.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">e-Learning</h5>
-                                </center>
-                            </div>
-                        </div>
-                        <div class="col col-50" style="height: 20vh;margin:0">
-                            <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="ujianOnline()">
-                                <center>
-                                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036702.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                                    <img src="../../../img/test.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Ujian Online</h5>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
-                    <div class="row" style="margin-left: auto;margin-right: auto;">
-                        <div class="col col-50"style="height: 20vh;margin:0" >
-                            <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuGuru.videoTutorialGuru()">
-                                <center>
-                                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036707.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                                    <img src="../../../img/video-tutorial.svg" style="height: 50%;width: 50%;margin-top: 5%;"/>
-                                    <h5 class="text-white text-center">Video Tutorial</h5>
-                                </center>
-                            </div>
-                        </div>
-                        <div class="col col-50" style="height: 20vh;margin:0">
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+            <div class="col col-50" style="height: 20vh;margin:0">
+              <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuGuru.jadwalPelajaranGuru()">
+                <center>
+                  <div class="vertical-center">
+                    <!-- <img src="https://image.flaticon.com/icons/svg/3164/3164217.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
+                    <img src="../../../img/calendar.svg" class="icon-btn" />
+                    <h5 class="text-white text-center">Jadwal Pelajaran</h5>
+                  </div>
+                </center>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
+          <div class="row" style="margin-left: auto;margin-right: auto;">
+            <div class="col col-50" style="height: 20vh;margin:0">
+              <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuGuru.absensiSiswaGuru()">
+                <center>
+                  <div class="vertical-center">
+                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036019.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
+                    <img src="../../../img/calendar2.svg" class="icon-btn" />
+                    <h5 class="text-white text-center">Absensi Siswa</h5>
+                  </div>
+                </center>
+              </div>
+            </div>
+            <div class="col col-50" style="height: 20vh;margin:0">
+              <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="tugasGuru()">
+                <center>
+                  <div class="vertical-center">
+                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036665.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
+                    <img src="../../../img/write.svg" class="icon-btn" />
+                    <h5 class="text-white text-center">Tugas Siswa</h5>
+                  </div>
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
+          <div class="row" style="margin-left: auto;margin-right: auto;">
+            <div class="col col-50" style="height: 20vh;margin:0">
+              <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="eLearning()">
+                <center>
+                  <div class="vertical-center">
+                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036633.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
+                    <img src="../../../img/monitor-screen.svg" class="icon-btn" />
+                    <h5 class="text-white text-center">e-Learning</h5>
+                  </div>
+                </center>
+              </div>
+            </div>
+            <div class="col col-50" style="height: 20vh;margin:0">
+              <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="ujianOnline()">
+                <center>
+                  <div class="vertical-center">
+                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036702.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
+                    <img src="../../../img/test.svg" class="icon-btn" />
+                    <h5 class="text-white text-center">Ujian Online</h5>
+                  </div>
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
+          <div class="row" style="margin-left: auto;margin-right: auto;">
+            <div class="col col-50" style="height: 20vh;margin:0">
+              <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuGuru.videoTutorialGuru()">
+                <center>
+                  <div class="vertical-center">
+                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036707.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
+                    <img src="../../../img/video-tutorial.svg" class="icon-btn" />
+                    <h5 class="text-white text-center">Video Tutorial</h5>
+                  </div>
+                </center>
+              </div>
+            </div>
+            <div class="col col-50" style="height: 20vh;margin:0">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <div class="row responsive-md" style="margin: auto;" ng-if="ijinPenggunaanAplikasi===false || ijinPenggunaanAplikasi===undefined">
-            <div class="col col-50 col-offset-25">
-                <div class="list card">
-                    <ion-item class="item-divider putih"> {{pesanUntukGuru.judulPesan}}</ion-item>
-                    <div class="item item-body">
-                        <div class="show-list-numbers-and-dots">
-                            <p style="margin-top:0px;color:#000000;">
-                                {{pesanUntukGuru.isiPesan}}
-                            </p>
-                            <a ng-if="pesanUntukGuru.link!==''" href="{{pesanUntukGuru.link}}" target="new" class="button button-positive button-block">Klik Tombol Ini
-                            </a>
-                        </div>
-                    </div>
-                    <!-- <ion-item class="item-icon-left" href="mailto:sudasacorporation@gmail.com">
+    <div class="row responsive-md" style="margin: auto;"
+      ng-if="ijinPenggunaanAplikasi===false || ijinPenggunaanAplikasi===undefined">
+      <div class="col col-50 col-offset-25">
+        <div class="list card">
+          <ion-item class="item-divider putih"> {{pesanUntukGuru.judulPesan}}</ion-item>
+          <div class="item item-body">
+            <div class="show-list-numbers-and-dots">
+              <p style="margin-top:0px;color:#000000;">
+                {{pesanUntukGuru.isiPesan}}
+              </p>
+              <a ng-if="pesanUntukGuru.link!==''" href="{{pesanUntukGuru.link}}" target="new"
+                class="button button-positive button-block">Klik Tombol Ini
+              </a>
+            </div>
+          </div>
+          <!-- <ion-item class="item-icon-left" href="mailto:sudasacorporation@gmail.com">
                         <i class="icon ion-email"></i>sudasacorporation@gmail.com
                     </ion-item> -->
-                    <ion-item class="item-icon-left" ng-repeat="data in adminSekolah" href="tel:{{data.noHandphone}}" ng-if="jumlahAdminSekolah!==0 && data.noHandphone.length>4">
-                        <i class="icon ion-ios-telephone"></i><p>{{data.noHandphone}}<br>{{data.namaPengguna}}</p>
-                    </ion-item>
-                </div>
-            </div>
+          <ion-item class="item-icon-left" ng-repeat="data in adminSekolah" href="tel:{{data.noHandphone}}"
+            ng-if="jumlahAdminSekolah!==0 && data.noHandphone.length>4">
+            <i class="icon ion-ios-telephone"></i>
+            <p>{{data.noHandphone}}<br>{{data.namaPengguna}}</p>
+          </ion-item>
         </div>
-    </ion-content>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>
