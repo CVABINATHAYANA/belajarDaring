@@ -13,11 +13,13 @@ angular.module('app.pelajaranUjianOnlineSekolah', [])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
- if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
         }
-        
+
         $scope.data = {
             "idUjian": $stateParams.idUjian,
             "namaUjian": $stateParams.namaUjian,
@@ -44,7 +46,7 @@ angular.module('app.pelajaranUjianOnlineSekolah', [])
             }, {})
         }
 
-        if($scope.data.ruangLingkupUjian==="Sekolah"){
+        if ($scope.data.ruangLingkupUjian === "Sekolah") {
             var refKelas = firebase.database(app).ref("jadwalPelajaran/").orderByChild("filterPelajaran").equalTo($scope.data.idSekolah + "_" + $scope.data.idGuru + "_" + $scope.data.idTahunAjaran + "_" + $scope.data.idKelas);
             var listRefKelas = $firebaseArray(refKelas);
             listRefKelas.$loaded().then(function (response) {
@@ -53,7 +55,7 @@ angular.module('app.pelajaranUjianOnlineSekolah', [])
                 //console.log($scope.mataPelajaran);
             })
         }
-        else if($scope.data.ruangLingkupUjian==="Umum"){
+        else if ($scope.data.ruangLingkupUjian === "Umum") {
             var refKelas = firebase.database(app).ref("jadwalPelajaran/").orderByChild("filterGuru").equalTo($scope.data.idSekolah + "_" + $scope.data.idGuru + "_" + $scope.data.idTahunAjaran);
             var listRefKelas = $firebaseArray(refKelas);
             listRefKelas.$loaded().then(function (response) {
@@ -63,7 +65,7 @@ angular.module('app.pelajaranUjianOnlineSekolah', [])
             })
         }
 
-        
+
 
         $scope.tambahPelajaran = function () {
 
@@ -181,7 +183,7 @@ angular.module('app.pelajaranUjianOnlineSekolah', [])
                             "pelajaran": data.pelajaran,
                             "namaSekolah": $stateParams.namaSekolah,
                             "jenisUjian": $stateParams.jenisUjian,
-                            "idGuru" : $stateParams.idGuru,
+                            "idGuru": $stateParams.idGuru,
                             "namaGuru": $stateParams.namaGuru,
                             "tingkatKelas": $stateParams.tingkatKelas,
                             "idSekolah": $stateParams.idSekolah,
@@ -257,8 +259,8 @@ angular.module('app.pelajaranUjianOnlineSekolah', [])
                                 //console.log('Data Berhasil Dihapus');
                             });
 
-                            deletePengaturan.$remove().then(function(ref){
-                                
+                            deletePengaturan.$remove().then(function (ref) {
+
                             })
                         }
                         else {

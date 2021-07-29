@@ -4,14 +4,14 @@ angular.module('firebaseConfig', ['firebase'])
 
         // My app's Firebase configuration
         var config = {
-            apiKey: "AIzaSyA3EKVxrKB46XcrJ3MHyBX3S50NwcRuDlg",
-            authDomain: "bulelengeducation.firebaseapp.com",
-            databaseURL: "https://bulelengeducation-default-rtdb.firebaseio.com",
-            projectId: "bulelengeducation",
-            storageBucket: "bulelengeducation.appspot.com",
-            messagingSenderId: "540495880933",
-            appId: "1:540495880933:web:091d1277c1c8cbabf3ea0c",
-            measurementId: "G-G2NNSRBNN4"
+            apiKey: "AIzaSyCZk4ZHTRUNjQ9pGe6CuuWLRCdeGWvWwz4",
+            authDomain: "newbulelengeducation.firebaseapp.com",
+            databaseURL: "https://newbulelengeducation-default-rtdb.firebaseio.com",
+            projectId: "newbulelengeducation",
+            storageBucket: "newbulelengeducation.appspot.com",
+            messagingSenderId: "719991188095",
+            appId: "1:719991188095:web:c9174892795884731d2d4a",
+            measurementId: "G-7J9KWW98NP"
         };
         // Initialize Firebase
         firebase.initializeApp(config);
