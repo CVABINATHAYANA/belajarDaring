@@ -1,4 +1,4 @@
-<ion-view title="Tambah Soal Ujian" cache-view="false">
+<ion-view title="Tambah Soal Ujian" cache-view="false" class="latar">
     <ion-content padding="false" class="has-header">
         <div class="row responsive-md" style="margin: auto;">
             <div class="col col-50 col-offset-25">
@@ -32,13 +32,13 @@
         </div>
     </ion-content>
 
-    <ion-footer-bar align-title="left" class="bar-positive" ng-show="aktif">
+    <ion-footer-bar align-title="left" class="bar-light" ng-show="aktif">
         <div class="buttons">
             <!--<button class="button"></button>-->
         </div>
         <h1 class="title"></h1>
         <div class="buttons" ng-click="cekSoal()">
-            <button class="button" side="right">Jumlah Soal
+            <button class="button button-dark" side="right">Jumlah Soal :
                 <b>{{totalSoal}}</b> Dari
                 <b>{{totalSoalUjian}}</b> Soal Olimpiade</button>
         </div>

@@ -1,6 +1,6 @@
 <ion-view title="Absensi Siswa" id="absensiSiswaAdmin"  class="latar">
     <ion-nav-buttons side="right" class="has-header">
-        <button class="button button-icon icon ion-android-add" ng-click="tambah()"></button>
+        <button class="button button-dark icon ion-android-add" ng-click="tambah()"> Tambah</button>
     </ion-nav-buttons>
     <ion-content padding="false" class="has-header">
         <div class="row responsive-md" style="margin: auto;">
@@ -41,9 +41,9 @@
             </div>
         </div>
     </ion-content>
-    <ion-footer-bar align-title="left" class="bar-dark">
+    <ion-footer-bar align-title="left" class="bar-light">
         <button class="button button-clear pull-left">Data</button>
-        <button class="button button-clear pull-right">Total :
+        <button class="button button-dark pull-right">Total :
             <strong>{{banyakData}}</strong> Guru Telah Mengabsen</button>
     </ion-footer-bar>
 </ion-view>
