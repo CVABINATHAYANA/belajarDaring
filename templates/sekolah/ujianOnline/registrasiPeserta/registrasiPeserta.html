@@ -1,4 +1,4 @@
-<ion-view title="Registrasi Peserta" cache-view="false" id="registrasiPesertaUjianOnlineAdmin">
+<ion-view title="Registrasi Peserta" cache-view="false" id="registrasiPesertaUjianOnlineAdmin" class="latar">
     <ion-content padding="false" class="has-header">
         <div class="row responsive-md" style="margin: auto;">
             <div class="col col-50 col-offset-25">
@@ -27,13 +27,13 @@
         </div>
         
     </ion-content>
-    <ion-footer-bar align-title="left" class="bar-positive" ng-show="aktif">
+    <ion-footer-bar align-title="left" class="bar-light" ng-show="aktif">
         <div class="buttons">
             <!--<button class="button"></button>-->
         </div>
         <h1 class="title"></h1>
         <div class="buttons" ng-click="pesertaTeregistrasi()">
-            <button class="button" side="right">Peserta Teregistrasi
+            <button class="button button-dark" side="right">Peserta Teregistrasi :
                 <b>{{totalPesertaOlimpiade}}</b> Siswa</button>
         </div>
     </ion-footer-bar>
