@@ -81,7 +81,7 @@ angular.module('app.controllers', [])
         akses.on("value", function (snapshot) {
             $ionicLoading.hide();
             $scope.ijinkanPenggunaanAplikasi = snapshot.val().ijinkanPenggunaanAplikasi;
-            console.log(snapshot.val())
+            // console.log(snapshot.val())
         })
 
         $scope.logoutSiswa = function () {

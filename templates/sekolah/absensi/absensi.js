@@ -17,6 +17,11 @@ angular.module('app.absensiSekolah', [])
         if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
         else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
+        $scope.data = {
+            "tanggal": $stateParams.tanggal,
+            "jumlah_absensi": $stateParams.jumlah_absensi,
+        }
+
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
         }
@@ -44,7 +49,7 @@ angular.module('app.absensiSekolah', [])
         //     // console.log($scope.absensiSiswa)
         // });
 
-        var ref = firebase.database(app).ref("groupAbsensiSiswa").orderByChild("idSekolah").equalTo($scope.idSekolah);
+        var ref = firebase.database(app).ref("groupAbsensiSiswa").orderByChild("tanggalDisplay").equalTo($scope.data.tanggal);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
@@ -139,6 +144,102 @@ angular.module('app.absensiSekolah', [])
 
             });
         }
+
+    }])
+
+    .controller('absensiSiswaSekolahPerHariCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+
+        $scope.idPenggunaSekolah = localStorage.getItem('idPenggunaSekolah');
+        $scope.idSekolah = localStorage.getItem('idSekolah');
+        $scope.namaPenggunaSekolah = localStorage.getItem('namaPenggunaSekolah');
+        $scope.jenjangSekolah = localStorage.getItem('jenjangSekolah');
+        $scope.namaSekolah = localStorage.getItem('namaSekolah');
+        $scope.uidSekolah = localStorage.getItem('uidSekolah');
+        $scope.idProvinsiSekolah = localStorage.getItem('idProvinsiSekolah');
+        $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
+        $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
+        $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
+
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
+
+        if (!$scope.idPenggunaSekolah) {
+            $state.go('welcome');
+        }
+
+        $scope.tambah = function () {
+            $state.go("menuSekolah.absensiSiswaTambahSekolah");
+        }
+
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+
+        index = 0 ;
+        var ref = firebase.database(app).ref("groupAbsensiSiswa").orderByChild("idSekolah").equalTo($scope.idSekolah);
+        var listRef = $firebaseArray(ref);
+        $ionicLoading.show();
+        listRef.$loaded().then(function (response) {
+            $ionicLoading.hide();
+            $scope.groupAbsensiSiswa = response;
+            $scope.absensiSiswa = $scope.groupAbsensiSiswa.groupBy('tanggalDisplay');
+            console.log($scope.groupAbsensiSiswa);
+
+            for (let i = 0; i < response.length; i++) {
+                index = index + 1;
+                console.log(index);
+                console.log(response[i].$id);
+                var groupAbsensiSiswa = firebase.database().ref("groupAbsensiSiswa/"+response[i].$id);
+                groupAbsensiSiswa.set({
+                    "groupAbsensi": response[i].groupAbsensi,
+                    "hariAbsensi":response[i].hariAbsensi,
+                    "idGuru": response[i].idGuru,
+                    "idKecamatan": response[i].idKecamatan,
+                    "idKelas": response[i].idKelas,
+                    "idKotaKabupaten": response[i].idKotaKabupaten,
+                    "idPelajaran": response[i].idPelajaran,
+                    "idPembuat": response[i].idPembuat,
+                    "idProvinsi": response[i].idProvinsi,
+                    "idSekolah": response[i].idSekolah,
+                    "idSemester": response[i].idSemester,
+                    "idTahunAjaran": response[i].idTahunAjaran,
+                    "jamAbsensi": response[i].jamAbsensi,
+                    "jenjang": response[i].jenjang,
+                    "namaGuru": response[i].namaGuru,
+                    "namaKecamatan": response[i].namaKecamatan,
+                    "namaKelas":response[i].namaKelas,
+                    "namaKotaKabupaten": response[i].namaKotaKabupaten,
+                    "namaProvinsi": response[i].namaProvinsi,
+                    "namaSekolah": response[i].namaSekolah,
+                    "pelajaran": response[i].pelajaran,
+                    "semester": response[i].semester,
+                    "tahunAjaran": response[i].tahunAjaran,
+                    "tanggalAbsensi": response[i].tanggalAbsensi,
+                    "tanggalDisplay": response[i].tanggalDisplay,
+                    "totalSiswa":response[i].totalSiswa,
+
+                }).then(function (ok) {
+                    console.log('Ok')
+                })
+
+            }
+
+        });
+
+        $scope.getData = function (x, y) {
+            $state.go('menuSekolah.absensiSiswaSekolah', {
+                "tanggal": x,
+                "jumlah_absensi": y.length
+            })
+        }
+
+        
 
     }])
 

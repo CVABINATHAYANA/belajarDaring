@@ -182,8 +182,6 @@ angular.module('app.tugasSiswa', [])
         })
 
     }])
-
-
     .controller('tugasSiswaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
@@ -272,9 +270,9 @@ angular.module('app.tugasSiswa', [])
         ref.on('value', function (snapshot) {
             $ionicLoading.hide();
             // $scope.formData = snapshot.val();
-            console.log(snapshot.val().idKelas)
+            console.log('ID KELAS : ',snapshot.val().idKelas)
             var kelas = snapshot.val().idKelas;
-            console.log($scope.formData.idMapel);
+            console.log('ID MAPEL : ',$scope.formData.idMapel);
             var mapel = $scope.formData.idMapel;
 
 
@@ -288,7 +286,8 @@ angular.module('app.tugasSiswa', [])
             // })
 
             
-            var ref = firebase.database(app).ref("tugasSiswa/" + kelas + '/' + mapel).orderByChild("idSiswa").equalTo($scope.idPenggunaSiswa);
+            // var ref = firebase.database(app).ref("tugasSiswa/" + kelas + '/' + mapel).orderByChild("idSiswa").equalTo($scope.idPenggunaSiswa);
+            var ref = firebase.database(app).ref("tugasSiswa/" + kelas + '/' + mapel + '/tugasperSiswa/' +$scope.idPenggunaSiswa);
             var listRef = $firebaseArray(ref);
             $ionicLoading.show();
             listRef.$loaded().then(function (response) {
@@ -368,7 +367,6 @@ angular.module('app.tugasSiswa', [])
         })
 
     }])
-
     .controller('tugasSiswaLihatCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', '$firebaseStorage', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter, $firebaseStorage) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
@@ -487,7 +485,14 @@ angular.module('app.tugasSiswa', [])
             })
         });
 
-        var refTugas = firebase.database(app).ref("tugasSiswa/" +$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/'+ $scope.formData.idTugas).update(JSON.parse(JSON.stringify({
+        // console.log($scope.formData.idTugas);
+        var refTugas = firebase.database(app).ref("tugasSiswa/" +$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/dataTugas/'+ $scope.formData.idTugas + "/" + $scope.formData.idTugas+$scope.idPenggunaSiswa).update(JSON.parse(JSON.stringify({
+            "dibaca": true,
+            "statusDibaca": $scope.idPenggunaSiswa + "_" + true,
+        })));
+
+
+        var refTugasSiswa = firebase.database(app).ref("tugasSiswa/" +$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/tugasperSiswa/'+ $scope.idPenggunaSiswa + '/' + $scope.formData.idTugas).update(JSON.parse(JSON.stringify({
             "dibaca": true,
             "statusDibaca": $scope.idPenggunaSiswa + "_" + true,
         })));
@@ -511,15 +516,20 @@ angular.module('app.tugasSiswa', [])
                 });
             }
             else {
-                var refTugas = firebase.database(app).ref("tugasSiswa/" +$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/'+ $scope.formData.idTugas).update(JSON.parse(JSON.stringify({
+                var refTugas = firebase.database(app).ref("tugasSiswa/" +$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/dataTugas/'+ $scope.formData.idTugas + "/" + $scope.formData.idTugas + $scope.idPenggunaSiswa).update(JSON.parse(JSON.stringify({
                     "jawabanTugas": $scope.formData.jawabanTugas,
                     "tanggalKirimTugas": tanggalKirimTugas
                 }))).then(function (resp) {
-                    $ionicPopup.alert({
-                        title: 'SUKSES',
-                        template: 'Jawaban Tugas Anda Berhasil Dikirim',
-                        okType: 'button-positive'
-                    });
+                    var refTugasSiswa = firebase.database(app).ref("tugasSiswa/" +$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/tugasperSiswa/'+ $scope.idPenggunaSiswa + "/" + $scope.formData.idTugas).update(JSON.parse(JSON.stringify({
+                        "jawabanTugas": $scope.formData.jawabanTugas,
+                        "tanggalKirimTugas": tanggalKirimTugas
+                    }))).then(function (resp) {
+                        $ionicPopup.alert({
+                            title: 'SUKSES',
+                            template: 'Jawaban Tugas Anda Berhasil Dikirim',
+                            okType: 'button-positive'
+                        });
+                    })
                 })
             }
         }
@@ -566,7 +576,6 @@ angular.module('app.tugasSiswa', [])
 
 
     }])
-
     .controller('uploadFileTugasCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', '$firebaseStorage', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter, $firebaseStorage) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
@@ -610,7 +619,7 @@ angular.module('app.tugasSiswa', [])
         }
 
         var uploader = document.getElementById("uploader");
-        var fileTugas = firebase.database(app).ref("tugasSiswa/"+$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/'+ $scope.formData.idTugas + "/fileSiswa");
+        var fileTugas = firebase.database(app).ref("tugasSiswa/"+$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/tugasperSiswa/'+ $scope.idPenggunaSiswa + "/" + $scope.formData.idTugas + "/fileSiswa");
         var listFileTugas = $firebaseArray(fileTugas);
         $ionicLoading.show();
         listFileTugas.$loaded().then(function (response) {
@@ -618,6 +627,15 @@ angular.module('app.tugasSiswa', [])
             $scope.fileTugasSiswa = response;
             $scope.banyakFile = response.length;
         });
+
+        // var fileTugas = firebase.database(app).ref("tugasSiswa/"+$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/tugasperSiswa/'+ $scope.idPenggunaSiswa + "/" + $scope.formData.idTugas + "/fileSiswa");
+        // var listFileTugas = $firebaseArray(fileTugas);
+        // $ionicLoading.show();
+        // listFileTugas.$loaded().then(function (response) {
+        //     $ionicLoading.hide();
+        //     $scope.fileTugasSiswa = response;
+        //     $scope.banyakFile = response.length;
+        // });
 
         $scope.selectFile = function (files) {
             $scope.filelist = files;
@@ -649,18 +667,26 @@ angular.module('app.tugasSiswa', [])
                             $scope.showImage = snapshot.downloadURL;
                             // console.log(snapshot);
                             // console.log(snapshot.downloadURL);
-                            var refAddFoto = firebase.database(app).ref("tugasSiswa/" +$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/'+  $scope.formData.idTugas + "/fileSiswa");
+                            var refAddFoto = firebase.database(app).ref("tugasSiswa/"+$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/tugasperSiswa/'+ $scope.idPenggunaSiswa + "/" + $scope.formData.idTugas + "/fileSiswa");
                             refAddFoto.push({
                                 "fotoURL": $scope.showImage,
                                 "namaFile": snapshot.metadata.name
                             }).then(function (response) {
-                                $ionicLoading.hide();
-                                //console.log(response);
-                                return true;
-                            }).then(function (error) {
+                                console.log(response.key)
+                                var refAddFoto2 = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + '/' + $scope.formData.idMapel + '/dataTugas/' + $scope.formData.idTugas + "/" + $scope.formData.idTugas + $scope.idPenggunaSiswa + "/fileSiswa/" + response.key);
+                                refAddFoto2.set({
+                                    "fotoURL": $scope.showImage,
+                                    "namaFile": snapshot.metadata.name
+                                }).then(function (response) {
+                                    $ionicLoading.hide();
+                                    //console.log(response);
+                                    return true;
+                                })
+                                // return true;
+                            }).catch(function (error) {
                                 console.log(error);
                             });
-
+                            
                         })
 
                     }
@@ -679,12 +705,20 @@ angular.module('app.tugasSiswa', [])
         };
 
         $scope.hapusFile = function (fileSiswa) {
-            // console.log(fileSiswa);
-            var fileTugas = firebase.database(app).ref("tugasSiswa/" +$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/'+ $scope.formData.idTugas + "/fileSiswa/" + fileSiswa.$id);
+            console.log(fileSiswa);
+            var fileTugas = firebase.database(app).ref("tugasSiswa/"+$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/tugasperSiswa/'+ $scope.idPenggunaSiswa + "/" + $scope.formData.idTugas + "/fileSiswa/" + fileSiswa.$id);
             var objDelete = $firebaseObject(fileTugas);
             objDelete.$remove().then(function (resp) {
                 console.log("deleted")
             })
+
+            var fileTugas2 = firebase.database(app).ref("tugasSiswa/"+$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/dataTugas/'+ $scope.formData.idTugas + "/" + $scope.formData.idTugas + $scope.idPenggunaSiswa + "/fileSiswa/" + fileSiswa.$id);
+            var objDelete2 = $firebaseObject(fileTugas2);
+            objDelete2.$remove().then(function (resp) {
+                console.log("deleted 2")
+                console.log("tugasSiswa/"+$scope.formData.idKelas +'/'+$scope.formData.idMapel +'/dataTugas/'+ $scope.formData.idTugas + "/" + $scope.formData.idTugas + $scope.idPenggunaSiswa + "/fileSiswa/" + fileSiswa.$id);
+            })
+
             var storageRef = firebase.storage(app).ref("tugasSiswa/" + $scope.formData.idTugas + "/" + $scope.idPenggunaSiswa + "/" + fileSiswa.namaFile);
             $scope.storage = $firebaseStorage(storageRef);
             $scope.storage.$delete().then(function () {
@@ -693,7 +727,6 @@ angular.module('app.tugasSiswa', [])
         }
 
     }])
-
     .controller('tugasSiswaDiskusiCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', '$firebaseStorage', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter, $firebaseStorage) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
@@ -816,3 +849,21 @@ angular.module('app.tugasSiswa', [])
            
         }
     }])
+
+
+
+    // firebase.database().ref('artikel').push({
+    //     artikel_judul: $scope.form.judul,
+    //     artikel_isi: $scope.form.isi,
+    //     artikel_tglUpload: tanggal,
+    // }).then(function (snap) {
+    //     // location.reload();
+
+    //     // File Gambar
+    //     var storageRef = firebase.storage().ref('artikel/' + snap.key + '/gambar1');;
+    //     var storage = $firebaseStorage(storageRef);
+    //     var file = document.querySelector("#artikel_gambar1").files[0];
+
+    //     var metadata = {
+    //         contentType: file.type
+    //     }

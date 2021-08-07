@@ -1,13 +1,13 @@
-<ion-view title="Jadwal Pelajaran Per Kecamatan" id="jadwalPelajaranAdmin" class="latar">
+<ion-view title="{{data.namaKecamatan}}" id="absensiSiswaAdmin" class="latar">
     <ion-content padding="false" class="has-header">
         <div class="row responsive-md" style="margin: auto;">
             <div class="col col-50 col-offset-25">
                 <ion-list id="jadwalPelajaran-list19">
-                    <ion-item class="item-avatar" ng-repeat="(x, y) in jadwalPerKecamatan" ng-click="getData(x,y)">
+                    <ion-item class="item-avatar" ng-repeat="(x, y) in absensiPerSekolah" ng-click="getData(x,y)">
                         <img src="https://image.flaticon.com/icons/svg/305/305139.svg">
                         <h2 style="text-transform: capitalize;">{{x}}</h2>
                         <p>
-                            <b style="color:green">{{y.length}} Guru</b> membuat Jadwal Pelajaran
+                            <b style="color:green">{{y.length}}</b> Data Absensi
                         </p>
                     </ion-item>
                 </ion-list>

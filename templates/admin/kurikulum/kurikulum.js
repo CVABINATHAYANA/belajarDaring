@@ -33,7 +33,8 @@ angular.module('app.kurikulumAdmin', [])
         $scope.tambah = function () {
             $state.go("menuAdmin.jadwalPelajaranTambahAdmin");
         }
-        var dataKecamatan = firebase.database().ref("groupJadwalPelajaranGuru").orderByChild("idKotaKabupaten").equalTo("id-buleleng");
+        var appJadwalPelajaranGuru = appJadwalPelajaran;
+        var dataKecamatan = firebase.database(appJadwalPelajaranGuru).ref("groupJadwalPelajaranGuru").orderByChild("idKotaKabupaten").equalTo("id-buleleng");
         var listDataKecamatan = $firebaseArray(dataKecamatan);
         listDataKecamatan.$loaded().then(function(response){
             $scope.groupKecamatan = response;
@@ -108,7 +109,8 @@ angular.module('app.kurikulumAdmin', [])
             "jumlahGuru":$stateParams.jumlahGuru,
         }
 
-        var dataSekolah = firebase.database().ref("groupJadwalPelajaranGuru").orderByChild("idKecamatan").equalTo($scope.data.idKecamatan);
+        var appJadwalPelajaranGuru = appJadwalPelajaran;
+        var dataSekolah = firebase.database(appJadwalPelajaranGuru).ref("groupJadwalPelajaranGuru").orderByChild("idKecamatan").equalTo($scope.data.idKecamatan);
         var listDataSekolah = $firebaseArray(dataSekolah);
         listDataSekolah.$loaded().then(function(response){
             $scope.groupSekolah= response;
@@ -163,7 +165,8 @@ angular.module('app.kurikulumAdmin', [])
             "namaSekolah": $stateParams.namaSekolah,
         }
 
-        var dataJadwalPelajaranPerGuru = firebase.database().ref("groupJadwalPelajaranGuru").orderByChild("idSekolah").equalTo($scope.data.idSekolah);
+        var appJadwalPelajaranGuru = appJadwalPelajaran;
+        var dataJadwalPelajaranPerGuru = firebase.database(appJadwalPelajaranGuru).ref("groupJadwalPelajaranGuru").orderByChild("idSekolah").equalTo($scope.data.idSekolah);
         var listDataJadwalPelajaranPerGuru = $firebaseArray(dataJadwalPelajaranPerGuru);
         listDataJadwalPelajaranPerGuru.$loaded().then(function(response){
             $scope.jadwalPerGuru= response;
@@ -220,8 +223,9 @@ angular.module('app.kurikulumAdmin', [])
                 return groups
             }, {})
         }
-
-        var ref = firebase.database().ref("jadwalPelajaran").orderByChild("filterGuru").equalTo($scope.data.filterGuru);
+        
+        var appJadwalPelajaranGuru = appJadwalPelajaran;
+        var ref = firebase.database(appJadwalPelajaranGuru).ref("jadwalPelajaran").orderByChild("filterGuru").equalTo($scope.data.filterGuru);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
@@ -656,7 +660,8 @@ angular.module('app.kurikulumAdmin', [])
             "tahunAjaran": $stateParams.tahunAjaran
         }
 
-        var ref = firebase.database().ref("jadwalPelajaran").orderByChild("filterGuruHari").equalTo($scope.data.filterGuru + "_" + $scope.data.hari);
+        var appJadwalPelajaranGuru = appJadwalPelajaran;
+        var ref = firebase.database(appJadwalPelajaranGuru).ref("jadwalPelajaran").orderByChild("filterGuruHari").equalTo($scope.data.filterGuru + "_" + $scope.data.hari);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {

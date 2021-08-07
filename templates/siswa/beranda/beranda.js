@@ -520,7 +520,7 @@ angular.module('app.berandaSiswa', [])
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah');
 
         if ($scope.idSekolahSiswa === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
-        console.log(app, $scope.kodeSekolah)
+        console.log(app,$scope.idSekolahSiswa)
 
         if (!$scope.idPenggunaSiswa) {
             $state.go('welcome');
@@ -556,6 +556,7 @@ angular.module('app.berandaSiswa', [])
             })
         }
 
+        console.log('CEK ID:' , $scope.idPenggunaSiswa);
         // var versiAplikasiUser = "0.0.1";
         // // VERSI APLIKASI
         // var versiAplikasi = firebase.database().ref("versiAplikasi/1");
@@ -607,7 +608,7 @@ angular.module('app.berandaSiswa', [])
         ref.on('value', function (snapshot) {
             $ionicLoading.hide();
             $scope.formData = snapshot.val();
-            console.log(snapshot.val())
+            console.log('TES',snapshot.val())
             $scope.ijinkanPenggunaanAplikasi = snapshot.val().ijinkanPenggunaanAplikasi;
         });
 

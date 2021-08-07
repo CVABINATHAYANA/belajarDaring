@@ -738,11 +738,39 @@ angular.module('app.routes', [])
         }
       })
 
-      .state('menuAdmin.absensiSiswaAdmin', {
-        url: '/absensiSiswaAdmin',
+      .state('menuAdmin.absensiSiswaPerSekolahAdmin', {
+        url: '/absensiSiswaPerSekolahAdmin',
+        params: {
+          idKecamatan: "",
+          namaKecamatan: "",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/absensi/siswa/absensiSiswaPerSekolah.html',
+            controller: 'absensiSiswaPerSekolahAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.absensiSiswaPerHariAdmin', {
+        url: '/absensiSiswaPerHariAdmin',
         params: {
           idSekolah: "",
           namaSekolah: "",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/absensi/siswa/absensiSiswaPerHari.html',
+            controller: 'absensiSiswaPerHariAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.absensiSiswaAdmin', {
+        url: '/absensiSiswaAdmin',
+        params: {
+          tanggal: "",
+          idSekolah: "",
         },
         views: {
           'menuAdmin': {
@@ -764,6 +792,7 @@ angular.module('app.routes', [])
         url: '/absensiSiswaLihatAdmin',
         params: {
           groupAbsensi: '',
+          idSekolah:'',
         },
         views: {
           'menuAdmin': {
@@ -795,6 +824,21 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuAdmin.tugasSiswaPerSekolahAdmin', {
+        url: '/tugasSiswaPerSekolahAdmin',
+        params: {
+          namaKecamatan: '',
+          idKecamatan:'',
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/tugas/siswa/tugasSiswaPerSekolah.html',
+            controller: 'tugasSiswaPerSekolahAdminCtrl'
+          }
+        }
+      })
+
       .state('menuAdmin.tugasSiswaAdmin', {
         url: '/tugasSiswaAdmin',
         params: {
@@ -809,6 +853,21 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuAdmin.tugasSiswaListAdmin', {
+        url: '/tugasSiswaAdmin',
+        params: {
+          tanggal: '',
+          idSekolah:'',
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/tugas/siswa/tugasSiswaList.html',
+            controller: 'tugasSiswaListAdminCtrl'
+          }
+        }
+      })
+
       .state('menuAdmin.tugasSiswaTambahAdmin', {
         url: '/tugasSiswaTambahAdmin',
         views: {
@@ -4824,6 +4883,7 @@ angular.module('app.routes', [])
         url: '/LihatJawabanTugasSiswa',
         params: {
           idTugas: '',
+          idSiswa: '',
           groupTugas: '',
           namaSiswa: '',
           namaKecamatan: '',
@@ -4845,6 +4905,7 @@ angular.module('app.routes', [])
 
           idKelas: '',
           idMapel: '',
+          idGroupTugas: '',
         },
         views: {
           'menuGuru': {
@@ -7141,6 +7202,10 @@ angular.module('app.routes', [])
       //Data Absensi Siswa Sekolah
       .state('menuSekolah.absensiSiswaSekolah', {
         url: '/absensiSiswaSekolah',
+        params: {
+          tanggal: '',
+          jumlah_absensi: '',
+        },
         views: {
           'menuSekolah': {
             templateUrl: 'templates/sekolah/absensi/siswa/absensiSiswa.html',
@@ -7148,6 +7213,18 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuSekolah.absensiSiswaPerHariSekolah', {
+        url: '/absensiSiswaPerHariSekolah',
+        views: {
+          'menuSekolah': {
+            templateUrl: 'templates/sekolah/absensi/siswa/absensiSiswaPerHari.html',
+            controller: 'absensiSiswaSekolahPerHariCtrl'
+          }
+        }
+      })
+
+      
       .state('menuSekolah.absensiSiswaTambahSekolah', {
         url: '/absensiSiswaTambahSekolah',
         views: {
@@ -7192,6 +7269,20 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuSekolah.tugasSiswaListSekolah', {
+        url: '/tugasSiswaListSekolah',
+        params: {
+          tanggal: '',
+        },
+        views: {
+          'menuSekolah': {
+            templateUrl: 'templates/sekolah/tugas/siswa/tugasSiswaList.html',
+            controller: 'tugasSiswaListSekolahCtrl'
+          }
+        }
+      })
+
       .state('menuSekolah.tugasSiswaTambahSekolah', {
         url: '/tugasSiswaTambahSekolah',
         views: {

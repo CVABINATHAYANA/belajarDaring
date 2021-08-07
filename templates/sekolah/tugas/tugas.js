@@ -30,6 +30,194 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
             });
         }
 
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+
+        // var ref = firebase.database().ref("tugasSiswa").orderByChild("idSekolah").equalTo($scope.idSekolah);
+        // var listRef = $firebaseArray(ref);
+        // $ionicLoading.show();
+        // listRef.$loaded().then(function (response) {
+        //     $ionicLoading.hide();
+        //     $scope.dataTugasSiswa = response
+        //     $scope.tugasSiswa = $scope.dataTugasSiswa.groupBy('groupTugas');
+        //     // console.log($scope.absensiSiswa)
+        // });
+
+        index = 0;
+        var ref = firebase.database(app).ref("groupTugasSiswa").orderByChild("idSekolah").equalTo($scope.idSekolah);
+        var listRef = $firebaseArray(ref);
+        $ionicLoading.show();
+        listRef.$loaded().then(function (response) {
+            $scope.tugasSiswaGrup = response
+            $scope.tugasSiswa = $scope.tugasSiswaGrup.groupBy('tanggalTugas');
+            console.log($scope.tugasSiswa)
+
+            for (let i = 0; i < response.length; i++) {
+                index = index + 1;
+                console.log(index);
+                console.log(response[i].$id);
+                var groupTugasSiswa = firebase.database().ref("groupTugasSiswa/"+response[i].$id);
+                groupTugasSiswa.set({
+                    "groupTugas": response[i].groupTugas,
+                    "idKecamatan": response[i].idKecamatan,
+                    "idKotaKabupaten": response[i].idKotaKabupaten,
+                    "idSekolah": response[i].idSekolah,
+                    "namaKecamatan": response[i].namaKecamatan,
+                    "namaSekolah": response[i].namaSekolah,
+                }).then(function (ok) {
+                    console.log('Ok')
+                })
+
+            }
+        }).then(function (response) {
+            $ionicLoading.hide();
+        });
+
+        $scope.getData = function (x , y) {
+            $state.go("menuSekolah.tugasSiswaListSekolah", {
+                "tanggal": x,
+            })
+        }
+
+        // $scope.getData = function (data) {
+
+        //     $ionicActionSheet.show({
+        //         titleText: 'Data Tugas : ' + data.groupTugas,
+        //         buttons: [
+        //             { text: '<i class="icon ion-edit"></i> Edit Tugas ' },
+        //             { text: '<i class="icon ion-social-buffer"></i> Lihat Tugas' },
+        //         ],
+        //         destructiveText: '<i class="icon ion-trash-b"></i> Hapus Tugas',
+        //         cancelText: 'Cancel',
+        //         cancel: function () {
+        //             //console.log('CANCELLED');
+        //         },
+        //         buttonClicked: function (index) {
+        //             if (index === 0) {
+        //                 $ionicPopup.alert({
+        //                     title: 'Perhatian',
+        //                     template: 'Maaf, Untuk saat ini hanya guru saja yang boleh mengedit tugas. Terima Kasih',
+        //                     okType: 'button-balanced'
+        //                 });
+        //                 // $state.go("menuSekolah.tugasSiswaEditSekolah", {
+        //                 //     "groupTugas": data.groupTugas
+        //                 // })
+        //             }
+        //             if (index === 1) {
+        //                 console.log(data.groupTugas);
+        //                 $state.go("menuSekolah.tugasSiswaLihatSekolah", {
+        //                     "idGroupTugasSiswa": data.$id,
+        //                     "groupTugas": data.groupTugas,
+        //                     "idKelas": data.idKelas,
+        //                     "idPelajaran": data.idPelajaran,
+        //                 })
+        //             }
+        //             return true;
+        //         },
+
+        //         destructiveButtonClicked: function () {
+        //             $ionicPopup.alert({
+        //                 title: 'Perhatian',
+        //                 template: 'Maaf, Untuk saat ini hanya guru saja yang boleh menghapus tugas. Terima Kasih',
+        //                 okType: 'button-balanced'
+        //             });
+        //             // if(data.idPembuat===$scope.idPenggunaSekolah){
+        //             //     var confirmPopup = $ionicPopup.confirm({
+        //             //         title: 'Hapus Data',
+        //             //         template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+        //             //         okType: "button-balanced",
+        //             //     });
+        //             //     confirmPopup.then(function (res) {
+        //             //         if (res) {
+        //             //             $ionicLoading.show();
+        //             //             var refObj = firebase.database(app).ref("tugasSiswa/").orderByChild("groupTugas").equalTo(data.groupTugas);
+        //             //             var objDelete = $firebaseArray(refObj);
+        //             //             objDelete.$loaded().then(function (response) {
+        //             //                 for (i = 0; i < response.length; i++) {
+        //             //                     var hapusData = firebase.database(app).ref("tugasSiswa/" + response[i].$id);
+        //             //                     var objDelete = $firebaseObject(hapusData);
+        //             //                     objDelete.$remove().then(function (ref) {
+        //             //                         $ionicLoading.hide();
+        //             //                         console.log('Data Berhasil Dihapus');
+        //             //                         // window.location.reload(true);
+                                            
+        //             //                     });
+        //             //                 }
+        //             //             })
+    
+        //             //             var objGroup = firebase.database(app).ref("groupTugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
+        //             //             var listObjGroup = $firebaseArray(objGroup);
+        //             //             listObjGroup.$loaded().then(function (hapus) {
+        //             //                 var id = hapus[0].$id;
+    
+        //             //                 var objHapus = firebase.database(app).ref("groupTugasSiswa/" + id);
+        //             //                 var objHapusData = $firebaseObject(objHapus);
+        //             //                 objHapusData.$remove().then(function (yes) {
+        //             //                     console.log("terhapus")
+        //             //                 })
+        //             //             })
+    
+        //             //         }
+        //             //         else {
+        //             //             //console.log('Tidak Jadi Menghapus');
+        //             //         }
+        //             //     });
+        //             // }
+        //             // else{
+        //             //     $ionicPopup.alert({
+        //             //         title: 'Perhatian',
+        //             //         template: 'Maaf, Anda tidak diperkenankan untuk menghapus data ini, atau Anda harus masuk ke beranda guru yang bersangkutan jika ingin menghapus. Terima Kasih',
+        //             //         okType: 'button-balanced'
+        //             //     });
+        //             // }
+        //             return true;
+        //         }
+
+        //     });
+        // }
+
+    }])
+
+    .controller('tugasSiswaListSekolahCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+
+        $scope.idPenggunaSekolah = localStorage.getItem('idPenggunaSekolah');
+        $scope.idSekolah = localStorage.getItem('idSekolah');
+        $scope.namaPenggunaSekolah = localStorage.getItem('namaPenggunaSekolah');
+        $scope.jenjangSekolah = localStorage.getItem('jenjangSekolah');
+        $scope.namaSekolah = localStorage.getItem('namaSekolah');
+        $scope.uidSekolah = localStorage.getItem('uidSekolah');
+        $scope.idProvinsiSekolah = localStorage.getItem('idProvinsiSekolah');
+        $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
+        $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
+        $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
+
+        $scope.data = {
+            "tanggal": $stateParams.tanggal,
+        }
+
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
+
+        if (!$scope.idPenggunaSekolah) {
+            $state.go('welcome');
+        }
+
+        $scope.tambah = function () {
+            // $state.go("menuSekolah.tugasSiswaTambahSekolah");
+            $ionicPopup.alert({
+                title: 'Perhatian',
+                template: 'Maaf, Untuk saat ini hanya guru saja yang boleh membuat tugas. Terima Kasih',
+                okType: 'button-balanced'
+            });
+        }
+
         // Array.prototype.groupBy = function (prop) {
         //     return this.reduce(function (groups, item) {
         //         const val = item[prop]
@@ -48,14 +236,13 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
         //     $scope.tugasSiswa = $scope.dataTugasSiswa.groupBy('groupTugas');
         //     // console.log($scope.absensiSiswa)
         // });
-
-        var ref = firebase.database(app).ref("groupTugasSiswa").orderByChild("idSekolah").equalTo($scope.idSekolah);
+        var ref = firebase.database(app).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo($scope.data.tanggal);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
             $ionicLoading.hide();
             $scope.tugasSiswa = response
-            // $scope.tugasSiswa = $scope.dataTugasSiswa.groupBy('groupTugas');
+            // $scope.tugasSiswa = $scope.tugasSiswaGrup.groupBy('tanggalTugas');
             // console.log($scope.tugasSiswa)
         });
 
@@ -101,55 +288,6 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
                         template: 'Maaf, Untuk saat ini hanya guru saja yang boleh menghapus tugas. Terima Kasih',
                         okType: 'button-balanced'
                     });
-                    // if(data.idPembuat===$scope.idPenggunaSekolah){
-                    //     var confirmPopup = $ionicPopup.confirm({
-                    //         title: 'Hapus Data',
-                    //         template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-                    //         okType: "button-balanced",
-                    //     });
-                    //     confirmPopup.then(function (res) {
-                    //         if (res) {
-                    //             $ionicLoading.show();
-                    //             var refObj = firebase.database(app).ref("tugasSiswa/").orderByChild("groupTugas").equalTo(data.groupTugas);
-                    //             var objDelete = $firebaseArray(refObj);
-                    //             objDelete.$loaded().then(function (response) {
-                    //                 for (i = 0; i < response.length; i++) {
-                    //                     var hapusData = firebase.database(app).ref("tugasSiswa/" + response[i].$id);
-                    //                     var objDelete = $firebaseObject(hapusData);
-                    //                     objDelete.$remove().then(function (ref) {
-                    //                         $ionicLoading.hide();
-                    //                         console.log('Data Berhasil Dihapus');
-                    //                         // window.location.reload(true);
-                                            
-                    //                     });
-                    //                 }
-                    //             })
-    
-                    //             var objGroup = firebase.database(app).ref("groupTugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
-                    //             var listObjGroup = $firebaseArray(objGroup);
-                    //             listObjGroup.$loaded().then(function (hapus) {
-                    //                 var id = hapus[0].$id;
-    
-                    //                 var objHapus = firebase.database(app).ref("groupTugasSiswa/" + id);
-                    //                 var objHapusData = $firebaseObject(objHapus);
-                    //                 objHapusData.$remove().then(function (yes) {
-                    //                     console.log("terhapus")
-                    //                 })
-                    //             })
-    
-                    //         }
-                    //         else {
-                    //             //console.log('Tidak Jadi Menghapus');
-                    //         }
-                    //     });
-                    // }
-                    // else{
-                    //     $ionicPopup.alert({
-                    //         title: 'Perhatian',
-                    //         template: 'Maaf, Anda tidak diperkenankan untuk menghapus data ini, atau Anda harus masuk ke beranda guru yang bersangkutan jika ingin menghapus. Terima Kasih',
-                    //         okType: 'button-balanced'
-                    //     });
-                    // }
                     return true;
                 }
 

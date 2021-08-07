@@ -13,20 +13,76 @@ angular.module('app.tugasAdmin', ['ui.tinymce'])
             $state.go('welcome');
         }
 
-        var kecamatan = firebase.database().ref("kecamatan").orderByChild("id_kota_kabupaten").equalTo($scope.idKotaKabupaten);
-        var listKecamatan = $firebaseArray(kecamatan);
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+
+        var tugasPerKecamatan = firebase.database().ref("groupTugasSiswa").orderByChild("idKotaKabupaten").equalTo($scope.idKotaKabupaten);
+        var listTugasPerKecamatan = $firebaseArray(tugasPerKecamatan);
         $ionicLoading.show();
-        listKecamatan.$loaded().then(function (response) {
+        listTugasPerKecamatan.$loaded().then(function (response) {
             $ionicLoading.hide();
-            $scope.dataKecamatan = response;
+            $scope.dataTugasPerKecamatan = response;
+            $scope.listdataTugas = $scope.dataTugasPerKecamatan.groupBy('namaKecamatan');
+            console.log( $scope.listdataTugas);
+
         })
 
-        $scope.getData = function (data) {
-            console.log(data)
-            $state.go("menuAdmin.tugasSiswaAdmin", {
-                "namaKecamatan": data.nama_kecamatan
+        $scope.getData = function (x , y ) {
+            $state.go("menuAdmin.tugasSiswaPerSekolahAdmin", {
+                "namaKecamatan": x,
+                "idKecamatan": y[0].idKecamatan,
             })
         }
+
+    }])
+
+    .controller('tugasSiswaPerSekolahAdminCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+
+        $scope.idAdmin = localStorage.getItem('idAdmin');
+        $scope.namaAdmin = localStorage.getItem('namaAdmin');
+        $scope.emailAdmin = localStorage.getItem('emailAdmin');
+        $scope.hakAkses = localStorage.getItem('hakAkses');
+        $scope.uidAdmin = localStorage.getItem('uidAdmin');
+        $scope.idKotaKabupaten = localStorage.getItem('idKotaKabupaten');
+
+        if (!$scope.idAdmin) {
+            $state.go('welcome');
+        }
+
+        $scope.tambah = function () {
+            $state.go("menuAdmin.tugasSiswaTambahAdmin");
+        }
+
+        $scope.data = {
+            "namaKecamatan": $stateParams.namaKecamatan,
+            "idKecamatan": $stateParams.idKecamatan,
+        }
+
+
+        var tugasPerSekolah = firebase.database().ref("groupTugasSiswa").orderByChild("idKecamatan").equalTo($scope.data.idKecamatan);
+        var listTugasPerSekolah = $firebaseArray(tugasPerSekolah);
+        $ionicLoading.show();
+        listTugasPerSekolah.$loaded().then(function (response) {
+            $ionicLoading.hide();
+            $scope.dataTugasPerKecamatan = response;
+            $scope.listdataTugas = $scope.dataTugasPerKecamatan.groupBy('namaSekolah');
+            console.log( $scope.listdataTugas);
+
+        })
+
+        $scope.getData = function (x , y ) {
+            $state.go("menuAdmin.tugasSiswaAdmin", {
+                "namaSekolah": x,
+                "idSekolah": y[0].idSekolah,
+            })
+        }
+
 
     }])
 
@@ -48,758 +104,90 @@ angular.module('app.tugasAdmin', ['ui.tinymce'])
         }
 
         $scope.data = {
-            "namaKecamatan": $stateParams.namaKecamatan,
             "idSekolah": $stateParams.idSekolah,
             "namaSekolah": $stateParams.namaSekolah,
         }
-        console.log($scope.data.idSekolah)
 
-        var tanggal = $filter('date')(new Date(), 'yyyy-MM-dd');
+        console.log( $scope.data.idSekolah);
 
-        if ($scope.data.namaKecamatan === "Kec. Denpasar Barat") {
-            $scope.totalTugas = [];
-            var refTugas = firebase.database(appTugasDenpasarBarat).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo(tanggal);
-            var listRefTugas = $firebaseArray(refTugas);
-            listRefTugas.$loaded().then(function (response) {
-                for (i = 0; i < response.length; i++) {
-                    $scope.totalTugas.push({
-                        "id": response[i].$id
-                    })
-                }
-                $scope.banyakData = $scope.totalTugas.length
-            });
+        // LOADBALANCING
+        if ($scope.data.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.data.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
-            $scope.count = 0;
-            $scope.loadMore = function () {
-                var ref = firebase.database(appTugasDenpasarBarat).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo(tanggal).limitToLast($scope.count += 50);
-                var listRef = $firebaseArray(ref);
-                $ionicLoading.show();
-                listRef.$loaded().then(function (response) {
-                    $ionicLoading.hide();
-                    $scope.tugasSiswa = response
-                    // console.log($scope.tugasSiswa)
-                    console.log("inilahDatanya", $scope.count)
-                    // console.log($scope.banyakData);
-
-                    if ($scope.tugasSiswa.length === $scope.banyakData) {
-                        $scope.noMoreItemsAvailable = true;
-                        console.log("totalDataTerakhir", $scope.banyakData);
-                    }
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                });
-            }
-
-            $scope.getData = function (data) {
-                $ionicActionSheet.show({
-                    titleText: 'Data Tugas : ' + data.groupTugas,
-                    buttons: [
-                        { text: '<i class="icon ion-social-buffer"></i> Lihat Tugas' }
-                    ],
-                    destructiveText: '<i class="icon ion-trash-b"></i> Hapus Tugas',
-                    cancelText: 'Cancel',
-                    cancel: function () {
-                        //console.log('CANCELLED');
-                    },
-                    buttonClicked: function (index) {
-                        if (index === 0) {
-                            $state.go("menuAdmin.tugasSiswaLihatAdmin", {
-                                "groupTugas": data.groupTugas,
-                                "idGroupTugasSiswa": data.$id,
-                                "idGuru": data.idGuru,
-                                "namaKecamatan": data.namaKecamatan
-                            })
-                        }
-                        return true;
-                    },
-
-                    destructiveButtonClicked: function () {
-                        if ($scope.hakAkses === "Super Admin") {
-                            var confirmPopup = $ionicPopup.confirm({
-                                title: 'Hapus Data',
-                                template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-                                okType: "button-positive",
-                            });
-                            confirmPopup.then(function (res) {
-                                if (res) {
-                                    $ionicLoading.show();
-                                    var refObj = firebase.database(appTugasDenpasarBarat).ref("tugasSiswa/").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var objDelete = $firebaseArray(refObj);
-                                    objDelete.$loaded().then(function (response) {
-                                        for (i = 0; i < response.length; i++) {
-                                            var hapusData = firebase.database(appTugasDenpasarBarat).ref("tugasSiswa/" + response[i].$id);
-                                            var objDelete = $firebaseObject(hapusData);
-                                            objDelete.$remove().then(function (ref) {
-                                                $ionicLoading.hide();
-                                                console.log('Data Berhasil Dihapus');
-                                                // window.location.reload(true);
-                                            });
-                                        }
-                                    })
-
-                                    var objGroup = firebase.database(appTugasDenpasarBarat).ref("groupTugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var listObjGroup = $firebaseArray(objGroup);
-                                    listObjGroup.$loaded().then(function (hapus) {
-                                        var id = hapus[0].$id;
-
-                                        var objHapus = firebase.database(appTugasDenpasarBarat).ref("groupTugasSiswa/" + id);
-                                        var objHapusData = $firebaseObject(objHapus);
-                                        objHapusData.$remove().then(function (yes) {
-                                            $ionicLoading.hide();
-                                            console.log("terhapus")
-                                        })
-                                    })
-
-                                }
-                                else {
-                                    //console.log('Tidak Jadi Menghapus');
-                                }
-                            });
-                        }
-                        else {
-                            $ionicPopup.alert({
-                                title: 'Perhatian',
-                                template: 'Maaf, Anda tidak diperkenankan menghapus data ini, Terima Kasih',
-                                okType: 'button-positive'
-                            });
-                        }
-
-                        return true;
-                    }
-
-                });
-            }
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
         }
-        else if ($scope.data.namaKecamatan === "Kec. Denpasar Timur") {
-            $scope.totalTugas = [];
-            var refTugas = firebase.database(appTugasDenpasarTimur).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo(tanggal);
-            var listRefTugas = $firebaseArray(refTugas);
-            listRefTugas.$loaded().then(function (response) {
-                for (i = 0; i < response.length; i++) {
-                    $scope.totalTugas.push({
-                        "id": response[i].$id
-                    })
-                }
-                $scope.banyakData = $scope.totalTugas.length
-            });
+        var ref = firebase.database(app).ref("groupTugasSiswa").orderByChild("idSekolah").equalTo($scope.data.idSekolah);
+        var listRef = $firebaseArray(ref);
+        $ionicLoading.show();
+        listRef.$loaded().then(function (response) {
+            $ionicLoading.hide();
+            $scope.tugasSiswaGroup = response
+            $scope.tugasSiswa = $scope.tugasSiswaGroup.groupBy('tanggalTugas');
+            console.log($scope.tugasSiswa)
+        });
 
-            $scope.count = 0;
-            $scope.loadMore = function () {
-                var ref = firebase.database(appTugasDenpasarTimur).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo(tanggal).limitToLast($scope.count += 50);
-                var listRef = $firebaseArray(ref);
-                $ionicLoading.show();
-                listRef.$loaded().then(function (response) {
-                    $ionicLoading.hide();
-                    $scope.tugasSiswa = response
-                    // console.log($scope.tugasSiswa)
-                    console.log("inilahDatanya", $scope.count)
-                    // console.log($scope.banyakData);
-
-                    if ($scope.tugasSiswa.length === $scope.banyakData) {
-                        $scope.noMoreItemsAvailable = true;
-                        console.log("totalDataTerakhir", $scope.banyakData);
-                    }
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                });
-            }
-
-            $scope.getData = function (data) {
-                $ionicActionSheet.show({
-                    titleText: 'Data Tugas : ' + data.groupTugas,
-                    buttons: [
-                        { text: '<i class="icon ion-social-buffer"></i> Lihat Tugas' }
-                    ],
-                    destructiveText: '<i class="icon ion-trash-b"></i> Hapus Tugas',
-                    cancelText: 'Cancel',
-                    cancel: function () {
-                        //console.log('CANCELLED');
-                    },
-                    buttonClicked: function (index) {
-                        if (index === 0) {
-                            $state.go("menuAdmin.tugasSiswaLihatAdmin", {
-                                "groupTugas": data.groupTugas,
-                                "idGroupTugasSiswa": data.$id,
-                                "idGuru": data.idGuru,
-                                "namaKecamatan": data.namaKecamatan
-                            })
-                        }
-                        return true;
-                    },
-
-                    destructiveButtonClicked: function () {
-                        if ($scope.hakAkses === "Super Admin") {
-                            var confirmPopup = $ionicPopup.confirm({
-                                title: 'Hapus Data',
-                                template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-                                okType: "button-positive",
-                            });
-                            confirmPopup.then(function (res) {
-                                if (res) {
-                                    $ionicLoading.show();
-                                    var refObj = firebase.database(appTugasDenpasarTimur).ref("tugasSiswa/").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var objDelete = $firebaseArray(refObj);
-                                    objDelete.$loaded().then(function (response) {
-                                        for (i = 0; i < response.length; i++) {
-                                            var hapusData = firebase.database(appTugasDenpasarTimur).ref("tugasSiswa/" + response[i].$id);
-                                            var objDelete = $firebaseObject(hapusData);
-                                            objDelete.$remove().then(function (ref) {
-                                                $ionicLoading.hide();
-                                                console.log('Data Berhasil Dihapus');
-                                                // window.location.reload(true);
-                                            });
-                                        }
-                                    })
-
-                                    var objGroup = firebase.database(appTugasDenpasarTimur).ref("groupTugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var listObjGroup = $firebaseArray(objGroup);
-                                    listObjGroup.$loaded().then(function (hapus) {
-                                        var id = hapus[0].$id;
-
-                                        var objHapus = firebase.database(appTugasDenpasarTimur).ref("groupTugasSiswa/" + id);
-                                        var objHapusData = $firebaseObject(objHapus);
-                                        objHapusData.$remove().then(function (yes) {
-                                            $ionicLoading.hide();
-                                            console.log("terhapus")
-                                        })
-                                    })
-
-                                }
-                                else {
-                                    //console.log('Tidak Jadi Menghapus');
-                                }
-                            });
-                        }
-                        else {
-                            $ionicPopup.alert({
-                                title: 'Perhatian',
-                                template: 'Maaf, Anda tidak diperkenankan menghapus data ini, Terima Kasih',
-                                okType: 'button-positive'
-                            });
-                        }
-
-                        return true;
-                    }
-
-                });
-            }
-        }
-        else if ($scope.data.namaKecamatan === "Kec. Denpasar Utara") {
-            $scope.totalTugas = [];
-            var refTugas = firebase.database(appTugasDenpasarUtara).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo(tanggal);
-            var listRefTugas = $firebaseArray(refTugas);
-            listRefTugas.$loaded().then(function (response) {
-                for (i = 0; i < response.length; i++) {
-                    $scope.totalTugas.push({
-                        "id": response[i].$id
-                    })
-                }
-                $scope.banyakData = $scope.totalTugas.length
-            });
-
-            $scope.count = 0;
-            $scope.loadMore = function () {
-                var ref = firebase.database(appTugasDenpasarUtara).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo(tanggal).limitToLast($scope.count += 50);
-                var listRef = $firebaseArray(ref);
-                $ionicLoading.show();
-                listRef.$loaded().then(function (response) {
-                    $ionicLoading.hide();
-                    $scope.tugasSiswa = response
-                    // console.log($scope.tugasSiswa)
-                    console.log("inilahDatanya", $scope.count)
-                    // console.log($scope.banyakData);
-
-                    if ($scope.tugasSiswa.length === $scope.banyakData) {
-                        $scope.noMoreItemsAvailable = true;
-                        console.log("totalDataTerakhir", $scope.banyakData);
-                    }
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                });
-            }
-
-            $scope.getData = function (data) {
-                $ionicActionSheet.show({
-                    titleText: 'Data Tugas : ' + data.groupTugas,
-                    buttons: [
-                        { text: '<i class="icon ion-social-buffer"></i> Lihat Tugas' },
-                    ],
-                    destructiveText: '<i class="icon ion-trash-b"></i> Hapus Tugas',
-                    cancelText: 'Cancel',
-                    cancel: function () {
-                        //console.log('CANCELLED');
-                    },
-                    buttonClicked: function (index) {
-                        if (index === 0) {
-                            $state.go("menuAdmin.tugasSiswaLihatAdmin", {
-                                "groupTugas": data.groupTugas,
-                                "idGroupTugasSiswa": data.$id,
-                                "idGuru": data.idGuru,
-                                "namaKecamatan": data.namaKecamatan
-                            })
-                        }
-                        return true;
-                    },
-
-                    destructiveButtonClicked: function () {
-                        if ($scope.hakAkses === "Super Admin") {
-                            var confirmPopup = $ionicPopup.confirm({
-                                title: 'Hapus Data',
-                                template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-                                okType: "button-positive",
-                            });
-                            confirmPopup.then(function (res) {
-                                if (res) {
-                                    $ionicLoading.show();
-                                    var refObj = firebase.database(appTugasDenpasarUtara).ref("tugasSiswa/").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var objDelete = $firebaseArray(refObj);
-                                    objDelete.$loaded().then(function (response) {
-                                        for (i = 0; i < response.length; i++) {
-                                            var hapusData = firebase.database(appTugasDenpasarUtara).ref("tugasSiswa/" + response[i].$id);
-                                            var objDelete = $firebaseObject(hapusData);
-                                            objDelete.$remove().then(function (ref) {
-                                                $ionicLoading.hide();
-                                                console.log('Data Berhasil Dihapus');
-                                                // window.location.reload(true);
-                                            });
-                                        }
-                                    })
-
-                                    var objGroup = firebase.database(appTugasDenpasarUtara).ref("groupTugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var listObjGroup = $firebaseArray(objGroup);
-                                    listObjGroup.$loaded().then(function (hapus) {
-                                        var id = hapus[0].$id;
-
-                                        var objHapus = firebase.database(appTugasDenpasarUtara).ref("groupTugasSiswa/" + id);
-                                        var objHapusData = $firebaseObject(objHapus);
-                                        objHapusData.$remove().then(function (yes) {
-                                            $ionicLoading.hide();
-                                            console.log("terhapus")
-                                        })
-                                    })
-
-                                }
-                                else {
-                                    //console.log('Tidak Jadi Menghapus');
-                                }
-                            });
-                        }
-                        else {
-                            $ionicPopup.alert({
-                                title: 'Perhatian',
-                                template: 'Maaf, Anda tidak diperkenankan menghapus data ini, Terima Kasih',
-                                okType: 'button-positive'
-                            });
-                        }
-
-                        return true;
-                    }
-
-                });
-            }
-        }
-        else if ($scope.data.namaKecamatan === "Kec. Denpasar Selatan") {
-            $scope.totalTugas = [];
-            var refTugas = firebase.database(appTugasDenpasarSelatan).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo(tanggal);
-            var listRefTugas = $firebaseArray(refTugas);
-            listRefTugas.$loaded().then(function (response) {
-                for (i = 0; i < response.length; i++) {
-                    $scope.totalTugas.push({
-                        "id": response[i].$id
-                    })
-                }
-                $scope.banyakData = $scope.totalTugas.length
-            });
-
-            $scope.count = 0;
-            $scope.loadMore = function () {
-                var ref = firebase.database(appTugasDenpasarSelatan).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo(tanggal).limitToLast($scope.count += 50);
-                var listRef = $firebaseArray(ref);
-                $ionicLoading.show();
-                listRef.$loaded().then(function (response) {
-                    $ionicLoading.hide();
-                    $scope.tugasSiswa = response
-                    // console.log($scope.tugasSiswa)
-                    console.log("inilahDatanya", $scope.count)
-                    // console.log($scope.banyakData);
-
-                    if ($scope.tugasSiswa.length === $scope.banyakData) {
-                        $scope.noMoreItemsAvailable = true;
-                        console.log("totalDataTerakhir", $scope.banyakData);
-                    }
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                });
-            }
-
-            $scope.getData = function (data) {
-                $ionicActionSheet.show({
-                    titleText: 'Data Tugas : ' + data.groupTugas,
-                    buttons: [
-                        { text: '<i class="icon ion-social-buffer"></i> Lihat Tugas' },
-                    ],
-                    destructiveText: '<i class="icon ion-trash-b"></i> Hapus Tugas',
-                    cancelText: 'Cancel',
-                    cancel: function () {
-                        //console.log('CANCELLED');
-                    },
-                    buttonClicked: function (index) {
-                        if (index === 0) {
-                            $state.go("menuAdmin.tugasSiswaLihatAdmin", {
-                                "groupTugas": data.groupTugas,
-                                "idGroupTugasSiswa": data.$id,
-                                "idGuru": data.idGuru,
-                                "namaKecamatan": data.namaKecamatan
-                            })
-                        }
-                        return true;
-                    },
-
-                    destructiveButtonClicked: function () {
-                        if ($scope.hakAkses === "Super Admin") {
-                            var confirmPopup = $ionicPopup.confirm({
-                                title: 'Hapus Data',
-                                template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-                                okType: "button-positive",
-                            });
-                            confirmPopup.then(function (res) {
-                                if (res) {
-                                    $ionicLoading.show();
-                                    var refObj = firebase.database(appTugasDenpasarSelatan).ref("tugasSiswa/").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var objDelete = $firebaseArray(refObj);
-                                    objDelete.$loaded().then(function (response) {
-                                        for (i = 0; i < response.length; i++) {
-                                            var hapusData = firebase.database(appTugasDenpasarSelatan).ref("tugasSiswa/" + response[i].$id);
-                                            var objDelete = $firebaseObject(hapusData);
-                                            objDelete.$remove().then(function (ref) {
-                                                $ionicLoading.hide();
-                                                console.log('Data Berhasil Dihapus');
-                                                // window.location.reload(true);
-                                            });
-                                        }
-                                    })
-
-                                    var objGroup = firebase.database(appTugasDenpasarSelatan).ref("groupTugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var listObjGroup = $firebaseArray(objGroup);
-                                    listObjGroup.$loaded().then(function (hapus) {
-                                        var id = hapus[0].$id;
-
-                                        var objHapus = firebase.database(appTugasDenpasarSelatan).ref("groupTugasSiswa/" + id);
-                                        var objHapusData = $firebaseObject(objHapus);
-                                        objHapusData.$remove().then(function (yes) {
-                                            $ionicLoading.hide();
-                                            console.log("terhapus")
-                                        })
-                                    })
-
-                                }
-                                else {
-                                    //console.log('Tidak Jadi Menghapus');
-                                }
-                            });
-                        }
-                        else {
-                            $ionicPopup.alert({
-                                title: 'Perhatian',
-                                template: 'Maaf, Anda tidak diperkenankan menghapus data ini, Terima Kasih',
-                                okType: 'button-positive'
-                            });
-                        }
-
-                        return true;
-                    }
-
-                });
-            }
-        }
-        else {
-            $scope.totalTugas = [];
-            var refTugas = firebase.database().ref("groupTugasSiswa").orderByChild("idSekolah").equalTo($scope.data.idSekolah);
-            var listRefTugas = $firebaseArray(refTugas);
-            listRefTugas.$loaded().then(function (response) {
-                for (i = 0; i < response.length; i++) {
-                    $scope.totalTugas.push({
-                        "id": response[i].$id
-                    })
-                }
-                $scope.banyakData = $scope.totalTugas.length
-            });
-
-            $scope.count = 0;
-            $scope.loadMore = function () {
-                var ref = firebase.database().ref("groupTugasSiswa").orderByChild("idSekolah").equalTo($scope.data.idSekolah).limitToLast($scope.count += 500);
-                var listRef = $firebaseArray(ref);
-                $ionicLoading.show();
-                listRef.$loaded().then(function (response) {
-                    $ionicLoading.hide();
-                    $scope.tugasSiswa = response
-                    // console.log($scope.tugasSiswa)
-                    console.log("inilahDatanya", $scope.count)
-                    // console.log($scope.banyakData);
-
-                    if ($scope.tugasSiswa.length === $scope.banyakData) {
-                        $scope.noMoreItemsAvailable = true;
-                        console.log("totalDataTerakhir", $scope.banyakData);
-                    }
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                });
-            }
-
-            $scope.getData = function (data) {
-                // sconsole.log(data)
-                $ionicActionSheet.show({
-                    titleText: 'Data Tugas : ' + data.groupTugas,
-                    buttons: [
-                        { text: '<i class="icon ion-social-buffer"></i> Lihat Tugas' },
-                    ],
-                    destructiveText: '<i class="icon ion-trash-b"></i> Hapus Tugas',
-                    cancelText: 'Cancel',
-                    cancel: function () {
-                        //console.log('CANCELLED');
-                    },
-                    buttonClicked: function (index) {
-                        if (index === 0) {
-                            $state.go("menuAdmin.tugasSiswaLihatAdmin", {
-                                "groupTugas": data.groupTugas,
-                                "idGroupTugasSiswa": data.$id,
-                                "idGuru": data.idGuru,
-                                "namaKecamatan": data.namaKecamatan
-                            })
-                        }
-                        return true;
-                    },
-
-                    destructiveButtonClicked: function () {
-                        if ($scope.hakAkses === "Super Admin") {
-                            var confirmPopup = $ionicPopup.confirm({
-                                title: 'Hapus Data',
-                                template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-                                okType: "button-positive",
-                            });
-                            confirmPopup.then(function (res) {
-                                if (res) {
-                                    $ionicLoading.show();
-                                    var refObj = firebase.database(appTugas).ref("tugasSiswa/").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var objDelete = $firebaseArray(refObj);
-                                    objDelete.$loaded().then(function (response) {
-                                        for (i = 0; i < response.length; i++) {
-                                            var hapusData = firebase.database(appTugas).ref("tugasSiswa/" + response[i].$id);
-                                            var objDelete = $firebaseObject(hapusData);
-                                            objDelete.$remove().then(function (ref) {
-                                                $ionicLoading.hide();
-                                                console.log('Data Berhasil Dihapus');
-                                                // window.location.reload(true);
-                                            });
-                                        }
-                                    })
-
-                                    var objGroup = firebase.database(appTugas).ref("groupTugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
-                                    var listObjGroup = $firebaseArray(objGroup);
-                                    listObjGroup.$loaded().then(function (hapus) {
-                                        var id = hapus[0].$id;
-
-                                        var objHapus = firebase.database(appTugas).ref("groupTugasSiswa/" + id);
-                                        var objHapusData = $firebaseObject(objHapus);
-                                        objHapusData.$remove().then(function (yes) {
-                                            $ionicLoading.hide();
-                                            console.log("terhapus")
-                                        })
-                                    })
-
-                                }
-                                else {
-                                    //console.log('Tidak Jadi Menghapus');
-                                }
-                            });
-                        }
-                        else {
-                            $ionicPopup.alert({
-                                title: 'Perhatian',
-                                template: 'Maaf, Anda tidak diperkenankan menghapus data ini, Terima Kasih',
-                                okType: 'button-positive'
-                            });
-                        }
-
-                        return true;
-                    }
-
-                });
-            }
+        $scope.getData = function (x , y ) {
+            $state.go("menuAdmin.tugasSiswaListAdmin", {
+                "tanggal": x,
+                "idSekolah": y[0].idSekolah,
+            })
         }
 
 
+    }])
 
-        // $scope.getData = function (data) {
-        //     console.log(data);
-        //     //Cek Tugas Siswa
-        //     var cekTugasSiswa = firebase.database(appTugas).ref("tugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
-        //     var listCekTugasSiswa = $firebaseArray(cekTugasSiswa);
-        //     // $ionicLoading.show();
-        //     listCekTugasSiswa.$loaded().then(function (response) {
-        //         // $ionicLoading.hide();
-        //         console.log("iniDatanya", response);
-        //         for (i = 0; i < response.length; i++) {
-        //             if (response[i].idPembuat !== undefined) {
-        //                 var idPembuat = response[i].idPembuat;
-        //             }
-        //             else {
-        //                 var idPembuat = "";
-        //             }
-        //             if (response[i].tanggalPengumpulanTugas !== undefined) {
-        //                 var tanggalPengumpulanTugas = response[i].tanggalPengumpulanTugas
-        //             }
-        //             else {
-        //                 var tanggalPengumpulanTugas = "";
-        //             }
-        //             if (response[i].jawabanTugas !== undefined) {
-        //                 var jawabanTugas = response[i].jawabanTugas;
-        //             }
-        //             else {
-        //                 var jawabanTugas = "";
-        //             }
-        //             if (response[i].tanggalKirimTugas !== undefined) {
-        //                 var tanggalKirimTugas = response[i].tanggalKirimTugas;
-        //             }
-        //             else {
-        //                 var tanggalKirimTugas = "";
-        //             }
-        //             if (response[i].nilaiTugasSiswa !== undefined) {
-        //                 var nilaiTugasSiswa = response[i].nilaiTugasSiswa;
-        //             }
-        //             else {
-        //                 var nilaiTugasSiswa = ""
-        //             }
-        //             if(response[i].namaKecamatan==="Kec. Denpasar Barat"){
-        //                 var insertTugas = firebase.database(appTugasDenpasarBarat).ref("tugasSiswa")
-        //             }
-        //             else if(response[i].namaKecamatan==="Kec. Denpasar Utara"){
-        //                 var insertTugas = firebase.database(appTugasDenpasarUtara).ref("tugasSiswa")
-        //             }
-        //             else if(response[i].namaKecamatan==="Kec. Denpasar Selatan"){
-        //                 var insertTugas = firebase.database(appTugasDenpasarSelatan).ref("tugasSiswa")
-        //             }
-        //             insertTugas.push({
-        //                 dibaca: response[i].dibaca,
-        //                 groupTugas: response[i].groupTugas,
-        //                 hariTugas: response[i].hariTugas,
-        //                 idGuru: response[i].idGuru,
-        //                 idKecamatan: response[i].idKecamatan,
-        //                 idKelas: response[i].idKelas,
-        //                 idKotaKabupaten: response[i].idKotaKabupaten,
-        //                 idPelajaran: response[i].idPelajaran,
-        //                 idPembuat: idPembuat,
-        //                 idProvinsi: response[i].idProvinsi,
-        //                 idSekolah: response[i].idSekolah,
-        //                 idSemester: response[i].idSemester,
-        //                 idSiswa: response[i].idSiswa,
-        //                 idTahunAjaran: response[i].idTahunAjaran,
-        //                 isiTugas: response[i].isiTugas,
-        //                 jamTugas: response[i].jamTugas,
-        //                 jenjang: response[i].jenjang,
-        //                 kirimTugas: response[i].kirimTugas,
-        //                 namaGuru: response[i].namaGuru,
-        //                 namaKecamatan: response[i].namaKecamatan,
-        //                 namaKelas: response[i].namaKelas,
-        //                 namaKotaKabupaten: response[i].namaKotaKabupaten,
-        //                 namaProvinsi: response[i].namaProvinsi,
-        //                 namaSekolah: response[i].namaSekolah,
-        //                 namaSiswa: response[i].namaSiswa,
-        //                 pelajaran: response[i].pelajaran,
-        //                 semester: response[i].semester,
-        //                 tahunAjaran: response[i].tahunAjaran,
-        //                 tanggalPengumpulanTugas: tanggalPengumpulanTugas,
-        //                 tanggalTugas: response[i].tanggalTugas,
-        //                 jawabanTugas: jawabanTugas,
-        //                 tanggalKirimTugas: tanggalKirimTugas,
-        //                 nilaiTugasSiswa: nilaiTugasSiswa
-        //             }).then(function (resp) {
-        //                 // $ionicLoading.hide();
-        //                 console.log('Tugas Berhasil Dibuat')
-        //             })
-        //         }
-        //     })
-        //     // $ionicActionSheet.show({
-        //     //     titleText: 'Data Tugas : ' + data.groupTugas,
-        //     //     buttons: [
-        //     //         { text: '<i class="icon ion-edit"></i> Edit Tugas ' },
-        //     //         { text: '<i class="icon ion-social-buffer"></i> Lihat Tugas' },
-        //     //         { text: '<i class="icon ion-social-buffer"></i> Import Tugas' },
-        //     //     ],
-        //     //     destructiveText: '<i class="icon ion-trash-b"></i> Hapus Tugas',
-        //     //     cancelText: 'Cancel',
-        //     //     cancel: function () {
-        //     //         //console.log('CANCELLED');
-        //     //     },
-        //     //     buttonClicked: function (index) {
-        //     //         if (index === 0) {
-        //     //             $state.go("menuAdmin.tugasSiswaEditAdmin", {
-        //     //                 "groupTugas": data.groupTugas
-        //     //             })
-        //     //         }
-        //     //         if (index === 1) {
-        //     //             $state.go("menuAdmin.tugasSiswaLihatAdmin", {
-        //     //                 "groupTugas": data.groupTugas
-        //     //             })
-        //     //         }
-        //     //         if (index === 2) {
+    .controller('tugasSiswaListAdminCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
+        $scope.idAdmin = localStorage.getItem('idAdmin');
+        $scope.namaAdmin = localStorage.getItem('namaAdmin');
+        $scope.emailAdmin = localStorage.getItem('emailAdmin');
+        $scope.hakAkses = localStorage.getItem('hakAkses');
+        $scope.uidAdmin = localStorage.getItem('uidAdmin');
+        $scope.idKotaKabupaten = localStorage.getItem('idKotaKabupaten');
 
+        if (!$scope.idAdmin) {
+            $state.go('welcome');
+        }
 
-        //     //         }
-        //     //         return true;
-        //     //     },
+        $scope.tambah = function () {
+            $state.go("menuAdmin.tugasSiswaTambahAdmin");
+        }
 
-        //     //     destructiveButtonClicked: function () {
-        //     //         if ($scope.hakAkses === "Super Admin") {
-        //     //             var confirmPopup = $ionicPopup.confirm({
-        //     //                 title: 'Hapus Data',
-        //     //                 template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-        //     //                 okType: "button-positive",
-        //     //             });
-        //     //             confirmPopup.then(function (res) {
-        //     //                 if (res) {
-        //     //                     $ionicLoading.show();
-        //     //                     var refObj = firebase.database(appTugas).ref("tugasSiswa/").orderByChild("groupTugas").equalTo(data.groupTugas);
-        //     //                     var objDelete = $firebaseArray(refObj);
-        //     //                     objDelete.$loaded().then(function (response) {
-        //     //                         for (i = 0; i < response.length; i++) {
-        //     //                             var hapusData = firebase.database(appTugas).ref("tugasSiswa/" + response[i].$id);
-        //     //                             var objDelete = $firebaseObject(hapusData);
-        //     //                             objDelete.$remove().then(function (ref) {
-        //     //                                 $ionicLoading.hide();
-        //     //                                 console.log('Data Berhasil Dihapus');
-        //     //                                 // window.location.reload(true);
-        //     //                             });
-        //     //                         }
-        //     //                     })
+        $scope.data = {
+            "tanggal": $stateParams.tanggal,
+            "idSekolah": $stateParams.idSekolah,
+        }
 
-        //     //                     var objGroup = firebase.database(appTugas).ref("groupTugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
-        //     //                     var listObjGroup = $firebaseArray(objGroup);
-        //     //                     listObjGroup.$loaded().then(function (hapus) {
-        //     //                         var id = hapus[0].$id;
+        console.log( $scope.data.idSekolah);
 
-        //     //                         var objHapus = firebase.database(appTugas).ref("groupTugasSiswa/" + id);
-        //     //                         var objHapusData = $firebaseObject(objHapus);
-        //     //                         objHapusData.$remove().then(function (yes) {
-        //     //                             console.log("terhapus")
-        //     //                         })
-        //     //                     })
+        // LOADBALANCING
+        if ($scope.data.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.data.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
-        //     //                 }
-        //     //                 else {
-        //     //                     //console.log('Tidak Jadi Menghapus');
-        //     //                 }
-        //     //             });
-        //     //         }
-        //     //         else {
-        //     //             $ionicPopup.alert({
-        //     //                 title: 'Perhatian',
-        //     //                 template: 'Maaf, Anda tidak diperkenankan menghapus data ini, Terima Kasih',
-        //     //                 okType: 'button-positive'
-        //     //             });
-        //     //         }
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+        var ref = firebase.database(app).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo($scope.data.tanggal);
+        var listRef = $firebaseArray(ref);
+        $ionicLoading.show();
+        listRef.$loaded().then(function (response) {
+            $ionicLoading.hide();
+            $scope.tugasSiswa= response
+            // $scope.tugasSiswa = $scope.tugasSiswaGroup.groupBy('');
+            // console.log($scope.tugasSiswa)
+        });
 
-        //     //         return true;
-        //     //     }
-
-        //     // });
-        // }
 
     }])
 

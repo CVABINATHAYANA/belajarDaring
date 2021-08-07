@@ -10,7 +10,7 @@
                     <input type="search" placeholder="Cari Data" ng-model="searchData">
                 </label>
                 <ion-list id="absensiSiswa-list19">
-                    <ion-item id="absensiSiswa-list-item43" ng-repeat="data in absensiSiswa | orderBy:'-groupAbsensi' | filter:searchData" ng-click="getData(data)" class="item-avatar">
+                    <ion-item id="absensiSiswa-list-item43" ng-repeat="data in absensiSiswa" ng-click="getData(data)" class="item-avatar">
                         <!-- <p><b style="color: green;">{{$index+1}}. {{data.namaGuru}}</b><br>
                             <span style="color:orange">{{data.namaSekolah}}</span><br>
                             <em>
@@ -35,15 +35,15 @@
                         </p>
                     </ion-item>
                 </ion-list>
-
+<!-- 
                 <ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="!noMoreItemsAvailable">
-                </ion-infinite-scroll>
+                </ion-infinite-scroll> -->
             </div>
         </div>
     </ion-content>
-    <ion-footer-bar align-title="left" class="bar-dark">
+    <!-- <ion-footer-bar align-title="left" class="bar-dark">
         <button class="button button-clear pull-left">Data</button>
         <button class="button button-clear pull-right">Total :
             <strong>{{banyakData}}</strong> Guru Telah Mengabsen</button>
-    </ion-footer-bar>
+    </ion-footer-bar> -->
 </ion-view>

@@ -25,6 +25,8 @@ angular.module('app.kurikulumSekolah', [])
             $state.go("menuSekolah.jadwalPelajaranTambahSekolah");
         }
 
+        var appJadwalPelajaranGuru = appJadwalPelajaran;
+
         // Array.prototype.groupBy = function (prop) {
         //     return this.reduce(function (groups, item) {
         //         const val = item[prop]
@@ -44,7 +46,7 @@ angular.module('app.kurikulumSekolah', [])
         //     $scope.jadwalPelajaran = $scope.jadwal.groupBy('filterGuru');
         //     console.log($scope.jadwalPelajaran)
         // });
-        
+        var index = 0;
         var ref = firebase.database(app).ref("groupJadwalPelajaranGuru").orderByChild("idSekolah").equalTo($scope.idSekolah);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
@@ -53,9 +55,85 @@ angular.module('app.kurikulumSekolah', [])
             $scope.jadwalPelajaran = response;
             // $scope.jadwalPelajaran = response;
             // $scope.jadwalPelajaran = $scope.jadwal.groupBy('filterGuru');
-            // console.log($scope.jadwalPelajaran)
+            console.log(response);
+            // for (let i = 0; i < response.length; i++) {
+            //     index = index + 1;
+            //     console.log(index);
+            //     console.log(response[i].$id);
+            //     var groupAbsensiSiswa = firebase.database(appJadwalPelajaranGuru).ref("groupJadwalPelajaranGuru/"+response[i].$id);
+            //     groupAbsensiSiswa.set({
+            //     "filterGuru":response[i].filterGuru,
+            //     "idGuru":response[i].idGuru,
+            //     "idKecamatan":response[i].idKecamatan,
+            //     "idKotaKabupaten":response[i].idKotaKabupaten,
+            //     "idPembuat":response[i].idPembuat,
+            //     "idProvinsi":response[i].idProvinsi,
+            //     "idSekolah":response[i].idSekolah,
+            //     "idTahunAjaran":response[i].idTahunAjaran,
+            //     "jenjang":response[i].jenjang,
+            //     "namaGuru":response[i].namaGuru,
+            //     "namaKecamatan":response[i].namaKecamatan,
+            //     "namaKotaKabupaten":response[i].idGuru,
+            //     "namaProvinsi":response[i].namaProvinsi,
+            //     "namaSekolah":response[i].namaSekolah,
+            //     "tahunAjaran":response[i].tahunAjaran,
+            //     "totalMengajar":response[i].totalMengajar,
+            //     }).then(function (ok) {
+            //         console.log('Ok')
+            //     })
+            // }
         });
 
+        var refjadwal = firebase.database(app).ref("jadwalPelajaran").orderByChild("idSekolah").equalTo($scope.idSekolah);
+        var listRefjadwal = $firebaseArray(refjadwal);
+        $ionicLoading.show();
+        listRefjadwal.$loaded().then(function (response) {
+            $ionicLoading.hide();
+            $scope.detailjadwal = response;
+            console.log($scope.detailjadwal);
+
+            for (let i = 0; i < response.length; i++) {
+                index = index + 1;
+                console.log(index);
+                console.log(response[i].$id);
+                var groupAbsensiSiswa = firebase.database(appJadwalPelajaranGuru).ref("jadwalPelajaran/"+response[i].$id);
+                groupAbsensiSiswa.set({
+                    "createAt":response[i].createAt,
+                    "diBuatOleh":response[i].diBuatOleh,
+                    "filterGuru":response[i].filterGuru,
+                    "filterGuruHari":response[i].filterGuruHari,
+                    "filterKelasHari":response[i].filterKelasHari,
+                    "filterPelajaran":response[i].filterPelajaran,
+                    "hari":response[i].hari,
+                    "idGuru":response[i].idGuru,
+                    "idKecamatan":response[i].idKecamatan,
+                    "idKelas":response[i].idKelas,
+                    "idKotaKabupaten":response[i].idKotaKabupaten,
+                    "idPelajaran":response[i].idPelajaran,
+                    "idPembuat":response[i].idPembuat,
+                    "idProvinsi":response[i].idProvinsi,
+                    "idSekolah":response[i].idSekolah,
+                    "idTahunAjaran":response[i].idTahunAjaran,
+                    "jamKe":response[i].jamKe,
+                    "jamMulai":response[i].jamMulai,
+                    "jamSelesai":response[i].jamSelesai,
+                    "jenjang":response[i].jenjang,
+                    "namaGuru":response[i].namaGuru,
+                    "namaKecamatan":response[i].namaKecamatan,
+                    "namaKelas":response[i].namaKelas,
+                    "namaKotaKabupaten":response[i].namaKotaKabupaten,
+                    "namaProvinsi":response[i].namaProvinsi,
+                    "namaSekolah":response[i].namaSekolah,
+                    "pelajaran":response[i].pelajaran,
+                    "tahunAjaran":response[i].tahunAjaran
+                }).then(function (ok) {
+                    console.log('Ok')
+                })
+
+            }
+
+
+        })
         // var getAbs = firebase.database().ref("jadwalPelajaran").orderByChild("filterGuru").equalTo("-LUP45QkXxdBgFss8cDy_-M3FlZqZOdFi43HQ2URg_-LcsztuyXoQJ2ZWNTS7h")
         // var listGetAbs = $firebaseArray(getAbs);
         // listGetAbs.$loaded().then(function (response) {
@@ -132,19 +210,19 @@ angular.module('app.kurikulumSekolah', [])
                                             $ionicLoading.hide();
                                             console.log('Data Berhasil Dihapus');
                                             // window.location.reload(true);
-                                            
+
                                         });
                                     }
                                 })
 
                                 var objGroup = firebase.database(app).ref("groupJadwalPelajaranGuru").orderByChild("filterGuru").equalTo(data.filterGuru);
                                 var listObjGroup = $firebaseArray(objGroup);
-                                listObjGroup.$loaded().then(function(hapus){
+                                listObjGroup.$loaded().then(function (hapus) {
                                     var id = hapus[0].$id;
 
-                                    var objHapus = firebase.database(app).ref("groupJadwalPelajaranGuru/"+id);
+                                    var objHapus = firebase.database(app).ref("groupJadwalPelajaranGuru/" + id);
                                     var objHapusData = $firebaseObject(objHapus);
-                                    objHapusData.$remove().then(function(yes){
+                                    objHapusData.$remove().then(function (yes) {
                                         console.log("terhapus")
                                     })
                                 })
@@ -652,7 +730,7 @@ angular.module('app.kurikulumSekolah', [])
         $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
-        
+
         if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
         else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
         if (!$scope.idPenggunaSekolah) {

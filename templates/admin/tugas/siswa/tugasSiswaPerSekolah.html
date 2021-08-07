@@ -1,12 +1,12 @@
-<ion-view title="Tugas Perkecamatan" id="tugasSiswaAdmin" class="latar">
+<ion-view title="Kec {{data.namaKecamatan}}" id="tugasSiswaAdmin" class="latar">
     
     <ion-content padding="false" class="has-header">
         <div class="row responsive-md" style="margin: auto;">
             <div class="col col-50 col-offset-25">
                 <ion-list id="tugasSiswa-list19">
                     <ion-item class="item-avatar" ng-repeat="(x, y) in listdataTugas" ng-click="getData(x,y)">
-                        <img src="https://image.flaticon.com/icons/svg/1527/1527531.svg">
-                        <h2 style="text-transform: capitalize;">Kecamatan {{x}}</h2>
+                        <img src="img/school.svg">
+                        <h2 style="text-transform: capitalize;">{{x}}</h2>
                         <p>
                             <b style="color:green">{{y.length}}</b> Data Tugas
                         </p>

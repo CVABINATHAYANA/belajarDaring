@@ -36,6 +36,7 @@ angular.module('app.absensiGuru', [])
             }, {})
         }
 
+        index = 0;
         var ref = firebase.database(app).ref("groupAbsensiSiswa").orderByChild("idGuru").equalTo($scope.idGuru);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
@@ -43,7 +44,46 @@ angular.module('app.absensiGuru', [])
             $ionicLoading.hide();
             $scope.absensiSiswa = response
             // $scope.absensiSiswa = $scope.dataAbsensiSiswa.groupBy('groupAbsensi');
-            // console.log($scope.absensiSiswa)
+            console.log($scope.absensiSiswa)
+            for (let i = 0; i < response.length; i++) {
+                index = index + 1;
+                console.log(index);
+                console.log(response[i].$id);
+                var groupAbsensiSiswa = firebase.database().ref("groupAbsensiSiswa/"+response[i].$id);
+                groupAbsensiSiswa.set({
+                    "groupAbsensi": response[i].groupAbsensi,
+                    "hariAbsensi":response[i].hariAbsensi,
+                    "idGuru": response[i].idGuru,
+                    "idKecamatan": response[i].idKecamatan,
+                    "idKelas": response[i].idKelas,
+                    "idKotaKabupaten": response[i].idKotaKabupaten,
+                    "idPelajaran": response[i].idPelajaran,
+                    "idPembuat": response[i].idPembuat,
+                    "idProvinsi": response[i].idProvinsi,
+                    "idSekolah": response[i].idSekolah,
+                    "idSemester": response[i].idSemester,
+                    "idTahunAjaran": response[i].idTahunAjaran,
+                    "jamAbsensi": response[i].jamAbsensi,
+                    "jenjang": response[i].jenjang,
+                    "namaGuru": response[i].namaGuru,
+                    "namaKecamatan": response[i].namaKecamatan,
+                    "namaKelas":response[i].namaKelas,
+                    "namaKotaKabupaten": response[i].namaKotaKabupaten,
+                    "namaProvinsi": response[i].namaProvinsi,
+                    "namaSekolah": response[i].namaSekolah,
+                    "pelajaran": response[i].pelajaran,
+                    "semester": response[i].semester,
+                    "tahunAjaran": response[i].tahunAjaran,
+                    "tanggalAbsensi": response[i].tanggalAbsensi,
+                    "tanggalDisplay": response[i].tanggalDisplay,
+                    "totalSiswa":response[i].totalSiswa,
+
+                }).then(function (ok) {
+                    console.log('Ok')
+                })
+
+            }
+
         });
 
         $scope.getData = function (data, absensiSiswa) {
@@ -184,7 +224,7 @@ angular.module('app.absensiGuru', [])
             $scope.namaProvinsi = snapshot.val().namaProvinsi;
             $scope.namaKotaKabupaten = snapshot.val().namaKotaKabupaten;
             $scope.namaKecamatan = snapshot.val().namaKecamatan;
-            $scope.namaSekolah = snapshot.val().namaKecamatan;
+            $scope.namaSekolah = snapshot.val().namaSekolah;
         });
 
         $scope.formData = {

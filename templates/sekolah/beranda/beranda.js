@@ -346,7 +346,7 @@ angular.module('app.berandaSekolah', [])
                 buttons: [
                     { text: '<i class="icon ion-ios-book"></i> Ujian Online ' },
                     { text: '<i class="icon ion-ios-box"></i> UTS/UAS ' },
-                    { text: '<i class="icon ion-ios-browsers"></i> Tryout ' },
+                    // { text: '<i class="icon ion-ios-browsers"></i> Tryout ' },
                     // { text: '<i class="icon ion-trophy"></i> Olimpiade Online ' },
                 ],
                 // destructiveText: '<i class="icon ion-trash-b"></i> Hapus Jadwal',
@@ -357,8 +357,6 @@ angular.module('app.berandaSekolah', [])
                 buttonClicked: function (index) {
                     if (index === 0) { $state.go("menuSekolah.ujianOnlineSekolah") }
                     if (index === 1) { $state.go("menuSekolah.UTSUASSekolah") }
-                    if (index === 2) { $state.go("menuSekolah.tryoutOnlineSekolah") }
-                    if (index === 3) { $state.go("menuSekolah.socSekolah") }
                     return true;
                 },
             });
@@ -480,4 +478,3 @@ angular.module('app.berandaSekolah', [])
         };
 
     }])
-
