@@ -1,5 +1,5 @@
 <ion-view title="Tugas Siswa" id="tugasSiswaAdmin" cache-view="false" class="latar">
-    
+
     <ion-nav-buttons side="right" class="has-header">
         <button class="button button-dark icon ion-android-add" ng-click="tambah()"> Tambah</button>
     </ion-nav-buttons>
@@ -18,7 +18,6 @@
                         <img src="https://image.flaticon.com/icons/svg/1802/1802781.svg">
                         <p><b style="color: green;">{{$index+1}}. {{data.judulTugas}}</b><br>
                             <span>{{data.namaGuru}}</span><br>
-                            <span>{{data.namaSekolah}}</span><br>
                             <em>
                                 <small>{{data.pelajaran}}, Kelas. {{data.namaKelas}}<br>
                                     Tanggal. {{data.tanggalTugas}}, {{data.jamTugas}}<br>
