@@ -125,6 +125,7 @@ angular.module('app.absensiGuru', [])
                         listGetAbs.$loaded().then(function (response) {
                             $ionicLoading.hide();
                             $scope.dataGetAbs = response;
+                            // console.log( 'TES RESPONSE '  + response);
                             $scope.absensiByGroup = $scope.dataGetAbs.groupBy('keterangan');
 
                             $state.go("menuGuru.absensiSiswaLihatGuru", {
@@ -676,6 +677,8 @@ angular.module('app.absensiGuru', [])
             "absensiByGroup": $stateParams.absensiByGroup
         }
 
+        // console.log($scope.data.groupAbsensi)
+
         $scope.dataGetAbs = $scope.data.dataGetAbs;
         $scope.absensiByGroup = $scope.data.absensiByGroup;
         // Untuk Print Data Nilai
@@ -685,7 +688,7 @@ angular.module('app.absensiGuru', [])
         $scope.excel = function () {
             console.log("d", d)
             var wb = XLSX.utils.table_to_book(document.getElementById('danu-table'));
-            XLSX.writeFile(wb, "nilaiPeringkat_" + ".xlsx");
+            XLSX.writeFile(wb, "Absensi" +$scope.data.tanggalDisplay+ "_"+ $scope.data.namaKelas+ "_" + $scope.data.pelajaran + ".xlsx");
         }
     }])
 

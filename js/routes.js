@@ -7237,7 +7237,16 @@ angular.module('app.routes', [])
       .state('menuSekolah.absensiSiswaLihatSekolah', {
         url: '/absensiSiswaLihatSekolah',
         params: {
-          groupAbsensi: '',
+          groupAbsensi :'',
+          tahunAjaran : '',
+          semester : '',
+          pelajaran: '',
+          namaGuru: '',
+          namaKelas : '',
+          tanggalDisplay: '',
+          namaSekolah: '',
+          dataGetAbs: '',
+          absensiByGroup: ''
         },
         views: {
           'menuSekolah': {

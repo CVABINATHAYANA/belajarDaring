@@ -79,8 +79,32 @@ angular.module('app.absensiSekolah', [])
                         })
                     }
                     if (index === 1) {
-                        $state.go("menuSekolah.absensiSiswaLihatSekolah", {
-                            "groupAbsensi": data.groupAbsensi
+                        // $state.go("menuSekolah.absensiSiswaLihatSekolah", {
+                        //     "groupAbsensi": data.groupAbsensi,
+                        //     "dataGetAbs": response,
+                        // })
+
+                        var getAbs = firebase.database(app).ref("absensiSiswa").orderByChild("groupAbsensi").equalTo(data.groupAbsensi);
+                        var listGetAbs = $firebaseArray(getAbs);
+                        $ionicLoading.show();
+                        listGetAbs.$loaded().then(function (response) {
+                            $ionicLoading.hide();
+                            $scope.dataGetAbs = response;
+                            console.log( 'TES RESPONSE '  + response);
+                            $scope.absensiByGroup = $scope.dataGetAbs.groupBy('keterangan');
+
+                            $state.go("menuSekolah.absensiSiswaLihatSekolah", {
+                                "groupAbsensi": data.groupAbsensi,
+                                "tahunAjaran": data.tahunAjaran,
+                                "semester": data.semester,
+                                "pelajaran": data.pelajaran,
+                                "namaGuru": data.namaGuru,
+                                "namaKelas": data.namaKelas,
+                                "tanggalDisplay": data.tanggalDisplay,
+                                "namaSekolah": data.namaSekolah,
+                                "dataGetAbs": response,
+                                "absensiByGroup": $scope.absensiByGroup
+                            })
                         })
                     }
                     return true;
@@ -730,7 +754,29 @@ angular.module('app.absensiSekolah', [])
         }
 
         $scope.data = {
-            "groupAbsensi": $stateParams.groupAbsensi
+            "groupAbsensi": $stateParams.groupAbsensi,
+            "tahunAjaran": $stateParams.tahunAjaran,
+            "semester": $stateParams.semester,
+            "pelajaran": $stateParams.pelajaran,
+            "namaGuru": $stateParams.namaGuru,
+            "namaKelas": $stateParams.namaKelas,
+            "tanggalDisplay": $stateParams.tanggalDisplay,
+            "namaSekolah": $stateParams.namaSekolah,
+            "dataGetAbs": $stateParams.dataGetAbs,
+            "absensiByGroup": $stateParams.absensiByGroup
+
+        }
+
+        $scope.dataGetAbs = $scope.data.dataGetAbs;
+        $scope.absensiByGroup = $scope.data.absensiByGroup;
+        // Untuk Print Data Nilai
+        var wb = XLSX.read($scope.dataGetAbs, { type: "array" });
+        var d = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+
+        $scope.excel = function () {
+            console.log("d", d)
+            var wb = XLSX.utils.table_to_book(document.getElementById('danu-table'));
+            XLSX.writeFile(wb, "Absensi" +$scope.data.tanggalDisplay+ "_"+ $scope.data.namaKelas+ "_" + $scope.data.pelajaran + ".xlsx");
         }
 
         Array.prototype.groupBy = function (prop) {
@@ -751,6 +797,8 @@ angular.module('app.absensiSekolah', [])
             $scope.absensiByGroup = $scope.dataGetAbs.groupBy('keterangan');
             console.log($scope.absensiByGroup);
             $scope.dataAbsensi = response[0];
+
+            
         })
 
     }])
