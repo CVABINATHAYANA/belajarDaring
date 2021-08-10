@@ -208,7 +208,7 @@ angular.module('app.absensiGuru', [])
         $scope.idKecamatanGuru = localStorage.getItem('idKecamatanGuru');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
-       
+
         // LOADBALANCING
         if ($scope.idSekolahGuru === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
         else if ($scope.idSekolahGuru === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
@@ -678,7 +678,15 @@ angular.module('app.absensiGuru', [])
 
         $scope.dataGetAbs = $scope.data.dataGetAbs;
         $scope.absensiByGroup = $scope.data.absensiByGroup;
+        // Untuk Print Data Nilai
+        var wb = XLSX.read($scope.dataGetAbs, { type: "array" });
+        var d = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
 
+        $scope.excel = function () {
+            console.log("d", d)
+            var wb = XLSX.utils.table_to_book(document.getElementById('danu-table'));
+            XLSX.writeFile(wb, "nilaiPeringkat_" + ".xlsx");
+        }
     }])
 
     .controller('absensiSiswaEditGuruCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
