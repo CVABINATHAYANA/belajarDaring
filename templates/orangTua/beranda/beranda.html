@@ -5,102 +5,229 @@
             <b>{{tugasYangBelumDibaca}}</b> Tugas Baru</button> -->
     </ion-nav-buttons>
     <style>
-        .icon-card{
-            width:50%;
-            margin-top:10%;
+        .vertical-center {
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
         }
-        .button-profile{    
-            border-radius: 100px;
-            width: 10%;
-            margin-top:10px;
-        }
-        #main-content{
-            left: 10vw;
-            right: 10vw;
-            top: 35vh;
-        }
-        .card{
-            border-radius:5px !important;
-            /* box-shadow :1px 0.5px 0.5px 0.5px rgb(219, 219, 219); */
-            border:1px solid  rgb(219, 219, 219)
-        }
-        .center{
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .w-100{
-            width: 100%;
-        }
-        .padding-0{
-            padding:0;
-        }
-        #bg-blue-card{
-            z-index: -1;
-            height: 35vh;
-        }
-        #bg-white-card{
-            height: 65vh;
-            z-index: -1;
-            width:100vw;
-            background-color: rgb(247, 247, 247);
-  
-        }
-        @media screen and (max-width: 1024px) {
-            #main-content{
-                margin-top:30%;
-                left: 10px;
-                right: 0px;
-                top:17vh
-            }
-            #bg-white-card{
-                height: 75vh;
-                border-radius: 20px 20px 0px 0px;
-            }
-            #bg-blue-card{
-            z-index: -1;
-            height: 25vh;
-            }
-            .button-profile{
-                width: 55%;
-            }
-            .icon-card{
+    
+        /* .icon-card{
                 width:50%;
-                margin-top:50%;
-            }
+                margin-top:10%;
+    
+            } */
+        .card {
+          height: 100%;
+          width: 100%;
+          margin-bottom: 0;
+          position: relative;
+          border-radius: 5px !important;
+          /* box-shadow :1px 0.5px 0.5px 0.5px rgb(219, 219, 219); */
+          border: 1px solid rgb(219, 219, 219)
         }
-        @media screen and (max-width: 420px) {
-            #main-content{
-                margin-top:30%;
-                left: 10px;
-                right: 0px;
-                top:38vh
-            }
-            #bg-white-card{
-                height: 80vh;
-                border-radius: 20px 20px 0px 0px;
-            }
-            #bg-blue-card{
+    
+        .button-profile {
+          border-radius: 100px;
+          width: 10%;
+          margin-top: 10px;
+        }
+    
+        #main-content {
+          left: 10vw;
+          right: 10vw;
+          top: 35vh;
+        }
+    
+        .center {
+          margin-left: auto;
+          margin-right: auto;
+        }
+    
+        .w-100 {
+          width: 100%;
+        }
+    
+        .padding-0 {
+          padding: 0;
+        }
+    
+        #bg-blue-card {
+          z-index: -1;
+          height: 35vh;
+        }
+    
+        #bg-white-card {
+          height: 65vh;
+          z-index: -1;
+          width: 100vw;
+    
+          background-color: rgb(247, 247, 247);
+        }
+    
+        .bg-transparant {
+          opacity: 0.3;
+          width: 25%;
+        }
+    
+        @media screen and (max-width: 1024px) {
+          #main-content {
+            margin-top: 30%;
+            left: 10px;
+            right: 0px;
+            top: 35vh
+          }
+    
+          /* #bg-white-card{
+                    height: 75vh;
+                    border-radius: 20px 20px 0px 0px;
+                    background-image:url(../../../img/logo1sukasada.png);
+                    background-size: cover;
+                } */
+          .bg-transparant {
+            /* display: none; */
+            width: 50% !important;
+          }
+    
+          #bg-blue-card {
+            z-index: -1;
+            height: 45vh;
+          }
+    
+          .button-profile {
+            width: 55%;
+          }
+    
+          .icon-card {
+            /* width: 70px; */
+            max-width: 25%;
+            /* margin-top: 10%; */
+          }
+        }
+    
+        @media screen and (max-width: 770px) {
+          #main-content {
+            margin-top: 30%;
+            left: 10px;
+            right: 0px;
+            top: 23vh
+          }
+    
+          /* #bg-white-card{
+                    height: 75vh;
+                    border-radius: 20px 20px 0px 0px;
+                    background-image:url(../../../img/logo1sukasada.png);
+                    background-size: cover;
+                } */
+          .bg-transparant {
+            /* display: none; */
+          }
+    
+          #bg-blue-card {
+            z-index: -1;
+            height: 30vh;
+          }
+    
+          .button-profile {
+            width: 55%;
+          }
+    
+          .icon-card {
+            /* width: 55px;
+            margin-top: 20%; */
+            min-width: 50% !important;
+          }
+        }
+    
+        @media screen and (max-width: 540px) {
+          #main-content {
+            margin-top: 30%;
+            left: 10px;
+            right: 0px;
+            top: 38vh
+          }
+    
+          #bg-white-card {
+            height: 80vh;
+            border-radius: 20px 20px 0px 0px;
+            background-image: url(../../../img/bg-transparant.png);
+            background-size: cover;
+          }
+    
+          .bg-transparant {
+            /* display: none; */
+            width: 50% !important;
+          }
+    
+          #bg-blue-card {
             z-index: -1;
             height: 50vh;
-            }
-            .button-profile{
-                width: 55%;
-            }
-            .icon-card{
-                width:50%;
-                margin-top:20%;
-            }
+          }
+    
+          .button-profile {
+            width: 55%;
+          }
+    
+          .icon-card {
+            /* width: 50% !important;
+            margin-top: 15%; */
+            min-width: 50% !important;
+          }
         }
+    
+        @media screen and (max-width: 420px) {
+          #main-content {
+            margin-top: 30%;
+            left: 10px;
+            right: 0px;
+            top: 38vh
+          }
+    
+          /* #bg-white-card{
+                    height: 80vh;
+                    border-radius: 20px 20px 0px 0px;
+                    background-image:url(../../../img/bg-transparant.png);
+                    background-size: cover;
+                } */
+          .bg-transparant {
+            /* display: none; */
+            width: 1000px !important;
+          }
+    
+          #bg-blue-card {
+            z-index: -1;
+            height: 50vh;
+          }
+    
+          .button-profile {
+            width: 55%;
+          }
+    
+          .icon-card {
+            /* width: 50% !important;
+            margin-top: 20%; */
+          }
+        }
+    
         @media screen and (max-width: 321px) {
-            #main-content{
-                margin-top:30%;
-                left: 10px;
-                right: 0px;
-                top:40vh
-            }
+          #main-content {
+            margin-top: 30%;
+            left: 10px;
+            right: 0px;
+            top: 40vh
+          }
+    
+          /* #bg-white-card{
+                    background-image:url(../../../img/logo1sukasada.png);
+                    background-size: cover;
+                } */
+          .bg-transparant {
+            /* display: none; */
+          }
         }
-        
-    </style>
+    
+      </style>
 
     <ion-content padding="">
         <div class="row" style="margin: 0;width: 100%;padding:0;">
@@ -125,11 +252,17 @@
         </div>
         <div class="row" style="margin: 0;width: 100%;padding:0;">
             <div class="col col-100" style="margin: 0;width: 100%;padding:0;">
-                <div id="bg-white-card">
-
-                </div>
+              <div id="bg-white-card" style="position:relative">
+                <center>
+                  <div ng-if="idSekolah==='-MfbLcag5nLp210rIgPK'" class="vertical-center">
+      
+                    <img class="bg-transparant" src="../../../img/logo1sukasada.png" alt="">
+      
+                  </div>
+                </center>
+              </div>
             </div>
-        </div>
+          </div>
 
         <!-- <div class="row responsive-lg" style="margin: auto;" ng-if="akses===false">
             <div class="col col-50 col-offset-25">
@@ -170,32 +303,32 @@
                             <div class="col" style="height: 20vh;margin:0; width: 100%;">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;"  ui-sref="menuOrangTua.jadwalPelajaranOrangTua()">
                                     <center>
-                                        <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201552.svg" width="50%"
-                                        >
-                                    <br>
-                                    <span style="font-size:10px;color:rgb(65, 64, 64)">Jadwal</span>
-                                    </center>
+                                        <div class="vertical-center">
+                                          <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201552.svg" width="50%">
+                                          <h5 style="font-size:10px;color:rgb(65, 64, 64)">Jadwal</h5>
+                                        </div>
+                                      </center>
                                 </div>
                             </div>
                             <div class="col" style="height: 20vh;margin:0">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;"  ui-sref="menuOrangTua.absensiOrangTua()">
                                     <center>
-                                        <img class="icon-card" src="https://image.flaticon.com/icons/svg/235/235251.svg" width="50%"
-                                        >
-                                    <br>
-                                    <span style="font-size:10px;color:rgb(65, 64, 64)">Absensi Siswa</span>
-                                    </center>
+                                        <div class="vertical-center">
+                                          <img class="icon-card" src="https://image.flaticon.com/icons/svg/235/235251.svg" width="50%">
+                                          <h5 style="font-size:10px;color:rgb(65, 64, 64)">Absensi Siswa</h5>
+                                        </div>
+                      
+                                      </center>
                                 </div>
                             </div>
                             <div class="col" style="height: 20vh;margin:0">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;" ui-sref="menuOrangTua.tugasSiswaPerMapelOrangTua()">
                                     <center>
-                                        <img class="icon-card" src="https://image.flaticon.com/icons/svg/178/178150.svg" width="50%"
-                                        >
-                                    <br>
-                                    <span style="font-size:10px;color:rgb(65, 64, 64)">Tugas Siswa</span>
-       
-                                    </center>
+                                        <div class="vertical-center">
+                                          <img class="icon-card" src="https://image.flaticon.com/icons/svg/178/178150.svg" width="50%">
+                                          <h5 style="font-size:10px;color:rgb(65, 64, 64)">Tugas Siswa</h5>
+                                        </div>
+                                      </center>
     
                                 </div>
                             </div>
@@ -242,32 +375,31 @@
                             <div class="col" style="height: 20vh;margin:0;">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;"  ui-sref="menuOrangTua.ujianOnlineSiswaOrangTua()">
                                     <center>
-                                        <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201635.svg" width="50%"
-                                        >
-                                    <br>
-                                    <span style="font-size:10px;color:rgb(65, 64, 64)">Ulangan</span>
-                                    </center>
+                                        <div class="vertical-center">
+                                          <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201635.svg" width="50%">
+                                          <h5 style="font-size:10px;color:rgb(65, 64, 64)">Ulangan</h5>
+                                        </div>
+                                      </center>
                                 </div>
                             </div>
                             <div class="col" style="height: 20vh;margin:0">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;"  ui-sref="menuSiswa.latihanSoalOnlineSiswa()">
                                     <center>
-                                        <img class="icon-card" src="https://image.flaticon.com/icons/svg/234/234653.svg" width="50%"
-                                        >
-                                    <br>
-                                    <span style="font-size:10px;color:rgb(65, 64, 64)">Latihan / Kuis</span>
-                                    </center>
+                                        <div class="vertical-center">
+                                          <img class="icon-card" src="https://image.flaticon.com/icons/svg/234/234653.svg" width="50%">
+                                          <h5 style="font-size:10px;color:rgb(65, 64, 64)">Latihan / Kuis</h5>
+                                        </div>
+                                      </center>
                                 </div>
                             </div>
                             <div class="col" style="height: 20vh;margin:0">
                                 <div class="card " style="height: 100%;width:100%;margin-bottom:0;" ui-sref="menuSiswa.berandaTryoutOnlineSiswa()">
                                     <center>
-                                        <img class="icon-card" src="https://image.flaticon.com/icons/svg/235/235296.svg" width="50%"
-                                        >
-                                    <br>
-                                    <span style="font-size:10px;color:rgb(65, 64, 64)">Tryout Online</span>
-       
-                                    </center>
+                                        <div class="vertical-center">
+                                          <img class="icon-card" src="https://image.flaticon.com/icons/svg/235/235296.svg" width="50%">
+                                          <h5 style="font-size:10px;color:rgb(65, 64, 64)">Tryout Online</h5>
+                                        </div>
+                                      </center>
     
                                 </div>
                             </div>
