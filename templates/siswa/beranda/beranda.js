@@ -519,7 +519,9 @@ angular.module('app.berandaSiswa', [])
         $scope.namaKelasSiswa = localStorage.getItem('namaKelasSiswa');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah');
 
+        // LOADBALANCING
         if ($scope.idSekolahSiswa === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolahSiswa === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
         console.log(app,$scope.idSekolahSiswa)
 
         if (!$scope.idPenggunaSiswa) {
