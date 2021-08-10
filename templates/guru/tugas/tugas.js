@@ -74,8 +74,8 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                     if (index === 0) {
                         console.log('ID kelas :' + data.idKelas);
                         console.log('ID Mapel :' + data.idPelajaran);
-                        // var getAbs = firebase.database(app).ref("tugasSiswa/" + data.idKelas + '/' + data.idPelajaran).orderByChild("groupTugas").equalTo(data.groupTugas);
-                        var getAbs = firebase.database(app).ref("tugasSiswa/" + data.idKelas + '/' + data.idPelajaran + '/dataTugas/' + data.groupTugas);
+                        // var getAbs = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran).orderByChild("groupTugas").equalTo(data.groupTugas);
+                        var getAbs = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran + '/dataTugas/' + data.groupTugas);
                         var listGetAbs = $firebaseArray(getAbs);
                         $ionicLoading.show();
                         listGetAbs.$loaded().then(function (response) {
@@ -107,8 +107,8 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                     }
                     if (index === 1) {
                         console.log(data.groupTugas);
-                        // var getAbs = firebase.database(app).ref("tugasSiswa/" +data.idKelas+ '/' +data.idPelajaran +'/dataTugas').orderByChild("groupTugas").equalTo(data.groupTugas);
-                        var getAbs = firebase.database(app).ref("tugasSiswa/" + data.idKelas + '/' + data.idPelajaran + '/dataTugas/' + data.groupTugas);
+                        // var getAbs = firebase.database(app).ref("tugasSiswaNew/" +data.idKelas+ '/' +data.idPelajaran +'/dataTugas').orderByChild("groupTugas").equalTo(data.groupTugas);
+                        var getAbs = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran + '/dataTugas/' + data.groupTugas);
                         var listGetAbs = $firebaseArray(getAbs);
                         $ionicLoading.show();
                         listGetAbs.$loaded().then(function (response) {
@@ -154,7 +154,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                         })
                     }
                     if (index === 3) {
-                        var getAbs = firebase.database(app).ref("tugasSiswa/" + data.idKelas + '/' + data.idPelajaran).orderByChild("groupTugas").equalTo(data.groupTugas);
+                        var getAbs = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran).orderByChild("groupTugas").equalTo(data.groupTugas);
                         var listGetAbs = $firebaseArray(getAbs);
                         $ionicLoading.show();
                         listGetAbs.$loaded().then(function (response) {
@@ -199,12 +199,12 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                         if (res) {
                             $ionicLoading.show();
 
-                            var refObj = firebase.database(app).ref("tugasSiswa/" + data.idKelas + '/' + data.idPelajaran + '/tugasperSiswa');
+                            var refObj = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran + '/tugasperSiswa');
                             var objDelete = $firebaseArray(refObj);
                             objDelete.$loaded().then(function (response) {
                                 for (i = 0; i < response.length; i++) {
                                     // console.log(response[i].$id);
-                                    var hapusData = firebase.database(app).ref("tugasSiswa/" + data.idKelas + '/' + data.idPelajaran + '/tugasperSiswa/' + response[i].$id).orderByChild("groupTugas").equalTo(data.groupTugas);
+                                    var hapusData = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran + '/tugasperSiswa/' + response[i].$id).orderByChild("groupTugas").equalTo(data.groupTugas);
                                     var objDelete = $firebaseObject(hapusData);
                                     console.log(objDelete);
                                     objDelete.$remove().then(function (ref) {
@@ -214,7 +214,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                                 }
                             })
 
-                            var objHapus1 = firebase.database(app).ref("tugasSiswa/" + data.idKelas + '/' + data.idPelajaran + '/dataTugas/' + data.groupTugas);
+                            var objHapus1 = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran + '/dataTugas/' + data.groupTugas);
                             var objHapusData1 = $firebaseObject(objHapus1);
                             objHapusData1.$remove().then(function (yes) {
                                 console.log("terhapus");
@@ -631,7 +631,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                     })
                     for (i = 0; i < $scope.dataTugas.length; i++) {
                         if ($scope.dataTugas[i].kirimTugas === true) {
-                            var insertDataTugas = firebase.database(app).ref("tugasSiswa/" + $scope.dataTugas[i].idKelas + "/" + $scope.dataTugas[i].idPelajaran + "/dataTugas/" + groupTugas + $scope.dataTugas[i].idGuru +"/" +  groupTugas + $scope.dataTugas[i].idGuru +$scope.dataTugas[i].idSiswa );
+                            var insertDataTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.dataTugas[i].idKelas + "/" + $scope.dataTugas[i].idPelajaran + "/dataTugas/" + groupTugas + $scope.dataTugas[i].idGuru +"/" +  groupTugas + $scope.dataTugas[i].idGuru +$scope.dataTugas[i].idSiswa );
                             insertDataTugas.set({
                                 "idSiswa": $scope.dataTugas[i].idSiswa,
                                 "namaSiswa": $scope.dataTugas[i].namaSiswa,
@@ -675,7 +675,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                                 "publish": $scope.formData.publish,
                                 "filterPublish": $scope.dataTugas[i].idSiswa + "_" + $scope.formData.publish
                             })
-                            var insertData = firebase.database(app).ref("tugasSiswa/" + $scope.dataTugas[i].idKelas + "/" + $scope.dataTugas[i].idPelajaran + "/tugasperSiswa/" + $scope.dataTugas[i].idSiswa + "/" +groupTugas + $scope.dataTugas[i].idGuru);
+                            var insertData = firebase.database(app).ref("tugasSiswaNew/" + $scope.dataTugas[i].idKelas + "/" + $scope.dataTugas[i].idPelajaran + "/tugasperSiswa/" + $scope.dataTugas[i].idSiswa + "/" +groupTugas + $scope.dataTugas[i].idGuru);
                             insertData.set({
                                 "idSiswa": $scope.dataTugas[i].idSiswa,
                                 "namaSiswa": $scope.dataTugas[i].namaSiswa,
@@ -895,7 +895,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
         $scope.banyakFile = $scope.fileTugasSiswa.length;
 
         console.log("ID KELAS" + $scope.data.idKelas);
-        var fileTugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/dataTugas/'+ $scope.data.idGroupTugas +"/" + $scope.data.idTugas + "/fileSiswa");
+        var fileTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/dataTugas/'+ $scope.data.idGroupTugas +"/" + $scope.data.idTugas + "/fileSiswa");
         var listFileTugas = $firebaseArray(fileTugas);
         listFileTugas.$loaded().then(function (response) {
             $scope.fileTugasSiswa = response;
@@ -903,11 +903,11 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
         })
 
         $scope.simpan = function () {
-            // console.log("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/dataTugas/'+ $scope.data.idGroupTugas +"/" + $scope.data.idTugas);
-            // console.log("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/tugasperSiswa/'+ $scope.data.idSiswa + "/" + $scope.data.idGroupTugas +"/" + $scope.data.idTugas);
+            // console.log("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/dataTugas/'+ $scope.data.idGroupTugas +"/" + $scope.data.idTugas);
+            // console.log("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/tugasperSiswa/'+ $scope.data.idSiswa + "/" + $scope.data.idGroupTugas +"/" + $scope.data.idTugas);
             if ($scope.formData.nilaiTugasSiswa !== undefined) {
-                var refTugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/dataTugas/'+ $scope.data.idGroupTugas +"/" + $scope.data.idTugas);
-                var refTugas2 = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/tugasperSiswa/'+ $scope.data.idSiswa + "/" + $scope.data.idGroupTugas);
+                var refTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/dataTugas/'+ $scope.data.idGroupTugas +"/" + $scope.data.idTugas);
+                var refTugas2 = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel + '/tugasperSiswa/'+ $scope.data.idSiswa + "/" + $scope.data.idGroupTugas);
                 refTugas.update(JSON.parse(JSON.stringify({
                     "nilaiTugasSiswa": $scope.formData.nilaiTugasSiswa
                 }))).then(function (resp) {
@@ -1048,13 +1048,13 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
 
 
                 console.log('ID' + $scope.formData.idKelas + "/" + $scope.formData.idMapel)
-                // var getAbs = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
-                var getAbs = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/dataTugas/" +$scope.data.groupTugas );
+                // var getAbs = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
+                var getAbs = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/dataTugas/" +$scope.data.groupTugas );
                 var listGetAbs = $firebaseArray(getAbs);
                 listGetAbs.$loaded().then(function (response) {
                     for (i = 0; i < response.length; i++) {
                         console.log('ID DATATUGAS : '+response[i].$id);
-                        var updateData = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/dataTugas/" +$scope.data.groupTugas +"/"+ response[i].$id);
+                        var updateData = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/dataTugas/" +$scope.data.groupTugas +"/"+ response[i].$id);
                         updateData.update({
                             "isiTugas": $scope.formData.isiTugas,
                             "judulTugas": $scope.formData.judulTugas,
@@ -1069,13 +1069,13 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                 })
 
 
-                var getTgs = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/");
+                var getTgs = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/");
                 var listGetTgs = $firebaseArray(getTgs);
                 listGetTgs.$loaded().then(function (response) {
                     // console.log($scope.data.groupTugas)
                     for (i = 0; i < response.length; i++) {
                         console.log('ID SISWA : '+response[i].$id);
-                        var updateDataTugas = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + response[i].$id + "/" + $scope.data.groupTugas);
+                        var updateDataTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + response[i].$id + "/" + $scope.data.groupTugas);
                         updateDataTugas.update({
                             "isiTugas": $scope.formData.isiTugas,
                             "judulTugas": $scope.formData.judulTugas,
@@ -1091,7 +1091,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
 
 
                 // var temp = [];
-                // var getTgs = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa");
+                // var getTgs = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa");
                 // var listGetTgs = $firebaseArray(getTgs);
                 // listGetTgs.$loaded().then(function (response) {
 
@@ -1100,7 +1100,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                 //         // for (let index = 0; index < temp.length; index++) {
                 //         //     var id_siswa = temp[index];
                 //         // }
-                //         // var updateDataTugas = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + temp + "/" + response[0].$id)
+                //         // var updateDataTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + temp + "/" + response[0].$id)
                 //         // updateDataTugas.update({
                 //         //     "isiTugas": $scope.formData.isiTugas,
                 //         //     "judulTugas": $scope.formData.judulTugas,
@@ -1115,7 +1115,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                 //     for (let index = 0; index < temp.length; index++) {
                 //         var element = temp[index];
                 //         // console.log(element)
-                //         var updateDataTugas = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + element[i]).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
+                //         var updateDataTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + element[i]).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
                 //         updateDataTugas.update({
                 //             "isiTugas": $scope.formData.isiTugas,
                 //             "judulTugas": $scope.formData.judulTugas,
@@ -1129,7 +1129,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                 //     }
 
                 // })
-                // // var updateDataTugas = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + temp[i]).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
+                // // var updateDataTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + temp[i]).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
                 // // var listTes = $firebaseArray(updateDataTugas);
                 // // listTes.$loaded().then(function (response) {
                 // //     console.log('ID TUGAS DI SISWA : ' + response);
@@ -1139,7 +1139,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                 // //     // console.log(response[i].$id);
                 // //     temp.push(response[i].$id);
                 // //     console.log('TEMP '+temp[i]);
-                // //     var updateDataTugas = firebase.database(app).ref("tugasSiswa/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + temp[i]).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
+                // //     var updateDataTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.formData.idKelas + "/" + $scope.formData.idMapel + "/tugasperSiswa/" + temp[i]).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
                 // //     var listTes = $firebaseArray(updateDataTugas);
                 // //     listTes.$loaded().then(function (response) {
                 // //         console.log('ID TUGAS DI SISWA : ' + response);
@@ -1215,11 +1215,11 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
             var kirimTugas = data.kirimTugas;
             // console.log(data);
             // console.log(kirimTugas)
-            // console.log("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/dataTugas/"+ $scope.data.groupTugas + "/" + $scope.data.groupTugas+data.idSiswa);
-            // console.log("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/tugasperSiswa/" + data.idSiswa + "/" + $scope.data.groupTugas);
+            // console.log("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/dataTugas/"+ $scope.data.groupTugas + "/" + $scope.data.groupTugas+data.idSiswa);
+            // console.log("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/tugasperSiswa/" + data.idSiswa + "/" + $scope.data.groupTugas);
             // console.log($scope.data.idKelas + '/' + $scope.data.idMapel)
             // Cek Tugas Siswa
-            var periksa = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/dataTugas/"+ $scope.data.groupTugas + "/" + $scope.data.groupTugas+data.idSiswa)
+            var periksa = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/dataTugas/"+ $scope.data.groupTugas + "/" + $scope.data.groupTugas+data.idSiswa)
             periksa.on("value", function (snapshot) {
                 // console.log(snapshot.val());
                 $ionicLoading.show()
@@ -1234,12 +1234,12 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
 
                 } else {
                     console.log('BELUM ADA');
-                    var tugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/dataTugas/"+ $scope.data.groupTugas).limitToFirst(1);
+                    var tugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/dataTugas/"+ $scope.data.groupTugas).limitToFirst(1);
                     tugas.on("child_added", function (snapshot) {
                         $scope.datanya = snapshot.val();
                         console.log($scope.datanya );
                         if (kirimTugas === true) {
-                            var insertData = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/dataTugas/"+ $scope.data.groupTugas + "/" + $scope.data.groupTugas+data.idSiswa).set({
+                            var insertData = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/dataTugas/"+ $scope.data.groupTugas + "/" + $scope.data.groupTugas+data.idSiswa).set({
                                 dibaca: false,
                                 filterPublish: data.idSiswa + "_" + $scope.datanya.publish,
                                 groupTugas: $scope.datanya.groupTugas,
@@ -1277,7 +1277,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                                 groupTugasIdSiswa: $scope.datanya.groupTugas + data.idSiswa
                             }).then(function (resp) {
                                 console.log('terkirim1')
-                                var insertData1 = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/tugasperSiswa/" + data.idSiswa + "/" + $scope.data.groupTugas).set({
+                                var insertData1 = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel +"/tugasperSiswa/" + data.idSiswa + "/" + $scope.data.groupTugas).set({
                                     dibaca: false,
                                     filterPublish: data.idSiswa + "_" + $scope.datanya.publish,
                                     groupTugas: $scope.datanya.groupTugas,
@@ -1320,13 +1320,13 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                         }
                         else {
                             //Hapus
-                            var ref = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel).orderByChild("idSiswa").equalTo(data.idSiswa);
+                            var ref = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel).orderByChild("idSiswa").equalTo(data.idSiswa);
                             var listRef = $firebaseArray(ref);
                             $ionicLoading.show();
                             listRef.$loaded().then(function (response) {
                                 for (i = 0; i < response.length; i++) {
                                     if (response[i].groupTugas === $scope.datanya.groupTugas) {
-                                        var hapus = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel + response[i].$id);
+                                        var hapus = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel + response[i].$id);
                                         var objHapus = $firebaseObject(hapus);
                                         objHapus.$remove().then(function (resp) {
                                             console.log('Terhapus');
@@ -1351,11 +1351,11 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
             //         console.log('sudahadadata')
             //     }
             //     else {
-            //         var tugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel).orderByChild("groupTugas").equalTo($scope.data.groupTugas).limitToFirst(1);
+            //         var tugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel).orderByChild("groupTugas").equalTo($scope.data.groupTugas).limitToFirst(1);
             //         tugas.on("child_added", function (snapshot) {
             //             $scope.datanya = snapshot.val();
             //             if (kirimTugas === true) {
-            //                 var insertData = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel).push({
+            //                 var insertData = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel).push({
             //                     dibaca: false,
             //                     filterPublish: data.idSiswa + "_" + $scope.datanya.publish,
             //                     groupTugas: $scope.datanya.groupTugas,
@@ -1397,14 +1397,14 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
             //             }
             //             else {
             //                 //Hapus
-            //                 var ref = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel).orderByChild("idSiswa").equalTo(data.idSiswa);
+            //                 var ref = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel).orderByChild("idSiswa").equalTo(data.idSiswa);
             //                 var listRef = $firebaseArray(ref);
             //                 $ionicLoading.show();
             //                 listRef.$loaded().then(function (response) {
             //                     $ionicLoading.hide();
             //                     for (i = 0; i < response.length; i++) {
             //                         if (response[i].groupTugas === $scope.datanya.groupTugas) {
-            //                             var hapus = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + '/' + $scope.data.idMapel + response[i].$id);
+            //                             var hapus = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + '/' + $scope.data.idMapel + response[i].$id);
             //                             var objHapus = $firebaseObject(hapus);
             //                             objHapus.$remove().then(function (resp) {
             //                                 console.log('Terhapus')
