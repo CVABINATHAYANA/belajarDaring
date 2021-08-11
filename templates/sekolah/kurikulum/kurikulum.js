@@ -56,32 +56,32 @@ angular.module('app.kurikulumSekolah', [])
             // $scope.jadwalPelajaran = response;
             // $scope.jadwalPelajaran = $scope.jadwal.groupBy('filterGuru');
             console.log(response);
-            // for (let i = 0; i < response.length; i++) {
-            //     index = index + 1;
-            //     console.log(index);
-            //     console.log(response[i].$id);
-            //     var groupAbsensiSiswa = firebase.database(appJadwalPelajaranGuru).ref("groupJadwalPelajaranGuru/"+response[i].$id);
-            //     groupAbsensiSiswa.set({
-            //     "filterGuru":response[i].filterGuru,
-            //     "idGuru":response[i].idGuru,
-            //     "idKecamatan":response[i].idKecamatan,
-            //     "idKotaKabupaten":response[i].idKotaKabupaten,
-            //     "idPembuat":response[i].idPembuat,
-            //     "idProvinsi":response[i].idProvinsi,
-            //     "idSekolah":response[i].idSekolah,
-            //     "idTahunAjaran":response[i].idTahunAjaran,
-            //     "jenjang":response[i].jenjang,
-            //     "namaGuru":response[i].namaGuru,
-            //     "namaKecamatan":response[i].namaKecamatan,
-            //     "namaKotaKabupaten":response[i].idGuru,
-            //     "namaProvinsi":response[i].namaProvinsi,
-            //     "namaSekolah":response[i].namaSekolah,
-            //     "tahunAjaran":response[i].tahunAjaran,
-            //     "totalMengajar":response[i].totalMengajar,
-            //     }).then(function (ok) {
-            //         console.log('Ok')
-            //     })
-            // }
+            for (let i = 0; i < response.length; i++) {
+                index = index + 1;
+                console.log(index);
+                console.log(response[i].$id);
+                var groupAbsensiSiswa = firebase.database(appJadwalPelajaranGuru).ref("groupJadwalPelajaranGuru/"+response[i].$id);
+                groupAbsensiSiswa.set({
+                "filterGuru":response[i].filterGuru,
+                "idGuru":response[i].idGuru,
+                "idKecamatan":response[i].idKecamatan,
+                "idKotaKabupaten":response[i].idKotaKabupaten,
+                "idPembuat":response[i].idPembuat,
+                "idProvinsi":response[i].idProvinsi,
+                "idSekolah":response[i].idSekolah,
+                "idTahunAjaran":response[i].idTahunAjaran,
+                "jenjang":response[i].jenjang,
+                "namaGuru":response[i].namaGuru,
+                "namaKecamatan":response[i].namaKecamatan,
+                "namaKotaKabupaten":response[i].idGuru,
+                "namaProvinsi":response[i].namaProvinsi,
+                "namaSekolah":response[i].namaSekolah,
+                "tahunAjaran":response[i].tahunAjaran,
+                "totalMengajar":response[i].totalMengajar,
+                }).then(function (ok) {
+                    console.log('Ok')
+                })
+            }
         });
 
         var refjadwal = firebase.database(app).ref("jadwalPelajaran").orderByChild("idSekolah").equalTo($scope.idSekolah);
@@ -92,45 +92,46 @@ angular.module('app.kurikulumSekolah', [])
             $scope.detailjadwal = response;
             console.log($scope.detailjadwal);
 
-            for (let i = 0; i < response.length; i++) {
-                index = index + 1;
-                console.log(index);
-                console.log(response[i].$id);
-                var groupAbsensiSiswa = firebase.database(appJadwalPelajaranGuru).ref("jadwalPelajaran/"+response[i].$id);
-                groupAbsensiSiswa.set({
-                    "createAt":response[i].createAt,
-                    "diBuatOleh":response[i].diBuatOleh,
-                    "filterGuru":response[i].filterGuru,
-                    "filterGuruHari":response[i].filterGuruHari,
-                    "filterKelasHari":response[i].filterKelasHari,
-                    "filterPelajaran":response[i].filterPelajaran,
-                    "hari":response[i].hari,
-                    "idGuru":response[i].idGuru,
-                    "idKecamatan":response[i].idKecamatan,
-                    "idKelas":response[i].idKelas,
-                    "idKotaKabupaten":response[i].idKotaKabupaten,
-                    "idPelajaran":response[i].idPelajaran,
-                    "idPembuat":response[i].idPembuat,
-                    "idProvinsi":response[i].idProvinsi,
-                    "idSekolah":response[i].idSekolah,
-                    "idTahunAjaran":response[i].idTahunAjaran,
-                    "jamKe":response[i].jamKe,
-                    "jamMulai":response[i].jamMulai,
-                    "jamSelesai":response[i].jamSelesai,
-                    "jenjang":response[i].jenjang,
-                    "namaGuru":response[i].namaGuru,
-                    "namaKecamatan":response[i].namaKecamatan,
-                    "namaKelas":response[i].namaKelas,
-                    "namaKotaKabupaten":response[i].namaKotaKabupaten,
-                    "namaProvinsi":response[i].namaProvinsi,
-                    "namaSekolah":response[i].namaSekolah,
-                    "pelajaran":response[i].pelajaran,
-                    "tahunAjaran":response[i].tahunAjaran
-                }).then(function (ok) {
-                    console.log('Ok')
-                })
+            // UPLOAD KE DATABASE ADMIN SUPER
+            // for (let i = 0; i < response.length; i++) {
+            //     index = index + 1;
+            //     console.log(index);
+            //     console.log(response[i].$id);
+            //     var groupAbsensiSiswa = firebase.database(appJadwalPelajaranGuru).ref("jadwalPelajaran/"+response[i].$id);
+            //     groupAbsensiSiswa.set({
+            //         "createAt":response[i].createAt,
+            //         "diBuatOleh":response[i].diBuatOleh,
+            //         "filterGuru":response[i].filterGuru,
+            //         "filterGuruHari":response[i].filterGuruHari,
+            //         "filterKelasHari":response[i].filterKelasHari,
+            //         "filterPelajaran":response[i].filterPelajaran,
+            //         "hari":response[i].hari,
+            //         "idGuru":response[i].idGuru,
+            //         "idKecamatan":response[i].idKecamatan,
+            //         "idKelas":response[i].idKelas,
+            //         "idKotaKabupaten":response[i].idKotaKabupaten,
+            //         "idPelajaran":response[i].idPelajaran,
+            //         "idPembuat":response[i].idPembuat,
+            //         "idProvinsi":response[i].idProvinsi,
+            //         "idSekolah":response[i].idSekolah,
+            //         "idTahunAjaran":response[i].idTahunAjaran,
+            //         "jamKe":response[i].jamKe,
+            //         "jamMulai":response[i].jamMulai,
+            //         "jamSelesai":response[i].jamSelesai,
+            //         "jenjang":response[i].jenjang,
+            //         "namaGuru":response[i].namaGuru,
+            //         "namaKecamatan":response[i].namaKecamatan,
+            //         "namaKelas":response[i].namaKelas,
+            //         "namaKotaKabupaten":response[i].namaKotaKabupaten,
+            //         "namaProvinsi":response[i].namaProvinsi,
+            //         "namaSekolah":response[i].namaSekolah,
+            //         "pelajaran":response[i].pelajaran,
+            //         "tahunAjaran":response[i].tahunAjaran
+            //     }).then(function (ok) {
+            //         console.log('Ok')
+            //     })
 
-            }
+            // }
 
 
         })

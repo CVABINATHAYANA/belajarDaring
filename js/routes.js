@@ -686,7 +686,8 @@ angular.module('app.routes', [])
       .state('menuAdmin.jadwalPelajaranLihatAdmin', {
         url: '/jadwalPelajaranLihatAdmin',
         params: {
-          filterGuru: ""
+          filterGuru: "",
+          idSekolah: "",
         },
         views: {
           'menuAdmin': {
@@ -700,7 +701,8 @@ angular.module('app.routes', [])
         params: {
           filterGuru: "",
           hari: "",
-          tahunAjaran: ""
+          tahunAjaran: "",
+          idSekolah : "",
         },
         views: {
           'menuAdmin': {
@@ -855,7 +857,7 @@ angular.module('app.routes', [])
       })
 
       .state('menuAdmin.tugasSiswaListAdmin', {
-        url: '/tugasSiswaAdmin',
+        url: '/tugasSiswaAdminlist',
         params: {
           tanggal: '',
           idSekolah:'',
@@ -882,8 +884,10 @@ angular.module('app.routes', [])
         params: {
           groupTugas: '',
           idGroupTugasSiswa: '',
-          idGuru: '',
-          namaKecamatan: '',
+          idKelas: '',
+          idPelajaran: '',
+          idSekolah:'',
+
         },
         views: {
           'menuAdmin': {
@@ -922,11 +926,14 @@ angular.module('app.routes', [])
         }
       })
       .state('menuAdmin.LihatJawabanTugasSiswaAdmin', {
-        url: '/jawabanTugasSiswa',
+        url: '/jawabanTugasSiswaAdmin',
         params: {
           idTugas: '',
           namaSiswa: '',
-          namaKecamatan: ''
+          idKelas: '',
+          idPelajaran: '',
+          groupTugas: '',
+          idSekolah: '',
         },
         views: {
           'menuAdmin': {
@@ -7335,6 +7342,7 @@ angular.module('app.routes', [])
           namaSiswa: '',
           idKelas: '',
           idPelajaran: '',
+          groupTugas: '',
         },
         views: {
           'menuSekolah': {
