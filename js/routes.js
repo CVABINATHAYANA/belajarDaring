@@ -2565,6 +2565,116 @@ angular.module('app.routes', [])
         }
       })
 
+      .state('menuAdmin.videoTutorialAdmin', {
+        url: '/videoTutorialAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialHome.html',
+            controller: 'videoTutorialAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialGuruAdmin', {
+        url: '/videoTutorialGuruAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialGuru.html',
+            controller: 'videoTutorialGuruAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialGuruLihatAdmin', {
+        url: '/videoTutorialGuruLihatAdmin',
+        params: {
+          idVideo: '',
+          judulVideo: '',
+          keteranganVideo: ''
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialGuruLihat.html',
+            controller: 'videoTutorialGuruLihatAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialSekolahAdmin', {
+        url: '/videoTutorialSekolahAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialSekolah.html',
+            controller: 'videoTutorialSekolahAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialSekolahLihatAdmin', {
+        url: '/videoTutorialSekolahLihatAdmin',
+        params: {
+          idVideo: '',
+          judulVideo: '',
+          keteranganVideo: ''
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialSekolahLihat.html',
+            controller: 'videoTutorialSekolahLihatAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialSiswaAdmin', {
+        url: '/videoTutorialSiswaAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialSiswa.html',
+            controller: 'videoTutorialSiswaAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialSiswaLihatAdmin', {
+        url: '/videoTutorialSiswaLihatAdmin',
+        params: {
+          idVideo: '',
+          judulVideo: '',
+          keteranganVideo: ''
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialSiswaLihat.html',
+            controller: 'videoTutorialSiswaLihatAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialOrangTuaAdmin', {
+        url: '/videoTutorialOrangTuaAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialOrangTua.html',
+            controller: 'videoTutorialOrangTuaAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialOrangTuaLihatAdmin', {
+        url: '/videoTutorialOrangTuaLihatAdmin',
+        params: {
+          idVideo: '',
+          judulVideo: '',
+          keteranganVideo: ''
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialOrangTuaLihat.html',
+            controller: 'videoTutorialOrangTuaLihatAdminCtrl'
+          }
+        }
+      })
+
       // USER SISWA
       .state('menuSiswa', {
         url: '/siswa',

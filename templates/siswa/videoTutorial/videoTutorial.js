@@ -22,12 +22,13 @@ angular.module('app.videoTutorialSiswa', [])
             $state.go('welcome');
         }
 
-        var video = firebase.database().ref("videoTutorial").orderByChild("untuk").equalTo("Siswa");
+        var video = firebase.database().ref("videoTutorial/Siswa");
         var listVideo = $firebaseArray(video);
         $ionicLoading.show();
         listVideo.$loaded().then(function (response) {
             $ionicLoading.hide();
             $scope.dataVideo = response;
+            console.log($scope.dataVideo);
         });
 
         $scope.getData = function (data) {
@@ -69,7 +70,7 @@ angular.module('app.videoTutorialSiswa', [])
             "keteranganVideo": $stateParams.keteranganVideo
         }
 
-        var dataVideo = firebase.database().ref("videoTutorial/"+$scope.data.idVideo);
+        var dataVideo = firebase.database().ref("videoTutorial/Siswa/"+$scope.data.idVideo);
         var obj = $firebaseObject(dataVideo);
         $ionicLoading.show();
         obj.$loaded().then(function(response){
