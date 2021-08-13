@@ -446,7 +446,11 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
             $scope.dataAbsensi = [];
             $scope.tampil = true;
             $scope.formData.idKelas = data.idKelas;
-            console.log()
+            // console.log($scope.dataKelasChek[$index]);
+            $scope.dataKelasChek[$index]["kirimKelas"] = true;
+
+            console.log($scope.dataKelasChek);
+
             // console.log($scope.dataKelasChek);
             // console.log( $scope.formData.idKelas);
 
