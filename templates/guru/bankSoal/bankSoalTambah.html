@@ -69,19 +69,17 @@
                         <!-- <option>Essay</option> -->
                     </select>
                 </label>
-                <ion-item class="item-icon-right assertive" ng-click="buatMateriBaru()">Buat
+                <!-- <ion-item class="item-icon-right assertive" ng-click="buatMateriBaru()">Buat
                     Materi Soal
                     <i class="icon ion-ios-arrow-right icon-accessory"></i>
-                </ion-item>
-                <label class="item item-select">
-                    <span class="input-label">
-                        <p>Materi Soal</p>
-                    </span>
-                    <select ng-model="formData.idMateriSoal" ng-change="getMateri()">
+                </ion-item> -->
+                <label class="item">
+                    <input type="text" placeholder="Materi Soal" ng-model="formData.idMateriSoal">
+                    <!-- <select ng-model="formData.idMateriSoal" ng-change="getMateri()">
                         <option ng-repeat="data in datas | orderBy:'materiSoal'" value="{{data.$id}}">
                             {{data.materiSoal}}
                         </option>
-                    </select>
+                    </select> -->
                 </label>
                 <!-- <label class="item item-select" id="tambahSoal-select15">
                     <span class="input-label">
@@ -131,14 +129,7 @@
                     <textarea placeholder="" ng-model="formData.jawabanD" rows="10"
                         ui-tinymce="tinymceOptions"></textarea>
                 </label>
-                <div class="spacer" style="height: 10px;" ng-show="PG"></div>
 
-                <ion-item class="item-divider" id="tambahSoal-list-item-divider13" ng-show="PG"> Pilihan Jawaban E
-                </ion-item>
-                <label class="item item-input" id="tambahSoal-textarea18" ng-show="PG">
-                    <textarea placeholder="" ng-model="formData.jawabanE" rows="10"
-                        ui-tinymce="tinymceOptions"></textarea>
-                </label>
                 <div class="spacer" style="height: 10px;" ng-show="PG"></div>
 
                 <ion-item class="item-divider" id="tambahSoal-list-item-divider14" ng-show="PG"> Kunci dan Pembahasan
@@ -152,7 +143,6 @@
                         <option>B</option>
                         <option>C</option>
                         <option>D</option>
-                        <option>E</option>
                     </select>
                 </label>
                 <div class="spacer" style="height: 10px;" ng-show="PG"></div>
@@ -219,7 +209,7 @@
                                 <input type="text" placeholder="Materi Soal" ng-model="formData.namaMateriSoal">
                             </label>
                             <button class="button button-positive button-block">Simpan Data</button>
-                        </form>    
+                        </form>
                 </div>
         </div>
     </ion-content>
