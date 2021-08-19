@@ -331,6 +331,7 @@ angular.module('app.tugasSiswa', [])
                                 "judulTugas": data.judulTugas,
                                 "isiTugas": data.isiTugas,
                                 "nilaiTugasSiswa": data.nilaiTugasSiswa,
+                                "komentarTugasSiswa":data.komentarTugasSiswa,
                                 "jawabanTugas": data.jawabanTugas,
 
                                 "idKelas":kelas,
@@ -403,6 +404,7 @@ angular.module('app.tugasSiswa', [])
             "judulTugas": $stateParams.judulTugas,
             "isiTugas": $stateParams.isiTugas,
             "nilaiTugasSiswa": $stateParams.nilaiTugasSiswa,
+            "komentarTugasSiswa" :$stateParams.komentarTugasSiswa,
             "jawabanTugas": $stateParams.jawabanTugas,
 
             "idKelas":$stateParams.idKelas,

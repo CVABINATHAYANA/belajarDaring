@@ -3977,6 +3977,7 @@ angular.module('app.routes', [])
           judulTugas:'',
           isiTugas: '',
           nilaiTugasSiswa: '',
+          komentarTugasSiswa:'',
           jawabanTugas: '',
 
           idMapel: "",
@@ -5014,6 +5015,7 @@ angular.module('app.routes', [])
 
           jawabanTugas: '',
           nilaiTugasSiswa: '',
+          komentarTugasSiswa: '',
           judulTugas:'',
           isiTugas: '',
           tanggalPengumpulanTugas: '',
