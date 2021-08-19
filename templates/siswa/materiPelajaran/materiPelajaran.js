@@ -191,7 +191,8 @@ angular.module('app.materiPelajaranSiswa', ['ngYoutubeEmbed'])
         }
 
 
-        var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran").orderByChild("idMateriPelajaran").equalTo($scope.data.idMateriPelajaran);
+        // var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran").orderByChild("idMateriPelajaran").equalTo($scope.data.idMateriPelajaran);
+        var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/"+$scope.data.idMateriPelajaran);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
@@ -201,7 +202,7 @@ angular.module('app.materiPelajaranSiswa', ['ngYoutubeEmbed'])
 
         $scope.getData = function (item) {
 
-            var obj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran/" + item.$id);
+            var obj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/"+$scope.data.idMateriPelajaran+ "/" + item.$id);
             var listObj = $firebaseObject(obj);
             $ionicLoading.show();
             listObj.$loaded().then(function (response) {

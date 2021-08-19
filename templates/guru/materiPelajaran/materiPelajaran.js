@@ -310,7 +310,8 @@ angular.module('app.materiPelajaranGuru', ['ngYoutubeEmbed'])
             "BAB": $stateParams.BAB
         };
 
-        var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran").orderByChild("idMateriPelajaran").equalTo($scope.data.idMateriPelajaran);
+        // var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran").orderByChild("idMateriPelajaran").equalTo($scope.data.idMateriPelajaran);
+        var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/"+$scope.data.idMateriPelajaran);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
@@ -353,7 +354,7 @@ angular.module('app.materiPelajaranGuru', ['ngYoutubeEmbed'])
                     }
 
                     if (index === 1) {
-                        var obj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran/" + item.$id);
+                        var obj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/"+$scope.data.idMateriPelajaran+ "/" + item.$id);
                         var listObj = $firebaseObject(obj);
                         $ionicLoading.show();
                         listObj.$loaded().then(function (response) {
@@ -375,7 +376,7 @@ angular.module('app.materiPelajaranGuru', ['ngYoutubeEmbed'])
                 },
 
                 destructiveButtonClicked: function () {
-                    var refObj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran/" + item.$id);
+                    var refObj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/" +$scope.data.idMateriPelajaran+ "/" + item.$id);
                     var objDelete = $firebaseObject(refObj)
                     var confirmPopup = $ionicPopup.confirm({
                         title: 'Hapus Data',
@@ -493,8 +494,9 @@ angular.module('app.materiPelajaranGuru', ['ngYoutubeEmbed'])
             var createAt = $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
             if ($scope.formData.namaSubBAB !== "" && $scope.formData.isiMateriPembelajaran !== "") {
+
                 $ionicLoading.show();
-                var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran");
+                var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/" + $stateParams.idMateriPelajaran);
                 ref.push({
                     "idMateriPelajaran": $stateParams.idMateriPelajaran,
                     "BAB": $stateParams.BAB,
@@ -604,7 +606,7 @@ angular.module('app.materiPelajaranGuru', ['ngYoutubeEmbed'])
             "namaSubBAB": $stateParams.namaSubBAB
         };
 
-        var obj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran/" + $scope.data.idSubBAB);
+        var obj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/"+$scope.data.idMateriPelajaran+ "/" + $scope.data.idSubBAB);
         var listObj = $firebaseObject(obj);
         $ionicLoading.show();
         listObj.$loaded().then(function (response) {
@@ -789,7 +791,7 @@ angular.module('app.materiPelajaranGuru', ['ngYoutubeEmbed'])
 
                 destructiveButtonClicked: function () {
                     //Cek Data
-                    var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran").orderByChild("idMateriPelajaran").equalTo(data.$id);
+                    var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/"+data.$id).orderByChild("idMateriPelajaran").equalTo(data.$id);
                     var listRef = $firebaseArray(ref);
                     $ionicLoading.show();
                     listRef.$loaded().then(function (response) {

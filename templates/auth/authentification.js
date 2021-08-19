@@ -1557,7 +1557,7 @@ angular.module('app.authentification', [])
                             //console.log("jangan dilanjutkan");
                             $ionicPopup.alert({
                                 title: 'Information',
-                                template: 'Maaf email anda belum terdaftar , silahkan mendaftar terlebih dahulu',
+                                template: 'Maaf NISN anda belum terdaftar , silahkan mendaftar terlebih dahulu',
                                 okType: 'button-positive'
                             });
                         }

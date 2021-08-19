@@ -156,7 +156,8 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                         })
                     }
                     if (index === 3) {
-                        var getAbs = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran).orderByChild("groupTugas").equalTo(data.groupTugas);
+                        // var getAbs = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran).orderByChild("groupTugas").equalTo(data.groupTugas);
+                        var getAbs = firebase.database(app).ref("tugasSiswaNew/" + data.idKelas + '/' + data.idPelajaran + '/dataTugas/' + data.groupTugas);
                         var listGetAbs = $firebaseArray(getAbs);
                         $ionicLoading.show();
                         listGetAbs.$loaded().then(function (response) {
