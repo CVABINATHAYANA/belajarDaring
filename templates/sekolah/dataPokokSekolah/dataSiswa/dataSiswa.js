@@ -782,7 +782,8 @@ angular.module('app.dataPokokSiswaSekolah', [])
                     "tahunAjaran": $scope.dataTahunAjaran,
                     "idKelas": $scope.formData.idKelas,
                     "namaKelas": $scope.namaKelas,
-                    "tingkatKelas": $scope.formData.tingkatKelas
+                    "tingkatKelas": $scope.formData.tingkatKelas,
+                    "siswaAbsen":$scope.formData.siswaAbsen,
                 }))).then(function (resp) {
                     $ionicLoading.hide();
                     var get = firebase.database(appSiswa).ref("dataSiswa/" + $scope.data.idSiswa + "/kelasSiswa").orderByChild('idTahunAjaran').equalTo($scope.formData.idTahunAjaran);

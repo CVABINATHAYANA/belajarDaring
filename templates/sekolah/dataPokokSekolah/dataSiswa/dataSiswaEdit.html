@@ -83,6 +83,13 @@
                             <option ng-repeat="data in dataKelas" value="{{data.$id}}">{{data.namaKelas}}</option>
                         </select>
                     </label>
+
+                    <label class="item item-input item-floating-label input" id="registrasi-input7">
+                        <span class="input-label">
+                            <p>No Absen</p>
+                        </span>
+                        <input type="tel" placeholder="Nomor Absen" ng-model="formData.siswaAbsen">
+                    </label>
                     <div class="spacer" style="height: 10px;"></div>
                     <ion-item class="item-divider input" id="registrasi-list-item-divider5"> Data Diri</ion-item>
                     <label class="item item-input item-floating-label input" id="registrasi-input6">
