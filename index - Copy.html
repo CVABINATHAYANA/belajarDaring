@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+  <link href="img/logospensa.png" rel="shortcut icon" />
+  <title>Aplikasi Daring</title>
+  <!-- Latest compiled and minified CSS -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="js/jquery-ui/jquery-ui.min.css"  rel="stylesheet">
+
+  <!-- TinyMCE -->
+  <!-- <script src="js/tinymce.min.js"></script> -->
+  <!-- <script src="bootstrap/css/bootstrap.min.css"></script> -->
+  <!-- <script src="https://tinymce.cachefly.net/4.0/tinymce.min.js"></script> -->
+
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=1qmtn07nwl4upub0wfv8dv300d2l3sam7r819cl4zsixgudl">
+  </script>
+
+  <!-- <script src="https://cdn.tiny.cloud/1/1qmtn07nwl4upub0wfv8dv300d2l3sam7r819cl4zsixgudl/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin">
+    </script> -->
+
+
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
+  <link href="css/ionic.app.css" rel="stylesheet">
+  
+
+  <style type="text/css">
+        .modal{
+        top: 0 ;
+        bottom: 0 ; 
+        left: 0 ;
+        right: 0 ;
+        width: 100% ;
+      }
+
+      .bg-gradient-blue{
+
+      background: rgb(239,71,58);
+      background: -moz-linear-gradient(180deg, rgba(239,71,58,1) 0%, rgba(174,44,34,1) 100%);
+      background: -webkit-linear-gradient(180deg, rgba(239,71,58,1) 0%, rgba(174,44,34,1) 100%);
+      background: linear-gradient(180deg, rgba(239,71,58,1) 0%, rgba(174,44,34,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ef473a",endColorstr="#ae2c22",GradientType=1);
+      border:none;
+    }
+      .bg-card-gradient-blue{
+        background: rgb(239,71,58);
+      background: -moz-linear-gradient(180deg, rgba(239,71,58,1) 0%, rgba(174,44,34,1) 100%);
+      background: -webkit-linear-gradient(180deg, rgba(239,71,58,1) 0%, rgba(174,44,34,1) 100%);
+      background: linear-gradient(180deg, rgba(239,71,58,1) 0%, rgba(174,44,34,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ef473a",endColorstr="#ae2c22",GradientType=1);
+        border:none;
+    }
+      .bg-gradient-blue2{
+      background: rgb(56,112,227);
+      background: -moz-linear-gradient(90deg, rgba(56,112,227,1) 0%, rgba(0,181,228,1) 100%);
+      background: -webkit-linear-gradient(90deg, rgba(56,112,227,1) 0%, rgba(0,181,228,1) 100%);
+      background: linear-gradient(90deg, rgba(56,112,227,1) 0%, rgba(0,181,228,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3870e3",endColorstr="#00b5e4",GradientType=1);
+      border:none;
+    }
+    .platform-ios .manual-ios-statusbar-padding {
+      padding-top: 20px;
+    }
+
+    .manual-remove-top-padding {
+      padding-top: 0px;
+    }
+
+    .manual-remove-top-padding .scroll {
+      padding-top: 0px !important;
+    }
+
+    ion-list.manual-list-fullwidth div.list,
+    .list.card.manual-card-fullwidth {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+
+    ion-list.manual-list-fullwidth div.list>.item,
+    .list.card.manual-card-fullwidth>.item {
+      border-radius: 0px;
+      border-left: 0px;
+      border-right: 0px;
+    }
+
+    .show-list-numbers-and-dots ul {
+      list-style-type: disc;
+      padding-left: 40px;
+    }
+
+    .show-list-numbers-and-dots ol {
+      list-style-type: decimal;
+      padding-left: 40px;
+    }
+
+    div.scrollmenu {
+      background-color: #387EF5;
+      overflow: auto;
+      white-space: nowrap;
+    }
+
+    div.scrollmenu a {
+      display: inline-block;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      text-decoration: none;
+    }
+
+    div.scrollmenu a:hover {
+      background-color: #EEEEEE;
+      color: black;
+    }
+
+    div.nomorSoalNow {
+      background-color: #EEEEEE;
+      color: black;
+      padding: 3px;
+    }
+
+    em,
+    i {
+      font-style: italic;
+    }
+
+    .putih {
+      background-color: white;
+    }
+
+    .input {
+      background-color: white;
+    }
+
+    .short {
+      width: 95% !important;
+      margin: auto;
+    }
+
+    .latar {
+      /* background-color: #EEEEEE; */
+      background-color: rgb(247, 247, 247);
+    }
+
+    .kartu {
+      margin: auto;
+      padding: 15px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      margin-bottom: 10px;
+    }
+
+    .kartuBaru {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 100%;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+      padding: 5px;
+      background-color: white;
+      border-radius: 5px;
+    }
+
+    .kartuTransparant {
+      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+      max-width: 100%;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    @media print {
+      .scroll-content {
+        position: relative;
+      }
+
+      .pane {
+        position: initial;
+      }
+
+      .no-print {
+        display: none;
+      }
+    }
+
+    .avatar {
+      vertical-align: middle;
+      margin-top:10px;
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+
+      border-radius: 50%;
+    }
+
+    .menuIcon {
+      background-color: #F8F8F8;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 3px 2px 3px #888888
+    }
+
+.container{max-width:1170px; margin:auto;}
+
+img{ max-width:100%;}
+.inbox_people {
+  background: #f8f8f8 none repeat scroll 0 0;
+  float: left;
+  overflow: hidden;
+  width: 40%; border-right:1px solid #c4c4c4;
+}
+.inbox_msg {
+  border: 1px solid #c4c4c4;
+  clear: both;
+  overflow: hidden;
+}
+.top_spac{ margin: 20px 0 0;}
+
+
+.recent_heading {float: left; width:40%;}
+.srch_bar {
+  display: inline-block;
+  text-align: right;
+  width: 60%;
+}
+
+.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
+
+.recent_heading h4 {
+  color: #05728f;
+  font-size: 21px;
+  margin: auto;
+}
+.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;}
+.srch_bar .input-group-addon button {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  padding: 0;
+  color: #707070;
+  font-size: 18px;
+}
+.srch_bar .input-group-addon { margin: 0 0 0 -27px;}
+
+.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;}
+.chat_ib h5 span{ font-size:13px; float:right;}
+.chat_ib p{ font-size:14px; color:#989898; margin:auto}
+.chat_img {
+  float: left;
+  width: 11%;
+}
+.chat_ib {
+  float: left;
+  padding: 0 0 0 15px;
+  width: 88%;
+}
+
+.chat_people{ overflow:hidden; clear:both;}
+.chat_list {
+  border-bottom: 1px solid #c4c4c4;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+.inbox_chat { height: 550px; overflow-y: scroll;}
+
+.active_chat{ background:#ebebeb;}
+
+.incoming_msg_img {
+  display: inline-block;
+  width: 6%;
+}
+.received_msg {
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 92%;
+ }
+ .received_withd_msg p {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #646464;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 5px 5px 12px;
+  width: 100%;
+}
+
+.received_nama p {
+  color:green;
+  font-size: 15px;
+}
+.time_date {
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+.received_withd_msg { width: 57%;}
+.mesgs {
+  width: 60%;
+}
+
+ .sent_msg p {
+  background: #05728f none repeat scroll 0 0;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 0; color:#fff;
+  padding: 5px 10px 5px 12px;
+  width:100%;
+}
+.outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
+.sent_msg {
+  float: right;
+  width: 46%;
+}
+.input_msg_write input {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  width: 100%;
+}
+
+.type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+.msg_send_btn {
+  background: #05728f none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  right: 0;
+  top: 11px;
+  width: 33px;
+}
+.messaging { padding: 0 0 50px 0;}
+.msg_history {
+  height: 516px;
+  overflow-y: auto;
+}
+    
+  </style>
+
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/routes.js"></script>
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+
+  <script src="templates/auth/authentification.js"></script>
+  <script src="templates/auth/registrasi/registrasi.js"></script>
+  <script src="templates/admin/beranda/beranda.js"></script>
+  <script src="templates/admin/pengaturan/pengaturan.js"></script>
+  <script src="templates/admin/dataPokokSekolah/dataPokokSekolah.js"></script>
+  <script src="templates/admin/kurikulum/kurikulum.js"></script>
+  <script src="templates/admin/absensi/absensi.js"></script>
+  <script src="templates/admin/tugas/tugas.js"></script>
+  <script src="templates/admin/bankSoal/bankSoal.js"></script>
+  <script src="templates/admin/materiPelajaran/materiPelajaran.js"></script>
+  <script src="templates/admin/dataAkun/dataAkun.js"></script>
+  <script src="templates/admin/soc/beranda/beranda.js"></script>
+  <script src="templates/admin/soc/pelajaran/pelajaran.js"></script>
+  <script src="templates/admin/soc/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/admin/soc/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/admin/soc/nilaiPeringkat/nilaiPeringkat.js"></script>
+  <script src="templates/admin/ujianOnline/beranda/beranda.js"></script>
+  <script src="templates/admin/ujianOnline/pelajaran/pelajaran.js"></script>
+  <script src="templates/admin/ujianOnline/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/admin/ujianOnline/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/admin/ujianOnline/nilaiPeringkat/nilaiPeringkat.js"></script>
+
+  <script src="templates/admin/UTSUAS/beranda/beranda.js"></script>
+  <script src="templates/admin/UTSUAS/pelajaran/pelajaran.js"></script>
+  <script src="templates/admin/UTSUAS/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/admin/UTSUAS/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/admin/UTSUAS/nilaiPeringkat/nilaiPeringkat.js"></script>
+
+  <script src="templates/admin/tryoutOnline/beranda/beranda.js"></script>
+  <script src="templates/admin/tryoutOnline/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/admin/tryoutOnline/pelajaran/pelajaran.js"></script>
+  <script src="templates/admin/tryoutOnline/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/admin/tryoutOnline/nilaiPeringkat/nilaiPeringkat.js"></script>
+
+  <script src="templates/sekolah/beranda/beranda.js"></script>
+  <script src="templates/sekolah/pengaturan/pengaturan.js"></script>
+  <script src="templates/sekolah/dataPokokSekolah/dataGuru/dataGuru.js"></script>
+  <script src="templates/sekolah/dataPokokSekolah/dataPrasarana/dataPrasarana.js"></script>
+  <script src="templates/sekolah/dataPokokSekolah/dataRombel/dataRombel.js"></script>
+  <script src="templates/sekolah/dataPokokSekolah/dataSarana/dataSarana.js"></script>
+  <script src="templates/sekolah/dataPokokSekolah/dataSekolah/dataSekolah.js"></script>
+  <script src="templates/sekolah/dataPokokSekolah/dataSiswa/dataSiswa.js"></script>
+  <script src="templates/sekolah/kurikulum/kurikulum.js"></script>
+  <script src="templates/sekolah/absensi/absensi.js"></script>
+  <script src="templates/sekolah/tugas/tugas.js"></script>
+  <script src="templates/sekolah/bankSoal/bankSoal.js"></script>
+  <script src="templates/sekolah/materiPelajaran/materiPelajaran.js"></script>
+  <script src="templates/sekolah/dataAkun/dataAkun.js"></script>
+  <script src="templates/sekolah/soc/beranda/beranda.js"></script>
+  <script src="templates/sekolah/soc/pelajaran/pelajaran.js"></script>
+  <script src="templates/sekolah/soc/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/sekolah/soc/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/sekolah/soc/nilaiPeringkat/nilaiPeringkat.js"></script>
+  <script src="templates/sekolah/ujianOnline/beranda/beranda.js"></script>
+  <script src="templates/sekolah/ujianOnline/pelajaran/pelajaran.js"></script>
+  <script src="templates/sekolah/ujianOnline/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/sekolah/ujianOnline/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/sekolah/ujianOnline/nilaiPeringkat/nilaiPeringkat.js"></script>
+  <script src="templates/sekolah/berita/berita.js"></script>
+  <script src="templates/sekolah/informasi/informasi.js"></script>
+  <script src="templates/sekolah/gallery/albumFoto/foto.js"></script>
+  <script src="templates/sekolah/gallery/albumVideo/video.js"></script>
+  <script src="templates/sekolah/visiMisi/visiMisi.js"></script>
+  <script src="templates/sekolah/tentangKami/tentangKami.js"></script>
+  <script src="templates/sekolah/layananKami/layananKami.js"></script>
+
+  <script src="templates/sekolah/UTSUAS/beranda/beranda.js"></script>
+  <script src="templates/sekolah/UTSUAS/pelajaran/pelajaran.js"></script>
+  <script src="templates/sekolah/UTSUAS/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/sekolah/UTSUAS/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/sekolah/UTSUAS/nilaiPeringkat/nilaiPeringkat.js"></script>
+
+  <script src="templates/sekolah/tryoutOnline/beranda/beranda.js"></script>
+  <script src="templates/sekolah/tryoutOnline/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/sekolah/tryoutOnline/pelajaran/pelajaran.js"></script>
+  <script src="templates/sekolah/tryoutOnline/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/sekolah/tryoutOnline/nilaiPeringkat/nilaiPeringkat.js"></script>
+  <script src="templates/sekolah/videoTutorial/videoTutorial.js"></script>
+  <script src="templates/sekolah/adminSekolah/adminSekolah.js"></script>
+
+  <script src="templates/guru/beranda/beranda.js"></script>
+  <script src="templates/guru/pengaturan/pengaturan.js"></script>
+  <script src="templates/guru/dataPokokSekolah/dataPokokSekolah.js"></script>
+  <script src="templates/guru/kurikulum/kurikulum.js"></script>
+  <script src="templates/guru/absensi/absensi.js"></script>
+  <script src="templates/guru/tugas/tugas.js"></script>
+  <script src="templates/guru/bankSoal/bankSoal.js"></script>
+  <script src="templates/guru/materiPelajaran/materiPelajaran.js"></script>
+  <script src="templates/guru/dataAkun/dataAkun.js"></script>
+  <script src="templates/guru/soc/beranda/beranda.js"></script>
+  <script src="templates/guru/soc/pelajaran/pelajaran.js"></script>
+  <script src="templates/guru/soc/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/guru/soc/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/guru/soc/nilaiPeringkat/nilaiPeringkat.js"></script>
+  <script src="templates/guru/ujianOnline/beranda/beranda.js"></script>
+  <script src="templates/guru/ujianOnline/pelajaran/pelajaran.js"></script>
+  <script src="templates/guru/ujianOnline/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/guru/ujianOnline/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/guru/ujianOnline/nilaiPeringkat/nilaiPeringkat.js"></script>
+
+  <script src="templates/guru/UTSUAS/beranda/beranda.js"></script>
+  <script src="templates/guru/UTSUAS/pelajaran/pelajaran.js"></script>
+  <script src="templates/guru/UTSUAS/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/guru/UTSUAS/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/guru/UTSUAS/nilaiPeringkat/nilaiPeringkat.js"></script>
+
+  <script src="templates/guru/tryoutOnline/beranda/beranda.js"></script>
+  <script src="templates/guru/tryoutOnline/pengaturanUmum/pengaturanUmum.js"></script>
+  <script src="templates/guru/tryoutOnline/pelajaran/pelajaran.js"></script>
+  <script src="templates/guru/tryoutOnline/registrasiPeserta/registrasiPeserta.js"></script>
+  <script src="templates/guru/tryoutOnline/nilaiPeringkat/nilaiPeringkat.js"></script>
+  <script src="templates/guru/videoTutorial/videoTutorial.js"></script>
+
+  <script src="templates/siswa/beranda/beranda.js"></script>
+  <script src="templates/siswa/soc/beranda/beranda.js"></script>
+  <script src="templates/siswa/soc/mulaiOlimpiade/mulaiOlimpiade.js"></script>
+  <script src="templates/siswa/soc/olimpiadeDetail/olimpiadeDetail.js"></script>
+  <script src="templates/siswa/soc/kisiKisiSoal/kisiKisiSoal.js"></script>
+  <script src="templates/siswa/soc/pesertaOlimpiade/pesertaOlimpiade.js"></script>
+  <script src="templates/siswa/soc/nilaiAnda/nilaiAnda.js"></script>
+  <script src="templates/siswa/soc/peringkatAnda/peringkatAnda.js"></script>
+  <script src="templates/siswa/soc/olimpiadeOnline/olimpiadeOnline.js"></script>
+
+  <script src="templates/siswa/UTSUAS/beranda/beranda.js"></script>
+  <script src="templates/siswa/UTSUAS/mulaiUTSUAS/mulaiUTSUAS.js"></script>
+  <script src="templates/siswa/UTSUAS/ujian/ujianOnline.js"></script>
+  <script src="templates/siswa/UTSUAS/nilaiAnda/nilaiAnda.js"></script>
+  <script src="templates/siswa/UTSUAS/peringkatAnda/peringkatAnda.js"></script>
+  <script src="templates/siswa/UTSUAS/ujianDetail/ujianDetail.js"></script>
+  <script src="templates/siswa/UTSUAS/kisiKisiSoal/kisiKisiSoal.js"></script>
+  <script src="templates/siswa/UTSUAS/pesertaUjian/pesertaUjian.js"></script>
+
+  <script src="templates/siswa/TryoutOnline/beranda/beranda.js"></script>
+  <script src="templates/siswa/TryoutOnline/mulaiTryoutOnline/mulaiTryoutOnline.js"></script>
+  <script src="templates/siswa/TryoutOnline/ujian/ujianOnline.js"></script>
+  <script src="templates/siswa/TryoutOnline/nilaiAnda/nilaiAnda.js"></script>
+  <script src="templates/siswa/TryoutOnline/peringkatAnda/peringkatAnda.js"></script>
+  <script src="templates/siswa/TryoutOnline/ujianDetail/ujianDetail.js"></script>
+  <script src="templates/siswa/TryoutOnline/kisiKisiSoal/kisiKisiSoal.js"></script>
+  <script src="templates/siswa/TryoutOnline/pesertaUjian/pesertaUjian.js"></script>
+
+  <script src="templates/siswa/ujianOnline/ulanganHarian/beranda/beranda.js"></script>
+  <script src="templates/siswa/ujianOnline/ulanganHarian/mulaiUjian/mulaiUjian.js"></script>
+  <script src="templates/siswa/ujianOnline/ulanganHarian/ujian/ujianOnline.js"></script>
+  <script src="templates/siswa/ujianOnline/ulanganHarian/ujianDetail/ujianDetail.js"></script>
+  <script src="templates/siswa/ujianOnline/ulanganHarian/kisiKisiSoal/kisiKisiSoal.js"></script>
+  <script src="templates/siswa/ujianOnline/ulanganHarian/pesertaUjian/pesertaUjian.js"></script>
+  <script src="templates/siswa/ujianOnline/ulanganHarian/nilaiAnda/nilaiAnda.js"></script>
+  <script src="templates/siswa/ujianOnline/ulanganHarian/peringkatAnda/peringkatAnda.js"></script>
+
+  <script src="templates/siswa/ujianOnline/latihanSoal/beranda/beranda.js"></script>
+  <script src="templates/siswa/ujianOnline/latihanSoal/berandaUmum/beranda.js"></script>
+  <script src="templates/siswa/ujianOnline/latihanSoal/berandaKuisOnlineUmum/beranda.js"></script>
+  <script src="templates/siswa/ujianOnline/latihanSoal/berandaTryoutOnlineUmum/beranda.js"></script>
+
+  <script src="templates/siswa/dataAkun/dataAkun.js"></script>
+  <script src="templates/siswa/jadwalPelajaran/jadwalPelajaran.js"></script>
+  <script src="templates/siswa/absensi/absensi.js"></script>
+  <script src="templates/siswa/tugas/tugas.js"></script>
+  <script src="templates/siswa/bankSoal/bankSoal.js"></script>
+  <script src="templates/siswa/materiPelajaran/materiPelajaran.js"></script>
+  <script src="templates/siswa/videoTutorial/videoTutorial.js"></script>
+
+  <script src="templates/orangTua/beranda/beranda.js"></script>
+  <script src="templates/orangTua/absensi/absensi.js"></script>
+  <script src="templates/orangTua/jadwalPelajaran/jadwalPelajaran.js"></script>
+  <script src="templates/orangTua/tugas/tugas.js"></script>
+  <script src="templates/orangTua/ujianOnline/ulanganHarian/beranda/beranda.js"></script>
+  <script src="templates/orangTua/ujianOnline/ulanganHarian/ujianDetail/ujianDetail.js"></script>
+  <script src="templates/orangTua/ujianOnline/ulanganHarian/nilaiAnda/nilaiAnda.js"></script>
+  <script src="templates/orangTua/ujianOnline/ulanganHarian/mulaiUjian/mulaiUjian.js"></script>
+  <script src="templates/orangTua/ujianOnline/ulanganHarian/peringkatAnda/peringkatAnda.js"></script>
+  <script src="templates/orangTua/dataAkun/dataAkun.js"></script>
+
+  <script src="js/directives.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/firebase.js"></script>
+  <!-- <script src="js/fierbase7.14.js"></script> -->
+  <!-- <script src="js/firebaseAnalytics.js"></script> -->
+  <script src="js/angularfire.min.js"></script>
+  <script src="js/ng-youtube-embed.min.js"></script>
+  <script src="js/excel.js"></script>
+  <script src="js/FileSaver.min.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script> -->
+  <!-- <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script> -->
+  <script src="js/firebase.init.js"></script>
+  <script src="js/ng-cordova.min.js"></script>
+  <!-- <script src="js/xlsx.full.min.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/ng-youtube-embed@1.7.16/build/ng-youtube-embed.min.js"></script> -->
+  <!-- <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.4/jspdf.plugin.autotable.js"></script> -->
+  <!-- <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.4/jspdf.plugin.autotable.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.1/xlsx.full.min.js"></script>
+
+  <script src="js/ng-file-upload-shim.min.js"></script>
+  <script src="js/ng-file-upload.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/lodash/4.15.0/lodash.min.js"></script>
+  <script src="js/loadBalancing.js"></script>
+
+
+  <!-- Only required for Tab projects w/ pages in multiple tabs 
+    <script src="lib/ionicuirouter/ionicUIRouter.js"></script>
+    -->
+
+</head>
+<!-- oncontextmenu="return false" -->
+
+<body ng-app="app" animation="slide-left-right-ios7">
+  <div>
+    <div>
+      <ion-nav-bar class="bar bar-assertive">
+        <ion-nav-back-button></ion-nav-back-button>
+      </ion-nav-bar>
+      <ion-nav-view></ion-nav-view>
+    </div>
+  </div>
+</body>
+
+</html>
