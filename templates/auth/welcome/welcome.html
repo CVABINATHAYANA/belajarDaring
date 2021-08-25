@@ -1,155 +1,144 @@
 <ion-view title="Aplikasi Daring" hide-nav-bar="true" cache-view="false" id="welcome">
-  <style>
-    .montserrat {
-      font-family: 'Montserrat', sans-serif;
-    }
-    .montserrat-alter{
-        font-family: 'Montserrat Alternates', sans-serif;
-    }
-    .btn-welcome{
-      font-weight: bold;
-    }
-    #logospensa{
-      width: 30%;
-      height: auto; 
-      margin-left: auto; 
-      margin-right: auto; 
-      margin-top: 2vh;
-      margin-bottom:20px;
-    }
-    #logosee{
-      width: 30%;
-      height: auto; 
-      margin-left: auto; 
-      margin-right: auto; 
-      margin-top: 2vh;
-      margin-bottom:20px;
-    }
-    #mainPage-heading1{
-      color:yellow
-    }
-    p{
-      color:yellow !important;
-    }
-    .ion-slide{
-      width:100%;
-      height:25vh;
-    }
-    @media screen and (max-width :420px) {
-      #logospensa{
-        width: 40%;
-      }
-      #logosee{
-        height: auto;
-        width: 35% !important;
-      }
-      #mainPage-heading1{
-        font-size: 30px !important;
-      }
-    }
-    @media screen and (max-width :320px) {
-      #logospensa{
-        width: 30%;
-      }
-      #mainPage-heading1{
-        font-size: 30px !important;
-      }
-      .btn-welcome{
-        font-size:5x !important;
-      }
-      .ion-slide{
-        height:27vh;
-      }
-    }
-
-  </style>
-  <ion-content padding="false" class="manual-ios-statusbar-padding bg-gradient-blue" scroll="true">
-    <div class="row responsive-lg" style="margin:auto">
-      <div class="col col-50 col-offset-25">
-        <div>
-          <center>
-            <img id="logospensa" src="img/logospensa.png">
-            <div id="title">
-              <h1 id="mainPage-heading1" style="text-align:center;font-weight: bold;">SPENSARAJA EDUCATION EXPOSE
-              </h1>
-              <img id="logosee" src="img/see5.png" style="width: 20%;">
-              <!-- <h1 id="mainPage-heading1" class="montserrat" style="text-align:center;font-weight: bold;color:white;font-size: 50px;margin-bottom: 20px;">SEE </h1> -->
+    <style>
+        .montserrat {
+          font-family: 'Montserrat', sans-serif;
+        }
+        .montserrat-alter{
+            font-family: 'Montserrat Alternates', sans-serif;
+        }
+        #logo{
+          width: 30%;
+          margin-top: 1vh;
+          display: block;
+          height: auto; 
+          margin-left: auto; 
+          margin-right: auto;
+        }
+        #mainPage-heading1{
+          color:white !important
+        }
+        p{
+          color:white !important
+        }
+        .ion-slide{
+          width:100%;
+          height:25vh;
+          color:white !important
+        }
+        @media screen and (max-width :420px) {
+          #logo{
+            width: 40%;
+          }
+        }
+        @media screen and (max-width :320px) {
+          #logospensa{
+            width: 30%;
+          }
+          #mainPage-heading1{
+            font-size: 25px !important;
+          }
+          .small-btn-text{
+            font-size:5x !important;
+          }
+          .ion-slide{
+            height:27vh;
+          }
+        }
+    
+      </style>
+    <ion-content padding="false" class="manual-ios-statusbar-padding bg-gradient-blue" scroll="true" >
+        <div class="row responsive-lg" style="margin:auto">
+            <div class="col col-50 col-offset-25" >
+                <div>
+                    <img id="logo" src="img/lgoBee.png">
+                        <h1 id="mainPage-heading1" style="text-align:center;font-weight: 300;color:white;">BULELENG EDUCATION EXPOSE
+                        </h1>
+                        <h1 id="mainPage-heading1" class="montserrat" style="text-align:center;font-weight: bold;color:white;">BEE </h1>
+                </div>
+                <ion-slides disable-side-menu-drag=""
+                options="{'loop': false,'direction':horizontal,'speed':500,'autoplay':2000,'grabCursor':true}"
+                slider="slider1" delegate-handle="slider1" class="ion-slide">
+                <ion-slide-page id="mainPage-slide24">
+                  <div class="spacer"></div>
+                  <div class="row responsive-lg" style="margin: auto;">
+                    <div class="col col-50 col-offset-25">
+                      <div id="mainPage-markdown1" style="text-align:center;" class="show-list-numbers-and-dots">
+                        <p style="color:white">Sistem Informasi Sekolah Terintegrasi Secara Real Time dan
+                          Uptodate. Dinas Pendidikan Pemuda dan Olahraga Kabupaten Buleleng bisa memonitoring semua aktivitas dan kegiatan yang terjadi
+                          di sekolah, di
+                          kelas,
+                          dan dapat memantau kegiatan siswa, guru dan lain-lain.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </ion-slide-page>
+      
+                <ion-slide-page id="mainPage-slide24">
+                  <div class="spacer"></div>
+                  <div class="row responsive-lg" style="margin: auto;">
+                    <div class="col col-50 col-offset-25">
+                      <!-- <div>
+                                      <img src="https://image.flaticon.com/icons/svg/1995/1995539.svg"
+                                          style="display: block; width: 40%; height: auto; margin-left: auto; margin-right: auto;">
+                                  </div> -->
+      
+                      <div id="mainPage-markdown1" style="text-align:center;" class="show-list-numbers-and-dots">
+                        <p style="color:white">Guru bisa membuat ujian online, mulai dari
+                          ulangan
+                          harian, latihan soal, kuis online, UTS/UAS, Tryout Online dan lain-lain, juga bisa
+                          membuat
+                          jadwal pelajaran, absensi dan tugas.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </ion-slide-page>
+      
+                <ion-slide-page id="mainPage-slide24">
+                  <div class="spacer"></div>
+                  <div class="row responsive-lg" style="margin: auto;">
+                    <div class="col col-50 col-offset-25">
+                      <!-- <div>
+                                      <img src="https://image.flaticon.com/icons/svg/2598/2598288.svg"
+                                          style="display: block; width: 40%; height: auto; margin-left: auto; margin-right: auto;">
+                                  </div> -->
+                      <div id="mainPage-markdown1" style="text-align:center;" class="show-list-numbers-and-dots">
+                        <p style="color:white">Siswa bisa melakukan ujian online, memantau
+                          kehadiran, memantau tugas dan menerima informasi-informasi dari guru.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </ion-slide-page>
+      
+                <ion-slide-page id="mainPage-slide25">
+                  <div class="spacer"></div>
+                  <div class="row responsive-lg" style="margin: auto;">
+                    <div class="col col-50 col-offset-25">
+                      <!-- <div>
+                                      <img src="img/smartphone.png"
+                                          style="display: block; width: 40%; height: auto; margin-left: auto; margin-right: auto;">
+                                  </div> -->
+      
+                      <div id="mainPage-markdown2" style="text-align:center;" class="show-list-numbers-and-dots">
+                        <p style="color:white">Data tersaji secara cepat, real time, akurat dan
+                          transparan, juga terintegrasi dengan admin sekolah, guru, siswa dan orang tua.</p>
+                      </div>
+                    </div>
+                  </div>
+                </ion-slide-page>
+              </ion-slides>
+                <a id="mainPage-button1" ng-click="login()" 
+                class="button button-light button-block" style="border-radius: 100px;">Log in</a>
+                <a id="mainPage-button2" ng-click="registrasi()"
+                    class="button button-light button-block button-outline" style="border-radius: 100px;color:white"> Daftar Akun Baru</a>
             </div>
-
-          </center>
-
         </div>
 
-        <ion-slides disable-side-menu-drag=""
-          options="{'loop': false,'direction':horizontal,'speed':500,'autoplay':2000,'grabCursor':true}"
-          slider="slider1" delegate-handle="slider1" class="ion-slide">
-          <ion-slide-page id="mainPage-slide24">
-            <div class="spacer"></div>
-            <div class="row responsive-lg" style="margin: auto;">
-              <div class="col col-50 col-offset-25">
-                <div id="mainPage-markdown1" style="text-align:center;" class="show-list-numbers-and-dots">
-                  <p style="color:white">Sistem Informasi Sekolah Terintegrasi Secara Real Time dan
-                    Uptodate. Dinas Pendidikan Pemuda dan Olahraga Kabupaten Buleleng bisa memonitoring semua aktivitas dan kegiatan yang terjadi
-                    di sekolah, di
-                    kelas,
-                    dan dapat memantau kegiatan siswa, guru dan lain-lain.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ion-slide-page>
-
-          <ion-slide-page id="mainPage-slide24">
-            <div class="spacer"></div>
-            <div class="row responsive-lg" style="margin: auto;">
-              <div class="col col-50 col-offset-25">
-                <div id="mainPage-markdown1" style="text-align:center;" class="show-list-numbers-and-dots">
-                  <p style="color:white">Guru bisa membuat ujian online, mulai dari
-                    ulangan
-                    harian, latihan soal, kuis online, UTS/UAS, Tryout Online dan lain-lain, juga bisa
-                    membuat
-                    jadwal pelajaran, absensi dan tugas.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ion-slide-page>
-
-          <ion-slide-page id="mainPage-slide24">
-            <div class="spacer"></div>
-            <div class="row responsive-lg" style="margin: auto;">
-              <div class="col col-50 col-offset-25">
-                <div id="mainPage-markdown1" style="text-align:center;" class="show-list-numbers-and-dots">
-                  <p style="color:white">Siswa bisa melakukan ujian online, memantau
-                    kehadiran, memantau tugas dan menerima informasi-informasi dari guru.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ion-slide-page>
-
-          <ion-slide-page id="mainPage-slide25">
-            <div class="spacer"></div>
-            <div class="row responsive-lg" style="margin: auto;">
-              <div class="col col-50 col-offset-25">
-                <div id="mainPage-markdown2" style="text-align:center;" class="show-list-numbers-and-dots">
-                  <p style="color:white">Data tersaji secara cepat, real time, akurat dan
-                    transparan, juga terintegrasi dengan admin sekolah, guru, siswa dan orang tua.</p>
-                </div>
-              </div>
-            </div>
-          </ion-slide-page>
-        </ion-slides>
-        <a id="mainPage-button1" ng-click="login()" class="button button-light button-block btn-welcome"
-          style="border-radius: 100px; color:rgb(239,71,58)">Log in</a>
-        <a id="mainPage-button2" ng-click="registrasi()"
-          class="button button-light button-block button-outline btn-welcome" style="border-radius: 100px;color:white">Daftar Akun Baru</a>
-      </div>
-    </div>
 
 
-
-
-
-  </ion-content>
+        
+                    
+    </ion-content>
 </ion-view>

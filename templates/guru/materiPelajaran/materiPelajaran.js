@@ -183,7 +183,10 @@ angular.module('app.materiPelajaranGuru', ['ngYoutubeEmbed'])
                     // "isiMateriPelajaran": $scope.formData.isiMateriPelajaran,
                     // "videoPembelajaran": $scope.formData.videoPembelajaran,
                     "publish": $scope.formData.publish,
-
+                    "publishSekolah":$scope.idSekolahGuru+'_'+$scope.formData.publish,
+                    "filterPelajaranDisplaySekolah":$scope.idSekolahGuru+'_'+$scope.formData.idPelajaran + "_" + $scope.formData.publish,
+                    "filterDisplayMateriPelajaranSekolah":$scope.idSekolahGuru+'_'+$scope.formData.idPelajaran + "_" + $scope.formData.jenjang + "_" + $scope.formData.kelas + "_" + $scope.formData.publish,
+                    
                     "tanggalBuat": tanggal,
                     "tanggalDisplay": tanggalDisplay,
                     "jamDisplay": jamDisplay,
@@ -207,6 +210,7 @@ angular.module('app.materiPelajaranGuru', ['ngYoutubeEmbed'])
                     "sebagai": "Guru",
 
                     "idPembuat": $scope.idGuru,
+                    
                 }).then(function (resp) {
                     console.log("success");
                     $state.go("menuGuru.materiPelajaranGuru");
@@ -969,6 +973,10 @@ angular.module('app.materiPelajaranGuru', ['ngYoutubeEmbed'])
                     // "tanggalBuat": tanggal,
                     // "tanggalDisplay": tanggalDisplay,
                     // "jamDisplay": jamDisplay,
+
+                    "publishSekolah":$scope.idSekolahGuru+'_'+$scope.formData.publish,
+                    "filterPelajaranDisplaySekolah":$scope.idSekolahGuru+'_'+$scope.formData.idPelajaran + "_" + $scope.formData.publish,
+                    "filterDisplayMateriPelajaranSekolah":$scope.idSekolahGuru+'_'+$scope.formData.idPelajaran + "_" + $scope.formData.jenjang + "_" + $scope.formData.kelas + "_" + $scope.formData.publish,
 
                     "filter": $scope.formData.idPelajaran + "_" + $scope.formData.kelas,
                     "filterDisplay": $scope.formData.idPelajaran + "_" + $scope.formData.kelas + "_" + $scope.formData.publish,
