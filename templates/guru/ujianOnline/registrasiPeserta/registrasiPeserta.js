@@ -227,7 +227,7 @@ angular.module('app.registrasiPesertaUjianOnlineGuru', [])
                                             $scope.aktif = true;
                                         }
                                     });
-
+                                    $ionicLoading.hide()
                                     $ionicPopup.alert({
                                         title: 'SUKSES',
                                         template: 'REGISTRASI SUKSES',
@@ -722,7 +722,7 @@ angular.module('app.registrasiPesertaUjianOnlineGuru', [])
                                                 $scope.aktif = true;
                                             }
                                         });
-
+                                        $ionicLoading.hide()
                                         $ionicPopup.alert({
                                             title: 'SUKSES',
                                             template: 'REGISTRASI SUKSES',

@@ -725,7 +725,7 @@ angular.module('app.tugasGuru', ['ui.tinymce'])
                                 $ionicLoading.hide();
 
                                 $state.go("menuGuru.tugasSiswaGuru");
-                                window.location.reload(true);
+                                // window.location.reload(true);
 
                             })
                         }

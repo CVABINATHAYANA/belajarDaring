@@ -89,7 +89,7 @@ angular.module('app.dataPokokSiswaSekolah', [])
         });
 
         $scope.getData = function (data) {
-
+            console.log(data)
             $ionicActionSheet.show({
                 titleText: 'Siswa : ' + data.namaPengguna,
                 buttons: [
