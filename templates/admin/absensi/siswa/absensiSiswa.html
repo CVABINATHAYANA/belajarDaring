@@ -1,6 +1,6 @@
 <ion-view title="Absensi Siswa" id="absensiSiswaAdmin"  class="latar">
     <ion-nav-buttons side="right" class="has-header">
-        <button class="button button-icon icon ion-android-add" ng-click="tambah()"></button>
+        <button class="button button-dark icon ion-android-add" ng-click="tambah()"> Tambah</button>
     </ion-nav-buttons>
     <ion-content padding="false" class="has-header">
         <div class="row responsive-md" style="margin: auto;">
@@ -10,7 +10,7 @@
                     <input type="search" placeholder="Cari Data" ng-model="searchData">
                 </label>
                 <ion-list id="absensiSiswa-list19">
-                    <ion-item id="absensiSiswa-list-item43" ng-repeat="data in absensiSiswa | orderBy:'-groupAbsensi' | filter:searchData" ng-click="getData(data)" class="item-avatar">
+                    <ion-item id="absensiSiswa-list-item43" ng-repeat="data in absensiSiswa" ng-click="getData(data)" class="item-avatar">
                         <!-- <p><b style="color: green;">{{$index+1}}. {{data.namaGuru}}</b><br>
                             <span style="color:orange">{{data.namaSekolah}}</span><br>
                             <em>
@@ -35,15 +35,19 @@
                         </p>
                     </ion-item>
                 </ion-list>
-
+<!-- 
                 <ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="!noMoreItemsAvailable">
-                </ion-infinite-scroll>
+                </ion-infinite-scroll> -->
             </div>
         </div>
     </ion-content>
-    <ion-footer-bar align-title="left" class="bar-dark">
+<<<<<<< HEAD
+    <!-- <ion-footer-bar align-title="left" class="bar-dark">
+=======
+    <ion-footer-bar align-title="left" class="bar-light">
+>>>>>>> 5812d17e3f1959679b5ac6331e18e3c31e34e7a8
         <button class="button button-clear pull-left">Data</button>
-        <button class="button button-clear pull-right">Total :
+        <button class="button button-dark pull-right">Total :
             <strong>{{banyakData}}</strong> Guru Telah Mengabsen</button>
-    </ion-footer-bar>
+    </ion-footer-bar> -->
 </ion-view>

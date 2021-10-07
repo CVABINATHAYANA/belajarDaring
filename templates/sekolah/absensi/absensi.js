@@ -13,32 +13,14 @@ angular.module('app.absensiSekolah', [])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
-        if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP1") { var app = app_smpn1dps; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J1") { var app = app_smpn2; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J8") { var app = app_smpn3; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J9") { var app = app_smpn4; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J10") { var app = app_smpn5; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw1") { var app = app_smpn6; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj1") { var app = app_smpn7; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP6") { var app = app_smpn8; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw13") { var app = app_smpn9; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J6") { var app = app_smpn10; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw12") { var app = app_smpn11; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J7") { var app = app_smpn12; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj8") { var app = app_smpn13; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP5") { var app = app_smpn14; }
-        else if ($scope.idSekolah === "-MPyROcy6xPWAnYTzci8") { var app = app_lentera; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J3") { var app = app_dharmapraja; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj5") { var app = app_harapanmulia; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw8") { var app = app_kusumasari; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw24") { var app = app_pelitahati; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj11") { var app = app_pgri1; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP10") { var app = app_rajyamuna; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP12") { var app = app_siladharma; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J17") { var app = app_tamanrama; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP13") { var app = app_tawakkal; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J15") { var app = app_slub; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj14") { var app = app_sapta; }
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
+
+        $scope.data = {
+            "tanggal": $stateParams.tanggal,
+            "jumlah_absensi": $stateParams.jumlah_absensi,
+        }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
@@ -67,7 +49,7 @@ angular.module('app.absensiSekolah', [])
         //     // console.log($scope.absensiSiswa)
         // });
 
-        var ref = firebase.database(app).ref("groupAbsensiSiswa").orderByChild("idSekolah").equalTo($scope.idSekolah);
+        var ref = firebase.database(app).ref("groupAbsensiSiswa").orderByChild("tanggalDisplay").equalTo($scope.data.tanggal);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
@@ -97,8 +79,32 @@ angular.module('app.absensiSekolah', [])
                         })
                     }
                     if (index === 1) {
-                        $state.go("menuSekolah.absensiSiswaLihatSekolah", {
-                            "groupAbsensi": data.groupAbsensi
+                        // $state.go("menuSekolah.absensiSiswaLihatSekolah", {
+                        //     "groupAbsensi": data.groupAbsensi,
+                        //     "dataGetAbs": response,
+                        // })
+
+                        var getAbs = firebase.database(app).ref("absensiSiswa").orderByChild("groupAbsensi").equalTo(data.groupAbsensi);
+                        var listGetAbs = $firebaseArray(getAbs);
+                        $ionicLoading.show();
+                        listGetAbs.$loaded().then(function (response) {
+                            $ionicLoading.hide();
+                            $scope.dataGetAbs = response;
+                            console.log( 'TES RESPONSE '  + response);
+                            $scope.absensiByGroup = $scope.dataGetAbs.groupBy('keterangan');
+
+                            $state.go("menuSekolah.absensiSiswaLihatSekolah", {
+                                "groupAbsensi": data.groupAbsensi,
+                                "tahunAjaran": data.tahunAjaran,
+                                "semester": data.semester,
+                                "pelajaran": data.pelajaran,
+                                "namaGuru": data.namaGuru,
+                                "namaKelas": data.namaKelas,
+                                "tanggalDisplay": data.tanggalDisplay,
+                                "namaSekolah": data.namaSekolah,
+                                "dataGetAbs": response,
+                                "absensiByGroup": $scope.absensiByGroup
+                            })
                         })
                     }
                     return true;
@@ -165,6 +171,102 @@ angular.module('app.absensiSekolah', [])
 
     }])
 
+    .controller('absensiSiswaSekolahPerHariCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+
+        $scope.idPenggunaSekolah = localStorage.getItem('idPenggunaSekolah');
+        $scope.idSekolah = localStorage.getItem('idSekolah');
+        $scope.namaPenggunaSekolah = localStorage.getItem('namaPenggunaSekolah');
+        $scope.jenjangSekolah = localStorage.getItem('jenjangSekolah');
+        $scope.namaSekolah = localStorage.getItem('namaSekolah');
+        $scope.uidSekolah = localStorage.getItem('uidSekolah');
+        $scope.idProvinsiSekolah = localStorage.getItem('idProvinsiSekolah');
+        $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
+        $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
+        $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
+
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
+
+        if (!$scope.idPenggunaSekolah) {
+            $state.go('welcome');
+        }
+
+        $scope.tambah = function () {
+            $state.go("menuSekolah.absensiSiswaTambahSekolah");
+        }
+
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+
+        index = 0 ;
+        var ref = firebase.database(app).ref("groupAbsensiSiswa").orderByChild("idSekolah").equalTo($scope.idSekolah);
+        var listRef = $firebaseArray(ref);
+        $ionicLoading.show();
+        listRef.$loaded().then(function (response) {
+            $ionicLoading.hide();
+            $scope.groupAbsensiSiswa = response;
+            $scope.absensiSiswa = $scope.groupAbsensiSiswa.groupBy('tanggalDisplay');
+            console.log($scope.groupAbsensiSiswa);
+
+            for (let i = 0; i < response.length; i++) {
+                index = index + 1;
+                console.log(index);
+                console.log(response[i].$id);
+                var groupAbsensiSiswa = firebase.database().ref("groupAbsensiSiswa/"+response[i].$id);
+                groupAbsensiSiswa.set({
+                    "groupAbsensi": response[i].groupAbsensi,
+                    "hariAbsensi":response[i].hariAbsensi,
+                    "idGuru": response[i].idGuru,
+                    "idKecamatan": response[i].idKecamatan,
+                    "idKelas": response[i].idKelas,
+                    "idKotaKabupaten": response[i].idKotaKabupaten,
+                    "idPelajaran": response[i].idPelajaran,
+                    "idPembuat": response[i].idPembuat,
+                    "idProvinsi": response[i].idProvinsi,
+                    "idSekolah": response[i].idSekolah,
+                    "idSemester": response[i].idSemester,
+                    "idTahunAjaran": response[i].idTahunAjaran,
+                    "jamAbsensi": response[i].jamAbsensi,
+                    "jenjang": response[i].jenjang,
+                    "namaGuru": response[i].namaGuru,
+                    "namaKecamatan": response[i].namaKecamatan,
+                    "namaKelas":response[i].namaKelas,
+                    "namaKotaKabupaten": response[i].namaKotaKabupaten,
+                    "namaProvinsi": response[i].namaProvinsi,
+                    "namaSekolah": response[i].namaSekolah,
+                    "pelajaran": response[i].pelajaran,
+                    "semester": response[i].semester,
+                    "tahunAjaran": response[i].tahunAjaran,
+                    "tanggalAbsensi": response[i].tanggalAbsensi,
+                    "tanggalDisplay": response[i].tanggalDisplay,
+                    "totalSiswa":response[i].totalSiswa,
+
+                }).then(function (ok) {
+                    console.log('Ok')
+                })
+
+            }
+
+        });
+
+        $scope.getData = function (x, y) {
+            $state.go('menuSekolah.absensiSiswaSekolah', {
+                "tanggal": x,
+                "jumlah_absensi": y.length
+            })
+        }
+
+        
+
+    }])
+
     .controller('absensiSiswaTambahSekolahCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idPenggunaSekolah = localStorage.getItem('idPenggunaSekolah');
@@ -178,32 +280,9 @@ angular.module('app.absensiSekolah', [])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
-        if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP1") { var app = app_smpn1dps; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J1") { var app = app_smpn2; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J8") { var app = app_smpn3; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J9") { var app = app_smpn4; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J10") { var app = app_smpn5; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw1") { var app = app_smpn6; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj1") { var app = app_smpn7; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP6") { var app = app_smpn8; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw13") { var app = app_smpn9; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J6") { var app = app_smpn10; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw12") { var app = app_smpn11; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J7") { var app = app_smpn12; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj8") { var app = app_smpn13; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP5") { var app = app_smpn14; }
-        else if ($scope.idSekolah === "-MPyROcy6xPWAnYTzci8") { var app = app_lentera; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J3") { var app = app_dharmapraja; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj5") { var app = app_harapanmulia; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw8") { var app = app_kusumasari; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw24") { var app = app_pelitahati; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj11") { var app = app_pgri1; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP10") { var app = app_rajyamuna; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP12") { var app = app_siladharma; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J17") { var app = app_tamanrama; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP13") { var app = app_tawakkal; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J15") { var app = app_slub; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj14") { var app = app_sapta; }
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
@@ -664,39 +743,40 @@ angular.module('app.absensiSekolah', [])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
-        if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP1") { var app = app_smpn1dps; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J1") { var app = app_smpn2; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J8") { var app = app_smpn3; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J9") { var app = app_smpn4; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J10") { var app = app_smpn5; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw1") { var app = app_smpn6; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj1") { var app = app_smpn7; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP6") { var app = app_smpn8; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw13") { var app = app_smpn9; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J6") { var app = app_smpn10; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw12") { var app = app_smpn11; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J7") { var app = app_smpn12; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj8") { var app = app_smpn13; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP5") { var app = app_smpn14; }
-        else if ($scope.idSekolah === "-MPyROcy6xPWAnYTzci8") { var app = app_lentera; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J3") { var app = app_dharmapraja; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj5") { var app = app_harapanmulia; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw8") { var app = app_kusumasari; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw24") { var app = app_pelitahati; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj11") { var app = app_pgri1; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP10") { var app = app_rajyamuna; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP12") { var app = app_siladharma; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J17") { var app = app_tamanrama; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP13") { var app = app_tawakkal; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J15") { var app = app_slub; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj14") { var app = app_sapta; }
+        // LOADBALANCING
+
+        console.log($scope.idSekolah);
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
         }
 
         $scope.data = {
-            "groupAbsensi": $stateParams.groupAbsensi
+            "groupAbsensi": $stateParams.groupAbsensi,
+            "tahunAjaran": $stateParams.tahunAjaran,
+            "semester": $stateParams.semester,
+            "pelajaran": $stateParams.pelajaran,
+            "namaGuru": $stateParams.namaGuru,
+            "namaKelas": $stateParams.namaKelas,
+            "tanggalDisplay": $stateParams.tanggalDisplay,
+            "namaSekolah": $stateParams.namaSekolah,
+            "dataGetAbs": $stateParams.dataGetAbs,
+            "absensiByGroup": $stateParams.absensiByGroup
+
+        }
+
+        $scope.dataGetAbs = $scope.data.dataGetAbs;
+        $scope.absensiByGroup = $scope.data.absensiByGroup;
+        // Untuk Print Data Nilai
+        var wb = XLSX.read($scope.dataGetAbs, { type: "array" });
+        var d = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]);
+
+        $scope.excel = function () {
+            console.log("d", d)
+            var wb = XLSX.utils.table_to_book(document.getElementById('danu-table'));
+            XLSX.writeFile(wb, "Absensi" +$scope.data.tanggalDisplay+ "_"+ $scope.data.namaKelas+ "_" + $scope.data.pelajaran + ".xlsx");
         }
 
         Array.prototype.groupBy = function (prop) {
@@ -717,6 +797,8 @@ angular.module('app.absensiSekolah', [])
             $scope.absensiByGroup = $scope.dataGetAbs.groupBy('keterangan');
             console.log($scope.absensiByGroup);
             $scope.dataAbsensi = response[0];
+
+            
         })
 
     }])
@@ -734,32 +816,9 @@ angular.module('app.absensiSekolah', [])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
-        if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP1") { var app = app_smpn1dps; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J1") { var app = app_smpn2; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J8") { var app = app_smpn3; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J9") { var app = app_smpn4; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J10") { var app = app_smpn5; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw1") { var app = app_smpn6; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj1") { var app = app_smpn7; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP6") { var app = app_smpn8; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw13") { var app = app_smpn9; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J6") { var app = app_smpn10; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw12") { var app = app_smpn11; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J7") { var app = app_smpn12; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj8") { var app = app_smpn13; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP5") { var app = app_smpn14; }
-        else if ($scope.idSekolah === "-MPyROcy6xPWAnYTzci8") { var app = app_lentera; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J3") { var app = app_dharmapraja; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj5") { var app = app_harapanmulia; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw8") { var app = app_kusumasari; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw24") { var app = app_pelitahati; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj11") { var app = app_pgri1; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP10") { var app = app_rajyamuna; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP12") { var app = app_siladharma; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J17") { var app = app_tamanrama; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP13") { var app = app_tawakkal; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J15") { var app = app_slub; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj14") { var app = app_sapta; }
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
         }

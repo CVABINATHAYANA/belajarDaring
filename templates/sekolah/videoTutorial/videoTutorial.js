@@ -16,20 +16,21 @@ angular.module('app.videoTutorialSekolah', [])
             $state.go('welcome');
         }
 
-        var video = firebase.database().ref("videoTutorial").orderByChild("untuk").equalTo("Admin Sekolah");
+        var video = firebase.database().ref("videoTutorial/Sekolah");
         var listVideo = $firebaseArray(video);
         $ionicLoading.show();
         listVideo.$loaded().then(function (response) {
             $ionicLoading.hide();
             $scope.dataVideo = response;
+            console.log($scope.dataVideo);
         });
 
         $scope.getData = function (data) {
             // console.log(data)
             $state.go("menuSekolah.videoTutorialLihatSekolah", {
                 "idVideo": data.$id,
-                "judulVideo": data.judulVideo,
-                "keteranganVideo": data.keteranganVideo
+                "judulVideo": data.JudulvideoTutorial,
+                "keteranganVideo": data.keterangan
             })
         }
 
@@ -57,7 +58,8 @@ angular.module('app.videoTutorialSekolah', [])
             "keteranganVideo": $stateParams.keteranganVideo
         }
 
-        var dataVideo = firebase.database().ref("videoTutorial/"+$scope.data.idVideo);
+
+        var dataVideo = firebase.database().ref("videoTutorial/Sekolah/"+$scope.data.idVideo);
         var obj = $firebaseObject(dataVideo);
         $ionicLoading.show();
         obj.$loaded().then(function(response){

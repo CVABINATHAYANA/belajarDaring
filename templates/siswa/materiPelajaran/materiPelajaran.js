@@ -29,7 +29,7 @@ angular.module('app.materiPelajaranSiswa', ['ngYoutubeEmbed'])
             }, {})
         }
 
-        var ref = firebase.database(appMateriPelajaran).ref("materiPelajaran").orderByChild("publish").equalTo(true);;
+        var ref = firebase.database(appMateriPelajaran).ref("materiPelajaran").orderByChild("publishSekolah").equalTo($scope.idSekolahSiswa+'_'+true);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
@@ -79,7 +79,8 @@ angular.module('app.materiPelajaranSiswa', ['ngYoutubeEmbed'])
             }, {})
         }
 
-        var ref = firebase.database(appMateriPelajaran).ref("materiPelajaran").orderByChild("filterPelajaranDisplay").equalTo($scope.data.idPelajaran + "_true");
+        // var ref = firebase.database(appMateriPelajaran).ref("materiPelajaran").orderByChild("filterPelajaranDisplay").equalTo($scope.data.idPelajaran + "_true");
+        var ref = firebase.database(appMateriPelajaran).ref("materiPelajaran").orderByChild("filterPelajaranDisplaySekolah").equalTo($scope.idSekolahSiswa+"_"+$scope.data.idPelajaran + "_true");
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
@@ -132,7 +133,7 @@ angular.module('app.materiPelajaranSiswa', ['ngYoutubeEmbed'])
             }, {})
         }
 
-        var ref = firebase.database(appMateriPelajaran).ref("materiPelajaran").orderByChild("filterDisplayMateriPelajaran").equalTo($scope.data.idPelajaran + "_" + $scope.data.jenjang + "_" + $scope.data.kelas + "_true");
+        var ref = firebase.database(appMateriPelajaran).ref("materiPelajaran").orderByChild("filterDisplayMateriPelajaranSekolah").equalTo($scope.idSekolahSiswa+"_"+$scope.data.idPelajaran + "_" + $scope.data.jenjang + "_" + $scope.data.kelas + "_true");
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
@@ -191,7 +192,8 @@ angular.module('app.materiPelajaranSiswa', ['ngYoutubeEmbed'])
         }
 
 
-        var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran").orderByChild("idMateriPelajaran").equalTo($scope.data.idMateriPelajaran);
+        // var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran").orderByChild("idMateriPelajaran").equalTo($scope.data.idMateriPelajaran);
+        var ref = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/"+$scope.data.idMateriPelajaran);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
@@ -201,7 +203,7 @@ angular.module('app.materiPelajaranSiswa', ['ngYoutubeEmbed'])
 
         $scope.getData = function (item) {
 
-            var obj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaran/" + item.$id);
+            var obj = firebase.database(appMateriPelajaran).ref("subBabMateriPelajaranNew/"+$scope.data.idMateriPelajaran+ "/" + item.$id);
             var listObj = $firebaseObject(obj);
             $ionicLoading.show();
             listObj.$loaded().then(function (response) {

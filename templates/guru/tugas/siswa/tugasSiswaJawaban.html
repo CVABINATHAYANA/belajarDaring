@@ -7,22 +7,17 @@
                     <div class="show-list-numbers-and-dots">
                         <div class="row">
                             <div class="col-33" style="padding-left:10px">
-                                <small>Tahun Ajaran <br>
-                                    Semester<br>
+                                <small>
                                     Pelajaran<br>
                                     Guru<br>
                                     Kelas<br>
-                                    Sekolah<br>
                                 </small>
                             </div>
                             <div class="col-67">
                                 <small>
-                                    : {{formData.tahunAjaran}}<br>
-                                    : {{formData.semester}}<br>
                                     : {{formData.pelajaran}}<br>
                                     : {{formData.namaGuru}}<br>
                                     : {{formData.namaKelas}}<br>
-                                    : {{formData.namaSekolah}}<br>
                                 </small>
                             </div>
                         </div>
@@ -78,7 +73,13 @@
                         <input type="number" placeholder="Contoh : 80" ng-model="formData.nilaiTugasSiswa" step="any"
                             min="0" max="100">
                     </label>
-                    <button id="registrasi-button3" class="button button-positive button-block">Kirim Tugas</button>
+                    <div class="spacer" style="height: 10px;"></div>
+                    <ion-item class="item-divider input" id="registrasi-list-item-divider4"> Komentar / Tanggapan
+                        <div class="spacer" style="height: 10px;"></div>
+                    <label class="item item-input">
+                        <textarea name="" id="" cols="30" rows="10" ng-model="formData.komentarTugasSiswa" ></textarea>
+                    </label>
+                    <button id="registrasi-button3" class="button button-positive button-block">Simpan</button>
                 </form>
 
             </div>

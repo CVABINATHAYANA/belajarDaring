@@ -21,67 +21,166 @@ angular.module('app.kurikulumAdmin', [])
             $state.go('welcome');
         }
 
-        $scope.data = {
-            "idSekolah": $stateParams.idSekolah,
-            "namaSekolah": $stateParams.namaSekolah,
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
         }
-        console.log($scope.data.idSekolah)
 
         $scope.tambah = function () {
             $state.go("menuAdmin.jadwalPelajaranTambahAdmin");
         }
-        
-        $scope.totalJadwal = []
-        var dataJadwal = firebase.database().ref("groupJadwalPelajaranGuru").orderByChild("idSekolah").equalTo($scope.data.idSekolah);
-        var listDataJadwal = $firebaseArray(dataJadwal);
-        listDataJadwal.$loaded().then(function(response){
-            for(i=0; i<response.length; i++){
-                $scope.totalJadwal.push({
-                    "id":response[i].$id,
-                })
-            }
-            $scope.banyakData = $scope.totalJadwal.length
+        var appJadwalPelajaranGuru = appJadwalPelajaran;
+        var dataKecamatan = firebase.database(appJadwalPelajaranGuru).ref("groupJadwalPelajaranGuru").orderByChild("idKotaKabupaten").equalTo("id-buleleng");
+        var listDataKecamatan = $firebaseArray(dataKecamatan);
+        listDataKecamatan.$loaded().then(function(response){
+            $scope.groupKecamatan = response;
+            $scope.jadwalPerKecamatan = $scope.groupKecamatan.groupBy('namaKecamatan');
+            $scope.jumlahSekolah = $scope.jadwalPerKecamatan.length;
+            console.log($scope.jadwalPerKecamatan);
+
         })
 
-        $scope.count = 0;
-        $scope.loadMore = function () {
-            var ref = firebase.database().ref("groupJadwalPelajaranGuru").orderByChild("idSekolah").equalTo($scope.data.idSekolah).limitToLast($scope.count += 100);
-            var listRef = $firebaseArray(ref);
-            $ionicLoading.show();
-            listRef.$loaded().then(function (response) {
-                $ionicLoading.hide();
-                $scope.jadwalPelajaran = response;
-                // console.log($scope.jadwalPelajaran);
-                console.log("inilahDatanya",$scope.count)
-
-                if ($scope.jadwalPelajaran.length === $scope.banyakData) {
-                    $scope.noMoreItemsAvailable = true;
-                    console.log("totalDataTerakhir", $scope.banyakData);
-                }
-                $scope.$broadcast('scroll.infiniteScrollComplete');
-            });
+        $scope.getData = function (x,y) {
+            $state.go("menuAdmin.jadwalPelajaranPerKecamatanAdmin", {
+                "namaKecamatan": x,
+                "idKecamatan": y[0].idKecamatan,
+                "jumlahGuru": y.length,
+            })
         }
 
-        // var ref = firebase.database().ref("groupJadwalPelajaranGuru").orderByChild("idSekolah").equalTo($scope.idSekolah);
-        // var listRef = $firebaseArray(ref);
-        // $ionicLoading.show();
-        // listRef.$loaded().then(function (response) {
-        //     $ionicLoading.hide();
-        //     $scope.jadwalPelajaran = response;
-        //     // $scope.jadwalPelajaran = response;
-        //     // $scope.jadwalPelajaran = $scope.jadwal.groupBy('filterGuru');
-        //     // console.log($scope.jadwalPelajaran)
-        // });
+        // $scope.totalJadwal = []
+        // $scope.count = 0;
+        // $scope.loadMore = function () {
+        //     var ref = firebase.database().ref("groupJadwalPelajaranGuru").orderByChild("idSekolah").equalTo($scope.data.idSekolah).limitToLast($scope.count += 100);
+        //     var listRef = $firebaseArray(ref);
+        //     $ionicLoading.show();
+        //     listRef.$loaded().then(function (response) {
+        //         $ionicLoading.hide();
+        //         $scope.jadwalPelajaran = response;
+        //         // console.log($scope.jadwalPelajaran);
+        //         console.log("inilahDatanya",$scope.count)
+
+        //         if ($scope.jadwalPelajaran.length === $scope.banyakData) {
+        //             $scope.noMoreItemsAvailable = true;
+        //             console.log("totalDataTerakhir", $scope.banyakData);
+        //         }
+        //         $scope.$broadcast('scroll.infiniteScrollComplete');
+        //     });
+        // }
+
+    }])
+
+    .controller('jadwalPelajaranPerKecamatanAdminCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+
+        $scope.idAdmin = localStorage.getItem('idAdmin');
+        $scope.namaAdmin = localStorage.getItem('namaAdmin');
+        $scope.emailAdmin = localStorage.getItem('emailAdmin');
+        $scope.hakAkses = localStorage.getItem('hakAkses');
+        $scope.uidAdmin = localStorage.getItem('uidAdmin');
+        $scope.idKotaKabupaten = localStorage.getItem('idKotaKabupaten');
+        $scope.idSekolah = localStorage.getItem('idSekolah');
+        $scope.namaPenggunaSekolah = localStorage.getItem('namaPenggunaSekolah');
+        $scope.jenjangSekolah = localStorage.getItem('jenjangSekolah');
+        $scope.namaSekolah = localStorage.getItem('namaSekolah');
+        $scope.uidSekolah = localStorage.getItem('uidSekolah');
+        $scope.idProvinsiSekolah = localStorage.getItem('idProvinsiSekolah');
+        $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
+        $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
+        $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
+        if (!$scope.idAdmin) {
+            $state.go('welcome');
+        }
+
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+        $scope.data = {
+            "idKecamatan": $stateParams.idKecamatan,
+            "namaKecamatan": $stateParams.namaKecamatan,
+            "jumlahGuru":$stateParams.jumlahGuru,
+        }
+
+        var appJadwalPelajaranGuru = appJadwalPelajaran;
+        var dataSekolah = firebase.database(appJadwalPelajaranGuru).ref("groupJadwalPelajaranGuru").orderByChild("idKecamatan").equalTo($scope.data.idKecamatan);
+        var listDataSekolah = $firebaseArray(dataSekolah);
+        listDataSekolah.$loaded().then(function(response){
+            $scope.groupSekolah= response;
+            $scope.jadwalPerSekolah= $scope.groupSekolah.groupBy('namaSekolah');
+            $scope.jumlahSekolah = $scope.jadwalPerSekolah.length;
+            // console.log($scope.jadwalPerSekolah);
+
+        })
+
+        $scope.getData = function (x,y) {
+            // console.log(x);
+            // console.log(y[0].idSekolah);
+            $state.go("menuAdmin.jadwalPelajaranPerSekolahAdmin", {
+                "namaSekolah": x,
+                "idSekolah": y[0].idSekolah,
+            })
+        }
+
+    }])
+
+    .controller('jadwalPelajaranPerSekolahAdminCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+
+        $scope.idAdmin = localStorage.getItem('idAdmin');
+        $scope.namaAdmin = localStorage.getItem('namaAdmin');
+        $scope.emailAdmin = localStorage.getItem('emailAdmin');
+        $scope.hakAkses = localStorage.getItem('hakAkses');
+        $scope.uidAdmin = localStorage.getItem('uidAdmin');
+        $scope.idKotaKabupaten = localStorage.getItem('idKotaKabupaten');
+        $scope.idSekolah = localStorage.getItem('idSekolah');
+        $scope.namaPenggunaSekolah = localStorage.getItem('namaPenggunaSekolah');
+        $scope.jenjangSekolah = localStorage.getItem('jenjangSekolah');
+        $scope.namaSekolah = localStorage.getItem('namaSekolah');
+        $scope.uidSekolah = localStorage.getItem('uidSekolah');
+        $scope.idProvinsiSekolah = localStorage.getItem('idProvinsiSekolah');
+        $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
+        $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
+        $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
+        if (!$scope.idAdmin) {
+            $state.go('welcome');
+        }
+
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+        $scope.data = {
+            "idSekolah": $stateParams.idSekolah,
+            "namaSekolah": $stateParams.namaSekolah,
+        }
+
+        var appJadwalPelajaranGuru = appJadwalPelajaran;
+        var dataJadwalPelajaranPerGuru = firebase.database(appJadwalPelajaranGuru).ref("groupJadwalPelajaranGuru").orderByChild("idSekolah").equalTo($scope.data.idSekolah);
+        var listDataJadwalPelajaranPerGuru = $firebaseArray(dataJadwalPelajaranPerGuru);
+        listDataJadwalPelajaranPerGuru.$loaded().then(function(response){
+            $scope.jadwalPerGuru= response;
+        })
+
 
 
         $scope.getData = function (data) {
-
+            // console.log(data.idSekolah)
             $ionicActionSheet.show({
                 titleText: 'Data Jadwal Pelajaran ',
                 buttons: [
                     { text: '<i class="icon ion-android-list"></i> Lihat Jadwal ' },
                 ],
-                destructiveText: '<i class="icon ion-trash-b"></i> Hapus Jadwal',
                 cancelText: 'Cancel',
                 cancel: function () {
                     //console.log('CANCELLED');
@@ -89,74 +188,103 @@ angular.module('app.kurikulumAdmin', [])
                 buttonClicked: function (index) {
                     if (index === 0) {
                         $state.go("menuAdmin.jadwalPelajaranLihatAdmin", {
-                            "filterGuru": data.filterGuru
+                            "filterGuru": data.filterGuru,
+                            "idSekolah": data.idSekolah,
                         })
                     }
                     return true;
                 },
+            });
+        }
 
-                destructiveButtonClicked: function () {
-                    if ($scope.hakAkses === 'Super Admin') {
-                        var confirmPopup = $ionicPopup.confirm({
-                            title: 'Hapus Data',
-                            template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-                            okType: "button-positive",
-                        });
-                        confirmPopup.then(function (res) {
-                            if (res) {
-                                $ionicLoading.show();
-                                var refObj = firebase.database(app).ref("jadwalPelajaran/").orderByChild("filterGuru").equalTo(data.filterGuru);
-                                var objDelete = $firebaseArray(refObj);
-                                objDelete.$loaded().then(function (response) {
-                                    for (i = 0; i < response.length; i++) {
-                                        var hapusData = firebase.database(app).ref("jadwalPelajaran/" + response[i].$id);
-                                        var objDelete = $firebaseObject(hapusData);
-                                        objDelete.$remove().then(function (ref) {
-                                            $ionicLoading.hide();
-                                            console.log('Data Berhasil Dihapus');
-                                            // window.location.reload(true);
-                                            Array.prototype.groupBy = function (prop) {
-                                                return this.reduce(function (groups, item) {
-                                                    const val = item[prop]
-                                                    groups[val] = groups[val] || []
-                                                    groups[val].push(item)
-                                                    return groups
-                                                }, {})
-                                            }
-                                        });
-                                    }
-                                })
 
-                                var objGroup = firebase.database(app).ref("groupJadwalPelajaranGuru").orderByChild("filterGuru").equalTo(data.filterGuru);
-                                var listObjGroup = $firebaseArray(objGroup);
-                                listObjGroup.$loaded().then(function(hapus){
-                                    var id = hapus[0].$id;
+    }])
 
-                                    var objHapus = firebase.database(app).ref("groupJadwalPelajaranGuru/"+id);
-                                    var objHapusData = $firebaseObject(objHapus);
-                                    objHapusData.$remove().then(function(yes){
-                                        console.log("terhapus")
-                                    })
-                                })
+    .controller('jadwalPelajaranLihatAdminCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
-                            }
-                            else {
-                                //console.log('Tidak Jadi Menghapus');
-                            }
+        $scope.idAdmin = localStorage.getItem('idAdmin');
+        $scope.namaAdmin = localStorage.getItem('namaAdmin');
+        $scope.emailAdmin = localStorage.getItem('emailAdmin');
+        $scope.hakAkses = localStorage.getItem('hakAkses');
+        $scope.uidAdmin = localStorage.getItem('uidAdmin');
+
+        if (!$scope.idAdmin) {
+            $state.go('welcome');
+        }
+
+        $scope.data = {
+            "filterGuru": $stateParams.filterGuru,
+            "idSekolah": $stateParams.idSekolah,
+        }
+
+        if ($scope.data.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.data.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
+
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
+        
+        var ref = firebase.database(app).ref("jadwalPelajaran").orderByChild("filterGuru").equalTo($scope.data.filterGuru);
+        var listRef = $firebaseArray(ref);
+        $ionicLoading.show();
+        listRef.$loaded().then(function (response) {
+            $ionicLoading.hide();
+            $scope.jadwalPelajaran = response;
+            $scope.totalJamMengajar = response.length;
+            $scope.jadwalPelajaranGroup = $scope.jadwalPelajaran.groupBy('hari');
+        })
+
+        // var ref = firebase.database().ref("jadwalPelajaran").orderByChild("filterGuru").equalTo($scope.data.filterGuru);
+        // var listRef = $firebaseArray(ref);
+        // $ionicLoading.show();
+        // listRef.$loaded().then(function (response) {
+        //     $ionicLoading.hide();
+        //     $scope.jadwalPelajaran = response;
+
+        // })
+
+        $scope.getData = function (x, y) {
+            $state.go('menuAdmin.jadwalPelajaranLihatDetailAdmin', {
+                "filterGuru": $stateParams.filterGuru,
+                "hari": x,
+                "tahunAjaran": y[0].tahunAjaran,
+                "idSekolah" : $scope.data.idSekolah,
+
+            })
+        }
+
+        $scope.hapusData = function (data) {
+            if ($scope.hakAkses === "Super Admin") {
+                var refObj = firebase.database(app).ref("jadwalPelajaran/" + data.$id);
+                var objDelete = $firebaseObject(refObj);
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Hapus Data',
+                    template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
+                    okType: "button-positive",
+                });
+                confirmPopup.then(function (res) {
+                    if (res) {
+                        objDelete.$remove().then(function (ref) {
+                            //console.log('Data Berhasil Dihapus');
                         });
                     }
                     else {
-                        $ionicPopup.alert({
-                            title: 'Perhatian',
-                            template: 'Maaf, Anda tidak diperkenankan menghapus data ini, Terima Kasih',
-                            okType: 'button-positive'
-                        });
+                        //console.log('Tidak Jadi Menghapus');
                     }
-
-                    return true;
-                }
-
-            });
+                });
+            }
+            else {
+                $ionicPopup.alert({
+                    title: 'Perhatian',
+                    template: 'Maaf, Anda tidak diperkenankan menghapus data ini, Terima Kasih',
+                    okType: 'button-positive'
+                });
+            }
         }
 
     }])
@@ -520,89 +648,6 @@ angular.module('app.kurikulumAdmin', [])
 
     }])
 
-    .controller('jadwalPelajaranLihatAdminCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
-
-        $scope.idAdmin = localStorage.getItem('idAdmin');
-        $scope.namaAdmin = localStorage.getItem('namaAdmin');
-        $scope.emailAdmin = localStorage.getItem('emailAdmin');
-        $scope.hakAkses = localStorage.getItem('hakAkses');
-        $scope.uidAdmin = localStorage.getItem('uidAdmin');
-
-        if (!$scope.idAdmin) {
-            $state.go('welcome');
-        }
-
-        $scope.data = {
-            "filterGuru": $stateParams.filterGuru
-        }
-
-        Array.prototype.groupBy = function (prop) {
-            return this.reduce(function (groups, item) {
-                const val = item[prop]
-                groups[val] = groups[val] || []
-                groups[val].push(item)
-                return groups
-            }, {})
-        }
-
-        var ref = firebase.database().ref("jadwalPelajaran").orderByChild("filterGuru").equalTo($scope.data.filterGuru);
-        var listRef = $firebaseArray(ref);
-        $ionicLoading.show();
-        listRef.$loaded().then(function (response) {
-            $ionicLoading.hide();
-            $scope.jadwalPelajaran = response;
-            $scope.totalJamMengajar = response.length;
-            $scope.jadwalPelajaranGroup = $scope.jadwalPelajaran.groupBy('hari');
-        })
-
-        // var ref = firebase.database().ref("jadwalPelajaran").orderByChild("filterGuru").equalTo($scope.data.filterGuru);
-        // var listRef = $firebaseArray(ref);
-        // $ionicLoading.show();
-        // listRef.$loaded().then(function (response) {
-        //     $ionicLoading.hide();
-        //     $scope.jadwalPelajaran = response;
-
-        // })
-
-        $scope.getData = function (x, y) {
-            $state.go('menuAdmin.jadwalPelajaranLihatDetailAdmin', {
-                "filterGuru": $stateParams.filterGuru,
-                "hari": x,
-                "tahunAjaran": y[0].tahunAjaran
-            })
-        }
-
-        $scope.hapusData = function (data) {
-            if ($scope.hakAkses === "Super Admin") {
-                var refObj = firebase.database(app).ref("jadwalPelajaran/" + data.$id);
-                var objDelete = $firebaseObject(refObj);
-                var confirmPopup = $ionicPopup.confirm({
-                    title: 'Hapus Data',
-                    template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-                    okType: "button-positive",
-                });
-                confirmPopup.then(function (res) {
-                    if (res) {
-                        objDelete.$remove().then(function (ref) {
-                            //console.log('Data Berhasil Dihapus');
-                        });
-                    }
-                    else {
-                        //console.log('Tidak Jadi Menghapus');
-                    }
-                });
-            }
-            else {
-                $ionicPopup.alert({
-                    title: 'Perhatian',
-                    template: 'Maaf, Anda tidak diperkenankan menghapus data ini, Terima Kasih',
-                    okType: 'button-positive'
-                });
-            }
-        }
-
-    }])
-
     .controller('jadwalPelajaranLihatDetailAdminCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idAdmin = localStorage.getItem('idAdmin');
@@ -618,10 +663,14 @@ angular.module('app.kurikulumAdmin', [])
         $scope.data = {
             "filterGuru": $stateParams.filterGuru,
             "hari": $stateParams.hari,
-            "tahunAjaran": $stateParams.tahunAjaran
+            "tahunAjaran": $stateParams.tahunAjaran,
+            "idSekolah": $stateParams.idSekolah
         }
 
-        var ref = firebase.database().ref("jadwalPelajaran").orderByChild("filterGuruHari").equalTo($scope.data.filterGuru + "_" + $scope.data.hari);
+        if ($scope.data.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.data.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
+        
+        var ref = firebase.database(app).ref("jadwalPelajaran").orderByChild("filterGuruHari").equalTo($scope.data.filterGuru + "_" + $scope.data.hari);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {

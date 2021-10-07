@@ -519,8 +519,10 @@ angular.module('app.berandaSiswa', [])
         $scope.namaKelasSiswa = localStorage.getItem('namaKelasSiswa');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah');
 
+        // LOADBALANCING
         if ($scope.idSekolahSiswa === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
-        console.log(app, $scope.kodeSekolah)
+        else if ($scope.idSekolahSiswa === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
+        console.log(app,$scope.idSekolahSiswa)
 
         if (!$scope.idPenggunaSiswa) {
             $state.go('welcome');
@@ -556,6 +558,7 @@ angular.module('app.berandaSiswa', [])
             })
         }
 
+        console.log('CEK ID:' , $scope.idPenggunaSiswa);
         // var versiAplikasiUser = "0.0.1";
         // // VERSI APLIKASI
         // var versiAplikasi = firebase.database().ref("versiAplikasi/1");
@@ -607,7 +610,7 @@ angular.module('app.berandaSiswa', [])
         ref.on('value', function (snapshot) {
             $ionicLoading.hide();
             $scope.formData = snapshot.val();
-            console.log(snapshot.val())
+            console.log('TES',snapshot.val())
             $scope.ijinkanPenggunaanAplikasi = snapshot.val().ijinkanPenggunaanAplikasi;
         });
 

@@ -1,0 +1,100 @@
+<ion-view title="Video Tutorial" id="videoTutorialAdmin">
+  <ion-nav-buttons side="right" class="has-header">
+    <button class="button button-dark icon ion-android-add" ng-click="tambahvideoTutorial()"> Tambah</button>
+  </ion-nav-buttons>
+  <ion-content padding="false" class="has-header">
+    <div class="row responsive-md" style="margin: auto;">
+      <div class="col col-50 col-offset-25">
+        <ion-list>
+          <ion-item class="item-avatar item-icon-right" ng-click="videoSekolah()">
+              <img src="https://image.flaticon.com/icons/svg/185/185983.svg">
+              <h3>Admin Sekolah</h3>
+              <p style="white-space:normal;">
+                  <small>
+                      <em>Video Tutorial untuk Admin Sekolah</em>
+                  </small>
+              </p>
+              <i class="icon ion-ios-arrow-right icon-accessory"></i>
+          </ion-item>
+          <ion-item class="item-avatar item-icon-right" ng-click="videoGuru()">
+            <img src="https://image.flaticon.com/icons/svg/185/185983.svg">
+            <h3>Guru</h3>
+            <p style="white-space:normal;">
+                <small>
+                    <em>Video Tutorial untuk Guru</em>
+                </small>
+            </p>
+            <i class="icon ion-ios-arrow-right icon-accessory"></i>
+        </ion-item>
+        <ion-item class="item-avatar item-icon-right" ng-click="videoSiswa()">
+          <img src="https://image.flaticon.com/icons/svg/185/185983.svg">
+          <h3>Siswa</h3>
+          <p style="white-space:normal;">
+              <small>
+                  <em>Video Tutorial untuk Siswa</em>
+              </small>
+          </p>
+          <i class="icon ion-ios-arrow-right icon-accessory"></i>
+      </ion-item>
+      <ion-item class="item-avatar item-icon-right" ng-click="videoOrangTua()">
+        <img src="https://image.flaticon.com/icons/svg/185/185983.svg">
+        <h3>Orang Tua Siswa</h3>
+        <p style="white-space:normal;">
+            <small>
+                <em>Video Tutorial untuk Orang Tua Siswa</em>
+            </small>
+        </p>
+        <i class="icon ion-ios-arrow-right icon-accessory"></i>
+    </ion-item>
+      </ion-list>
+
+        <script id="templates/modal.html" type="text/ng-template" cache-view="false">
+                <ion-modal-view>
+                  <ion-header-bar class="bar bar-header bar-positive">
+                    <h1 class="title">Tambah Video Tutorial</h1>
+                    <button class="button button-clear button-primary" ng-click="modal.hide()">Close</button>
+                  </ion-header-bar>
+          
+                  <ion-content style="padding:10px">
+          
+                        <form class="list" ng-submit="simpan()">
+                          <label class="item item-select" id="registrasi-select2">
+                            <span class="input-label">
+                                <p>Users</p>
+                                <p>
+                                    <select ng-model="formData.user">
+                                        <option value="Sekolah">Admin Sekolah</option>
+                                        <option value="Guru">Guru</option>
+                                        <option value="Siswa">Siswa</option>
+                                        <option value="OrangTua">Orang Tua</option>
+                                    </select>
+                                </p>
+                            </span>
+                        </label>
+                                <label class="item item-input item-floating-label">
+                                  <span class="input-label">
+                                    <p>Judul Video Tutorial</p>
+                                  </span>
+                                  <input type="text" placeholder="Judul Video Tutorial" ng-model="formData.JudulvideoTutorial">
+                                </label>
+
+                                <label class="item item-input item-floating-label">
+                                  <span class="input-label">
+                                    <p>Link Video Tutorial</p>
+                                  </span>
+                                  <input type="text" placeholder="Link Video Tutorial" ng-model="formData.LinkvideoTutorial">
+                                </label>
+                                <label class="item item-input">
+                                  <textarea placeholder="Keterangan" ng-model="formData.keterangan" rows="5"></textarea></label>
+                                <button class="button button-positive button-block">Simpan Video</button>
+                          </form>
+          
+                  </ion-content>
+                </ion-modal-view>
+              </script>
+      </div>
+    </div>
+
+
+  </ion-content>
+</ion-view>

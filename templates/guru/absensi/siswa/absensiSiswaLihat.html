@@ -1,4 +1,7 @@
 <ion-view title="Lihat Absensi" id="absensiSiswaLihatAdmin" class="latar">
+  <ion-nav-buttons side="right" class="has-header">
+    <button class="button button-icon button-dark icon ion-android-print" ng-click="excel()"></button>
+</ion-nav-buttons>
     <ion-content padding="false" class="has-header">
         <div class="row responsive-md" style="margin: auto;">
             <div class="col col-50 col-offset-25">
@@ -51,6 +54,50 @@
                         </p>
                     </ion-item>
                 </ion-list>
+                <div class="container-fluid " style="margin-top:20px;margin-bottom:20px; display: none;">
+                  <div class="col-sm-12">
+                      <div class="panel panel-default kotak-shadow">
+                          <div class="panel-heading" style="background-color: white">
+                              <h4>Absensi</h4>
+                          </div>
+                          <div class="panel-body" style="overflow: auto;">
+                              <table id="danu-table" class="table table-hover table-responsive table-striped dtable"
+                                  style="overflow:auto;font-size: 12px">
+                                  <thead>
+                                      <tr>
+                                          <th align="center">No</th>
+                                          <th>
+                                            <div align="center">Tanggal</div>
+                                          </th>
+                                          <th>
+                                              <div align="left">Kelas</div>
+                                          </th>
+                                          <th>
+                                              <div align="center">Nama Siswa</div>
+                                          </th>
+                                          <th>
+                                              <div align="center">Keterangan</div>
+                                          </th>
+                                      </tr>
+                                  </thead>
+                                  <tr ng-repeat="data in dataGetAbs | filter : searchData"
+                                      ng-click="lihatData(y)">
+                                      <td>
+                                          <div align="center">{{$index+1}}</div>
+                                      </td>
+                                      <td align="left">{{data.tanggalDisplay}}</td>
+                                      <th>
+                                          <div align="left">{{data.namaKelas}}</div>
+                                      </th>
+                                      <td align="left">{{data.namaSiswa | uppercase}}</td>
+                                      <td align="center">{{data.keterangan}}</td>
+                                  </tr>
+                              </table>
+                          </div>
+                          <div class="panel-footer"><small></small></div>
+                      </div>
+                  </div>
+              </div>
             </div>
         </div>
     </ion-content>

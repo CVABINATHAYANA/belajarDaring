@@ -13,7 +13,9 @@ angular.module('app.nilaiPeringkatUjianOnlineSekolah', [])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
+        // LOADBALANCING
         if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
@@ -212,8 +214,9 @@ angular.module('app.nilaiPeringkatUjianOnlineSekolah', [])
         $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
-
+        // LOADBALANCING
         if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
@@ -562,7 +565,9 @@ angular.module('app.nilaiPeringkatUjianOnlineSekolah', [])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
+        // LOADBALANCING
         if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
@@ -689,7 +694,9 @@ angular.module('app.nilaiPeringkatUjianOnlineSekolah', [])
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
         
+        // LOADBALANCING
         if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');

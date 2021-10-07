@@ -1557,7 +1557,7 @@ angular.module('app.authentification', [])
                             //console.log("jangan dilanjutkan");
                             $ionicPopup.alert({
                                 title: 'Information',
-                                template: 'Maaf email anda belum terdaftar , silahkan mendaftar terlebih dahulu',
+                                template: 'Maaf NISN anda belum terdaftar , silahkan mendaftar terlebih dahulu',
                                 okType: 'button-positive'
                             });
                         }
@@ -1822,7 +1822,7 @@ angular.module('app.authentification', [])
         }
 
         if ($scope.idPenggunaSiswa) {
-            $state.go('menuSiswa.berandaSiswa');
+            $state.go('menuOrangTua.berandaOrangTua');
         }
 
         if ($scope.idPenggunaOrangTua) {
@@ -2036,7 +2036,7 @@ angular.module('app.authentification', [])
                                         localStorage.setItem('statusSiswa', response[0].statusSiswa);
                                         $state.go('menuOrangTua.berandaOrangTua');
                                     }).then(function (resp) {
-                                        // window.location.reload(true);
+                                        window.location.reload(true);
                                     })
 
                                 })

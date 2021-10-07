@@ -1,4 +1,4 @@
-angular.module('app.dataAkunSiswa', [])
+angular.module('app.dataAkunSiswaOrangTua', [])
 
     .controller('gantiPasswordSiswaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', '$firebaseAuth', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter, $firebaseAuth) {
 
@@ -60,7 +60,7 @@ angular.module('app.dataAkunSiswa', [])
 
     }])
 
-    .controller('profilPenggunaSiswaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+    .controller('profilPenggunaSiswaOrangTuaCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
 
         $scope.idPenggunaSiswa = localStorage.getItem('idPenggunaSiswa');
         $scope.namaPenggunaSiswa = localStorage.getItem('namaPenggunaSiswa');

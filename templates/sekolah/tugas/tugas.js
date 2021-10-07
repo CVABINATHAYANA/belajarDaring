@@ -13,31 +13,9 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
-        if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP1") { var app = app_smpn1dps; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J1") { var app = app_smpn2; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J8") { var app = app_smpn3; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J9") { var app = app_smpn4; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J10") { var app = app_smpn5; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw1") { var app = app_smpn6; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj1") { var app = app_smpn7; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP6") { var app = app_smpn8; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw13") { var app = app_smpn9; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J6") { var app = app_smpn10; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw12") { var app = app_smpn11; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J7") { var app = app_smpn12; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj8") { var app = app_smpn13; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP5") { var app = app_smpn14; }
-        else if ($scope.idSekolah === "-MPyROcy6xPWAnYTzci8") { var app = app_lentera; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J3") { var app = app_dharmapraja; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj5") { var app = app_harapanmulia; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw8") { var app = app_kusumasari; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw24") { var app = app_pelitahati; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj11") { var app = app_pgri1; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP10") { var app = app_rajyamuna; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP12") { var app = app_siladharma; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J17") { var app = app_tamanrama; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP13") { var app = app_tawakkal; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J15") { var app = app_slub; }
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
@@ -52,33 +30,93 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
             });
         }
 
-        // Array.prototype.groupBy = function (prop) {
-        //     return this.reduce(function (groups, item) {
-        //         const val = item[prop]
-        //         groups[val] = groups[val] || []
-        //         groups[val].push(item)
-        //         return groups
-        //     }, {})
-        // }
+        Array.prototype.groupBy = function (prop) {
+            return this.reduce(function (groups, item) {
+                const val = item[prop]
+                groups[val] = groups[val] || []
+                groups[val].push(item)
+                return groups
+            }, {})
+        }
 
-        // var ref = firebase.database().ref("tugasSiswa").orderByChild("idSekolah").equalTo($scope.idSekolah);
-        // var listRef = $firebaseArray(ref);
-        // $ionicLoading.show();
-        // listRef.$loaded().then(function (response) {
-        //     $ionicLoading.hide();
-        //     $scope.dataTugasSiswa = response
-        //     $scope.tugasSiswa = $scope.dataTugasSiswa.groupBy('groupTugas');
-        //     // console.log($scope.absensiSiswa)
-        // });
-
+        index = 0;
         var ref = firebase.database(app).ref("groupTugasSiswa").orderByChild("idSekolah").equalTo($scope.idSekolah);
         var listRef = $firebaseArray(ref);
         $ionicLoading.show();
         listRef.$loaded().then(function (response) {
+            $scope.tugasSiswaGrup = response
+            $scope.tugasSiswa = $scope.tugasSiswaGrup.groupBy('tanggalTugas');
+            console.log($scope.tugasSiswa)
+
+            for (let i = 0; i < response.length; i++) {
+                index = index + 1;
+                console.log(index);
+                console.log(response[i].$id);
+                var groupTugasSiswa = firebase.database().ref("groupTugasSiswa/"+response[i].$id);
+                groupTugasSiswa.set({
+                    "groupTugas": response[i].groupTugas,
+                    "idKecamatan": response[i].idKecamatan,
+                    "idKotaKabupaten": response[i].idKotaKabupaten,
+                    "idSekolah": response[i].idSekolah,
+                    "namaKecamatan": response[i].namaKecamatan,
+                    "namaSekolah": response[i].namaSekolah,
+                }).then(function (ok) {
+                    console.log('Ok')
+                })
+
+            }
+        }).then(function (response) {
             $ionicLoading.hide();
-            $scope.tugasSiswa = response
-            // $scope.tugasSiswa = $scope.dataTugasSiswa.groupBy('groupTugas');
-            // console.log($scope.tugasSiswa)
+        });
+
+        $scope.getData = function (x , y) {
+            $state.go("menuSekolah.tugasSiswaListSekolah", {
+                "tanggal": x,
+            })
+        }
+
+    }])
+
+    .controller('tugasSiswaListSekolahCtrl', ['$scope', '$stateParams', '$firebaseArray', '$firebaseObject', '$ionicPopup', '$ionicLoading', '$state', '$ionicModal', '$ionicActionSheet', '$timeout', '$filter', function ($scope, $stateParams, $firebaseArray, $firebaseObject, $ionicPopup, $ionicLoading, $state, $ionicModal, $ionicActionSheet, $timeout, $filter) {
+
+        $scope.idPenggunaSekolah = localStorage.getItem('idPenggunaSekolah');
+        $scope.idSekolah = localStorage.getItem('idSekolah');
+        $scope.namaPenggunaSekolah = localStorage.getItem('namaPenggunaSekolah');
+        $scope.jenjangSekolah = localStorage.getItem('jenjangSekolah');
+        $scope.namaSekolah = localStorage.getItem('namaSekolah');
+        $scope.uidSekolah = localStorage.getItem('uidSekolah');
+        $scope.idProvinsiSekolah = localStorage.getItem('idProvinsiSekolah');
+        $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
+        $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
+        $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
+
+        $scope.data = {
+            "tanggal": $stateParams.tanggal,
+        }
+
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
+
+        if (!$scope.idPenggunaSekolah) {
+            $state.go('welcome');
+        }
+
+        $scope.tambah = function () {
+            // $state.go("menuSekolah.tugasSiswaTambahSekolah");
+            $ionicPopup.alert({
+                title: 'Perhatian',
+                template: 'Maaf, Untuk saat ini hanya guru saja yang boleh membuat tugas. Terima Kasih',
+                okType: 'button-balanced'
+            });
+        }
+
+        var ref = firebase.database(app).ref("groupTugasSiswa").orderByChild("tanggalTugas").equalTo($scope.data.tanggal);
+        var listRef = $firebaseArray(ref);
+        $ionicLoading.show();
+        listRef.$loaded().then(function (response) {
+            $ionicLoading.hide();
+            $scope.tugasSiswa = response;
         });
 
         $scope.getData = function (data) {
@@ -101,13 +139,11 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
                             template: 'Maaf, Untuk saat ini hanya guru saja yang boleh mengedit tugas. Terima Kasih',
                             okType: 'button-balanced'
                         });
-                        // $state.go("menuSekolah.tugasSiswaEditSekolah", {
-                        //     "groupTugas": data.groupTugas
-                        // })
                     }
                     if (index === 1) {
                         console.log(data.groupTugas);
                         $state.go("menuSekolah.tugasSiswaLihatSekolah", {
+                            "idGroupTugasSiswa": data.$id,
                             "groupTugas": data.groupTugas,
                             "idKelas": data.idKelas,
                             "idPelajaran": data.idPelajaran,
@@ -122,55 +158,6 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
                         template: 'Maaf, Untuk saat ini hanya guru saja yang boleh menghapus tugas. Terima Kasih',
                         okType: 'button-balanced'
                     });
-                    // if(data.idPembuat===$scope.idPenggunaSekolah){
-                    //     var confirmPopup = $ionicPopup.confirm({
-                    //         title: 'Hapus Data',
-                    //         template: 'Apakah Kamu Yakin Ingin Menghapus Data Ini?',
-                    //         okType: "button-balanced",
-                    //     });
-                    //     confirmPopup.then(function (res) {
-                    //         if (res) {
-                    //             $ionicLoading.show();
-                    //             var refObj = firebase.database(app).ref("tugasSiswa/").orderByChild("groupTugas").equalTo(data.groupTugas);
-                    //             var objDelete = $firebaseArray(refObj);
-                    //             objDelete.$loaded().then(function (response) {
-                    //                 for (i = 0; i < response.length; i++) {
-                    //                     var hapusData = firebase.database(app).ref("tugasSiswa/" + response[i].$id);
-                    //                     var objDelete = $firebaseObject(hapusData);
-                    //                     objDelete.$remove().then(function (ref) {
-                    //                         $ionicLoading.hide();
-                    //                         console.log('Data Berhasil Dihapus');
-                    //                         // window.location.reload(true);
-                                            
-                    //                     });
-                    //                 }
-                    //             })
-    
-                    //             var objGroup = firebase.database(app).ref("groupTugasSiswa").orderByChild("groupTugas").equalTo(data.groupTugas);
-                    //             var listObjGroup = $firebaseArray(objGroup);
-                    //             listObjGroup.$loaded().then(function (hapus) {
-                    //                 var id = hapus[0].$id;
-    
-                    //                 var objHapus = firebase.database(app).ref("groupTugasSiswa/" + id);
-                    //                 var objHapusData = $firebaseObject(objHapus);
-                    //                 objHapusData.$remove().then(function (yes) {
-                    //                     console.log("terhapus")
-                    //                 })
-                    //             })
-    
-                    //         }
-                    //         else {
-                    //             //console.log('Tidak Jadi Menghapus');
-                    //         }
-                    //     });
-                    // }
-                    // else{
-                    //     $ionicPopup.alert({
-                    //         title: 'Perhatian',
-                    //         template: 'Maaf, Anda tidak diperkenankan untuk menghapus data ini, atau Anda harus masuk ke beranda guru yang bersangkutan jika ingin menghapus. Terima Kasih',
-                    //         okType: 'button-balanced'
-                    //     });
-                    // }
                     return true;
                 }
 
@@ -191,32 +178,9 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
         $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
-
-        if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP1") { var app = app_smpn1dps; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J1") { var app = app_smpn2; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J8") { var app = app_smpn3; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J9") { var app = app_smpn4; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J10") { var app = app_smpn5; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw1") { var app = app_smpn6; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj1") { var app = app_smpn7; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP6") { var app = app_smpn8; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw13") { var app = app_smpn9; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J6") { var app = app_smpn10; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw12") { var app = app_smpn11; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J7") { var app = app_smpn12; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj8") { var app = app_smpn13; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP5") { var app = app_smpn14; }
-        else if ($scope.idSekolah === "-MPyROcy6xPWAnYTzci8") { var app = app_lentera; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J3") { var app = app_dharmapraja; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj5") { var app = app_harapanmulia; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw8") { var app = app_kusumasari; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw24") { var app = app_pelitahati; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj11") { var app = app_pgri1; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP10") { var app = app_rajyamuna; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP12") { var app = app_siladharma; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J17") { var app = app_tamanrama; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP13") { var app = app_tawakkal; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J15") { var app = app_slub; }
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
@@ -756,43 +720,25 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
         $scope.idKotaKabupatenSekolah = localStorage.getItem('idKotaKabupatenSekolah');
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
-        if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP1") { var app = app_smpn1dps; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J1") { var app = app_smpn2; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J8") { var app = app_smpn3; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J9") { var app = app_smpn4; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J10") { var app = app_smpn5; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw1") { var app = app_smpn6; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj1") { var app = app_smpn7; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP6") { var app = app_smpn8; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw13") { var app = app_smpn9; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J6") { var app = app_smpn10; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw12") { var app = app_smpn11; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J7") { var app = app_smpn12; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj8") { var app = app_smpn13; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP5") { var app = app_smpn14; }
-        else if ($scope.idSekolah === "-MPyROcy6xPWAnYTzci8") { var app = app_lentera; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J3") { var app = app_dharmapraja; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj5") { var app = app_harapanmulia; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw8") { var app = app_kusumasari; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw24") { var app = app_pelitahati; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj11") { var app = app_pgri1; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP10") { var app = app_rajyamuna; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP12") { var app = app_siladharma; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J17") { var app = app_tamanrama; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP13") { var app = app_tawakkal; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J15") { var app = app_slub; }
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
         }
 
         $scope.data = {
+            "idGroupTugasSiswa": $stateParams.idGroupTugasSiswa,
             "groupTugas": $stateParams.groupTugas,
             "idKelas": $stateParams.idKelas,
             "idPelajaran": $stateParams.idPelajaran,
         }
 
-        var getAbs = firebase.database(app).ref("tugasSiswa").child($scope.data.idKelas).child($scope.data.idPelajaran).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
+        console.log($scope.data.groupTugas)
+
+        // var getAbs = firebase.database(app).ref("tugasSiswaNew").child($scope.data.idKelas).child($scope.data.idPelajaran).orderByChild("groupTugas").equalTo($scope.data.groupTugas);
+        var getAbs = firebase.database(app).ref("tugasSiswaNew").child($scope.data.idKelas).child($scope.data.idPelajaran).child("dataTugas").child($scope.data.groupTugas);
         var listGetAbs = $firebaseArray(getAbs);
         $ionicLoading.show();
         listGetAbs.$loaded().then(function (response) {
@@ -801,6 +747,14 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
             $scope.dataTugas = response[0];
         })
 
+        var fileTugas = firebase.database(app).ref("groupTugasSiswa/" + $scope.data.idGroupTugasSiswa + "/fileGuru");
+        var listFileTugas = $firebaseArray(fileTugas);
+        listFileTugas.$loaded().then(function (response) {
+            $scope.fileTugasGuru = response;
+            $scope.banyakFile = response.length;
+            console.log($scope.banyakFile);
+        });
+
         $scope.lihatJawabanTugas = function (data) {
             // console.log(data.jawabanTugas)
             $state.go("menuSekolah.LihatJawabanTugasSiswaSekolah", {
@@ -808,6 +762,7 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
                 "namaSiswa": data.namaSiswa,
                 "idKelas": data.idKelas,
                 "idPelajaran": data.idPelajaran,
+                "groupTugas": data.groupTugas,
             })
         }
 
@@ -826,31 +781,9 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
-        if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP1") { var app = app_smpn1dps; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J1") { var app = app_smpn2; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J8") { var app = app_smpn3; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J9") { var app = app_smpn4; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J10") { var app = app_smpn5; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw1") { var app = app_smpn6; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj1") { var app = app_smpn7; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP6") { var app = app_smpn8; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw13") { var app = app_smpn9; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J6") { var app = app_smpn10; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw12") { var app = app_smpn11; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J7") { var app = app_smpn12; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj8") { var app = app_smpn13; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP5") { var app = app_smpn14; }
-        else if ($scope.idSekolah === "-MPyROcy6xPWAnYTzci8") { var app = app_lentera; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J3") { var app = app_dharmapraja; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj5") { var app = app_harapanmulia; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw8") { var app = app_kusumasari; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw24") { var app = app_pelitahati; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj11") { var app = app_pgri1; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP10") { var app = app_rajyamuna; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP12") { var app = app_siladharma; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J17") { var app = app_tamanrama; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP13") { var app = app_tawakkal; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J15") { var app = app_slub; }
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
 
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
@@ -861,9 +794,10 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
             "namaSiswa": $stateParams.namaSiswa,
             "idKelas": $stateParams.idKelas,
             "idPelajaran": $stateParams.idPelajaran,
+            "groupTugas":$stateParams.groupTugas,
         }
 
-        var refTugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + "/" + $scope.data.idPelajaran + "/" + $scope.data.idTugas);
+        var refTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + "/" + $scope.data.idPelajaran + "/dataTugas/" +$scope.data.groupTugas + '/'+ $scope.data.idTugas);
         var objTugas = $firebaseObject(refTugas);
         $ionicLoading.show();
         objTugas.$loaded().then(function (response) {
@@ -871,26 +805,26 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
             $scope.formData = response;
         });
 
-        var fileTugas = firebase.database(app).ref("tugasSiswa/" + $scope.data.idKelas + "/" + $scope.data.idPelajaran + "/" + $scope.data.idTugas + "/fileSiswa");
+        var fileTugas = firebase.database(app).ref("tugasSiswaNew/" + $scope.data.idKelas + "/" + $scope.data.idPelajaran + "/dataTugas/" +$scope.data.groupTugas + '/'+ $scope.data.idTugas + "/fileSiswa");
         var listFileTugas = $firebaseArray(fileTugas);
         listFileTugas.$loaded().then(function (response) {
             $scope.fileTugasSiswa = response;
             $scope.banyakFile = response.length;
         })
 
-        $scope.simpan = function () {
-            if ($scope.formData.nilaiTugasSiswa !== undefined) {
-                refTugas.update(JSON.parse(JSON.stringify({
-                    "nilaiTugasSiswa": $scope.formData.nilaiTugasSiswa
-                }))).then(function (resp) {
-                    $ionicPopup.alert({
-                        title: 'SUKSES',
-                        template: 'Nilai Tugas ' + $scope.data.namaSiswa + ' Berhasil Dikirim',
-                        okType: 'button-balanced'
-                    });
-                })
-            }
-        }
+        // $scope.simpan = function () {
+        //     if ($scope.formData.nilaiTugasSiswa !== undefined) {
+        //         refTugas.update(JSON.parse(JSON.stringify({
+        //             "nilaiTugasSiswa": $scope.formData.nilaiTugasSiswa
+        //         }))).then(function (resp) {
+        //             $ionicPopup.alert({
+        //                 title: 'SUKSES',
+        //                 template: 'Nilai Tugas ' + $scope.data.namaSiswa + ' Berhasil Dikirim',
+        //                 okType: 'button-balanced'
+        //             });
+        //         })
+        //     }
+        // }
 
     }])
 
@@ -907,31 +841,9 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
         $scope.idKecamatanSekolah = localStorage.getItem('idKecamatanSekolah');
         $scope.kodeSekolah = localStorage.getItem('kodeSekolah')
 
-        if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP1") { var app = app_smpn1dps; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J1") { var app = app_smpn2; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J8") { var app = app_smpn3; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J9") { var app = app_smpn4; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J10") { var app = app_smpn5; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw1") { var app = app_smpn6; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj1") { var app = app_smpn7; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP6") { var app = app_smpn8; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw13") { var app = app_smpn9; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J6") { var app = app_smpn10; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw12") { var app = app_smpn11; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J7") { var app = app_smpn12; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj8") { var app = app_smpn13; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP5") { var app = app_smpn14; }
-        else if ($scope.idSekolah === "-MPyROcy6xPWAnYTzci8") { var app = app_lentera; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J3") { var app = app_dharmapraja; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj5") { var app = app_harapanmulia; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw8") { var app = app_kusumasari; }
-        else if ($scope.idSekolah === "-MPyA8UKj59icln4APLw24") { var app = app_pelitahati; }
-        else if ($scope.idSekolah === "-MPyESRb8UVcQBHz7pxj11") { var app = app_pgri1; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP10") { var app = app_rajyamuna; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP12") { var app = app_siladharma; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J17") { var app = app_tamanrama; }
-        else if ($scope.idSekolah === "-MPy2LKKp9pwOpJjuoCP13") { var app = app_tawakkal; }
-        else if ($scope.idSekolah === "-MPyF17P3CjaG3Am7g9J15") { var app = app_slub; }
+        // LOADBALANCING
+        if ($scope.idSekolah === "-MQjdKWahm0gX0nyNuIF") { var app = app_smpn1; }
+        else if ($scope.idSekolah === "-MfbLcag5nLp210rIgPK") { var app = app_smpn1sukasada; }
         if (!$scope.idPenggunaSekolah) {
             $state.go('welcome');
         }
@@ -1011,7 +923,7 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
         })
 
         $scope.getTugas = function (data) {
-            var refAbsensi = firebase.database(app).ref("tugasSiswa/" + data.$id);
+            var refAbsensi = firebase.database(app).ref("tugasSiswaNew/" + data.$id);
             refAbsensi.update({
                 "kirimTugas": data.kirimTugas
             }).then(function (resp) {
@@ -1027,7 +939,7 @@ angular.module('app.tugasSekolah', ['ui.tinymce'])
                 var listGetAbs = $firebaseArray(getAbs);
                 listGetAbs.$loaded().then(function (response) {
                     for(i=0; i<response.length; i++){
-                        var updateData = firebase.database(app).ref("tugasSiswa/"+response[i].$id);
+                        var updateData = firebase.database(app).ref("tugasSiswaNew/"+response[i].$id);
                         updateData.update({
                             "isiTugas" : $scope.formData.isiTugas,
                             "tanggalPengumpulanTugas": tanggalPengumpulanTugas

@@ -1,4 +1,4 @@
-<ion-view title="{{namaSekolah}}" id="dataSekolahEditAdmin">
+<ion-view title="{{namaSekolah}}" id="dataSekolahEditAdmin" class="latar">
     <ion-content padding="false" class="has-header">
         <div class="row responsive-md" style="margin: auto;">
             <div class="col col-50 col-offset-25">
@@ -7,11 +7,9 @@
                         <span class="input-label">
                             <p>Jenjang</p>
                         </span>
-                        <select ng-model="formData.jenjang">
+                        <select ng-model="formData.jenjang" aria-readonly="true">
                             <option>SD</option>
                             <option>SMP</option>
-                            <option>SMA</option>
-                            <option>SMK</option>
                         </select>
                     </label>
                     <label class="item item-select" id="dataSekolah-select2">

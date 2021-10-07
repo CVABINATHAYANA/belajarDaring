@@ -631,8 +631,9 @@ angular.module('app.routes', [])
       .state('menuAdmin.jadwalPelajaranAdmin', {
         url: '/jadwalPelajaranAdmin',
         params: {
-          idSekolah: "",
-          namaSekolah: "",
+          idKecamatan: "",
+          namaKecamatan: "",
+          jumlahGuru:"",
         },
         views: {
           'menuAdmin': {
@@ -641,6 +642,38 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuAdmin.jadwalPelajaranPerKecamatanAdmin', {
+        url: '/jadwalPelajaranPerKecamatanAdmin',
+        params: {
+          idKecamatan: "",
+          namaKecamatan: "",
+          jumlahGuru:"",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/kurikulum/jadwalPelajaran/jadwalPelajaranPerKecamatan.html',
+            controller: 'jadwalPelajaranPerKecamatanAdminCtrl'
+          }
+        }
+      })
+
+
+      .state('menuAdmin.jadwalPelajaranPerSekolahAdmin', {
+        url: '/jadwalPelajaranPerSekolahAdmin',
+        params: {
+          idSekolah: "",
+          namaSekolah: "",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/kurikulum/jadwalPelajaran/jadwalPelajaranPerSekolah.html',
+            controller: 'jadwalPelajaranPerSekolahAdminCtrl'
+          }
+        }
+      })
+
+
       .state('menuAdmin.jadwalPelajaranTambahAdmin', {
         url: '/jadwalPelajaranTambahAdmin',
         views: {
@@ -653,7 +686,8 @@ angular.module('app.routes', [])
       .state('menuAdmin.jadwalPelajaranLihatAdmin', {
         url: '/jadwalPelajaranLihatAdmin',
         params: {
-          filterGuru: ""
+          filterGuru: "",
+          idSekolah: "",
         },
         views: {
           'menuAdmin': {
@@ -667,7 +701,8 @@ angular.module('app.routes', [])
         params: {
           filterGuru: "",
           hari: "",
-          tahunAjaran: ""
+          tahunAjaran: "",
+          idSekolah : "",
         },
         views: {
           'menuAdmin': {
@@ -690,11 +725,54 @@ angular.module('app.routes', [])
       })
 
       //Data Absensi Siswa Admin
-      .state('menuAdmin.absensiSiswaAdmin', {
-        url: '/absensiSiswaAdmin',
+
+      .state('menuAdmin.absensiSiswaPerKecamatanAdmin', {
+        url: '/absensiSiswaPerKecamatanAdmin',
         params: {
           idSekolah: "",
           namaSekolah: "",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/absensi/siswa/absensiSiswaPerKecamatan.html',
+            controller: 'absensiSiswaPerKecamatanAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.absensiSiswaPerSekolahAdmin', {
+        url: '/absensiSiswaPerSekolahAdmin',
+        params: {
+          idKecamatan: "",
+          namaKecamatan: "",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/absensi/siswa/absensiSiswaPerSekolah.html',
+            controller: 'absensiSiswaPerSekolahAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.absensiSiswaPerHariAdmin', {
+        url: '/absensiSiswaPerHariAdmin',
+        params: {
+          idSekolah: "",
+          namaSekolah: "",
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/absensi/siswa/absensiSiswaPerHari.html',
+            controller: 'absensiSiswaPerHariAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.absensiSiswaAdmin', {
+        url: '/absensiSiswaAdmin',
+        params: {
+          tanggal: "",
+          idSekolah: "",
         },
         views: {
           'menuAdmin': {
@@ -716,6 +794,7 @@ angular.module('app.routes', [])
         url: '/absensiSiswaLihatAdmin',
         params: {
           groupAbsensi: '',
+          idSekolah:'',
         },
         views: {
           'menuAdmin': {
@@ -747,6 +826,21 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuAdmin.tugasSiswaPerSekolahAdmin', {
+        url: '/tugasSiswaPerSekolahAdmin',
+        params: {
+          namaKecamatan: '',
+          idKecamatan:'',
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/tugas/siswa/tugasSiswaPerSekolah.html',
+            controller: 'tugasSiswaPerSekolahAdminCtrl'
+          }
+        }
+      })
+
       .state('menuAdmin.tugasSiswaAdmin', {
         url: '/tugasSiswaAdmin',
         params: {
@@ -761,6 +855,21 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuAdmin.tugasSiswaListAdmin', {
+        url: '/tugasSiswaAdminlist',
+        params: {
+          tanggal: '',
+          idSekolah:'',
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/tugas/siswa/tugasSiswaList.html',
+            controller: 'tugasSiswaListAdminCtrl'
+          }
+        }
+      })
+
       .state('menuAdmin.tugasSiswaTambahAdmin', {
         url: '/tugasSiswaTambahAdmin',
         views: {
@@ -775,8 +884,10 @@ angular.module('app.routes', [])
         params: {
           groupTugas: '',
           idGroupTugasSiswa: '',
-          idGuru: '',
-          namaKecamatan: '',
+          idKelas: '',
+          idPelajaran: '',
+          idSekolah:'',
+
         },
         views: {
           'menuAdmin': {
@@ -815,11 +926,14 @@ angular.module('app.routes', [])
         }
       })
       .state('menuAdmin.LihatJawabanTugasSiswaAdmin', {
-        url: '/jawabanTugasSiswa',
+        url: '/jawabanTugasSiswaAdmin',
         params: {
           idTugas: '',
           namaSiswa: '',
-          namaKecamatan: ''
+          idKelas: '',
+          idPelajaran: '',
+          groupTugas: '',
+          idSekolah: '',
         },
         views: {
           'menuAdmin': {
@@ -2451,6 +2565,116 @@ angular.module('app.routes', [])
         }
       })
 
+      .state('menuAdmin.videoTutorialAdmin', {
+        url: '/videoTutorialAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialHome.html',
+            controller: 'videoTutorialAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialGuruAdmin', {
+        url: '/videoTutorialGuruAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialGuru.html',
+            controller: 'videoTutorialGuruAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialGuruLihatAdmin', {
+        url: '/videoTutorialGuruLihatAdmin',
+        params: {
+          idVideo: '',
+          judulVideo: '',
+          keteranganVideo: ''
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialGuruLihat.html',
+            controller: 'videoTutorialGuruLihatAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialSekolahAdmin', {
+        url: '/videoTutorialSekolahAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialSekolah.html',
+            controller: 'videoTutorialSekolahAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialSekolahLihatAdmin', {
+        url: '/videoTutorialSekolahLihatAdmin',
+        params: {
+          idVideo: '',
+          judulVideo: '',
+          keteranganVideo: ''
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialSekolahLihat.html',
+            controller: 'videoTutorialSekolahLihatAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialSiswaAdmin', {
+        url: '/videoTutorialSiswaAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialSiswa.html',
+            controller: 'videoTutorialSiswaAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialSiswaLihatAdmin', {
+        url: '/videoTutorialSiswaLihatAdmin',
+        params: {
+          idVideo: '',
+          judulVideo: '',
+          keteranganVideo: ''
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialSiswaLihat.html',
+            controller: 'videoTutorialSiswaLihatAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialOrangTuaAdmin', {
+        url: '/videoTutorialOrangTuaAdmin',
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialOrangTua.html',
+            controller: 'videoTutorialOrangTuaAdminCtrl'
+          }
+        }
+      })
+
+      .state('menuAdmin.videoTutorialOrangTuaLihatAdmin', {
+        url: '/videoTutorialOrangTuaLihatAdmin',
+        params: {
+          idVideo: '',
+          judulVideo: '',
+          keteranganVideo: ''
+        },
+        views: {
+          'menuAdmin': {
+            templateUrl: 'templates/admin/videoTutorial/videoTutorialOrangTuaLihat.html',
+            controller: 'videoTutorialOrangTuaLihatAdminCtrl'
+          }
+        }
+      })
+
       // USER SISWA
       .state('menuSiswa', {
         url: '/siswa',
@@ -3753,6 +3977,7 @@ angular.module('app.routes', [])
           judulTugas:'',
           isiTugas: '',
           nilaiTugasSiswa: '',
+          komentarTugasSiswa:'',
           jawabanTugas: '',
 
           idMapel: "",
@@ -4776,6 +5001,7 @@ angular.module('app.routes', [])
         url: '/LihatJawabanTugasSiswa',
         params: {
           idTugas: '',
+          idSiswa: '',
           groupTugas: '',
           namaSiswa: '',
           namaKecamatan: '',
@@ -4789,6 +5015,7 @@ angular.module('app.routes', [])
 
           jawabanTugas: '',
           nilaiTugasSiswa: '',
+          komentarTugasSiswa: '',
           judulTugas:'',
           isiTugas: '',
           tanggalPengumpulanTugas: '',
@@ -4797,6 +5024,7 @@ angular.module('app.routes', [])
 
           idKelas: '',
           idMapel: '',
+          idGroupTugas: '',
         },
         views: {
           'menuGuru': {
@@ -7093,6 +7321,10 @@ angular.module('app.routes', [])
       //Data Absensi Siswa Sekolah
       .state('menuSekolah.absensiSiswaSekolah', {
         url: '/absensiSiswaSekolah',
+        params: {
+          tanggal: '',
+          jumlah_absensi: '',
+        },
         views: {
           'menuSekolah': {
             templateUrl: 'templates/sekolah/absensi/siswa/absensiSiswa.html',
@@ -7100,6 +7332,18 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuSekolah.absensiSiswaPerHariSekolah', {
+        url: '/absensiSiswaPerHariSekolah',
+        views: {
+          'menuSekolah': {
+            templateUrl: 'templates/sekolah/absensi/siswa/absensiSiswaPerHari.html',
+            controller: 'absensiSiswaSekolahPerHariCtrl'
+          }
+        }
+      })
+
+      
       .state('menuSekolah.absensiSiswaTambahSekolah', {
         url: '/absensiSiswaTambahSekolah',
         views: {
@@ -7112,7 +7356,16 @@ angular.module('app.routes', [])
       .state('menuSekolah.absensiSiswaLihatSekolah', {
         url: '/absensiSiswaLihatSekolah',
         params: {
-          groupAbsensi: '',
+          groupAbsensi :'',
+          tahunAjaran : '',
+          semester : '',
+          pelajaran: '',
+          namaGuru: '',
+          namaKelas : '',
+          tanggalDisplay: '',
+          namaSekolah: '',
+          dataGetAbs: '',
+          absensiByGroup: ''
         },
         views: {
           'menuSekolah': {
@@ -7144,6 +7397,20 @@ angular.module('app.routes', [])
           }
         }
       })
+
+      .state('menuSekolah.tugasSiswaListSekolah', {
+        url: '/tugasSiswaListSekolah',
+        params: {
+          tanggal: '',
+        },
+        views: {
+          'menuSekolah': {
+            templateUrl: 'templates/sekolah/tugas/siswa/tugasSiswaList.html',
+            controller: 'tugasSiswaListSekolahCtrl'
+          }
+        }
+      })
+
       .state('menuSekolah.tugasSiswaTambahSekolah', {
         url: '/tugasSiswaTambahSekolah',
         views: {
@@ -7156,6 +7423,7 @@ angular.module('app.routes', [])
       .state('menuSekolah.tugasSiswaLihatSekolah', {
         url: '/tugasSiswaLihatSekolah',
         params: {
+          idGroupTugasSiswa: '',
           groupTugas: '',
           idKelas: '',
           idPelajaran: '',
@@ -7186,6 +7454,7 @@ angular.module('app.routes', [])
           namaSiswa: '',
           idKelas: '',
           idPelajaran: '',
+          groupTugas: '',
         },
         views: {
           'menuSekolah': {
@@ -9232,6 +9501,7 @@ angular.module('app.routes', [])
         }
       })
       
+      
       // Tugas Siswa
       .state('menuOrangTua.tugasSiswaPerMapelOrangTua', {
         url: '/tugasSiswaPerMapelOrangTua',
@@ -9339,6 +9609,351 @@ angular.module('app.routes', [])
           }
         }
       })
+ 
+      // MENU UJIAN ORANG TUA
+      .state('menuOrangTua.ujianOnlineSiswaOrangTua', {
+        url: '/ujianOnlineSiswaOrangTua',
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/beranda/beranda.html',
+            controller: 'berandaUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      // USER UJIAN ONLINE DETAIL SISWA
+      .state('menuOrangTua.UjianOnlineDetaiSiswaOrangTua', {
+        url: '/UjianOnlineDetaiSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          olimpiadeTingkat: "",
+          jenjang: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          namaSekolah: "",
+          namaKelas: "",
+          namaGuru: "",
+          jenisUjian: "",
+          tingkatKelas: "",
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/ujianDetail/ujianDetail.html',
+            controller: 'UjianOnlineDetaiSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      // USER UJIAN ONLINE NILAI ANDA SISWA
+      .state('menuOrangTua.nilaiAndaUjianOnlineSiswaOrangTua', {
+        url: '/nilaiAndaUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          jenjang: "",
+          olimpiadeTingkat: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          idRekapJawabanUjianOnlineSiswa: ""
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/nilaiAnda/nilaiAnda.html',
+            controller: 'nilaiAndaUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      .state('menuOrangTua.nilaiUjianOnlineSiswaOrangTua', {
+        url: '/nilaiUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          jenjang: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          idPelajaranUjianOnline: "",
+          idPelajaran: "",
+          pelajaran: "",
+          statusFinish: "",
+          idJawabanUjianOnlineSiswaPerPelajaran: "",
+          idRekapJawabanUjianOnlineSiswa: ""
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/mulaiUjian/nilai.html',
+            controller: 'nilaiUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      .state('menuOrangTua.statusJawabanUjianOnlineSiswaOrangTua', {
+        url: '/statusJawabanUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          idPelajaranUjianOnline: "",
+          pelajaran: "",
+          keterangan: ""
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/mulaiUjian/statusJawaban.html',
+            controller: 'statusJawabanUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      // USER UJIAN ONLINE PERINGKAT ANDA SISWA
+      .state('menuOrangTua.peringkatAndaUjianOnlineSiswaOrangTua', {
+        url: '/peringkatAndaUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          jenjang: "",
+          olimpiadeTingkat: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          totalSiswaLolos: "",
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/peringkatAnda/peringkatAnda.html',
+            controller: 'peringkatAndaUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      .state('menuOrangTua.nilaiSiswaUjianOnlineSiswaOrangTua', {
+        url: '/nilaiSiswaUjianOnlineSiswaOrangTua',
+        params: {
+          idUjian: "",
+          namaUjian: "",
+          olimpiadeTingkat: "",
+          namaKotaKabupaten: "",
+          namaProvinsi: "",
+          semester: "",
+          tahunAjaran: "",
+          idRekapJawabanUjianOnlineSiswa: "",
+          namaPengguna: "",
+          uid: "",
+          jenjang: ""
+        },
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/ujianOnline/ulanganHarian/peringkatAnda/nilaiSiswa.html',
+            controller: 'nilaiSiswaUjianOnlineSiswaOrangTuaCtrl'
+          }
+        }
+      })
+
+      // Data Akun Siswa
+      .state('menuOrangTua.profilPenggunaSiswaOrangTua', {
+        url: '/profilPenggunaSiswaOrangTua',
+        views: {
+          'menuOrangTua': {
+            templateUrl: 'templates/orangTua/dataAkun/profilPengguna.html',
+            controller: 'profilPenggunaSiswaOrangTuaCtrl'
+          }
+        }
+      })
+      // // USER UJIAN ONLINE MULAI UJIAN SISWA
+      // .state('menuSiswa.mulaiUjianOnlineSiswa', {
+      //   url: '/mulaiUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     idSemester: "",
+      //     semester: "",
+      //     idTahunAjaran: "",
+      //     tahunAjaran: "",
+      //     idRekapJawabanUjianOnlineSiswa: "",
+      //     namaSekolah: "",
+      //     namaKelas: "",
+      //     namaGuru: "",
+      //     jenisUjian: "",
+      //     tingkatKelas: "",
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/mulaiUjian/mulaiUjian.html',
+      //       controller: 'mulaiUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+ 
+      // // USER UJIAN ONLINE TEST SISWA
+      // .state('ujianOnlineSiswa', {
+      //   url: '/ujianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: "",
+      //     idPelajaranUjianOnline: "",
+      //     idPelajaran: "",
+      //     pelajaran: "",
+      //     statusFinish: "",
+      //     idJawabanUjianOnlineSiswaPerPelajaran: "",
+      //     idRekapJawabanUjianOnlineSiswa: ""
+      //   },
+      //   templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/ujian/ujianOnline.html',
+      //   controller: 'ujianOnlineSiswaCtrl'
+      // })
+
+      // // USER UJIAN ONLINE KISI KISI SOAL OLIMPIADE SISWA
+      // .state('menuSiswa.kisiKisiSoalUjianOnlineSiswa', {
+      //   url: '/kisiKisiSoalUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: ""
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/kisiKisiSoal/kisiKisiSoal.html',
+      //       controller: 'kisiKisiSoalUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+      // // USER UJIAN ONLINE PESERTA OLIMPIADE SISWA
+      // .state('menuSiswa.pesertaUjianOnlineSiswa', {
+      //   url: '/pesertaUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: ""
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/pesertaUjian/pesertaUjian.html',
+      //       controller: 'pesertaUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+
+      // })
+      // .state('menuSiswa.nilaiSiswaDetailUjianOnlineSiswa', {
+      //   url: '/nilaiSiswaDetailUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     jenjang: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: "",
+      //     idPelajaranUjianOnline: "",
+      //     idPelajaran: "",
+      //     pelajaran: "",
+      //     statusFinish: "",
+      //     idJawabanUjianOnlineSiswaPerPelajaran: "",
+      //     idRekapJawabanUjianOnlineSiswa: "",
+      //     namaPengguna: "",
+      //     uid: ""
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/peringkatAnda/nilaiSiswaDetail.html',
+      //       controller: 'nilaiSiswaDetailUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+      // .state('menuSiswa.statusJawabanSiswaUjianOnlineSiswa', {
+      //   url: '/statusJawabanSiswaUjianOnlineSiswa',
+      //   params: {
+      //     idUjian: "",
+      //     namaUjian: "",
+      //     olimpiadeTingkat: "",
+      //     namaKotaKabupaten: "",
+      //     namaProvinsi: "",
+      //     semester: "",
+      //     tahunAjaran: "",
+      //     idPelajaranUjianOnline: "",
+      //     pelajaran: "",
+      //     namaPengguna: "",
+      //     uid: "",
+      //     keterangan: ""
+      //   },
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/ulanganHarian/peringkatAnda/statusJawabanSiswa.html',
+      //       controller: 'statusJawabanSiswaUjianOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+
+      // // USER LATIHAN SOAL ONLINE SISWA
+      // .state('menuSiswa.latihanSoalOnlineSiswa', {
+      //   url: '/latihanSoalOnlineSiswa',
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/latihanSoal/beranda/beranda.html',
+      //       controller: 'berandaLatihanSoalOnlineSiswaCtrl'
+      //     }
+      //   }
+      // })
+      // // USER LATIHAN SOAL ONLINE SISWA UMUM
+      // .state('menuSiswa.latihanSoalOnlineSiswaUmum', {
+      //   url: '/latihanSoalOnlineSiswaUmum',
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/latihanSoal/berandaUmum/beranda.html',
+      //       controller: 'berandaLatihanSoalOnlineSiswaUmumCtrl'
+      //     }
+      //   }
+      // })
+      // // USER KUIS ONLINE SISWA UMUM
+      // .state('menuSiswa.kuisOnlineSiswaUmum', {
+      //   url: '/berandaKuisOnlineSiswaUmum',
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/latihanSoal/berandaKuisOnlineUmum/beranda.html',
+      //       controller: 'berandaKuisOnlineSiswaUmumCtrl'
+      //     }
+      //   }
+      // })
+      // // USER TRYOUT ONLINE SISWA UMUM
+      // .state('menuSiswa.tryoutOnlineSiswaUmum', {
+      //   url: '/tryoutOnlineSiswaUmum',
+      //   views: {
+      //     'menuSiswa': {
+      //       templateUrl: 'templates/siswa/ujianOnline/latihanSoal/berandaTryoutOnlineUmum/beranda.html',
+      //       controller: 'berandaTryoutOnlineSiswaUmumCtrl'
+      //     }
+      //   }
+      // })
       
     $urlRouterProvider.otherwise('/welcome')
 

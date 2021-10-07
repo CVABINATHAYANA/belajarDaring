@@ -1,0 +1,23 @@
+<ion-view title="{{data.namaSekolah}}" id="absensiSiswaAdmin" cache-view="false" class="latar">
+    <!-- <ion-nav-buttons side="right" class="has-header">
+        <button class="button button-icon icon ion-android-add" ng-click="tambah()"></button>
+    </ion-nav-buttons> -->
+    <ion-content padding="false" class="has-header">
+        <div class="row responsive-md" style="margin: auto;">
+            <div class="col col-50 col-offset-25">
+                <!-- <label class="item item-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input type="search" placeholder="Cari Data" ng-model="searchData">
+                </label> -->
+                <ion-list id="absensiSiswa-list19">
+                    <ion-item id="absensiSiswa-list-item43" ng-repeat="(x,y) in absensiPerSekolah" ng-click="getData(x,y)" class="item-avatar">
+                        <img src="https://image.flaticon.com/icons/svg/579/579440.svg">
+                        <p><b style="color: green;">Tanggal {{x}}</b><br>
+                            <span>{{y.length}} data absensi</span>
+                        </p>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
