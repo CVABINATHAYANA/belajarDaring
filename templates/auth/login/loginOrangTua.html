@@ -1,41 +1,61 @@
 <ion-view title="Login Orang Tua" cache-view="false" hide-nav-bar="true" id="page8" class="latar">
-    <style>
-      input[type=text],
-      input[type=password] {
-        color: white;
-      }
-  
-      input::placeholder,
-      span>p {
-        color: white
-      }
-  
-      .item-floating-label {
-        border-bottom: 2px solid white;
-      }
-  
-      input[type=radio] {
-        background-color: transparent !important;
-        border: none;
-        --color-checked: #75D154;
-      }
-  
-      h4,
-      h5 {
-        color: white
-      }
-  
+  <style>
+    input[type=email],
+    input[type=password] {
+      color: white;
+    }
+    .button{
+      border-radius:100px !important;
+      font-weight: bold;
+    }
+    .button-outline{
+      border : 2px solid white !important;
+    }
+
+    input::placeholder,
+    span>p {
+      color: white
+    }
+    .text-white{
+      color:white!important;
+    }
+    .text-blue{
+      color:rgb(56, 126, 245) !important;
+    }
+    .text-center{
+      text-align: center;
+    }
+
+    .item, .item-input {
+      border: 2px solid white;
+      border-radius :100px;
+      margin-top:20px;
+      margin-bottom:20px;
+      background-color: transparent;
+    }
+
+    input[type=radio] {
+      background-color: transparent !important;
+      border: none;
+      --color-checked: #75D154;
+    }
+
+    h4,
+    h5 {
+      color: white
+    }
+
+    img {
+      width: 20%;
+    }
+
+    @media screen and (max-width:420px) {
       img {
-        width: 20%;
+        width: 40%;
       }
-  
-      @media screen and (max-width:420px) {
-        img {
-          width: 40%;
-        }
-      }
-    </style>
-    <ion-content padding="false" class="bg-gradient-blue">
+    }
+  </style>
+    <ion-content padding="true" class="bg-gradient-blue">
       <div class="row responsive-md" style="margin: auto;">
         <div class="col col-50 col-offset-25">
           <div>
@@ -51,51 +71,27 @@
           </div>
           <form class="list" name="myForm">
             <ion-list>
-  
-              <label class="item-input item-floating-label">
-                <span class="input-label">
-                  <p>NISN</p>
-                </span>
-                <input type="text" placeholder="Nisn" ng-model="formData.email" name="email">
-                <small class="help-block" ng-show="myForm.email.$touched &amp;&amp; myForm.email.$invalid"
-                  style="color: red">Masukan NISN Yang Benar</small>
+
+              <label class="item item-input">
+                <i class="icon ion-person placeholder-icon text-white"></i>
+                <input type="email" placeholder="NISN" ng-model="formData.email" name="email" class="text-white">
               </label>
+              <small class="help-block" ng-show="myForm.email.$touched &amp;&amp; myForm.email.$invalid"
+              style="color: white;margin-left:20px;">Masukan NISN Yang Benar</small>
   
-              <label class="item-input item-floating-label">
-                <span class="input-label">
-                  <p>Password</p>
-                </span>
-                <input type="password" placeholder="Password" ng-model="formData.password">
+              <label class="item item-input">
+                <i class="icon ion-key placeholder-icon text-white"></i>
+                <input type="password" placeholder="Password" ng-model="formData.password" class="text-white">
               </label>
-              <div class="spacer" style="height: 10px;"></div>
-              <!--   
-                <ion-item class="item-divider" style="background-color: transparent;color: white;border:none"> Sebagai Apakah Anda ?</ion-item>
-                <ion-radio ng-model="formData.sebagai" value="dinasPendidikan">
-                  <p>Dinas Pendidikan</p>
-                </ion-radio>
-    
-                <ion-radio ng-model="formData.sebagai" value="adminSekolah">
-                  <p>Admin Sekolah</p>
-                </ion-radio>
-    
-                <ion-radio ng-model="formData.sebagai" value="guruSekolah">
-                  <p>Guru</p>
-                </ion-radio>
-    
-                <ion-radio ng-model="formData.sebagai" value="siswaSekolah">
-                  <p>Siswa</p>
-                </ion-radio>
-    
-                <ion-radio ng-model="formData.sebagai" value="orangTua">
-                  <p>Orang Tua</p>
-                </ion-radio> -->
             </ion-list>
   
-            <button ng-click="login()" class="button button-light button-block" style="border-radius:100px;font-weight: bold;">Log
-              in</button>
-            <button ng-click="kembali()" class="button button-light button-block button-outline" style="border-radius:100px">Kembali</button>
-            <a ng-click="forgetPassword()" class="button button-light button-block button-clear">Lupa Password ?
-            </a>
+            <center>
+              <button ng-click="login()" class="button button-light button-block text-blue">Log
+                in</button>
+              <button ng-click="kembali()" class="button button-light button-block button-outline text-white">Kembali</button>
+              <a ng-click="forgetPassword()" class="text-center text-white">Lupa Password ?
+              </a>
+            </center>
   
           </form>
         </div>
