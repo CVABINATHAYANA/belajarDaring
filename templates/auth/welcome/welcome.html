@@ -6,6 +6,13 @@
         .montserrat-alter{
             font-family: 'Montserrat Alternates', sans-serif;
         }
+        .button{
+          border-radius: 100px  !important;
+          font-weight: bold;
+        }
+        .button-light{
+          border : 2px solid white !important
+        }
         #logo{
           width: 30%;
           margin-top: 1vh;
@@ -46,7 +53,7 @@
         }
     
       </style>
-    <ion-content padding="false" class="manual-ios-statusbar-padding bg-gradient-blue" scroll="true" >
+    <ion-content padding="true" class="manual-ios-statusbar-padding bg-gradient-blue" scroll="true" >
         <div class="row responsive-lg" style="margin:auto">
             <div class="col col-50 col-offset-25" >
                 <div>
@@ -130,7 +137,7 @@
                 </ion-slide-page>
               </ion-slides>
                 <a id="mainPage-button1" ng-click="login()" 
-                class="button button-light button-block" style="border-radius: 100px;">Log in</a>
+                class="button button-light button-block text-blue" >Log in</a>
                 <a id="mainPage-button2" ng-click="registrasi()"
                     class="button button-light button-block button-outline" style="border-radius: 100px;color:white"> Daftar Akun Baru</a>
             </div>
