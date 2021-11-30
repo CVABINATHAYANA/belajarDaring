@@ -10,16 +10,9 @@
                     <input type="search" placeholder="Cari Data" ng-model="searchData">
                 </label>
                 <ion-list id="jadwalPelajaran-list19">
-                    <!-- <ion-item id="jadwalPelajaran-list-item43" ng-repeat="data in jadwalPelajaran | filter:searchData">
-                        <p>{{$index+1}}. <b>{{data.pelajaran}}</b><br>
-                            <em>{{data.namaGuru}}, {{data.namaSekolah}}<br>Kelas. {{data.namaKelas}}, {{data.hari}}, {{data.jamMulai}} s/d {{data.jamSelesai}}</em>
-                        </p>
-                        <ion-option-button class="button-assertive" ng-click="hapusData(data)">Hapus</ion-option-button>
-                        <ion-option-button class="button-balanced" ng-click="editData(data)">Edit</ion-option-button>
-                    </ion-item> -->
                     <ion-item class="item-avatar" ng-repeat="data in jadwalPelajaran | filter:searchData"
                         ng-click="getData(data)">
-                        <img src="https://image.flaticon.com/icons/svg/305/305139.svg">
+                        <img src="img/book.png">
                         <h2>{{$index+1}}. {{data.namaGuru}}</h2>
                         <p>{{data.namaSekolah}}
                             <br>

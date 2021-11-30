@@ -9,18 +9,9 @@
                     <i class="icon ion-search placeholder-icon"></i>
                     <input type="search" placeholder="Cari Data" ng-model="searchData">
                 </label>
-                <!-- <ion-list id="bankSoalAdmin-list19">
-                    <ion-item class="item-avatar item-icon-right" ng-repeat="(x,y) in dataSoal" ng-click="getData(x, y)">
-                        <img src="https://image.flaticon.com/icons/svg/201/201571.svg">
-                        <h2>{{x}}</h2>
-                        <p>
-                            <b style="color:green">{{y.length}}</b> Jumlah Soal</p>
-                        <i class="icon ion-ios-arrow-right icon-accessory"></i>
-                    </ion-item>
-                </ion-list> -->
                 <ion-list id="bankSoalAdmin-list19">
                     <ion-item class="item-avatar item-icon-right" ng-repeat="data in dataSoal | filter:searchData" ng-click="getData(data)">
-                        <img src="https://image.flaticon.com/icons/svg/201/201571.svg"
+                        <img src="img/book.png"
                             ng-if="data.link===undefined || data.link===''">
                         <img src="{{data.link}}" ng-if="data.link!==undefined || data.link!==''">
                         <h4>{{data.pelajaran}}</h4>

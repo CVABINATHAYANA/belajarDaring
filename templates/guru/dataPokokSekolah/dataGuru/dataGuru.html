@@ -14,7 +14,8 @@
             <ion-list>
                 <ion-item class="item-avatar item-icon-right" id="home-list-item4" ng-repeat="data in dataGuru | filter:searchData"
                     ng-click="getData(data)">
-                    <img src="img/learning.png">
+                    <img src="img/teacher.png" ng-if="data.jenisKelamin=='Laki-laki'">
+                    <img src="img/teacher-female.png" ng-if="data.jenisKelamin=='Perempuan'">
                     <h2><span style="color:green">{{$index+1}}. {{data.namaPengguna | uppercase}}</span></h2>
                     <p style="white-space:normal;">{{data.namaSekolah}}<br>
                         {{data.namaKotaKabupaten}}, {{data.namaProvinsi}}<br>

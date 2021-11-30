@@ -234,17 +234,14 @@
       <div class="col col-100" style="margin: 0;width: 100%;padding:0;">
         <div id="bg-blue-card">
           <center>
-            <img src="https://image.flaticon.com/icons/svg/145/145867.svg" ng-if="jenisKelaminSiswa==='Laki-laki'"
+            <img src="img/student-male.png" ng-if="jenisKelaminSiswa==='Laki-laki'"
               class="avatar" style="border:2px solid white; ">
-            <img src="https://image.flaticon.com/icons/svg/145/145864.svg" ng-if="jenisKelaminSiswa==='Perempuan'"
+            <img src="img/student-female.png" ng-if="jenisKelaminSiswa==='Perempuan'"
               class="avatar" style="border:2px solid white; ">
             <h4 style="color: white;font-weight: bold;">{{formData.namaPengguna}}</h4>
             <h5>
               <strong style="color:white">{{formData.namaSekolah}}</strong><br>
               <span ng-if="statusSiswa==='Siswa'" style="color:white">Kelas {{formData.namaKelas}}</span><br>
-              <!-- <span style="color:white">
-                                {{formData.namaKotaKabupaten}}, {{formData.namaProvinsi}}
-                            </span> -->
               <button class="button button-light button-profile"
                 ui-sref="menuSiswa.profilPenggunaSiswa()">Profile</button>
 
@@ -260,7 +257,7 @@
           <center>
             <div ng-if="idSekolahSiswa==='-MfbLcag5nLp210rIgPK'" class="vertical-center">
 
-              <img class="bg-transparant" src="../../../img/logo1sukasada.png" alt="">
+              <img class="bg-transparant" src="img/logo1sukasada.png" alt="">
 
             </div>
           </center>
@@ -288,7 +285,7 @@
             <div class="col" style="height: 20vh;margin:0; width: 100%;">
               <div class="card " ui-sref="menuSiswa.kelasLintasMinat()">
                 <center>
-                  <img class="icon-card" src="https://image.flaticon.com/icons/svg/1089/1089129.svg">
+                  <img class="icon-card" src="img/blackboard.png">
                   <br>
                   <span style="font-size:10px;color:rgb(65, 64, 64)">Kelas Lintas Minat</span>
 
@@ -308,7 +305,7 @@
               <div class="card " ui-sref="menuSiswa.jadwalPelajaranSiswa()">
                 <center>
                   <div class="vertical-center">
-                    <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201552.svg" width="50%">
+                    <img class="icon-card" src="img/calendar.png" width="50%">
                     <h5 style="font-size:10px;color:rgb(65, 64, 64)">Jadwal</h5>
                   </div>
                 </center>
@@ -318,7 +315,7 @@
               <div class="card " ui-sref="menuSiswa.absensiSiswa()">
                 <center>
                   <div class="vertical-center">
-                    <img class="icon-card" src="https://image.flaticon.com/icons/svg/235/235251.svg" width="50%">
+                    <img class="icon-card" src="img/checked.png" width="50%">
                     <h5 style="font-size:10px;color:rgb(65, 64, 64)">Absensi Siswa</h5>
                   </div>
 
@@ -329,7 +326,7 @@
               <div class="card " ui-sref="menuSiswa.tugasSiswaPerMapel()">
                 <center>
                   <div class="vertical-center">
-                    <img class="icon-card" src="https://image.flaticon.com/icons/svg/178/178150.svg" width="50%">
+                    <img class="icon-card" src="img/homework-alter.png" width="50%">
                     <h5 style="font-size:10px;color:rgb(65, 64, 64)">Tugas Siswa</h5>
                   </div>
                 </center>
@@ -344,7 +341,7 @@
               <div class="card " ui-sref="menuSiswa.bankSoalSiswa()">
                 <center>
                   <div class="vertical-center">
-                    <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201638.svg" width="50%">
+                    <img class="icon-card" src="img/book.png" width="50%">
                     <h5 style="font-size:10px;color:rgb(65, 64, 64)">Bank Soal</h5>
                   </div>
 
@@ -355,7 +352,7 @@
               <div class="card " ui-sref="menuSiswa.materiPelajaranSiswa()">
                 <center>
                   <div class="vertical-center">
-                    <img class="icon-card" src="https://image.flaticon.com/icons/svg/1838/1838007.svg" width="50%">
+                    <img class="icon-card" src="img/blackboard.png" width="50%">
                     <h5 style="font-size:10px;color:rgb(65, 64, 64)">Materi Pelajaran</h5>
                   </div>
                 </center>
@@ -365,7 +362,7 @@
               <div class="card " ng-click="goMeeting()">
                 <center>
                   <div class="vertical-center">
-                    <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201636.svg" width="50%">
+                    <img class="icon-card" src="img/webinar.png" width="50%">
                     <h5 style="font-size:10px;color:rgb(65, 64, 64)">Kelas Virtual</h5>
                   </div>
                 </center>
@@ -380,7 +377,7 @@
               <div class="card " ui-sref="menuSiswa.ujianOnlineSiswa()">
                 <center>
                   <div class="vertical-center">
-                    <img class="icon-card" src="https://image.flaticon.com/icons/svg/201/201635.svg" width="50%">
+                    <img class="icon-card" src="img/test.png" width="50%">
                     <h5 style="font-size:10px;color:rgb(65, 64, 64)">Ulangan</h5>
                   </div>
                 </center>
@@ -390,7 +387,7 @@
               <div class="card " ui-sref="menuSiswa.latihanSoalOnlineSiswa()">
                 <center>
                   <div class="vertical-center">
-                    <img class="icon-card" src="https://image.flaticon.com/icons/svg/234/234653.svg" width="50%">
+                    <img class="icon-card" src="img/quiz.png" width="50%">
                     <h5 style="font-size:10px;color:rgb(65, 64, 64)">Latihan / Kuis</h5>
                   </div>
                 </center>
@@ -400,7 +397,7 @@
               <div class="card " ui-sref="menuSiswa.videoTutorialSiswa()">
                 <center>
                   <div class="vertical-center">
-                    <img class="icon-card" src="https://image.flaticon.com/icons/svg/185/185983.svg" width="50%">
+                    <img class="icon-card" src="img/video-marketing.png" width="50%">
                     <h5 style="font-size:10px;color:rgb(65, 64, 64)">Video Tutorial</h5>
                   </div>
                 </center>

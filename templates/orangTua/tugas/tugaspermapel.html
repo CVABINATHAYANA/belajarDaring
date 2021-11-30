@@ -20,7 +20,7 @@
                     <ion-item class="item-avatar item-icon-right"
                         ng-repeat="data in tugasSiswa | filter:searchData | orderBy:'-tanggalTugas'"
                         ng-click="getData(data)" style="background-color:#eeeaea" ng-if="data.dibaca===false && data.publish===true">
-                        <img src="https://image.flaticon.com/icons/svg/178/178150.svg">
+                        <img src="img/homework-alter.png">
                         <h2>{{data.judulTugas}}</h2>
                         <p>
                             <small>
@@ -37,7 +37,7 @@
                     <ion-item class="item-avatar item-icon-right"
                         ng-repeat="data in tugasSiswa | filter:searchData | orderBy:'-tanggalTugas'"
                         ng-click="getData(data)" ng-if="data.dibaca===true && data.publish===true">
-                        <img src="https://image.flaticon.com/icons/svg/178/178150.svg">
+                        <img src="img/homework-alter.png">
                         <h2>{{data.judulTugas}}</h2>
                         <p>
                             <small>

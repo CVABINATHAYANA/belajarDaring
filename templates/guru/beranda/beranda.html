@@ -41,9 +41,9 @@
           <div class="col col-50 col-offset-25">
             <div class="row" style="margin: auto">
               <div class="col col-33">
-                <img src="https://image.flaticon.com/icons/svg/145/145867.svg" ng-if="jenisKelaminGuru==='Laki-laki'"
+                <img src="img/teacher.png" ng-if="jenisKelaminGuru==='Laki-laki'"
                   style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
-                <img src="https://image.flaticon.com/icons/svg/145/145864.svg" ng-if="jenisKelaminGuru==='Perempuan'"
+                <img src="img/teacher-female.png" ng-if="jenisKelaminGuru==='Perempuan'"
                   style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
               </div>
               <div class="col col-67" style="padding-left: 10px">
@@ -72,7 +72,7 @@
                   style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
                 </div>
                 <div ng-if="idSekolahGuru==='-MfbLcag5nLp210rIgPK'">
-                  <img src="../../../img/logo1sukasada.png"
+                  <img src="img/logo1sukasada.png"
                   style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
                 </div>
 
@@ -112,7 +112,7 @@
             <div class="row" style="margin: auto">
               <div class="col col-33">
                 <div ng-if="idSekolahGuru!=='-MfbLcag5nLp210rIgPK'">
-                  <img src="https://image.flaticon.com/icons/svg/437/437553.svg"
+                  <img src="img/school.png"
                   style="display: block; width: 50%; height: auto; margin-left: auto; margin-right: auto;">
                 </div>
                 <div ng-if="idSekolahGuru==='-MfbLcag5nLp210rIgPK'">
@@ -160,119 +160,26 @@
         </div> -->
 
     <div ng-if="ijinPenggunaanAplikasi===true">
-      <!-- <div class="row responsive-md" style="margin: auto;">
-                <div class="col col-50 col-offset-25">
-                    <ion-list>
-                        <ion-item class="item-avatar item-icon-right" ng-click="dataPokokSekolah()">
-                            <img src="https://image.flaticon.com/icons/svg/2777/2777287.svg">
-                            <h2>Data Pokok Sekolah</h2>
-                            <p style="white-space:normal;">
-                                <small>
-                                    <em>Didalamnya terdapat data sekolah, prasarana, sarana, rombel, guru dan
-                                        siswa.</em>
-                                </small>
-                            </p>
-                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
-                        </ion-item>
-
-                        <div class="spacer" style="height: 10px;"></div>
-                        <ion-item class="item-avatar item-icon-right" ui-sref="menuGuru.jadwalPelajaranGuru()">
-                            <img src="https://image.flaticon.com/icons/svg/3164/3164217.svg">
-                            <h2>Jadwal Pelajaran</h2>
-                            <p style="white-space:normal;">
-                                <small>
-                                    <em>Pengaturan jadwal pelajaran yang dilakukan oleh guru, terintegrasi langsung ke
-                                        siswa dan
-                                        orang tua.</em>
-                                </small>
-                            </p>
-                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
-                        </ion-item>
-                        <ion-item class="item-avatar item-icon-right" ui-sref="menuGuru.absensiSiswaGuru()">
-                            <img src="https://image.flaticon.com/icons/svg/3036/3036019.svg">
-                            <h2>Absensi Siswa</h2>
-                            <p style="white-space:normal;">
-                                <small>
-                                    <em>Pembuatan absensi siswa dilakukan oleh guru, terintegrasi langsung ke siswa dan
-                                        orang tua.</em>
-                                </small>
-                            </p>
-                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
-                        </ion-item>
-                        <ion-item class="item-avatar item-icon-right"  ng-click="tugasGuru()">
-                            <img src="https://image.flaticon.com/icons/svg/3036/3036665.svg">
-                            <h2>Tugas Siswa</h2>
-                            <p style="white-space:normal;">
-                                <small>
-                                    <em>Pembuatan tugas siswa dilakukan oleh guru, terintegrasi langsung ke siswa dan
-                                        orang tua.</em>
-                                </small>
-                            </p>
-                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
-                        </ion-item>
-
-                        <div class="spacer" style="height: 10px;"></div>
-                        <ion-item class="item-avatar item-icon-right" ng-click="eLearning()">
-                            <img src="https://image.flaticon.com/icons/svg/3036/3036633.svg">
-                            <h2>e-Learning</h2>
-                            <p style="white-space:normal;">
-                                <small>
-                                    <em>Didalamnya terdapat bank soal dan materi pelajaran yang bisa dibuat dan disusun
-                                        oleh
-                                        guru.</em>
-                                </small>
-                            </p>
-                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
-                        </ion-item>
-                        <ion-item class="item-avatar item-icon-right" ng-click="ujianOnline()">
-                            <img src="https://image.flaticon.com/icons/svg/3036/3036702.svg">
-                            <h2>Ujian Online</h2>
-                            <p style="white-space:normal;">
-                                <small>
-                                    <em>Guru bisa membuat ujian online sendiri, seperti : ulangan harian, latihan soal,
-                                        kuis
-                                        online, tryout online, UTS, UAS dan olimpiade online.</em>
-                                </small>
-                            </p>
-                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
-                        </ion-item>
-
-                        <div class="spacer" style="height: 10px;"></div>
-                        <ion-item class="item-avatar item-icon-right" ui-sref="menuGuru.videoTutorialGuru()">
-                            <img src="https://image.flaticon.com/icons/svg/3036/3036707.svg">
-                            <h2>Video Tutorial</h2>
-                            <p style="white-space:normal;">
-                                <small>
-                                    <em>Ini adalah video tutorial penggunaan aplikasi untuk guru.</em>
-                                </small>
-                            </p>
-                            <i class="icon ion-ios-arrow-right icon-accessory"></i>
-                        </ion-item>
-                    </ion-list>
-                </div>
-            </div> -->
       <div class="container row responsive-md">
         <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
           <div class="row" style="margin-left: auto;margin-right: auto;">
             <div class="col col-50" style="height: 20vh;margin:0">
-              <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="dataPokokSekolah()">
+              <div class="card" style="height: 100%;" ng-click="dataPokokSekolah()">
                 <center>
                   <div class="vertical-center">
-                    <!-- <img src="https://image.flaticon.com/icons/svg/2777/2777287.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                    <img src="../../../img/school2.svg" class="icon-btn"/>
-                    <h5 class="text-white text-center">Data Sekolah</h5>
+                    <img src="img/school.png" class="icon-btn"/>
+                    <h5 class="text-center">Data Sekolah</h5>
                   </div>
                 </center>
 
               </div>
             </div>
             <div class="col col-50" style="height: 20vh;margin:0">
-              <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuGuru.jadwalPelajaranGuru()">
+              <div class="card" style="height: 100%;" ui-sref="menuGuru.jadwalPelajaranGuru()">
                 <center>
                   <div class="vertical-center">
-                    <!-- <img src="https://image.flaticon.com/icons/svg/3164/3164217.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                    <img src="../../../img/calendar.svg" class="icon-btn" />
-                    <h5 class="text-white text-center">Jadwal Pelajaran</h5>
+                    <img src="img/calendar.png" class="icon-btn" />
+                    <h5 class="text-center">Jadwal Pelajaran</h5>
                   </div>
                 </center>
               </div>
@@ -282,49 +189,21 @@
         <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
           <div class="row" style="margin-left: auto;margin-right: auto;">
             <div class="col col-50" style="height: 20vh;margin:0">
-              <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuGuru.absensiSiswaGuru()">
+              <div class="card" style="height: 100%;" ui-sref="menuGuru.absensiSiswaGuru()">
                 <center>
                   <div class="vertical-center">
-                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036019.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                    <img src="../../../img/calendar2.svg" class="icon-btn" />
-                    <h5 class="text-white text-center">Absensi Siswa</h5>
+                    <img src="img/checked.png" class="icon-btn" />
+                    <h5 class="text-center">Absensi Siswa</h5>
                   </div>
                 </center>
               </div>
             </div>
             <div class="col col-50" style="height: 20vh;margin:0">
-              <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="tugasGuru()">
+              <div class="card" style="height: 100%;" ng-click="tugasGuru()">
                 <center>
                   <div class="vertical-center">
-                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036665.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                    <img src="../../../img/write.svg" class="icon-btn" />
-                    <h5 class="text-white text-center">Tugas Siswa</h5>
-                  </div>
-                </center>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
-          <div class="row" style="margin-left: auto;margin-right: auto;">
-            <div class="col col-50" style="height: 20vh;margin:0">
-              <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="eLearning()">
-                <center>
-                  <div class="vertical-center">
-                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036633.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                    <img src="../../../img/monitor-screen.svg" class="icon-btn" />
-                    <h5 class="text-white text-center">e-Learning</h5>
-                  </div>
-                </center>
-              </div>
-            </div>
-            <div class="col col-50" style="height: 20vh;margin:0">
-              <div class="card bg-card-gradient-blue" style="height: 100%;" ng-click="ujianOnline()">
-                <center>
-                  <div class="vertical-center">
-                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036702.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                    <img src="../../../img/test.svg" class="icon-btn" />
-                    <h5 class="text-white text-center">Ujian Online</h5>
+                    <img src="img/homework-alter.png" class="icon-btn" />
+                    <h5 class="text-center">Tugas Siswa</h5>
                   </div>
                 </center>
               </div>
@@ -334,12 +213,35 @@
         <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
           <div class="row" style="margin-left: auto;margin-right: auto;">
             <div class="col col-50" style="height: 20vh;margin:0">
-              <div class="card bg-card-gradient-blue" style="height: 100%;" ui-sref="menuGuru.videoTutorialGuru()">
+              <div class="card" style="height: 100%;" ng-click="eLearning()">
                 <center>
                   <div class="vertical-center">
-                    <!-- <img src="https://image.flaticon.com/icons/svg/3036/3036707.svg" style="height: 50%;width: 50%;margin-top: 10px;"> -->
-                    <img src="../../../img/video-tutorial.svg" class="icon-btn" />
-                    <h5 class="text-white text-center">Video Tutorial</h5>
+                    <img src="img/webinar.png" class="icon-btn" />
+                    <h5 class="text-center">e-Learning</h5>
+                  </div>
+                </center>
+              </div>
+            </div>
+            <div class="col col-50" style="height: 20vh;margin:0">
+              <div class="card" style="height: 100%;" ng-click="ujianOnline()">
+                <center>
+                  <div class="vertical-center">
+                    <img src="img/test.png" class="icon-btn" />
+                    <h5 class="text-center">Ujian Online</h5>
+                  </div>
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-50" style="padding-bottom: 0;padding-top: 0;margin-bottom: 0;margin-top:0;">
+          <div class="row" style="margin-left: auto;margin-right: auto;">
+            <div class="col col-50" style="height: 20vh;margin:0">
+              <div class="card" style="height: 100%;" ui-sref="menuGuru.videoTutorialGuru()">
+                <center>
+                  <div class="vertical-center">
+                    <img src="img/video-marketing.png" class="icon-btn" />
+                    <h5 class="text-center">Video Tutorial</h5>
                   </div>
                 </center>
               </div>

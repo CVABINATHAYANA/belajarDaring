@@ -24,7 +24,8 @@
                     <ion-list>
                         <ion-item class="item-avatar item-icon-right" id="home-list-item4"
                             ng-repeat="data in dataSiswa | filter:searchData | orderBy:['namaKelas','namaPengguna']" ng-click="getData(data)">
-                            <img src="img/learning.png">
+                            <img src="img/student-male.png" ng-if="data.jenisKelamin=='Laki-laki'">
+                            <img src="img/student-female.png" ng-if="data.jenisKelamin=='Perempuan'">
                             <h2><span style="color:green">{{$index+1}}. {{data.namaPengguna}}</span></h2>
                             <p style="white-space:normal;">{{data.namaSekolah}}<br>
                                 Kelas. {{data.namaKelas}}<br>
